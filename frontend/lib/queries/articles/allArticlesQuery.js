@@ -7,6 +7,7 @@ export const ALL_ARTICLES_QUERY = gql`
       limit: $limit
       sort: "published_at:DESC"
     ) {
+      id
       title
       slug
       image_cover {

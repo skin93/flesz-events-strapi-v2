@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from 'react';
 
 import Link from 'next/link';
@@ -10,7 +9,6 @@ import { ALL_ARTICLES_QUERY } from '../lib/queries/articles/allArticlesQuery';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Fade from '@material-ui/core/Fade';
 
 import SkeletonCard from '../src/components/UI/SkeletonCard';
 import BaseCard from '../src/components/UI/BaseCard';
@@ -60,26 +58,22 @@ export default function Home(props) {
   }
 
   return (
-    <Fade in timeout={500}>
-      <section className={classes.root} aria-label='home-page'>
-        <Typography variant='h6' component='h1' className={classes.heading}>
-          OSTATNIE WPISY
-        </Typography>
-        <Grid container spacing={2} className={classes.container}>
-          {data.articles.map((article) => (
-            <Fade in timeout={500} key={article.id}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Link href={`/articles/${article.slug}`}>
-                  <a>
-                    <BaseCard article={article} />
-                  </a>
-                </Link>
-              </Grid>
-            </Fade>
-          ))}
-        </Grid>
-      </section>
-    </Fade>
+    <section className={classes.root} aria-label='home-page'>
+      <Typography variant='h6' component='h1' className={classes.heading}>
+        OSTATNIE WPISY
+      </Typography>
+      <Grid container spacing={2} className={classes.container}>
+        {data.articles.map((article) => (
+          <Grid item xs={12} sm={6} md={4} key={article.id}>
+            <Link href={`/articles/${article.slug}`}>
+              <a>
+                <BaseCard article={article} />
+              </a>
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+    </section>
   );
 }
 
@@ -101,10 +95,10 @@ export async function getServerSideProps() {
 const useStyles = makeStyles((theme) => ({
   root: { padding: '15px' },
   heading: {
-    textAlign: `center`,
+    textAlign: 'center',
     color: theme.palette.light.main,
   },
   container: {
-    marginTop: `30px`,
+    marginTop: '30px',
   },
 }));
