@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_metadata",
+  "info": {
+    "name": "Metadata",
+    "icon": "info",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "meta_title": {
+      "type": "string",
+      "maxLength": 60,
+      "required": true,
+      "unique": false
+    },
+    "meta_description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 155
+    },
+    "share_image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.share-image"
+    },
+    "keywords": {
+      "type": "text"
+    },
+    "prevent_indexing": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

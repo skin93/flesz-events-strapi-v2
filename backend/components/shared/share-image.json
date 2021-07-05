@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_share_images",
+  "info": {
+    "name": "Share_image",
+    "icon": "image"
+  },
+  "options": {},
+  "attributes": {
+    "alt": {
+      "type": "string",
+      "required": true
+    },
+    "media": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    }
+  }
+}

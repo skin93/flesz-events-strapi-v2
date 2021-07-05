@@ -1,0 +1,8 @@
+{
+  "name": "flesz-events-strapi-v2",
+  "version": "1.0.0",
+  "description": "Music portal. News about concerts and festivals from around the world. ",
+  "main": "index.js",
+  "author": "Arkadiusz \"Skin\" Ciesielski",
+  "license": "MIT"
+}
