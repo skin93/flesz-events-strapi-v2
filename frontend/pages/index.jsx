@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 import useSWR from 'swr';
 import { request } from 'graphql-request';
-import { ALL_ARTICLES_QUERY } from '../lib/queries/articles/allArticlesQuery';
+import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-import SkeletonCard from '../src/components/UI/SkeletonCard';
-import BaseCard from '../src/components/UI/BaseCard';
+import SkeletonCard from '@/components/UI/SkeletonCard';
+import BaseCard from '@/components/UI/BaseCard';
 
 export default function Home(props) {
   const classes = useStyles();

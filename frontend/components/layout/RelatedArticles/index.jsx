@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 
-import RelatedCard from '../../../components/UI/RelatedCard';
+import RelatedCard from '@/components/UI/RelatedCard';
 
 const RelatedArticles = ({ articles }) => {
   const classes = useStyles();

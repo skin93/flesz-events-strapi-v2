@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { getMediaUrl } from '../../../lib/getMediaUrl';
+import { getMediaUrl } from '@/lib/getMediaUrl';
 
 const SEO = ({ meta_title, meta_description, share_image }) => {
   const router = useRouter();

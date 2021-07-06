@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
 import { request } from 'graphql-request';
-import { SINGLE_ARTICLE_QUERY } from '../../lib/queries/articles/singleArticleQuery';
+import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -15,12 +15,10 @@ import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import SEO from '../../src/components/SEO';
-import { getMediaUrl } from '../../lib/getMediaUrl';
-import Disqus from '../../src/components/Disqus';
+import SEO from '@/components/SEO';
+import RelatedArticles from '@/components/layout/RelatedArticles';
 
-import RelatedArticles from '../../src/components/layout/RelatedArticles';
-// import Disqus from '../../components/Disqus'
+import { getMediaUrl } from '@/lib/getMediaUrl';
 
 const ArticlePage = (props) => {
   const router = useRouter();

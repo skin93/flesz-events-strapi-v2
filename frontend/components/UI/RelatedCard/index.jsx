@@ -7,7 +7,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import { getMediaUrl } from '../../../../lib/getMediaUrl';
+import { getMediaUrl } from '@/lib/getMediaUrl';
 
 const RelatedCard = ({ article }) => {
   const classes = useStyles();
