@@ -14,10 +14,12 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "maxLength": 80
     },
     "excerpt": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 255
     },
     "content": {
       "type": "richtext",
@@ -64,7 +66,8 @@
     "related_articles": {
       "type": "component",
       "repeatable": false,
-      "component": "articles.related-articles"
+      "component": "articles.related-articles",
+      "required": true
     },
     "link": {
       "type": "string",

@@ -2,13 +2,11 @@
   "collectionName": "components_articles_related_articles",
   "info": {
     "name": "Related_articles",
-    "icon": "newspaper"
+    "icon": "newspaper",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "intro": {
-      "type": "string"
-    },
     "articles": {
       "collection": "article"
     }
