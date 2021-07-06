@@ -5,6 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { getMediaUrl } from '@/lib/getMediaUrl';
 
 const BaseCard = ({ article }) => {
   const classes = useStyles();
@@ -13,7 +14,7 @@ const BaseCard = ({ article }) => {
       <CardActionArea className={classes.actionsArea}>
         <CardMedia
           className={classes.media}
-          image={`http://localhost:1337${article.image_cover.url}`}
+          image={getMediaUrl(article.image_cover)}
           title={article.title}
           alt={article.title}
         />
