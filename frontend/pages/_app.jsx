@@ -1,11 +1,15 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import { Container } from '@material-ui/core';
+
+import * as gtag from '../lib/gtag'
+
+Router.events.on('routeChangeComplete', (url) => gtag.pageview(url))
 
 export default function MyApp(props) {
   const router = useRouter();

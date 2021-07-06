@@ -32,6 +32,16 @@ export const SINGLE_ARTICLE_QUERY = gql`
           alt
         }
       }
+      related_articles{
+      intro
+      articles{
+        title
+        image_cover{
+          alternativeText
+          url
+        }
+      }
+    }
     }
   }
 `;

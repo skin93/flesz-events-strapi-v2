@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,13 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Fade from '@material-ui/core/Fade';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import SEO from '../../src/components/SEO';
 import { getMediaUrl } from '../../lib/getMediaUrl';
+import Disqus from '../../src/components/Disqus';
 
 // import FeaturedPosts from '../../components/layout/FeaturedPosts'
 // import Disqus from '../../components/Disqus'
@@ -38,7 +37,6 @@ const ArticlePage = (props) => {
   });
 
   const { articles } = data;
-
   const article = articles[0];
 
   if (error) {
