@@ -62,7 +62,7 @@ const SEO = ({ meta_title, meta_description, share_image }) => {
       <meta
         property='og:image'
         content={
-          share_image.media
+          share_image
             ? getMediaUrl(share_image.media)
             : 'https://flesz.events/logo-publikacja.png'
         }
@@ -70,7 +70,7 @@ const SEO = ({ meta_title, meta_description, share_image }) => {
       <meta
         property='og:image:secure_url'
         content={
-          share_image.media
+          share_image
             ? getMediaUrl(share_image.media)
             : 'https://flesz.events/logo-publikacja.png'
         }

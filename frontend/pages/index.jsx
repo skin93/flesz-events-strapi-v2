@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import BaseCard from '@/components/UI/BaseCard';
+import SEO from '@/components/SEO';
 
 export default function Home(props) {
   const classes = useStyles();
@@ -58,22 +59,25 @@ export default function Home(props) {
   }
 
   return (
-    <section className={classes.root} aria-label='home-page'>
-      <Typography variant='h6' component='h1' className={classes.heading}>
-        OSTATNIE WPISY
-      </Typography>
-      <Grid container spacing={2} className={classes.container}>
-        {data.articles.map((article) => (
-          <Grid item xs={12} sm={6} md={4} key={article.id}>
-            <Link href={`/articles/${article.slug}`}>
-              <a>
-                <BaseCard article={article} />
-              </a>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
-    </section>
+    <React.Fragment>
+      <SEO />
+      <section className={classes.root} aria-label='home-page'>
+        <Typography variant='h6' component='h1' className={classes.heading}>
+          OSTATNIE WPISY
+        </Typography>
+        <Grid container spacing={2} className={classes.container}>
+          {data.articles.map((article) => (
+            <Grid item xs={12} sm={6} md={4} key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <a>
+                  <BaseCard article={article} />
+                </a>
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      </section>
+    </React.Fragment>
   );
 }
 

@@ -35,8 +35,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.palette.muted.darker,
+    alignItems: 'center',    backgroundColor: theme.palette.muted.darker,
   },
   container: {
     display: 'flex',

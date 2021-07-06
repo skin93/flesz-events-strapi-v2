@@ -29,8 +29,9 @@ export const SINGLE_ARTICLE_QUERY = gql`
         share_image {
           media {
             url
+            caption
+            alternativeText
           }
-          alt
         }
       }
       related_articles {
