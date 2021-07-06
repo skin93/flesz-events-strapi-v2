@@ -2,14 +2,11 @@
   "collectionName": "components_shared_share_images",
   "info": {
     "name": "Share_image",
-    "icon": "image"
+    "icon": "image",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "alt": {
-      "type": "string",
-      "required": true
-    },
     "media": {
       "model": "file",
       "via": "related",
