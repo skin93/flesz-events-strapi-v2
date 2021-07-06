@@ -39,6 +39,9 @@ const theme = createMuiTheme({
           backgroundColor: grey[900],
         },
         blockquote: {
+          '& > p': {
+            color: grey[50],
+          },
           fontWeight: 600,
           fontStyle: 'italic',
           quotes: '"“" "”"',
@@ -52,7 +55,6 @@ const theme = createMuiTheme({
             color: teal.A400,
           },
           backgroundColor: 'transparent',
-          color: 'rgba(255, 255, 255, 0.9)',
           padding: '30px',
           lineHeight: '2em',
           margin: '0 auto',
