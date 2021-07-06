@@ -18,7 +18,6 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 
 import SiteDrawer from '@/components/layout/SiteDrawer';
-import Box from '@material-ui/core/Box';
 
 function HideOnScroll(props) {
   const { children } = props;
@@ -46,21 +45,20 @@ const TheHeader = (props) => {
         <AppBar position='fixed' className={classes.appBar}>
           <Toolbar variant='dense' id='back-to-top-anchor'>
             <Container maxWidth='lg' className={classes.navbarDisplayFlex}>
-              <Box
+              <div
                 className={classes.navbarBrand}
                 color='inherit'
                 aria-label='home'>
                 <Link href='/'>
                   <a>
-                    <Box
-                      component='img'
+                    <img
                       src='/biale-logo-pelny-napis-akcent.png'
                       className={classes.logo}
                       alt='logo'
                     />
                   </a>
                 </Link>
-              </Box>
+              </div>
               <Hidden smDown>
                 <List
                   component='nav'

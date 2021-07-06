@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { getMediaUrl } from '@/lib/getMediaUrl';
@@ -14,7 +13,7 @@ const RelatedCard = ({ article }) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <Box component='div' className={classes.box}>
+        <div className={classes.box}>
           <CardMedia
             component='img'
             className={classes.media}
@@ -31,7 +30,7 @@ const RelatedCard = ({ article }) => {
               {article.title}
             </Typography>
           </CardContent>
-        </Box>
+        </div>
       </CardActionArea>
     </Card>
   );

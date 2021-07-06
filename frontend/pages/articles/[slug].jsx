@@ -10,7 +10,6 @@ import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -73,7 +72,7 @@ const ArticlePage = (props) => {
         share_image={article.metadata.share_image}
       />
       <section aria-label='post-page' style={{ flexGrow: 1, padding: '15px' }}>
-        <Box component='div' style={{ margin: '0 0 30px 0' }}>
+        <div style={{ margin: '0 0 30px 0' }}>
           <Link href={`/categories/${article.category.slug}`}>
             <a>
               <Chip
@@ -108,7 +107,7 @@ const ArticlePage = (props) => {
               variant='outlined'
             />
           ))}
-        </Box>
+        </div>
         <Typography
           variant='h3'
           component='h1'
@@ -143,7 +142,7 @@ const ArticlePage = (props) => {
                   {article.excerpt}
                 </Typography>
                 <Divider className={classes.divider} />
-                <Box
+                <div
                   dangerouslySetInnerHTML={{ __html: article.content }}
                   className={classes.content}
                   aria-label='article-content'

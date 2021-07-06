@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 
@@ -17,10 +16,10 @@ const TagsContainer = ({ tags }) => {
           <Grid item xs={6} sm={4}>
             <Link href={`/tags/${tag.slug}`}>
               <a>
-                <Box component='div' className={classes.tagItem}>
+                <div className={classes.tagItem}>
                   <span>#</span>
                   <p>{tag.name}</p>
-                </Box>
+                </div>
               </a>
             </Link>
           </Grid>
