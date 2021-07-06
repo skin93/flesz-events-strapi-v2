@@ -71,7 +71,7 @@ const TagPage = (props) => {
           <span>#</span>
           {tag.name}
         </Typography>
-        {tag.articles ? (
+        {tag.articles.length > 0 ? (
           <Grid container spacing={2} className={classes.container}>
             {tag.articles.map((article) => (
               <Fade key={article.id} in timeout={500}>
