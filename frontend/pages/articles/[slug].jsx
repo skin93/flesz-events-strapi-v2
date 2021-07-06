@@ -19,7 +19,7 @@ import SEO from '../../src/components/SEO';
 import { getMediaUrl } from '../../lib/getMediaUrl';
 import Disqus from '../../src/components/Disqus';
 
-// import FeaturedPosts from '../../components/layout/FeaturedPosts'
+import RelatedArticles from '../../src/components/layout/RelatedArticles';
 // import Disqus from '../../components/Disqus'
 
 const ArticlePage = (props) => {
@@ -161,7 +161,11 @@ const ArticlePage = (props) => {
             lg={3}
             container
             justify='center'
-            component='aside'></Grid>
+            component='aside'>
+            {article.related_articles && (
+              <RelatedArticles articles={article.related_articles.articles} />
+            )}
+          </Grid>
         </Grid>
       </section>
     </React.Fragment>
