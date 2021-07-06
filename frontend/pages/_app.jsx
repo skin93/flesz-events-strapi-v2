@@ -7,6 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
 import { Container } from '@material-ui/core';
 
+import TheHeader from '@/components/layout/TheHeader';
+
 import * as gtag from '@/lib/gtag';
 
 Router.events.on('routeChangeComplete', (url) => gtag.pageview(url));
@@ -35,6 +37,7 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        <TheHeader />
         <Container
           maxWidth='lg'
           component='main'
