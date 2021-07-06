@@ -8,6 +8,7 @@ import theme from '../theme';
 import { Container } from '@material-ui/core';
 
 import TheHeader from '@/components/layout/TheHeader';
+import TheFooter from '@/components/layout/TheFooter';
 
 import * as gtag from '@/lib/gtag';
 
@@ -48,6 +49,7 @@ export default function MyApp(props) {
           }}>
           <Component {...pageProps} />
         </Container>
+        <TheFooter />
       </ThemeProvider>
     </React.Fragment>
   );
