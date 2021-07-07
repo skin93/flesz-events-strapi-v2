@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,6 +16,7 @@ import Drawer from '@material-ui/core/Drawer';
 
 const SiteDrawer = ({ navLinks }) => {
   const classes = useStyles();
+  const router = useRouter();
 
   const [state, setState] = React.useState({ right: false });
 
@@ -40,7 +42,12 @@ const SiteDrawer = ({ navLinks }) => {
         className={classes.list}>
         {navLinks.map(({ title, path }) => (
           <Link href={path} key={title} passHref>
-            <a className={classes.linkText}>
+            <a
+              className={
+                router.asPath === `${path}`
+                  ? `${classes.active}`
+                  : `${classes.linkText}`
+              }>
               <ListItem button>
                 <ListItemText primary={title} />
               </ListItem>
@@ -74,6 +81,11 @@ export default SiteDrawer;
 const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
+  },
+  active: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: theme.palette.accent.main,
   },
   linkText: {
     textDecoration: `none`,
