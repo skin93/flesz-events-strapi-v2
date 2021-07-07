@@ -29,7 +29,7 @@ export default TheFooter;
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    height: 'auto',
+    height: '100px',
     top: 'auto',
     bottom: 0,
     display: 'flex',
