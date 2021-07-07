@@ -68,26 +68,32 @@ const TagPage = (props) => {
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='tag-page'>
-          <Typography variant='h6' className={classes.heading}>
-            <span>#</span>
-            {tag.name}
-          </Typography>
           {tag.articles.length > 0 ? (
-            <Grid container spacing={2} className={classes.container}>
-              {tag.articles.map((article) => (
-                <Fade key={article.id} in timeout={200}>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Link href={`/articles/${article.slug}`}>
-                      <a>
-                        <BaseCard article={article} />
-                      </a>
-                    </Link>
-                  </Grid>
-                </Fade>
-              ))}
-            </Grid>
+            <React.Fragment>
+              <Typography variant='h6' className={classes.heading}>
+                <span>#</span>
+                {tag.name}
+              </Typography>
+              <Grid container spacing={2} className={classes.container}>
+                {tag.articles.map((article) => (
+                  <Fade key={article.id} in timeout={200}>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Link href={`/articles/${article.slug}`}>
+                        <a>
+                          <BaseCard article={article} />
+                        </a>
+                      </Link>
+                    </Grid>
+                  </Fade>
+                ))}
+              </Grid>
+            </React.Fragment>
           ) : (
-            <div>Brak artykułów</div>
+            <div className={classes.noArticles}>
+              <Typography variant='h1' className={classes.heading}>
+                Jeszcze nie ma czego czytać...
+              </Typography>
+            </div>
           )}
         </section>
       </Fade>
@@ -123,6 +129,12 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: '30px',
+  },
+  noArticles: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '80vh',
   },
   loadMoreButton: {
     display: 'block',
