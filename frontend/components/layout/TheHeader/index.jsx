@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,6 +40,7 @@ const navLinks = [
 
 const TheHeader = (props) => {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <>
@@ -50,7 +52,7 @@ const TheHeader = (props) => {
                 className={classes.navbarBrand}
                 color='inherit'
                 aria-label='home'>
-                <Link href='/' passHref>
+                <Link href='/'>
                   <a>
                     <Image
                       src='/biale-logo-pelny-napis-akcent.png'
@@ -69,7 +71,12 @@ const TheHeader = (props) => {
                   className={classes.navDisplayFlex}>
                   {navLinks.map(({ title, path }) => (
                     <Link href={path} key={title} passHref>
-                      <a className={classes.linkText}>
+                      <a
+                        className={
+                          router.asPath === `${path}`
+                            ? `${classes.active}`
+                            : `${classes.linkText}`
+                        }>
                         <ListItem button>
                           <ListItemText primary={title} />
                         </ListItem>
@@ -126,6 +133,11 @@ const useStyles = makeStyles((theme) => ({
   navDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
+  },
+  active: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: theme.palette.accent.main,
   },
   linkText: {
     textDecoration: `none`,
