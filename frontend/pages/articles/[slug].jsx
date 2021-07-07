@@ -161,6 +161,7 @@ const ArticlePage = (props) => {
               xs={12}
               lg={3}
               container
+              spacing={2}
               justify='center'
               component='aside'>
               {article.related_articles && (
