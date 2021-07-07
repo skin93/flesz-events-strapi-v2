@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 import Link from 'next/link';
 
@@ -49,12 +50,14 @@ const TheHeader = (props) => {
                 className={classes.navbarBrand}
                 color='inherit'
                 aria-label='home'>
-                <Link href='/'>
+                <Link href='/' passHref>
                   <a>
-                    <img
+                    <Image
                       src='/biale-logo-pelny-napis-akcent.png'
                       className={classes.logo}
                       alt='logo'
+                      width={150}
+                      height={20}
                     />
                   </a>
                 </Link>
@@ -105,8 +108,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   navbarDisplayFlex: {
-    display: `flex`,
-    justifyContent: `space-between`,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   navbarBrand: {
     padding: `8px 16px`,
@@ -118,7 +122,6 @@ const useStyles = makeStyles((theme) => ({
     display: `flex`,
     justifyContent: `center`,
     alignItems: `center`,
-    width: `150px`,
   },
   navDisplayFlex: {
     display: `flex`,
