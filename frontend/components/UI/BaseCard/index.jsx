@@ -39,10 +39,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '250px',
     position: 'relative',
-    borderRadius: '10px',
-  },
-  actionsArea: {
-    height: '100%',
   },
   category: {
     fontWeight: 'bold',
@@ -52,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   media: {
-    position: 'relative',
     height: '100%',
   },
   content: {
@@ -66,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(0,0,0,0.7)',
     transition: 'all .2s ease-in-out',
     '&:hover': {
-      backgroundColor: 'rgba(0,0,0,0.2)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
     },
     width: '100%',
     height: '100%',
