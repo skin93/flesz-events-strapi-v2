@@ -1,7 +1,6 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
@@ -31,13 +30,14 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+
         <TheHeader />
         <Container
           maxWidth='lg'
           component='main'
           key={router.asPath}
           style={{
-            margin: '0 auto',
+            margin: '30px auto',
             overflow: 'hidden',
           }}>
           <Component {...pageProps} />

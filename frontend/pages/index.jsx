@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Link from 'next/link';
 
@@ -9,16 +9,22 @@ import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Fade from '@material-ui/core/Fade';
 
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
+import LoadMoreButton from '@/components/UI/LoadMoreButton';
 
 export default function Home(props) {
   const classes = useStyles();
 
-  const [start, setStart] = React.useState(0);
-  const [limit, setLimit] = React.useState(6);
+  const [start, setStart] = useState(0);
+  const [limit, setLimit] = useState(1);
+
+  const handleClick = () => {
+    setLimit((prev) => prev + 1);
+  };
 
   const fetcher = (query, start, limit) => {
     return request(process.env.NEXT_PUBLIC_API_STRAPI, query, {
@@ -67,15 +73,22 @@ export default function Home(props) {
         </Typography>
         <Grid container spacing={2} className={classes.container}>
           {data.articles.map((article) => (
-            <Grid item xs={12} sm={6} md={4} key={article.id}>
-              <Link href={`/articles/${article.slug}`}>
-                <a>
-                  <BaseCard article={article} />
-                </a>
-              </Link>
-            </Grid>
+            <Fade key={article.id} in timeout={200}>
+              <Grid item xs={12} sm={6} md={4}>
+                <Link href={`/articles/${article.slug}`} passHref>
+                  <a>
+                    <BaseCard article={article} />
+                  </a>
+                </Link>
+              </Grid>
+            </Fade>
           ))}
         </Grid>
+        <LoadMoreButton
+          handleClick={handleClick}
+          count={data.articlesConnection.aggregate.count}
+          items={data.articles}
+        />
       </section>
     </React.Fragment>
   );
@@ -87,7 +100,7 @@ export async function getServerSideProps() {
     ALL_ARTICLES_QUERY,
     {
       start: 0,
-      limit: 6,
+      limit: 1,
     }
   );
 

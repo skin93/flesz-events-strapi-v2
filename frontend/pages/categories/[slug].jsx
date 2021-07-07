@@ -66,29 +66,31 @@ const CategoryPage = (props) => {
         meta_description={category.metadata.meta_description}
         share_image={category.metadata.share_image}
       />
-      <section style={{ padding: '15px' }} aria-label='category-page'>
-        <Typography variant='h6' className={classes.heading}>
-          <span>#</span>
-          {category.name}
-        </Typography>
-        {category.articles.length > 0 ? (
-          <Grid container spacing={2} className={classes.container}>
-            {category.articles.map((article) => (
-              <Fade key={article.id} in timeout={500}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Link href={`/articles/${article.slug}`}>
-                    <a>
-                      <BaseCard article={article} />
-                    </a>
-                  </Link>
-                </Grid>
-              </Fade>
-            ))}
-          </Grid>
-        ) : (
-          <div>Brak artykułów</div>
-        )}
-      </section>
+      <Fade in timeout={200}>
+        <section style={{ padding: '15px' }} aria-label='category-page'>
+          <Typography variant='h6' className={classes.heading}>
+            <span>#</span>
+            {category.name}
+          </Typography>
+          {category.articles.length > 0 ? (
+            <Grid container spacing={2} className={classes.container}>
+              {category.articles.map((article) => (
+                <Fade key={article.id} in timeout={200}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Link href={`/articles/${article.slug}`}>
+                      <a>
+                        <BaseCard article={article} />
+                      </a>
+                    </Link>
+                  </Grid>
+                </Fade>
+              ))}
+            </Grid>
+          ) : (
+            <div>Brak artykułów</div>
+          )}
+        </section>
+      </Fade>
     </React.Fragment>
   );
 };

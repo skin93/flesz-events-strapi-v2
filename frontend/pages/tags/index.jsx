@@ -88,40 +88,42 @@ const TagsPage = (props) => {
   return (
     <React.Fragment>
       <SEO meta_title='Tagi' meta_description='Zbiór wszystkich tagów.' />
-      <section className={classes.root} aria-label='tags-page'>
-        <Typography variant='h6' className={classes.heading}>
-          TAGI
-        </Typography>
-        <form className={classes.form} noValidate autoComplete='off'>
-          <TextField
+      <Fade in timeout={200}>
+        <section className={classes.root} aria-label='tags-page'>
+          <Typography variant='h6' className={classes.heading}>
+            TAGI
+          </Typography>
+          <form className={classes.form} noValidate autoComplete='off'>
+            <TextField
+              onChange={handleChange}
+              className={classes.textField}
+              id='outlined-basic'
+              label='Szukaj tagu'
+              variant='outlined'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </form>
+          {tagsFound.length > 0 ? (
+            <TagsContainer aria-label='tags-filtered' tags={tagsFound} />
+          ) : (
+            <TagsContainer aria-label='all-tags' tags={tagsToShow} />
+          )}
+          <Button
             onChange={handleChange}
-            className={classes.textField}
-            id='outlined-basic'
-            label='Szukaj tagu'
+            disabled={next >= data.tagsConnection.aggregate.count}
+            onClick={handleShowMoreTags}
             variant='outlined'
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </form>
-        {tagsFound.length > 0 ? (
-          <TagsContainer aria-label='tags-filtered' tags={tagsFound} />
-        ) : (
-          <TagsContainer aria-label='all-tags' tags={tagsToShow} />
-        )}
-        <Button
-          onChange={handleChange}
-          disabled={next >= data.tagsConnection.aggregate.count}
-          onClick={handleShowMoreTags}
-          variant='outlined'
-          className={classes.loadMoreButton}>
-          Wczytaj więcej
-        </Button>
-      </section>
+            className={classes.loadMoreButton}>
+            Wczytaj więcej
+          </Button>
+        </section>
+      </Fade>
     </React.Fragment>
   );
 };

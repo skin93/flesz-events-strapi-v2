@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+import grey from '@material-ui/core/colors/grey';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +14,9 @@ const TagsContainer = ({ tags }) => {
   return (
     <Grid container spacing={2} className={classes.container}>
       {tags.map((tag) => (
-        <Fade key={tag.id} in timeout={500}>
+        <Fade key={tag.id} in timeout={200}>
           <Grid item xs={6} sm={4}>
-            <Link href={`/tags/${tag.slug}`}>
+            <Link href={`/tags/${tag.slug}`} passHref>
               <a>
                 <div className={classes.tagItem}>
                   <span>#</span>
@@ -36,10 +38,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '30px',
   },
   tagItem: {
+    '& > p': {
+      color: theme.palette.light.main,
+    },
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.light.main,
     textAlign: 'center',
     fontSize: 'calc(.7rem + .5vw)',
     backgroundColor: 'inherit',

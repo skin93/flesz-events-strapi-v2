@@ -1,6 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
-import teal from '@material-ui/core/colors/teal';
 
 const theme = createMuiTheme({
   overrides: {
@@ -52,7 +51,7 @@ const theme = createMuiTheme({
             top: 60,
             left: -40,
             fontSize: '6em',
-            color: teal.A400,
+            color: '#32e0c4',
           },
           backgroundColor: 'transparent',
           padding: '30px',
@@ -75,7 +74,7 @@ const theme = createMuiTheme({
           backgroundColor: 'transparent',
         },
         a: {
-          color: teal.A400,
+          color: '#32e0c4',
           textDecoration: 'none',
         },
         strong: {
@@ -93,7 +92,7 @@ const theme = createMuiTheme({
           lineHeight: '1.5',
           fontSize: 'calc(.7rem + .5vw)',
           '&::marker': {
-            color: teal.A400,
+            color: '#32e0c4',
           },
         },
         ul: {
@@ -106,11 +105,11 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: teal.A400,
+      main: '#32e0c4',
     },
     type: 'dark',
     accent: {
-      main: teal.A400,
+      main: '#32e0c4',
     },
     light: {
       main: grey[200],

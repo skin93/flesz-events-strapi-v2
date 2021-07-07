@@ -10,6 +10,7 @@ import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Fade from '@material-ui/core/Fade';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -71,100 +72,104 @@ const ArticlePage = (props) => {
         meta_description={article.metadata.meta_description}
         share_image={article.metadata.share_image}
       />
-      <section aria-label='post-page' style={{ flexGrow: 1, padding: '15px' }}>
-        <div style={{ margin: '0 0 30px 0' }}>
-          <Link href={`/categories/${article.category.slug}`}>
-            <a>
-              <Chip
-                variant='outlined'
-                label={article.category.name}
-                className={classes.category}
-              />
-            </a>
-          </Link>
-          {article.tags.map((tag) => (
-            <Link key={tag.slug} href={`/tags/${tag.slug}`}>
+      <Fade in timeout={200}>
+        <section
+          aria-label='post-page'
+          style={{ flexGrow: 1, padding: '15px' }}>
+          <div style={{ margin: '0 0 30px 0' }}>
+            <Link href={`/categories/${article.category.slug}`}>
               <a>
                 <Chip
-                  key={tag.name}
-                  label={tag.name}
-                  className={classes.tagItem}
                   variant='outlined'
+                  label={article.category.name}
+                  className={classes.category}
                 />
               </a>
             </Link>
-          ))}
-          <Chip
-            label={article.published_at.split('T')[0]}
-            className={classes.published_at}
-            variant='outlined'
-          />
-          {article.writers.map((writer) => (
+            {article.tags.map((tag) => (
+              <Link key={tag.slug} href={`/tags/${tag.slug}`}>
+                <a>
+                  <Chip
+                    key={tag.name}
+                    label={tag.name}
+                    className={classes.tagItem}
+                    variant='outlined'
+                  />
+                </a>
+              </Link>
+            ))}
             <Chip
-              label={writer.name}
-              key={writer.name}
-              className={classes.writer}
+              label={article.published_at.split('T')[0]}
+              className={classes.published_at}
               variant='outlined'
             />
-          ))}
-        </div>
-        <Typography
-          variant='h3'
-          component='h1'
-          aria-label='article-title'
-          className={classes.title}>
-          {article.title}
-        </Typography>
-        <Divider className={classes.divider} />
-        <Grid container justify='space-between'>
-          <Grid item xs={12} lg={8} component='article'>
-            <Grid container>
-              <Grid item>
-                <Image
-                  src={getMediaUrl(article.image_cover)}
-                  width={800}
-                  height={450}
-                  quality={100}
-                  layout='responsive'
-                  alt={article.title}
-                  aria-label='article-cover'
-                />
-                <Typography
-                  variant='subtitle2'
-                  className={classes.coverSrc}
-                  aria-label='article-cover-src'>
-                  {article.image_cover.caption}
-                </Typography>
-                <Typography
-                  variant='subtitle1'
-                  className={classes.excerpt}
-                  aria-label='article-excerpt'>
-                  {article.excerpt}
-                </Typography>
-                <Divider className={classes.divider} />
-                <div
-                  dangerouslySetInnerHTML={{ __html: article.content }}
-                  className={classes.content}
-                  aria-label='article-content'
-                />
-                <Divider className={classes.divider} />
+            {article.writers.map((writer) => (
+              <Chip
+                label={writer.name}
+                key={writer.name}
+                className={classes.writer}
+                variant='outlined'
+              />
+            ))}
+          </div>
+          <Typography
+            variant='h3'
+            component='h1'
+            aria-label='article-title'
+            className={classes.title}>
+            {article.title}
+          </Typography>
+          <Divider className={classes.divider} />
+          <Grid container justify='space-between'>
+            <Grid item xs={12} lg={8} component='article'>
+              <Grid container>
+                <Grid item>
+                  <Image
+                    src={getMediaUrl(article.image_cover)}
+                    width={800}
+                    height={450}
+                    quality={100}
+                    layout='responsive'
+                    alt={article.title}
+                    aria-label='article-cover'
+                  />
+                  <Typography
+                    variant='subtitle2'
+                    className={classes.coverSrc}
+                    aria-label='article-cover-src'>
+                    {article.image_cover.caption}
+                  </Typography>
+                  <Typography
+                    variant='subtitle1'
+                    className={classes.excerpt}
+                    aria-label='article-excerpt'>
+                    {article.excerpt}
+                  </Typography>
+                  <Divider className={classes.divider} />
+                  <div
+                    dangerouslySetInnerHTML={{ __html: article.content }}
+                    className={classes.content}
+                    aria-label='article-content'
+                  />
+                  <Divider className={classes.divider} />
+                </Grid>
               </Grid>
             </Grid>
+            <Grid item xs={12} lg={1} />
+            <Grid
+              item
+              xs={12}
+              lg={3}
+              container
+              justify='center'
+              component='aside'>
+              {article.related_articles && (
+                <RelatedArticles articles={article.related_articles.articles} />
+              )}
+            </Grid>
           </Grid>
-          <Grid item xs={12} lg={1} />
-          <Grid
-            item
-            xs={12}
-            lg={3}
-            container
-            justify='center'
-            component='aside'>
-            {article.related_articles && (
-              <RelatedArticles articles={article.related_articles.articles} />
-            )}
-          </Grid>
-        </Grid>
-      </section>
+        </section>
+      </Fade>
     </React.Fragment>
   );
 };
