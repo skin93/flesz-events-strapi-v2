@@ -20,10 +20,10 @@ export default function Home(props) {
   const classes = useStyles();
 
   const [start, setStart] = useState(0);
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(6);
 
   const handleClick = () => {
-    setLimit((prev) => prev + 1);
+    setLimit((prev) => prev + 3);
   };
 
   const fetcher = (query, start, limit) => {
@@ -100,7 +100,7 @@ export async function getServerSideProps() {
     ALL_ARTICLES_QUERY,
     {
       start: 0,
-      limit: 1,
+      limit: 6,
     }
   );
 
