@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 
@@ -16,6 +16,7 @@ import Fade from '@material-ui/core/Fade';
 import BaseCard from '@/components/UI/BaseCard';
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import SEO from '@/components/SEO';
+import LoadMoreButton from '@/components/UI/LoadMoreButton';
 
 const CategoryPage = (props) => {
   const router = useRouter();
@@ -33,6 +34,25 @@ const CategoryPage = (props) => {
 
   const { categories } = data;
   const category = categories[0];
+
+  const articlesPerPage = 9;
+
+  const [articlesToShow, setArticlesToShow] = useState([]);
+  const [next, setNext] = useState(articlesPerPage);
+
+  const loopWithSlice = (start, end) => {
+    const slicedArticles = category.articles.slice(start, end);
+    setArticlesToShow((prev) => [...prev, ...slicedArticles]);
+  };
+
+  useEffect(() => {
+    loopWithSlice(0, articlesPerPage);
+  }, []);
+
+  const handleShowMoreArticles = () => {
+    loopWithSlice(next, next + articlesPerPage);
+    setNext(next + articlesPerPage);
+  };
 
   if (error) {
     return (
@@ -68,14 +88,14 @@ const CategoryPage = (props) => {
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='category-page'>
-          {category.articles.length > 0 ? (
+          {articlesToShow.length > 0 ? (
             <React.Fragment>
               <Typography variant='h6' className={classes.heading}>
                 <span>#</span>
                 {category.name}
               </Typography>
               <Grid container spacing={2} className={classes.container}>
-                {category.articles.map((article) => (
+                {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
                     <Grid item xs={12} sm={6} md={4}>
                       <Link href={`/articles/${article.slug}`}>
@@ -95,6 +115,11 @@ const CategoryPage = (props) => {
               </Typography>
             </div>
           )}
+          <LoadMoreButton
+            next={next}
+            count={category.articles.length}
+            onClick={handleShowMoreArticles}
+          />
         </section>
       </Fade>
     </React.Fragment>
