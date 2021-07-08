@@ -14,11 +14,6 @@ export const ALL_ARTICLES_QUERY = gql`
         alternativeText
         url
       }
-      category {
-        name
-        slug
-      }
-      published_at
     }
     articlesConnection {
       aggregate {
