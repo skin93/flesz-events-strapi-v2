@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import useSWR from 'swr';
 import { request } from 'graphql-request';
@@ -17,22 +17,23 @@ import SearchIcon from '@material-ui/icons/Search';
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import SEO from '@/components/SEO';
 import TagsContainer from '@/components/tags/TagsContainer';
+import LoadMoreButton from '@/components/UI/LoadMoreButton';
 
 const TagsPage = (props) => {
   const classes = useStyles();
 
   const tagsPerPage = 24;
 
-  const [tagsToShow, setTagsToShow] = React.useState([]);
-  const [next, setNext] = React.useState(tagsPerPage);
-  const [tagsFound, setTagsFound] = React.useState([]);
+  const [tagsToShow, setTagsToShow] = useState([]);
+  const [next, setNext] = useState(tagsPerPage);
+  const [tagsFound, setTagsFound] = useState([]);
 
   const loopWithSlice = (start, end) => {
     const slicedTags = data.tags.slice(start, end);
     setTagsToShow((prevTags) => [...prevTags, ...slicedTags]);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     loopWithSlice(0, tagsPerPage);
   }, []);
 
@@ -114,14 +115,12 @@ const TagsPage = (props) => {
           ) : (
             <TagsContainer aria-label='all-tags' tags={tagsToShow} />
           )}
-          <Button
+          <LoadMoreButton
             onChange={handleChange}
-            disabled={next >= data.tagsConnection.aggregate.count}
+            next={next}
+            count={data.tagsConnection.aggregate.count}
             onClick={handleShowMoreTags}
-            variant='outlined'
-            className={classes.loadMoreButton}>
-            Wczytaj więcej
-          </Button>
+          />
         </section>
       </Fade>
     </React.Fragment>

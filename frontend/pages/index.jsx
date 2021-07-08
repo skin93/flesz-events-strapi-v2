@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 
@@ -14,23 +14,36 @@ import Fade from '@material-ui/core/Fade';
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
+import Button from '@material-ui/core/Button';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
 
 export default function Home(props) {
   const classes = useStyles();
 
+  const [limit, setLimit] = useState(90);
   const [start, setStart] = useState(0);
-  const [limit, setLimit] = useState(6);
 
-  const handleClick = () => {
-    setLimit((prev) => prev + 3);
+  const articlesPerPage = 9;
+
+  const [articlesToShow, setArticlesToShow] = useState([]);
+  const [next, setNext] = useState(articlesPerPage);
+
+  const loopWithSlice = (start, end) => {
+    const slicedArticles = data.articles.slice(start, end);
+    setArticlesToShow((prev) => [...prev, ...slicedArticles]);
   };
 
-  const fetcher = (query, start, limit) => {
-    return request(process.env.NEXT_PUBLIC_API_STRAPI, query, {
-      start,
-      limit,
-    });
+  useEffect(() => {
+    loopWithSlice(0, articlesPerPage);
+  }, []);
+
+  const handleShowMoreArticles = () => {
+    loopWithSlice(next, next + articlesPerPage);
+    setNext(next + articlesPerPage);
+  };
+
+  const fetcher = (query) => {
+    return request(process.env.NEXT_PUBLIC_API_STRAPI, query, { start, limit });
   };
 
   const q = ALL_ARTICLES_QUERY;
@@ -72,7 +85,7 @@ export default function Home(props) {
           OSTATNIE WPISY
         </Typography>
         <Grid container spacing={2} className={classes.container}>
-          {data.articles.map((article) => (
+          {articlesToShow.map((article) => (
             <Fade key={article.id} in timeout={200}>
               <Grid item xs={12} sm={6} md={4}>
                 <Link href={`/articles/${article.slug}`} passHref>
@@ -85,9 +98,9 @@ export default function Home(props) {
           ))}
         </Grid>
         <LoadMoreButton
-          handleClick={handleClick}
+          next={next}
           count={data.articlesConnection.aggregate.count}
-          items={data.articles}
+          onClick={handleShowMoreArticles}
         />
       </section>
     </React.Fragment>
@@ -100,7 +113,7 @@ export async function getServerSideProps() {
     ALL_ARTICLES_QUERY,
     {
       start: 0,
-      limit: 6,
+      limit: 90,
     }
   );
 
