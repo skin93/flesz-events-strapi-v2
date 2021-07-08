@@ -17,10 +17,6 @@ const BaseCard = ({ article }) => {
         alt={article.title}
       />
       <CardContent className={classes.content}>
-        <Typography gutterBottom variant='button' className={classes.category}>
-          {article.category.name}
-        </Typography>
-
         <Typography
           variant='subtitle1'
           component='h2'
