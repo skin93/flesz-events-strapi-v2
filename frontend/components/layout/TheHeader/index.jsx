@@ -36,6 +36,10 @@ const navLinks = [
   { title: 'news', path: '/categories/news' },
   { title: 'festiwale', path: '/categories/festiwale' },
   { title: 'koncerty', path: '/categories/koncerty' },
+  { title: 'recenzje', path: '/categories/recenzje' },
+  { title: 'relacje', path: '/categories/relacje' },
+  { title: 'patronat', path: '/categories/patronat' },
+  { title: 'polecamy', path: '/categories/polecamy' },
 ];
 
 const TheHeader = (props) => {
