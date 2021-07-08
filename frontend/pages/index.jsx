@@ -80,34 +80,36 @@ export default function Home(props) {
   return (
     <React.Fragment>
       <SEO />
-      <section className={classes.root} aria-label='home-page'>
-        <Typography variant='h6' component='h1' className={classes.heading}>
-          OSTATNIE WPISY
-        </Typography>
-        <Grid container spacing={2} className={classes.container}>
-          {articlesToShow.map((article) => (
-            <Fade key={article.id} in timeout={200}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Link href={`/articles/${article.slug}`} passHref>
-                  <a>
-                    <BaseCard article={article} />
-                  </a>
-                </Link>
-              </Grid>
-            </Fade>
-          ))}
-        </Grid>
-        <LoadMoreButton
-          next={next}
-          count={data.articlesConnection.aggregate.count}
-          onClick={handleShowMoreArticles}
-        />
-      </section>
+      <Fade in timeout={200}>
+        <section className={classes.root} aria-label='home-page'>
+          <Typography variant='h6' component='h1' className={classes.heading}>
+            OSTATNIE WPISY
+          </Typography>
+          <Grid container spacing={2} className={classes.container}>
+            {articlesToShow.map((article) => (
+              <Fade key={article.id} in timeout={200}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Link href={`/articles/${article.slug}`} passHref>
+                    <a>
+                      <BaseCard article={article} />
+                    </a>
+                  </Link>
+                </Grid>
+              </Fade>
+            ))}
+          </Grid>
+          <LoadMoreButton
+            next={next}
+            count={data.articlesConnection.aggregate.count}
+            onClick={handleShowMoreArticles}
+          />
+        </section>
+      </Fade>
     </React.Fragment>
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const data = await request(
     process.env.NEXT_PUBLIC_API_STRAPI,
     ALL_ARTICLES_QUERY,
