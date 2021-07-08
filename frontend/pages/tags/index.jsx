@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useSWR from 'swr';
 import { request } from 'graphql-request';
@@ -129,7 +129,7 @@ const TagsPage = (props) => {
 
 export default TagsPage;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const data = await request(
     process.env.NEXT_PUBLIC_API_STRAPI,
     ALL_TAGS_QUERY
