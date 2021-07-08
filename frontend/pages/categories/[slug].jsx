@@ -111,7 +111,7 @@ const CategoryPage = (props) => {
           ) : (
             <div className={classes.noArticles}>
               <Typography variant='h1' className={classes.heading}>
-                Jeszcze nie ma czego czytać...
+                Jeszcze tutaj pusto...
               </Typography>
             </div>
           )}
