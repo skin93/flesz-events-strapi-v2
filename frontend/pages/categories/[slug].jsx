@@ -115,11 +115,13 @@ const CategoryPage = (props) => {
               </Typography>
             </div>
           )}
-          <LoadMoreButton
-            next={next}
-            count={category.articles.length}
-            onClick={handleShowMoreArticles}
-          />
+          {category.articles.length > 0 && (
+            <LoadMoreButton
+              next={next}
+              count={category.articles.length}
+              onClick={handleShowMoreArticles}
+            />
+          )}
         </section>
       </Fade>
     </React.Fragment>
