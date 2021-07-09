@@ -5,19 +5,19 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { alpha } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import SiteDrawer from '@/components/layout/SiteDrawer';
 
@@ -89,6 +89,21 @@ const TheHeader = (props) => {
                   ))}
                 </List>
               </Hidden>
+              <Hidden mdDown>
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder='Szukaj...'
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </div>
+              </Hidden>
               <Hidden mdUp>
                 <SiteDrawer navLinks={navLinks} />
               </Hidden>
@@ -147,5 +162,45 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: `none`,
     textTransform: `uppercase`,
     color: theme.palette.light.main,
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: theme.palette.light.main,
+  },
+  inputRoot: {
+    color: theme.palette.light.main,
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
   },
 }));
