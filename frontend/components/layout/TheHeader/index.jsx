@@ -70,18 +70,23 @@ const TheHeader = (props) => {
 
   const [articlesFound, setArticlesFound] = useState([]);
 
-  const fetcher = async (query) => {
-    return await request(process.env.NEXT_PUBLIC_API_STRAPI, query);
+  const fetcher = (query) => {
+    return request(process.env.NEXT_PUBLIC_API_STRAPI, query);
   };
 
   const q = ARTICLES_TITLE_QUERY;
 
   const { data, error } = useSWR(q, fetcher);
 
-  if (!data && !error) {
+  if (error) {
     return (
-      <div>
-        <CircularProgress />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <p>Coś poszło nie tak...</p>
       </div>
     );
   }
