@@ -16,14 +16,14 @@ const RelatedArticles = ({ articles }) => {
   }
 
   return (
-    <section className={classes.root} aria-label='featured-posts'>
+    <section className={classes.root} aria-label='related-articles'>
       <Typography variant='h6' component='h1' className={classes.heading}>
         Zobacz także:
       </Typography>
       <Grid
         container
         direction='row'
-        justify='center'
+        justifyContent='center'
         spacing={2}
         className={classes.container}>
         {articles.map((article) => (

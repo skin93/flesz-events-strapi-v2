@@ -120,7 +120,7 @@ const ArticlePage = (props) => {
             {article.title}
           </Typography>
           <Divider className={classes.divider} />
-          <Grid container justify='space-between'>
+          <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
               <Grid container>
                 <Grid item>
@@ -162,7 +162,7 @@ const ArticlePage = (props) => {
               lg={3}
               container
               spacing={2}
-              justify='center'
+              justifyContent='center'
               component='aside'>
               {article.related_articles && (
                 <RelatedArticles articles={article.related_articles.articles} />
