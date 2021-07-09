@@ -40,10 +40,6 @@
       "required": true,
       "targetField": "title"
     },
-    "featured": {
-      "type": "boolean",
-      "default": false
-    },
     "writers": {
       "via": "articles",
       "collection": "writer"
@@ -67,12 +63,6 @@
       "type": "component",
       "repeatable": false,
       "component": "articles.related-articles",
-      "required": true
-    },
-    "link": {
-      "type": "string",
-      "default": "http://localhost:1337/articles/",
-      "unique": true,
       "required": true
     }
   }
