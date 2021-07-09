@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request';
 export const SINGLE_ARTICLE_QUERY = gql`
   query singleArticleQuery($slug: String!) {
-    articles(where: { slug: $slug }) {
+    articles(publicationState: LIVE, where: { slug: $slug }) {
       title
       excerpt
       content
