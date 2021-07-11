@@ -64,6 +64,9 @@
       "repeatable": false,
       "component": "articles.related-articles",
       "required": true
+    },
+    "publish_at": {
+      "type": "datetime"
     }
   }
 }
