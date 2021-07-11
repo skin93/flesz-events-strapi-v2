@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
+import { client } from '@/lib/requestClient';
 import { PREVIEW_ARTICLE_QUERY } from '@/lib/queries/articles/previewArticleQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,8 +27,7 @@ const PreviewArticlePage = (props) => {
 
   const q = PREVIEW_ARTICLE_QUERY;
 
-  const fetcher = (query, id) =>
-    request(process.env.NEXT_PUBLIC_API_STRAPI, query, { id });
+  const fetcher = async (query, id) => await client.request(query, { id });
 
   const { error, data } = useSWR([q, id], fetcher, {
     initialData: props.data,
@@ -177,13 +176,9 @@ const PreviewArticlePage = (props) => {
 export default PreviewArticlePage;
 
 export async function getServerSideProps({ params }) {
-  const data = await request(
-    process.env.NEXT_PUBLIC_API_STRAPI,
-    PREVIEW_ARTICLE_QUERY,
-    {
-      id: params.id,
-    }
-  );
+  const data = await client.request(PREVIEW_ARTICLE_QUERY, {
+    id: params.id,
+  });
 
   return {
     props: { data },

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
+import { client } from '@/lib/requestClient';
 import { SINGLE_CATEGORY_QUERY } from '@/lib/queries/categories/singleCategoryQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,8 +25,7 @@ const CategoryPage = (props) => {
 
   const q = SINGLE_CATEGORY_QUERY;
 
-  const fetcher = (query, slug) =>
-    request(process.env.NEXT_PUBLIC_API_STRAPI, query, { slug });
+  const fetcher = async (query, slug) => await client.request(query, { slug });
 
   const { error, data } = useSWR([q, slug], fetcher, {
     initialData: props.data,
@@ -131,13 +130,9 @@ const CategoryPage = (props) => {
 export default CategoryPage;
 
 export async function getServerSideProps({ params }) {
-  const data = await request(
-    process.env.NEXT_PUBLIC_API_STRAPI,
-    SINGLE_CATEGORY_QUERY,
-    {
-      slug: params.slug,
-    }
-  );
+  const data = await client.request(SINGLE_CATEGORY_QUERY, {
+    slug: params.slug,
+  });
 
   return {
     props: { data },

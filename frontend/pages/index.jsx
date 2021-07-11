@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
+import { client } from '@/lib/requestClient';
 import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,14 +14,13 @@ import Fade from '@material-ui/core/Fade';
 import SkeletonCard from '@/components/UI/SkeletonCard';
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
-import Button from '@material-ui/core/Button';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
 
 export default function Home(props) {
   const classes = useStyles();
 
-  const [limit, setLimit] = useState(90);
-  const [start, setStart] = useState(0);
+  const [limit] = useState(90);
+  const [start] = useState(0);
 
   const articlesPerPage = 9;
 
@@ -42,9 +41,8 @@ export default function Home(props) {
     setNext(next + articlesPerPage);
   };
 
-  const fetcher = (query) => {
-    return request(process.env.NEXT_PUBLIC_API_STRAPI, query, { start, limit });
-  };
+  const fetcher = async (query) =>
+    await client.request(query, { start, limit });
 
   const q = ALL_ARTICLES_QUERY;
 
@@ -110,14 +108,10 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const data = await request(
-    process.env.NEXT_PUBLIC_API_STRAPI,
-    ALL_ARTICLES_QUERY,
-    {
-      start: 0,
-      limit: 90,
-    }
-  );
+  const data = await client.request(ALL_ARTICLES_QUERY, {
+    start: 0,
+    limit: 90,
+  });
 
   return {
     props: { data },

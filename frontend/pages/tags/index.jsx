@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
+import { client } from '@/lib/requestClient';
 import { ALL_TAGS_QUERY } from '@/lib/queries/tags/allTagsQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,9 +41,7 @@ const TagsPage = (props) => {
     setNext(next + tagsPerPage);
   };
 
-  const fetcher = (query) => {
-    return request(process.env.NEXT_PUBLIC_API_STRAPI, query);
-  };
+  const fetcher = async (query) => await client.request(query);
 
   const q = ALL_TAGS_QUERY;
 
@@ -129,10 +127,7 @@ const TagsPage = (props) => {
 export default TagsPage;
 
 export async function getStaticProps() {
-  const data = await request(
-    process.env.NEXT_PUBLIC_API_STRAPI,
-    ALL_TAGS_QUERY
-  );
+  const data = await client.request(ALL_TAGS_QUERY);
 
   return {
     props: { data },
