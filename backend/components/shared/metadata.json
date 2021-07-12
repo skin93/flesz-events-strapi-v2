@@ -26,9 +26,13 @@
     "keywords": {
       "type": "text"
     },
-    "prevent_indexing": {
+    "follow": {
       "type": "boolean",
       "default": false
+    },
+    "index": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
