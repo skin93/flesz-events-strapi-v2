@@ -3,8 +3,20 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getMediaUrl } from '@/lib/getMediaUrl';
 
-const SEO = ({ meta_title, meta_description, share_image }) => {
+const SEO = ({
+  meta_title,
+  meta_description,
+  share_image,
+  index,
+  follow,
+  keywords,
+}) => {
   const router = useRouter();
+  const robots = [
+    index === true ? 'index' : 'noindex',
+    follow === true ? ' dofollow' : ' nofollow',
+  ];
+  console.log(robots);
   return (
     <Head>
       <title>
@@ -18,6 +30,8 @@ const SEO = ({ meta_title, meta_description, share_image }) => {
         name='viewport'
         content='minimum-scale=1, initial-scale=1, width=device-width'
       />
+      <meta name='robots' content={robots} />
+      {keywords && <meta name='keywords' content={keywords} />}
       <meta
         name='description'
         content={

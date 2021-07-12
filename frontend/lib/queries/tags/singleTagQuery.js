@@ -22,6 +22,8 @@ export const SINGLE_TAG_QUERY = gql`
       metadata {
         meta_title
         meta_description
+        follow
+        keywords
         share_image {
           media {
             url

@@ -71,6 +71,8 @@ const ArticlePage = (props) => {
         meta_title={article.metadata.meta_title}
         meta_description={article.metadata.meta_description}
         share_image={article.metadata.share_image}
+        follow={article.metadata.follow}
+        keywords={article.metadata.keywords}
       />
       <Fade in timeout={200}>
         <section
@@ -135,8 +137,8 @@ const ArticlePage = (props) => {
                   />
                   <Typography
                     variant='subtitle2'
-                    className={classes.coverSrc}
-                    aria-label='article-cover-src'>
+                    className={classes.caption}
+                    aria-label='article-image-caption'>
                     {article.image_cover.caption}
                   </Typography>
                   <Typography
@@ -205,7 +207,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     margin: '30px 0',
   },
-  coverSrc: {
+  caption: {
     color: theme.palette.muted.main,
     fontWeight: 'bold',
   },
