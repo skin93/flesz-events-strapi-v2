@@ -27,6 +27,7 @@ export const SINGLE_ARTICLE_QUERY = gql`
         meta_title
         meta_description
         follow
+        index
         keywords
         share_image {
           media {

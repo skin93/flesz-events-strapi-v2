@@ -77,7 +77,7 @@ export default function Home(props) {
 
   return (
     <React.Fragment>
-      <SEO />
+      <SEO index={true} />
       <Fade in timeout={200}>
         <section className={classes.root} aria-label='home-page'>
           <Typography variant='h6' component='h1' className={classes.heading}>

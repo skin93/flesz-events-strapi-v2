@@ -26,6 +26,9 @@ export const PREVIEW_ARTICLE_QUERY = gql`
       metadata {
         meta_title
         meta_description
+        follow
+        keywords
+        index
         share_image {
           media {
             url

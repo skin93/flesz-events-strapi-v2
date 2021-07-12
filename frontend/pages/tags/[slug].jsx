@@ -85,6 +85,8 @@ const TagPage = (props) => {
         meta_description={tag.metadata.meta_description}
         share_image={tag.metadata.share_image}
         keywords={tag.metadata.keywords}
+        index={tag.metadata.index}
+        follow={tag.metadata.follow}
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='tag-page'>
