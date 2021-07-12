@@ -73,6 +73,7 @@ const ArticlePage = (props) => {
         share_image={article.metadata.share_image}
         follow={article.metadata.follow}
         keywords={article.metadata.keywords}
+        index={article.metadata.index}
       />
       <Fade in timeout={200}>
         <section
