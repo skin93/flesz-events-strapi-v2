@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
+import { client } from '@/lib/requestClient';
 import { ARTICLES_TITLE_QUERY } from '@/lib/queries/articles/articlesTitleQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,22 +25,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import SiteDrawer from '@/components/layout/SiteDrawer';
-
-const ResultsContainer = ({ articles, onClick }) => {
-  return (
-    <div>
-      {articles.map((article) => (
-        <div key={article.id}>
-          <Link href={`/articles/${article.slug}`} passHref>
-            <a>
-              <h1 onClick={onClick}>{article.title}</h1>
-            </a>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-};
+import ResultsContainer from '@/components/UI/ResultsContainer';
 
 function HideOnScroll(props) {
   const { children } = props;
@@ -70,8 +55,8 @@ const TheHeader = (props) => {
 
   const [articlesFound, setArticlesFound] = useState([]);
 
-  const fetcher = (query) => {
-    return request(process.env.NEXT_PUBLIC_API_STRAPI, query);
+  const fetcher = async (query) => {
+    return await client.request(query);
   };
 
   const q = ARTICLES_TITLE_QUERY;
@@ -174,10 +159,10 @@ const TheHeader = (props) => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
+      <div className={classes.offset} />
       {articlesFound.length > 0 && (
         <ResultsContainer articles={articlesFound} onClick={clear} />
       )}
-      <div className={classes.offset} />
     </>
   );
 };
