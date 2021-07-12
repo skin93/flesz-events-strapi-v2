@@ -5,7 +5,7 @@ export const SINGLE_CATEGORY_QUERY = gql`
       name
       description
       slug
-      articles(sort: "published_at:DESC", publicationState: LIVE) {
+      articles(sort: "published_at:DESC") {
         id
         title
         slug
