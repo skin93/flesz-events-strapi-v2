@@ -107,7 +107,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await client.request(ALL_ARTICLES_QUERY, {
     start: 0,
     limit: 90,

@@ -1,7 +1,11 @@
 import { gql } from 'graphql-request';
 export const SINGLE_TAG_QUERY = gql`
   query singleTagQuery($slug: String!) {
-    tags(where: { slug: $slug }) {
+    tags(
+      where: { slug: $slug }
+      publicationState: LIVE
+      sort: "published_at:DESC"
+    ) {
       name
       description
       slug

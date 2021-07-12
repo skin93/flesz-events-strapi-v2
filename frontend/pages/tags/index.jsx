@@ -126,7 +126,7 @@ const TagsPage = (props) => {
 
 export default TagsPage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await client.request(ALL_TAGS_QUERY);
 
   return {

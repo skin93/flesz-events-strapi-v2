@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request';
 export const ALL_TAGS_QUERY = gql`
   query {
-    tags {
+    tags(sort: "name:ASC", publicationState: LIVE) {
       id
       name
       slug
