@@ -10,7 +10,6 @@ const ResultsContainer = ({ articles, onClick }) => {
       maxWidth='lg'
       aria-label='Results container'
       className={classes.results}>
-      <h3>Wyniki wyszukiwań:</h3>
       <ul>
         {articles.map((article) => (
           <li key={article.id} className={classes.resultItem}>
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: theme.palette.background.default,
-    '& > h3': {
+    '& > h2': {
       color: theme.palette.primary.main,
       marginLeft: 'auto',
     },
@@ -44,5 +43,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    lineHeight: 2,
+    '&:hover': {
+      backgroundColor: 'rgba(0,0,0,0.2)',
+    },
   },
 }));
