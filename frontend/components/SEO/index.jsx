@@ -16,7 +16,6 @@ const SEO = ({
     index === true ? 'index' : 'noindex',
     follow === true ? ' dofollow' : ' nofollow',
   ];
-  console.log(robots);
   return (
     <Head>
       <title>

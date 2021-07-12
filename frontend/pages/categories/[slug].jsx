@@ -84,9 +84,9 @@ const CategoryPage = (props) => {
         meta_title={category.metadata.meta_title}
         meta_description={category.metadata.meta_description}
         share_image={category.metadata.share_image}
-        keywords={tag.metadata.keywords}
-        index={tag.metadata.index}
-        follow={tag.metadata.follow}
+        keywords={category.metadata.keywords}
+        index={category.metadata.index}
+        follow={category.metadata.follow}
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='category-page'>
