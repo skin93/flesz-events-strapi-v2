@@ -28,14 +28,7 @@ export default TheFooter;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    height: '100px',
-    top: 'auto',
-    bottom: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 'auto',
     backgroundColor: theme.palette.muted.darker,
   },
   container: {
