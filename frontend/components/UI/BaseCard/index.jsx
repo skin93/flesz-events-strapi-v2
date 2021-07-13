@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: '200px',
+    pointerEvents: 'none',
   },
   content: {
     display: 'flex',
