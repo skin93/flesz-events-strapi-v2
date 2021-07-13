@@ -133,6 +133,7 @@ const ArticlePage = (props) => {
                     height={450}
                     quality={100}
                     layout='responsive'
+                    objectFit='cover'
                     alt={article.title}
                     aria-label='article-cover'
                   />

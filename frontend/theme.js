@@ -13,8 +13,11 @@ const theme = createTheme({
           lineHeight: '1.5',
           margin: '30px',
           '& img': {
-            width: '60%',
-            height: 'auto',
+            width: '100%',
+            height: '100%',
+            maxWidth: '800px',
+            maxHeight: '450px',
+            objectFit: 'contain',
           },
         },
         '.raw-html-embed': {
