@@ -77,7 +77,7 @@ const ArticlePage = (props) => {
       />
       <Fade in timeout={200}>
         <section
-          aria-label='post-page'
+          aria-label='article-page'
           style={{ flexGrow: 1, padding: '15px' }}>
           <div style={{ margin: '0 0 30px 0' }}>
             <Link href={`/categories/${article.category.slug}`}>
@@ -134,6 +134,7 @@ const ArticlePage = (props) => {
                     quality={100}
                     layout='responsive'
                     objectFit='cover'
+                    objectPosition='center top'
                     alt={article.title}
                     aria-label='article-cover'
                   />
@@ -159,11 +160,10 @@ const ArticlePage = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} lg={1} />
             <Grid
               item
               xs={12}
-              lg={3}
+              lg={4}
               container
               spacing={2}
               justifyContent='center'

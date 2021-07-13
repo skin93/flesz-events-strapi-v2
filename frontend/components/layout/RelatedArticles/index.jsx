@@ -45,9 +45,10 @@ export default RelatedArticles;
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: '15px',
+    width: '100%',
   },
   heading: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: theme.palette.light.main,
   },
   container: {
