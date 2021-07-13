@@ -113,7 +113,7 @@ const TagPage = (props) => {
           ) : (
             <div className={classes.noArticles}>
               <Typography variant='h1' className={classes.heading}>
-                Jeszcze tutaj pusto...
+                Nic tu nie ma...
               </Typography>
             </div>
           )}
@@ -159,7 +159,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: '80vh',
   },
   loadMoreButton: {
     display: 'block',
