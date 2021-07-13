@@ -35,34 +35,42 @@ export default RelatedCard;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'relative',
-    width: '100%',
+    backgroundColor: 'transparent',
     height: '100px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    boxShadow: 'none',
+    '& h4': {
+      color: theme.palette.light.main,
+    },
+    '&:hover h4': {
+      color: theme.palette.primary.main,
+    },
   },
   media: {
     height: '100%',
+    width: '150px',
+    objectFit: 'cover',
+    objectPosition: 'center top',
+    pointerEvents: 'none',
   },
   content: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    transition: 'all .2s ease-in-out',
-    '&:hover': {
-      backgroundColor: 'rgba(0,0,0,0.4)',
-    },
     width: '100%',
+    display: 'flex',
+    paddingBottom: '0',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     height: '100%',
   },
   title: {
     fontWeight: 'bold',
     color: theme.palette.light.main,
     margin: 0,
-    fontSize: 'calc(9px + 0.2vw)',
+    fontSize: 'calc(11px + 0.2vw)',
     [theme.breakpoints.up('lg')]: {
       fontSize: '13px',
     },

@@ -11,6 +11,7 @@ const BaseCard = ({ article }) => {
   return (
     <Card className={classes.root}>
       <CardMedia
+        component='image'
         className={classes.media}
         image={getMediaUrl(article.image_cover)}
         title={article.title}
@@ -32,9 +33,19 @@ export default BaseCard;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: 'transparent',
     width: '100%',
-    height: '250px',
+    height: '300px',
     position: 'relative',
+    boxShadow: 'none',
+    '& h2': {
+      color: theme.palette.light.main,
+    },
+    '&:hover h2': {
+      color: theme.palette.primary.main,
+    },
   },
   category: {
     fontWeight: 'bold',
@@ -44,31 +55,20 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   media: {
-    height: '100%',
+    height: '200px',
   },
   content: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    backgroundColor: 'rgba(0,0,0,0.6)',
+    justifyContent: 'center',
     transition: 'all .2s ease-in-out',
-    '&:hover': {
-      backgroundColor: 'rgba(0,0,0,0.4)',
-    },
     width: '100%',
-    height: '100%',
+    height: '100px',
   },
   title: {
+    textAlign: 'center',
+    margin: '0 auto',
     fontWeight: 'bold',
     fontSize: 'calc(1.2em + 0.1vw)',
-    color: theme.palette.light.main,
-  },
-  published: {
-    color: theme.palette.muted.main,
-    fontWeight: 'bold',
   },
 }));
