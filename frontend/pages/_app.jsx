@@ -30,19 +30,25 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-
-        <TheHeader />
-        <Container
-          maxWidth='lg'
-          component='main'
-          key={router.asPath}
+        <div
           style={{
-            margin: '30px auto',
-            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
           }}>
-          <Component {...pageProps} />
-        </Container>
-        <TheFooter />
+          <TheHeader />
+          <Container
+            maxWidth='lg'
+            component='main'
+            key={router.asPath}
+            style={{
+              margin: '30px auto',
+              overflow: 'hidden',
+            }}>
+            <Component {...pageProps} />
+          </Container>
+          <TheFooter />
+        </div>
       </ThemeProvider>
     </React.Fragment>
   );
