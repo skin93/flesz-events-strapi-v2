@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -18,17 +18,20 @@ const SiteDrawer = ({ navLinks }) => {
   const classes = useStyles();
   const router = useRouter();
 
-  const [state, setState] = React.useState({ right: false });
+  const [state, setState] = useState({ right: false });
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-    setState({ [anchor]: open });
-  };
+  const toggleDrawer = useCallback(
+    (anchor, open) => (event) => {
+      if (
+        event.type === 'keydown' &&
+        (event.key === 'Tab' || event.key === 'Shift')
+      ) {
+        return;
+      }
+      setState({ [anchor]: open });
+    },
+    []
+  );
 
   const sideDrawerList = (anchor) => (
     <div

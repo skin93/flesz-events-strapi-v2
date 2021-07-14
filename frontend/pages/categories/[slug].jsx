@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Link from 'next/link';
-
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
@@ -13,15 +13,19 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 
-import BaseCard from '@/components/UI/BaseCard';
-import SkeletonCard from '@/components/UI/SkeletonCard';
 import SEO from '@/components/SEO';
+import BaseCard from '@/components/UI/BaseCard';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const CategoryPage = (props) => {
   const router = useRouter();
   const slug = router.query.slug;
   const classes = useStyles();
+
+  const [articlesPerPage] = useState(9);
+  const [articlesToShow, setArticlesToShow] = useState([]);
+  const [next, setNext] = useState(articlesPerPage);
 
   const q = SINGLE_CATEGORY_QUERY;
 
@@ -31,27 +35,22 @@ const CategoryPage = (props) => {
     initialData: props.data,
   });
 
-  const { categories } = data;
-  const category = categories[0];
-
-  const articlesPerPage = 9;
-
-  const [articlesToShow, setArticlesToShow] = useState([]);
-  const [next, setNext] = useState(articlesPerPage);
-
-  const loopWithSlice = (start, end) => {
-    const slicedArticles = category.articles.slice(start, end);
-    setArticlesToShow((prev) => [...prev, ...slicedArticles]);
-  };
+  const loopWithSlice = useCallback(
+    (start, end) => {
+      const slicedArticles = data.categories[0].articles.slice(start, end);
+      setArticlesToShow((prev) => [...prev, ...slicedArticles]);
+    },
+    [data]
+  );
 
   useEffect(() => {
     loopWithSlice(0, articlesPerPage);
-  }, []);
+  }, [loopWithSlice, articlesPerPage]);
 
-  const handleShowMoreArticles = () => {
+  const handleShowMoreArticles = useCallback(() => {
     loopWithSlice(next, next + articlesPerPage);
     setNext(next + articlesPerPage);
-  };
+  }, [next, articlesPerPage, loopWithSlice]);
 
   if (error) {
     return (
@@ -81,12 +80,12 @@ const CategoryPage = (props) => {
   return (
     <React.Fragment>
       <SEO
-        meta_title={category.metadata.meta_title}
-        meta_description={category.metadata.meta_description}
-        share_image={category.metadata.share_image}
-        keywords={category.metadata.keywords}
-        index={category.metadata.index}
-        follow={category.metadata.follow}
+        meta_title={data.categories[0].metadata.meta_title}
+        meta_description={data.categories[0].metadata.meta_description}
+        share_image={data.categories[0].metadata.share_image}
+        keywords={data.categories[0].metadata.keywords}
+        index={data.categories[0].metadata.index}
+        follow={data.categories[0].metadata.follow}
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='category-page'>
@@ -94,7 +93,7 @@ const CategoryPage = (props) => {
             <React.Fragment>
               <Typography variant='h6' className={classes.heading}>
                 <span>#</span>
-                {category.name}
+                {data.categories[0].name}
               </Typography>
               <Grid container spacing={2} className={classes.container}>
                 {articlesToShow.map((article) => (
@@ -117,10 +116,10 @@ const CategoryPage = (props) => {
               </Typography>
             </div>
           )}
-          {category.articles.length > 0 && (
+          {data.categories[0].articles.length > 0 && (
             <LoadMoreButton
               next={next}
-              count={category.articles.length}
+              count={data.categories[0].articles.length}
               onClick={handleShowMoreArticles}
             />
           )}

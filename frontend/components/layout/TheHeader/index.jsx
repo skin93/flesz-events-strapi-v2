@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import Image from 'next/image';
 
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 
 import useSWR from 'swr';
 import { client } from '@/lib/requestClient';
@@ -22,12 +23,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import SiteDrawer from '@/components/layout/SiteDrawer';
-import ResultsContainer from '@/components/UI/ResultsContainer';
+const SiteDrawer = dynamic(() => import('@/components/layout/SiteDrawer'));
 
-function HideOnScroll(props) {
+const ResultsContainer = dynamic(() =>
+  import('@/components/UI/ResultsContainer')
+);
+
+const HideOnScroll = (props) => {
   const { children } = props;
   const trigger = useScrollTrigger();
 
@@ -36,7 +39,7 @@ function HideOnScroll(props) {
       {children}
     </Slide>
   );
-}
+};
 
 const navLinks = [
   { title: 'news', path: '/categories/news' },

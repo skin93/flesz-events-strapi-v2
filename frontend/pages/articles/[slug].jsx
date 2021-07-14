@@ -1,4 +1,6 @@
 import React from 'react';
+
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,12 +15,13 @@ import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
-import Skeleton from '@material-ui/lab/Skeleton';
+const Skeleton = dynamic(() => import('@material-ui/lab/Skeleton'));
 
 import SEO from '@/components/SEO';
 import RelatedArticles from '@/components/layout/RelatedArticles';
 
 import { getMediaUrl } from '@/lib/getMediaUrl';
+import Disqus from '@/components/Disqus';
 
 const ArticlePage = (props) => {
   const router = useRouter();
@@ -33,9 +36,6 @@ const ArticlePage = (props) => {
   const { error, data } = useSWR([q, slug], fetcher, {
     initialData: props.data,
   });
-
-  const { articles } = data;
-  const article = articles[0];
 
   if (error) {
     return (
@@ -68,28 +68,28 @@ const ArticlePage = (props) => {
   return (
     <React.Fragment>
       <SEO
-        meta_title={article.metadata.meta_title}
-        meta_description={article.metadata.meta_description}
-        share_image={article.metadata.share_image}
-        follow={article.metadata.follow}
-        keywords={article.metadata.keywords}
-        index={article.metadata.index}
+        meta_title={data.articles[0].metadata.meta_title}
+        meta_description={data.articles[0].metadata.meta_description}
+        share_image={data.articles[0].metadata.share_image}
+        follow={data.articles[0].metadata.follow}
+        keywords={data.articles[0].metadata.keywords}
+        index={data.articles[0].metadata.index}
       />
       <Fade in timeout={200}>
         <section
           aria-label='article-page'
           style={{ flexGrow: 1, padding: '15px' }}>
           <div style={{ margin: '0 0 30px 0' }}>
-            <Link href={`/categories/${article.category.slug}`}>
+            <Link href={`/categories/${data.articles[0].category.slug}`}>
               <a>
                 <Chip
                   variant='outlined'
-                  label={article.category.name}
+                  label={data.articles[0].category.name}
                   className={classes.category}
                 />
               </a>
             </Link>
-            {article.tags.map((tag) => (
+            {data.articles[0].tags.map((tag) => (
               <Link key={tag.slug} href={`/tags/${tag.slug}`}>
                 <a>
                   <Chip
@@ -102,11 +102,11 @@ const ArticlePage = (props) => {
               </Link>
             ))}
             <Chip
-              label={article.published_at.split('T')[0]}
+              label={data.articles[0].published_at.split('T')[0]}
               className={classes.published_at}
               variant='outlined'
             />
-            {article.writers.map((writer) => (
+            {data.articles[0].writers.map((writer) => (
               <Chip
                 label={writer.name}
                 key={writer.name}
@@ -120,7 +120,7 @@ const ArticlePage = (props) => {
             component='h1'
             aria-label='article-title'
             className={classes.title}>
-            {article.title}
+            {data.articles[0].title}
           </Typography>
           <Divider className={classes.divider} />
           <Grid container justifyContent='space-between'>
@@ -128,37 +128,40 @@ const ArticlePage = (props) => {
               <Grid container>
                 <Grid item>
                   <Image
-                    src={getMediaUrl(article.image_cover)}
+                    src={getMediaUrl(data.articles[0].image_cover)}
                     width={800}
                     height={450}
                     quality={100}
                     layout='responsive'
                     objectFit='cover'
                     objectPosition='center top'
-                    alt={article.title}
+                    alt={data.articles[0].title}
                     aria-label='article-cover'
                   />
                   <Typography
                     variant='subtitle2'
                     className={classes.caption}
                     aria-label='article-image-caption'>
-                    {article.image_cover.caption}
+                    {data.articles[0].image_cover.caption}
                   </Typography>
                   <Typography
                     variant='subtitle1'
                     className={classes.excerpt}
                     aria-label='article-excerpt'>
-                    {article.excerpt}
+                    {data.articles[0].excerpt}
                   </Typography>
                   <Divider className={classes.divider} />
                   <div
-                    dangerouslySetInnerHTML={{ __html: article.content }}
+                    dangerouslySetInnerHTML={{
+                      __html: data.articles[0].content,
+                    }}
                     className={classes.content}
                     aria-label='article-content'
                   />
                   <Divider className={classes.divider} />
                 </Grid>
               </Grid>
+              <Disqus article={data.articles[0]} />
             </Grid>
             <Grid
               item
@@ -168,8 +171,10 @@ const ArticlePage = (props) => {
               spacing={2}
               justifyContent='center'
               component='aside'>
-              {article.related_articles && (
-                <RelatedArticles articles={article.related_articles.articles} />
+              {data.articles[0].related_articles && (
+                <RelatedArticles
+                  articles={data.articles[0].related_articles.articles}
+                />
               )}
             </Grid>
           </Grid>

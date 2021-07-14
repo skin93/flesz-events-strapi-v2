@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const Disqus = ({ article }) => {
   const classes = useStyles();
-  const disqusShortname = `${process.env.NEXT_PUBLIC_DISQUS_SHORTNAME}`;
+  const disqusShortname = 'flesz-events';
   const disqusConfig = {
     url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`,
     identifier: article.id,

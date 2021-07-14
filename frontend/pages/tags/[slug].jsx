@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
@@ -13,15 +13,19 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 
-import BaseCard from '@/components/UI/BaseCard';
-import SkeletonCard from '@/components/UI/SkeletonCard';
 import SEO from '@/components/SEO';
+import BaseCard from '@/components/UI/BaseCard';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const TagPage = (props) => {
   const router = useRouter();
   const slug = router.query.slug;
   const classes = useStyles();
+
+  const [articlesPerPage] = useState(9);
+  const [articlesToShow, setArticlesToShow] = useState([]);
+  const [next, setNext] = useState(articlesPerPage);
 
   const q = SINGLE_TAG_QUERY;
 
@@ -31,27 +35,22 @@ const TagPage = (props) => {
     initialData: props.data,
   });
 
-  const { tags } = data;
-  const tag = tags[0];
-
-  const articlesPerPage = 9;
-
-  const [articlesToShow, setArticlesToShow] = useState([]);
-  const [next, setNext] = useState(articlesPerPage);
-
-  const loopWithSlice = (start, end) => {
-    const slicedArticles = tag.articles.slice(start, end);
-    setArticlesToShow((prev) => [...prev, ...slicedArticles]);
-  };
+  const loopWithSlice = useCallback(
+    (start, end) => {
+      const slicedArticles = data.tags[0].articles.slice(start, end);
+      setArticlesToShow((prev) => [...prev, ...slicedArticles]);
+    },
+    [data]
+  );
 
   useEffect(() => {
     loopWithSlice(0, articlesPerPage);
-  }, []);
+  }, [loopWithSlice, articlesPerPage]);
 
-  const handleShowMoreArticles = () => {
+  const handleShowMoreArticles = useCallback(() => {
     loopWithSlice(next, next + articlesPerPage);
     setNext(next + articlesPerPage);
-  };
+  }, [loopWithSlice, next, articlesPerPage]);
 
   if (error) {
     return (
@@ -81,12 +80,12 @@ const TagPage = (props) => {
   return (
     <React.Fragment>
       <SEO
-        meta_title={tag.metadata.meta_title}
-        meta_description={tag.metadata.meta_description}
-        share_image={tag.metadata.share_image}
-        keywords={tag.metadata.keywords}
-        index={tag.metadata.index}
-        follow={tag.metadata.follow}
+        meta_title={data.tags[0].metadata.meta_title}
+        meta_description={data.tags[0].metadata.meta_description}
+        share_image={data.tags[0].metadata.share_image}
+        keywords={data.tags[0].metadata.keywords}
+        index={data.tags[0].metadata.index}
+        follow={data.tags[0].metadata.follow}
       />
       <Fade in timeout={200}>
         <section style={{ padding: '15px' }} aria-label='tag-page'>
@@ -94,7 +93,7 @@ const TagPage = (props) => {
             <React.Fragment>
               <Typography variant='h6' className={classes.heading}>
                 <span>#</span>
-                {tag.name}
+                {data.tags[0].name}
               </Typography>
               <Grid container spacing={2} className={classes.container}>
                 {articlesToShow.map((article) => (
@@ -117,10 +116,10 @@ const TagPage = (props) => {
               </Typography>
             </div>
           )}
-          {tag.articles.length > 0 && (
+          {data.tags[0].articles.length > 0 && (
             <LoadMoreButton
               next={next}
-              count={tag.articles.length}
+              count={data.tags[0].articles.length}
               onClick={handleShowMoreArticles}
             />
           )}

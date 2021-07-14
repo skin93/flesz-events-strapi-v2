@@ -11,7 +11,7 @@ const BaseCard = ({ article }) => {
   return (
     <Card className={classes.root}>
       <CardMedia
-        component='image'
+        component='img'
         className={classes.media}
         image={getMediaUrl(article.image_cover)}
         title={article.title}

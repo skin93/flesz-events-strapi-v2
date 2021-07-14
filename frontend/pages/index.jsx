@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import useSWR from 'swr';
@@ -11,35 +12,19 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 
-import SkeletonCard from '@/components/UI/SkeletonCard';
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 export default function Home(props) {
   const classes = useStyles();
 
   const [limit] = useState(90);
   const [start] = useState(0);
-
-  const articlesPerPage = 9;
-
+  const [articlesPerPage] = useState(9);
   const [articlesToShow, setArticlesToShow] = useState([]);
   const [next, setNext] = useState(articlesPerPage);
-
-  const loopWithSlice = (start, end) => {
-    const slicedArticles = data.articles.slice(start, end);
-    setArticlesToShow((prev) => [...prev, ...slicedArticles]);
-  };
-
-  useEffect(() => {
-    loopWithSlice(0, articlesPerPage);
-  }, []);
-
-  const handleShowMoreArticles = () => {
-    loopWithSlice(next, next + articlesPerPage);
-    setNext(next + articlesPerPage);
-  };
 
   const fetcher = async (query) =>
     await client.request(query, { start, limit });
@@ -49,6 +34,23 @@ export default function Home(props) {
   const { error, data } = useSWR([q, start, limit], fetcher, {
     initialData: props.data,
   });
+
+  const loopWithSlice = useCallback(
+    (start, end) => {
+      const slicedArticles = data.articles.slice(start, end);
+      setArticlesToShow((prev) => [...prev, ...slicedArticles]);
+    },
+    [data]
+  );
+
+  useEffect(() => {
+    loopWithSlice(0, articlesPerPage);
+  }, [loopWithSlice, articlesPerPage]);
+
+  const handleShowMoreArticles = useCallback(() => {
+    loopWithSlice(next, next + articlesPerPage);
+    setNext(next + articlesPerPage);
+  }, [next, articlesPerPage, loopWithSlice]);
 
   if (error) {
     return (

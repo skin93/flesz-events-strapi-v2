@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+
+import dynamic from 'next/dynamic';
 
 import useSWR from 'swr';
 import { client } from '@/lib/requestClient';
@@ -10,36 +12,20 @@ import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-
 import SearchIcon from '@material-ui/icons/Search';
 
-import SkeletonCard from '@/components/UI/SkeletonCard';
 import SEO from '@/components/SEO';
 import TagsContainer from '@/components/tags/TagsContainer';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const TagsPage = (props) => {
   const classes = useStyles();
 
-  const tagsPerPage = 24;
-
+  const [tagsPerPage] = useState(24);
   const [tagsToShow, setTagsToShow] = useState([]);
   const [next, setNext] = useState(tagsPerPage);
   const [tagsFound, setTagsFound] = useState([]);
-
-  const loopWithSlice = (start, end) => {
-    const slicedTags = data.tags.slice(start, end);
-    setTagsToShow((prevTags) => [...prevTags, ...slicedTags]);
-  };
-
-  useEffect(() => {
-    loopWithSlice(0, tagsPerPage);
-  }, []);
-
-  const handleShowMoreTags = () => {
-    loopWithSlice(next, next + tagsPerPage);
-    setNext(next + tagsPerPage);
-  };
 
   const fetcher = async (query) => await client.request(query);
 
@@ -49,14 +35,34 @@ const TagsPage = (props) => {
     initialData: props.data,
   });
 
-  const handleChange = (e) => {
-    const tagsFound = data.tags.filter(
-      (tag) =>
-        e.target.value !== '' &&
-        tag.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setTagsFound(tagsFound);
-  };
+  const loopWithSlice = useCallback(
+    (start, end) => {
+      const slicedTags = data.tags.slice(start, end);
+      setTagsToShow((prevTags) => [...prevTags, ...slicedTags]);
+    },
+    [data]
+  );
+
+  useEffect(() => {
+    loopWithSlice(0, tagsPerPage);
+  }, [loopWithSlice, tagsPerPage]);
+
+  const handleShowMoreTags = useCallback(() => {
+    loopWithSlice(next, next + tagsPerPage);
+    setNext(next + tagsPerPage);
+  }, [loopWithSlice, next, tagsPerPage]);
+
+  const handleChange = useCallback(
+    (e) => {
+      const tagsFound = data.tags.filter(
+        (tag) =>
+          e.target.value !== '' &&
+          tag.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setTagsFound(tagsFound);
+    },
+    [data]
+  );
 
   if (error) {
     return (
