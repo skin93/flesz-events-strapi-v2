@@ -59,16 +59,12 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: 'none',
   },
   content: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    transition: 'all .2s ease-in-out',
     width: '100%',
     height: '100px',
+    paddingLeft: 0,
   },
   title: {
-    textAlign: 'center',
-    margin: '0 auto',
+    textAlign: 'left',
     fontWeight: 'bold',
     fontSize: 'calc(1.2em + 0.1vw)',
   },
