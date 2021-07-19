@@ -121,15 +121,17 @@ const PreviewArticlePage = (props) => {
             <Grid item xs={12} lg={8} component='article'>
               <Grid container>
                 <Grid item>
-                  <Image
-                    src={getMediaUrl(data.article.image_cover)}
-                    width={800}
-                    height={450}
-                    quality={100}
-                    layout='responsive'
-                    alt={data.article.title}
-                    aria-label='article-cover'
-                  />
+                <Image
+                src={getMediaUrl(data.article.image_cover)}
+                width={800}
+                height={450}
+                quality={100}
+                layout='responsive'
+                objectFit='cover'
+                objectPosition='center top'
+                alt={data.article.title}
+                aria-label='article-cover'
+              />
                   <Typography
                     variant='subtitle2'
                     className={classes.coverSrc}
