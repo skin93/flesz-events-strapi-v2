@@ -23,6 +23,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 const SiteDrawer = dynamic(() => import('@/components/layout/SiteDrawer'));
 
@@ -136,6 +137,11 @@ const TheHeader = (props) => {
                       </a>
                     </Link>
                   ))}
+                  <Link href='https://facebook.com/flesz.events' passHref>
+                    <ListItem button>
+                      <FacebookIcon className={classes.icon} />
+                    </ListItem>
+                  </Link>
                 </List>
               </Hidden>
               <Hidden mdDown>
@@ -256,5 +262,8 @@ const useStyles = makeStyles((theme) => ({
         width: '20ch',
       },
     },
+  },
+  icon: {
+    color: theme.palette.light.main,
   },
 }));

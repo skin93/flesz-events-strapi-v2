@@ -11,6 +11,7 @@ import Menu from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 import Drawer from '@material-ui/core/Drawer';
 
@@ -57,6 +58,11 @@ const SiteDrawer = ({ navLinks }) => {
             </a>
           </Link>
         ))}
+        <Link href='https://facebook.com/flesz.events' passHref>
+          <ListItem button>
+            <FacebookIcon className={classes.icon} />
+          </ListItem>
+        </Link>
       </List>
     </div>
   );
@@ -93,6 +99,9 @@ const useStyles = makeStyles((theme) => ({
   linkText: {
     textDecoration: `none`,
     textTransform: `uppercase`,
+    color: theme.palette.light.main,
+  },
+  icon: {
     color: theme.palette.light.main,
   },
 }));
