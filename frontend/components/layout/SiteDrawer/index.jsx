@@ -44,16 +44,16 @@ const SiteDrawer = ({ navLinks }) => {
         component='nav'
         aria-labelledby='main navigation'
         className={classes.list}>
-        {navLinks.map(({ title, path }) => (
-          <Link href={path} key={title} passHref>
+        {navLinks.map(({ name, slug }) => (
+          <Link href={`/categories/${slug}`} key={slug} passHref>
             <a
               className={
-                router.asPath === `${path}`
+                router.asPath === `/categories/${slug}`
                   ? `${classes.active}`
                   : `${classes.linkText}`
               }>
               <ListItem button>
-                <ListItemText primary={title} />
+                <ListItemText primary={name} />
               </ListItem>
             </a>
           </Link>

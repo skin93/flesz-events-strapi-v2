@@ -35,11 +35,6 @@ const theme = createTheme({
             height: '80%',
           },
         },
-        body: {
-          padding: 0,
-          margin: 0,
-          backgroundColor: grey[900],
-        },
         blockquote: {
           '& > p': {
             color: grey[50],
