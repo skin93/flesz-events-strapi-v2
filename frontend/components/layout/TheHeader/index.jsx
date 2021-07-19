@@ -123,21 +123,20 @@ const TheHeader = (props) => {
                   component='nav'
                   aria-label='main-navigation'
                   className={classes.navDisplayFlex}>
-                  {props.categories &&
-                    props.categories.map(({ name, slug }) => (
-                      <Link href={`/categories/${slug}`} key={slug} passHref>
-                        <a
-                          className={
-                            router.asPath === `/categories/${slug}`
-                              ? `${classes.active}`
-                              : `${classes.linkText}`
-                          }>
-                          <ListItem button>
-                            <ListItemText primary={name} />
-                          </ListItem>
-                        </a>
-                      </Link>
-                    ))}
+                  {navLinks.map(({ title, path }) => (
+                    <Link href={path} key={title} passHref>
+                      <a
+                        className={
+                          router.asPath === `${path}`
+                            ? `${classes.active}`
+                            : `${classes.linkText}`
+                        }>
+                        <ListItem button>
+                          <ListItemText primary={title} />
+                        </ListItem>
+                      </a>
+                    </Link>
+                  ))}
                   <Link href='https://facebook.com/flesz.events' passHref>
                     <ListItem button>
                       <FacebookIcon className={classes.icon} />
@@ -163,7 +162,7 @@ const TheHeader = (props) => {
                 </div>
               </Hidden>
               <Hidden mdUp>
-                <SiteDrawer navLinks={props.categories} />
+                <SiteDrawer navLinks={navLinks} />
               </Hidden>
             </Container>
           </Toolbar>

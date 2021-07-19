@@ -34,8 +34,7 @@ export default class MyDocument extends Document {
             }}
           />
         </Head>
-        <body
-          style={{ padding: 0, margin: 0, backgroundColor: 'rgb(36,36,36)' }}>
+        <body>
           <Main />
           <NextScript />
         </body>
