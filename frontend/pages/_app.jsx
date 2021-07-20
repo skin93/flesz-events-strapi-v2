@@ -1,5 +1,6 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,6 +11,8 @@ import TheHeader from '@/components/layout/TheHeader';
 import TheFooter from '@/components/layout/TheFooter';
 
 import * as gtag from '@/lib/gtag';
+
+const NextNProgress = dynamic(() => import('nextjs-progressbar'));
 
 Router.events.on('routeChangeComplete', (url) => gtag.pageview(url));
 
@@ -45,6 +48,13 @@ export default function MyApp(props) {
               margin: '30px auto',
               overflow: 'hidden',
             }}>
+            <NextNProgress
+              color='#32e0c4'
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={5}
+              showOnShallow={true}
+            />
             <Component {...pageProps} />
           </Container>
           <TheFooter />
