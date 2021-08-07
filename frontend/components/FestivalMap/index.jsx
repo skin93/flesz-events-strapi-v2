@@ -43,7 +43,7 @@ const FestivalMap = ({ festivals }) => {
         <Marker
           key={fest.id}
           icon={ICON}
-          position={[53.491633, 22.727119]}
+          position={[fest.location.latitude, fest.location.longitude]}
           animate={true}>
           <Popup>
             <h1
