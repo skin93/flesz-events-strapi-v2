@@ -60,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
     display: 'flex',
-    paddingBottom: '0',
+    padding: '0 0 0 16px',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'flex-start',
     height: '100%',
   },

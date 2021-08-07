@@ -125,42 +125,38 @@ const ArticlePage = (props) => {
           <Divider className={classes.divider} />
           <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
-              <Grid container>
-                <Grid item>
-                  <Image
-                    src={getMediaUrl(data.articles[0].image_cover)}
-                    width={800}
-                    height={450}
-                    quality={100}
-                    layout='responsive'
-                    objectFit='cover'
-                    objectPosition='center top'
-                    alt={data.articles[0].title}
-                    aria-label='article-cover'
-                  />
-                  <Typography
-                    variant='subtitle2'
-                    className={classes.caption}
-                    aria-label='article-image-caption'>
-                    {data.articles[0].image_cover.caption}
-                  </Typography>
-                  <Typography
-                    variant='subtitle1'
-                    className={classes.excerpt}
-                    aria-label='article-excerpt'>
-                    {data.articles[0].excerpt}
-                  </Typography>
-                  <Divider className={classes.divider} />
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: data.articles[0].content,
-                    }}
-                    className={classes.content}
-                    aria-label='article-content'
-                  />
-                  <Divider className={classes.divider} />
-                </Grid>
-              </Grid>
+              <Image
+                src={getMediaUrl(data.articles[0].image_cover)}
+                width={800}
+                height={450}
+                quality={100}
+                layout='responsive'
+                objectFit='cover'
+                objectPosition='center top'
+                alt={data.articles[0].title}
+                aria-label='article-cover'
+              />
+              <Typography
+                variant='subtitle2'
+                className={classes.caption}
+                aria-label='article-image-caption'>
+                {data.articles[0].image_cover.caption}
+              </Typography>
+              <Typography
+                variant='subtitle1'
+                className={classes.excerpt}
+                aria-label='article-excerpt'>
+                {data.articles[0].excerpt}
+              </Typography>
+              <Divider className={classes.divider} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.articles[0].content,
+                }}
+                className={classes.content}
+                aria-label='article-content'
+              />
+              <Divider className={classes.divider} />
               <Disqus article={data.articles[0]} />
             </Grid>
             <Grid

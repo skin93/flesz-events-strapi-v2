@@ -119,9 +119,7 @@ const PreviewArticlePage = (props) => {
           <Divider className={classes.divider} />
           <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
-              <Grid container>
-                <Grid item>
-                <Image
+              <Image
                 src={getMediaUrl(data.article.image_cover)}
                 width={800}
                 height={450}
@@ -132,33 +130,30 @@ const PreviewArticlePage = (props) => {
                 alt={data.article.title}
                 aria-label='article-cover'
               />
-                  <Typography
-                    variant='subtitle2'
-                    className={classes.coverSrc}
-                    aria-label='article-cover-src'>
-                    {data.article.image_cover.caption}
-                  </Typography>
-                  <Typography
-                    variant='subtitle1'
-                    className={classes.excerpt}
-                    aria-label='article-excerpt'>
-                    {data.article.excerpt}
-                  </Typography>
-                  <Divider className={classes.divider} />
-                  <div
-                    dangerouslySetInnerHTML={{ __html: data.article.content }}
-                    className={classes.content}
-                    aria-label='article-content'
-                  />
-                  <Divider className={classes.divider} />
-                </Grid>
-              </Grid>
+              <Typography
+                variant='subtitle2'
+                className={classes.coverSrc}
+                aria-label='article-cover-src'>
+                {data.article.image_cover.caption}
+              </Typography>
+              <Typography
+                variant='subtitle1'
+                className={classes.excerpt}
+                aria-label='article-excerpt'>
+                {data.article.excerpt}
+              </Typography>
+              <Divider className={classes.divider} />
+              <div
+                dangerouslySetInnerHTML={{ __html: data.article.content }}
+                className={classes.content}
+                aria-label='article-content'
+              />
+              <Divider className={classes.divider} />
             </Grid>
-            <Grid item xs={12} lg={1} />
             <Grid
               item
               xs={12}
-              lg={3}
+              lg={4}
               container
               spacing={2}
               justifyContent='center'
