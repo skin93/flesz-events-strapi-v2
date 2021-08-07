@@ -20,6 +20,12 @@ const theme = createTheme({
             objectFit: 'contain',
           },
         },
+        '.leaflet-top': {
+          display: 'none',
+        },
+        '.leaflet-left': {
+          display: 'none',
+        },
         '.raw-html-embed': {
           position: 'relative',
           overflow: 'hidden',

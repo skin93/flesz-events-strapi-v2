@@ -39,6 +39,7 @@ export default function MyApp(props) {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100vh',
+            width: '100%',
           }}>
           <TheHeader />
           <Container
