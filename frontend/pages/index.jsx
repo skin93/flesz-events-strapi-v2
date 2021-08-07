@@ -15,6 +15,7 @@ import Fade from '@material-ui/core/Fade';
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+import Container from '@material-ui/core/Container';
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 export default function Home(props) {
@@ -81,11 +82,15 @@ export default function Home(props) {
     <React.Fragment>
       <SEO index={true} />
       <Fade in timeout={200}>
-        <section className={classes.root} aria-label='home-page'>
+        <Container
+          component='section'
+          maxWidth='lg'
+          className={classes.root}
+          aria-label='home-page'>
           <Typography variant='h6' component='h1' className={classes.heading}>
             OSTATNIE WPISY
           </Typography>
-          <Grid container spacing={2} className={classes.container}>
+          <Grid container spacing={2}>
             {articlesToShow.map((article) => (
               <Fade key={article.id} in timeout={200}>
                 <Grid item xs={12} sm={6} md={4}>
@@ -103,7 +108,7 @@ export default function Home(props) {
             count={data.articlesConnection.aggregate.count}
             onClick={handleShowMoreArticles}
           />
-        </section>
+        </Container>
       </Fade>
     </React.Fragment>
   );
@@ -121,10 +126,10 @@ export async function getServerSideProps() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: '15px' },
   heading: {
     textAlign: 'center',
     color: theme.palette.light.main,
+    margin: '30px 0',
   },
   container: {
     marginTop: '30px',

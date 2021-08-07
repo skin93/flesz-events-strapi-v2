@@ -11,6 +11,7 @@ import { PREVIEW_ARTICLE_QUERY } from '@/lib/queries/articles/previewArticleQuer
 import { getMediaUrl } from '@/lib/getMediaUrl';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
@@ -70,7 +71,9 @@ const PreviewArticlePage = (props) => {
         share_image={data.article.metadata.share_image}
       />
       <Fade in timeout={200}>
-        <section
+        <Container
+          component='section'
+          maxWidth='lg'
           aria-label='post-page'
           style={{ flexGrow: 1, padding: '15px' }}>
           <div style={{ margin: '0 0 30px 0' }}>
@@ -165,7 +168,7 @@ const PreviewArticlePage = (props) => {
               )}
             </Grid>
           </Grid>
-        </section>
+        </Container>
       </Fade>
     </React.Fragment>
   );

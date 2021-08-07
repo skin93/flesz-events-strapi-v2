@@ -42,14 +42,21 @@ const FestivalMapPage = (props) => {
   return (
     <React.Fragment>
       <Fade in timeout={200}>
-        <section aria-label='festival-map'>
+        <section
+          aria-label='festival-map'
+          style={{
+            position: 'relative',
+            height: '100vh',
+            width: '100%',
+            overflow: 'hidden',
+          }}>
           <div
             id='map'
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
-              height: '100vh',
+              height: '100%',
               width: '100%',
             }}>
             <MapWithNoSSR festivals={data?.festivals} />

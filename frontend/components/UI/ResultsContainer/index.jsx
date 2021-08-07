@@ -27,6 +27,7 @@ export default ResultsContainer;
 
 const useStyles = makeStyles((theme) => ({
   results: {
+    margin: '30px auto',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: theme.palette.background.default,

@@ -9,6 +9,7 @@ import { client } from '@/lib/requestClient';
 import { SINGLE_CATEGORY_QUERY } from '@/lib/queries/categories/singleCategoryQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
@@ -88,7 +89,7 @@ const CategoryPage = (props) => {
         follow={data.categories[0].metadata.follow}
       />
       <Fade in timeout={200}>
-        <section style={{ padding: '15px' }} aria-label='category-page'>
+        <Container component='section' maxWidth='lg' aria-label='category-page'>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
               <Typography variant='h6' className={classes.heading}>
@@ -123,7 +124,7 @@ const CategoryPage = (props) => {
               onClick={handleShowMoreArticles}
             />
           )}
-        </section>
+        </Container>
       </Fade>
     </React.Fragment>
   );
@@ -143,6 +144,7 @@ export async function getServerSideProps({ params }) {
 
 const useStyles = makeStyles((theme) => ({
   heading: {
+    margin: '30px 0',
     fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'uppercase',

@@ -42,13 +42,12 @@ export default function MyApp(props) {
             width: '100%',
           }}>
           <TheHeader />
-          <Container
-            maxWidth='lg'
+          <main
             component='main'
-            key={router.asPath}
             style={{
-              margin: '30px auto',
+              margin: '0 auto',
               overflow: 'hidden',
+              width: '100%',
             }}>
             <NextNProgress
               color='#32e0c4'
@@ -57,8 +56,8 @@ export default function MyApp(props) {
               height={5}
               showOnShallow={true}
             />
-            <Component {...pageProps} />
-          </Container>
+            <Component key={router.asPath} {...pageProps} />
+          </main>
           <TheFooter />
         </div>
       </ThemeProvider>

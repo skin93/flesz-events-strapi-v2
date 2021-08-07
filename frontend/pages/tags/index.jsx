@@ -7,6 +7,7 @@ import { client } from '@/lib/requestClient';
 import { ALL_TAGS_QUERY } from '@/lib/queries/tags/allTagsQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
@@ -93,7 +94,11 @@ const TagsPage = (props) => {
     <React.Fragment>
       <SEO meta_title='Tagi' meta_description='Zbiór wszystkich tagów.' />
       <Fade in timeout={200}>
-        <section className={classes.root} aria-label='tags-page'>
+        <Container
+          component='section'
+          maxWidth='lg'
+          className={classes.root}
+          aria-label='tags-page'>
           <Typography variant='h6' className={classes.heading}>
             TAGI
           </Typography>
@@ -124,7 +129,7 @@ const TagsPage = (props) => {
             count={data.tagsConnection.aggregate.count}
             onClick={handleShowMoreTags}
           />
-        </section>
+        </Container>
       </Fade>
     </React.Fragment>
   );
@@ -141,10 +146,10 @@ export async function getServerSideProps() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: '15px' },
   heading: {
     textAlign: 'center',
     color: theme.palette.light.main,
+    margin: '30px 0',
   },
   form: {
     display: 'block',
