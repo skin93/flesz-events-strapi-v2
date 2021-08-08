@@ -6,7 +6,6 @@ const MapWithNoSSR = dynamic(() => import('@/components/FestivalMap'), {
 });
 
 import Fade from '@material-ui/core/Fade';
-import Grid from '@material-ui/core/Grid';
 
 import useSWR from 'swr';
 import { ALL_FESTIVALS_QUERY } from '@/lib/queries/festivals/allFestivalsQuery';
@@ -45,7 +44,6 @@ const FestivalMapPage = (props) => {
         <section
           aria-label='festival-map'
           style={{
-            position: 'relative',
             height: '100vh',
             width: '100%',
             overflow: 'hidden',
@@ -53,9 +51,6 @@ const FestivalMapPage = (props) => {
           <div
             id='map'
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
               height: '100%',
               width: '100%',
             }}>
