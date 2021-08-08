@@ -7,6 +7,8 @@ export const ALL_FESTIVALS_QUERY = gql`
       description
       slug
       location {
+        city
+        place
         latitude
         longitude
       }
