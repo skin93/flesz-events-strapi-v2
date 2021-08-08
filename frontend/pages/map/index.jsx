@@ -11,6 +11,7 @@ import useSWR from 'swr';
 import { ALL_FESTIVALS_QUERY } from '@/lib/queries/festivals/allFestivalsQuery';
 import { client } from '@/lib/requestClient';
 import { CircularProgress } from '@material-ui/core';
+import SEO from '@/components/SEO';
 
 const FestivalMapPage = (props) => {
   const fetcher = async (query) => await client.request(query);
@@ -40,6 +41,13 @@ const FestivalMapPage = (props) => {
 
   return (
     <React.Fragment>
+      <SEO
+        meta_title='Festiwalowa mapa Polski'
+        meta_description='Sprawdź, czy w Twojej okolicy nie gra coś ciekawego!'
+        follow={false}
+        keywords='festiwale, mapa, Polska, eventy'
+        index={true}
+      />
       <Fade in timeout={200}>
         <section
           aria-label='festival-map'

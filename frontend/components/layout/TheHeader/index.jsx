@@ -46,7 +46,6 @@ const navLinks = [
   { title: 'news', path: '/categories/news' },
   { title: 'festiwale', path: '/categories/festiwale' },
   { title: 'koncerty', path: '/categories/koncerty' },
-  { title: 'mapa', path: '/festival-map' },
   // { title: 'relacje', path: '/categories/relacje' },
   // { title: 'patronat', path: '/categories/patronat' },
   // { title: 'polecamy', path: '/categories/polecamy' },
