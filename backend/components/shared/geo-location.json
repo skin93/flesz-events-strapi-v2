@@ -2,15 +2,27 @@
   "collectionName": "components_shared_geo_locations",
   "info": {
     "name": "GeoLocation",
-    "icon": "location-arrow"
+    "icon": "location-arrow",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "latitude": {
-      "type": "float"
+      "type": "float",
+      "required": true,
+      "unique": true
     },
     "longitude": {
-      "type": "float"
+      "type": "float",
+      "required": true,
+      "unique": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "place": {
+      "type": "string"
     }
   }
 }
