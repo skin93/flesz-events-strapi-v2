@@ -59,6 +59,9 @@ const FestivalMap = ({ festivals }) => {
         open={isOpen}
         onClose={() => setIsOpen(false)}>
         <Image
+          quality={100}
+          alt={selected?.name}
+          aria-label='festival-image'
           layout='responsive'
           objectFit='cover'
           objectPosition='center bottom'
