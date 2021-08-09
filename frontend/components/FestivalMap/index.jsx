@@ -37,7 +37,9 @@ const FestivalMap = ({ festivals }) => {
           <Marker
             key={fest.id}
             latitude={fest.location.latitude}
-            longitude={fest.location.longitude}>
+            longitude={fest.location.longitude}
+            offsetLeft={-25}
+            offsetTop={-12.5}>
             <button
               className='marker-btn'
               onClick={() => {
