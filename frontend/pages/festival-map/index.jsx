@@ -39,36 +39,25 @@ const FestivalMapPage = (props) => {
     return <CircularProgress />;
   }
 
-  return (
-    <React.Fragment>
-      <SEO
-        meta_title='Festiwalowa mapa Polski'
-        meta_description='Sprawdź, czy w Twojej okolicy nie gra coś ciekawego!'
-        follow={false}
-        keywords='festiwale, mapa, Polska, eventy'
-        index={true}
-      />
-      <Fade in timeout={200}>
-        <section
-          aria-label='festival-map'
-          style={{
-            height: '100vh',
-            width: '100%',
-            overflow: 'hidden',
-          }}>
-          <div
-            id='map'
-            style={{
-              height: '100%',
-              width: '100%',
-            }}>
-            <MapWithNoSSR festivals={data?.festivals} />
-          </div>
-        </section>
-      </Fade>
-    </React.Fragment>
-  );
-};
+  if(data) {
+    return (
+      <React.Fragment>
+        <SEO
+          meta_title='Festiwalowa mapa Polski'
+          meta_description='Sprawdź, czy w Twojej okolicy nie gra coś ciekawego!'
+          follow={false}
+          keywords='festiwale, mapa, Polska, eventy'
+          index={true}
+        />
+        <Fade in timeout={200}>
+          <section aria-label='festival-map'>
+            <MapWithNoSSR festivals={data.festivals} />
+          </section>
+        </Fade>
+      </React.Fragment>
+    );
+  };
+  }
 
 export async function getServerSideProps() {
   const data = await client.request(ALL_FESTIVALS_QUERY);

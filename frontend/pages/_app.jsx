@@ -58,7 +58,7 @@ export default function MyApp(props) {
             />
             <Component key={router.asPath} {...pageProps} />
           </main>
-          <TheFooter />
+          {router.asPath !== '/festival-map' && <TheFooter />}
         </div>
       </ThemeProvider>
     </React.Fragment>

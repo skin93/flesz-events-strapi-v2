@@ -1,89 +1,87 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { MapContainer, TileLayer, Marker, ZoomControl } from 'react-leaflet';
-import { icon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import 'leaflet-defaulticon-compatibility';
+import Image from 'next/image';
+import ReactMapGl, { Marker } from 'react-map-gl';
+
+import { getMediaUrl } from '@/lib/getMediaUrl';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Dialog, Button } from '@material-ui/core';
-import { getMediaUrl } from '@/lib/getMediaUrl';
 
-const ICON = icon({
-  iconUrl: '/icons8-metal-music-96.png',
-  iconSize: [50, 50],
-});
 
 const FestivalMap = ({ festivals }) => {
   const router = useRouter();
+
   const classes = useStyles();
+
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [viewport, setViewport] = useState({
+    latitude: 51.973077,
+    longitude: 19.451946,
+    width: '100vw',
+    height: '93vh',
+    zoom: 6,
+  });
+
   return (
     <React.Fragment>
-      <MapContainer
-        style={{ width: '100%', height: '100%' }}
-        center={[51.973077054179456, 19.451946876844065]}
-        zoom={7}
-        minZoom={6}
-        maxBounds={[
-          [48.852449627947756, 14.101818103638223],
-          [55.4650129920098, 24.423182822981925],
-        ]}>
-        <TileLayer
-          subdomains='abcd'
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-        />
-        <ZoomControl position='bottomright' />
-
+      <ReactMapGl
+        minZoom={5}
+        {...viewport}
+        mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
+        onViewportChange={(viewport) => {
+          setViewport(viewport);
+        }}
+        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}>
         {festivals.map((fest) => (
           <Marker
-            eventHandlers={{
-              click: () => {
+            key={fest.id}
+            latitude={fest.location.latitude}
+            longitude={fest.location.longitude}>
+            <button
+              className='marker-btn'
+              onClick={() => {
                 setSelected(fest);
                 setIsOpen(true);
-              },
-            }}
-            key={fest.id}
-            icon={ICON}
-            position={[fest.location.latitude, fest.location.longitude]}
-            animate={true}
-          />
+              }}>
+              <img src='/icons8-metal-music-96.png' />
+            </button>
+          </Marker>
         ))}
-      </MapContainer>
-      <Dialog
-        className={classes.container}
-        open={isOpen}
-        onClose={() => setIsOpen(false)}>
-        <Image
-          quality={100}
-          alt={selected?.name}
-          aria-label='festival-image'
-          layout='responsive'
-          objectFit='cover'
-          objectPosition='center bottom'
-          width={300}
-          height={200}
-          src={getMediaUrl(selected?.image)}
-        />
-        <div className={classes.body}>
-          <h2 className={classes.heading}>{selected?.name}</h2>
-          <small className={classes.location}>
-            {selected?.location.city} - {selected?.location.place}
-          </small>
-          <p className={classes.desc}>{selected?.description}</p>
-          <Button
-            onClick={() => router.push(`/tags/${selected.slug}`)}
-            className={classes.button}
-            color='primary'
-            variant='contained'>
-            CZYTAJ WIĘCEJ
-          </Button>
-        </div>
-      </Dialog>
+        {selected && (
+          <Dialog
+            className={classes.container}
+            open={isOpen}
+            onClose={() => setIsOpen(false)}>
+            <Image
+              quality={100}
+              alt={selected.name}
+              aria-label='festival-image'
+              layout='responsive'
+              objectFit='cover'
+              objectPosition='center bottom'
+              width={300}
+              height={200}
+              src={getMediaUrl(selected.image)}
+            />
+            <div className={classes.body}>
+              <h2 className={classes.heading}>{selected.name}</h2>
+              <small className={classes.location}>
+                {selected.location.city} - {selected.location.place}
+              </small>
+              <p className={classes.desc}>{selected.description}</p>
+              <Button
+                onClick={() => router.push(`/tags/${selected.slug}`)}
+                className={classes.button}
+                color='primary'
+                variant='contained'>
+                CZYTAJ WIĘCEJ
+              </Button>
+            </div>
+          </Dialog>
+        )}
+      </ReactMapGl>
     </React.Fragment>
   );
 };
