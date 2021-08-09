@@ -20,7 +20,7 @@ const FestivalMap = ({ festivals }) => {
     longitude: 19.451946,
     width: '100vw',
     height: '93vh',
-    zoom: 6,
+    zoom: 5,
   });
 
   return (
@@ -44,7 +44,12 @@ const FestivalMap = ({ festivals }) => {
                 setSelected(fest);
                 setIsOpen(true);
               }}>
-              <Image width={25} height={25} alt={`${fest.name}`} src='/icons8-metal-music-96.png' />
+              <Image
+                width={25}
+                height={25}
+                alt={`${fest.name}`}
+                src='/icons8-metal-music-96.png'
+              />
             </button>
           </Marker>
         ))}
