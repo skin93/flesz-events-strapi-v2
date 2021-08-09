@@ -108,11 +108,6 @@ const theme = createTheme({
           background: 'none',
           border: 'none',
           cursor: 'pointer',
-
-          '& > img': {
-            width: '25px',
-            height: '25px',
-          },
         },
       },
     },

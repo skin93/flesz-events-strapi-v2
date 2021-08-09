@@ -8,7 +8,6 @@ import { getMediaUrl } from '@/lib/getMediaUrl';
 import { makeStyles } from '@material-ui/core/styles';
 import { Dialog, Button } from '@material-ui/core';
 
-
 const FestivalMap = ({ festivals }) => {
   const router = useRouter();
 
@@ -45,7 +44,7 @@ const FestivalMap = ({ festivals }) => {
                 setSelected(fest);
                 setIsOpen(true);
               }}>
-              <img src='/icons8-metal-music-96.png' />
+              <Image width={25} height={25} alt={`${fest.name}`} src='/icons8-metal-music-96.png' />
             </button>
           </Marker>
         ))}
