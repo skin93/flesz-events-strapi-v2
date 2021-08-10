@@ -65,10 +65,10 @@ const FestivalMap = ({ festivals }) => {
               alt={selected.name}
               aria-label='festival-image'
               layout='responsive'
-              objectFit='cover'
-              objectPosition='center bottom'
-              width={300}
-              height={200}
+              objectFit='fill'
+              objectPosition='center center'
+              width={600}
+              height={400}
               src={getMediaUrl(selected.image)}
             />
             <div className={classes.body}>
