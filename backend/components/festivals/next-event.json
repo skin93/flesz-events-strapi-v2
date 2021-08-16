@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_festivals_next_events",
+  "info": {
+    "name": "Next_event",
+    "icon": "arrow-right",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "from_date": {
+      "type": "date",
+      "required": false
+    },
+    "to_date": {
+      "type": "date"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}
