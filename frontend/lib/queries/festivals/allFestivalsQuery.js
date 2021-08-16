@@ -12,6 +12,12 @@ export const ALL_FESTIVALS_QUERY = gql`
         latitude
         longitude
       }
+      next_event {
+        name
+        date
+        from_date
+        to_date
+      }
       image {
         url
       }

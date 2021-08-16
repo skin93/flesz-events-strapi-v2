@@ -3,6 +3,26 @@ import grey from '@material-ui/core/colors/grey';
 
 const theme = createTheme({
   overrides: {
+    MuiDialog: {
+      paperScrollBody: {
+        textAlign: 'center',
+      },
+    },
+    MuiDialogTitle: {
+      root: {
+        fontSize: '3rem',
+      },
+    },
+    MuiDialogActions: {
+      root: {
+        justifyContent: 'center',
+      },
+    },
+    MuiTypography: {
+      subtitle2: {
+        marginBottom: '12px',
+      },
+    },
     MuiCssBaseline: {
       '@global': {
         figure: {
@@ -115,6 +135,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#32e0c4',
+      darker: '#248f7e',
     },
     type: 'dark',
     accent: {

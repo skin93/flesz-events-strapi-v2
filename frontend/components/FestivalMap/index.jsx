@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import ReactMapGl, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { getMediaUrl } from '@/lib/getMediaUrl';
-
+import Moment from 'react-moment';
 import { makeStyles } from '@material-ui/core/styles';
-import { Dialog, Button } from '@material-ui/core';
+import {
+  Typography,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+} from '@material-ui/core';
+import Slide from '@material-ui/core/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='left' ref={ref} {...props} />;
+});
 
 const FestivalMap = ({ festivals }) => {
   const router = useRouter();
@@ -58,9 +68,10 @@ const FestivalMap = ({ festivals }) => {
         ))}
         {selected && (
           <Dialog
-            className={classes.container}
             open={isOpen}
-            onClose={() => setIsOpen(false)}>
+            scroll='body'
+            onClose={() => setIsOpen(false)}
+            TransitionComponent={Transition}>
             <Image
               quality={100}
               alt={selected.name}
@@ -72,20 +83,45 @@ const FestivalMap = ({ festivals }) => {
               height={400}
               src={getMediaUrl(selected.image)}
             />
-            <div className={classes.body}>
-              <h2 className={classes.heading}>{selected.name}</h2>
-              <small className={classes.location}>
+
+            <div className={classes.head}>
+              <h2 onClick={() => router.push(`/tags/${selected.slug}`)}>
+                {selected.name}
+              </h2>
+              <Typography variant='subtitle2'>
                 {selected.location.city} - {selected.location.place}
-              </small>
-              <p className={classes.desc}>{selected.description}</p>
-              <Button
-                onClick={() => router.push(`/tags/${selected.slug}`)}
-                className={classes.button}
-                color='primary'
-                variant='contained'>
-                CZYTAJ WIĘCEJ
-              </Button>
+              </Typography>
             </div>
+
+            <DialogContent dividers className={classes.content}>
+              <DialogContentText className={classes.desc}>
+                {selected.description}
+              </DialogContentText>
+            </DialogContent>
+            {selected.next_event && (
+              <div className={classes.event}>
+                <Typography variant='subtitle2'>
+                  Najbliższe wydarzenie:
+                </Typography>
+                <h2>
+                  {selected.next_event.name} <br />{' '}
+                  {selected.next_event.date ? (
+                    <Fragment>{selected.next_event.date}</Fragment>
+                  ) : (
+                    <Fragment>
+                      <Moment format='DD'>
+                        {selected.next_event.from_date}
+                      </Moment>
+                      -
+                      <Moment format='DD.MM.YYYY'>
+                        {selected.next_event.to_date}
+                      </Moment>
+                    </Fragment>
+                  )}
+                </h2>
+                <div className='date'></div>
+              </div>
+            )}
           </Dialog>
         )}
       </ReactMapGl>
@@ -97,25 +133,20 @@ const useStyles = makeStyles((theme) => ({
   markerHeading: {
     cursor: 'pointer',
   },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  body: {
-    display: 'block',
-    padding: '16px 24px',
-  },
-  heading: {
-    margin: 0,
+  head: {
+    '& > h2': {
+      cursor: 'pointer',
+      color: theme.palette.primary.main,
+    },
   },
   desc: {
-    fontSize: '1rem',
     color: theme.palette.light.main,
   },
   location: {
-    color: theme.palette.primary.main,
-    fontSize: '.9rem',
-    marginBottom: '24px',
+    color: theme.palette.text.secondary,
+  },
+  event: {
+    padding: '16px 24px',
   },
   button: {
     margin: '24px 0',
