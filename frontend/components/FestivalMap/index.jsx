@@ -27,6 +27,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const navControlStyle = {
   right: 10,
   top: 10,
+  zIndex: 100,
 };
 
 const FestivalMap = ({ festivals }) => {
