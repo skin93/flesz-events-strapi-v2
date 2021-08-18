@@ -227,8 +227,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pointCount: {
     cursor: 'pointer',
-    color: theme.palette.light.main,
-    background: theme.palette.primary.dark,
+    color: theme.palette.black.main,
+    background: theme.palette.primary.main,
     borderRadius: '50%',
     padding: '10px',
     display: 'flex',
