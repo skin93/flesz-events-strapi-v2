@@ -1,7 +1,11 @@
 import React, { Fragment, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGl, {
+  Marker,
+  FlyToInterpolator,
+  NavigationControl,
+} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import useSupercluster from 'use-supercluster';
 
@@ -19,6 +23,11 @@ import Slide from '@material-ui/core/Slide';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='left' ref={ref} {...props} />;
 });
+
+const navControlStyle = {
+  right: 10,
+  top: 10,
+};
 
 const FestivalMap = ({ festivals }) => {
   const router = useRouter();
@@ -68,15 +77,15 @@ const FestivalMap = ({ festivals }) => {
   return (
     <React.Fragment>
       <ReactMapGl
+        attributionControl
         minZoom={5}
         maxZoom={20}
         {...viewport}
         mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
-        onViewportChange={(viewport) => {
-          setViewport(viewport);
-        }}
+        onViewportChange={(viewport) => setViewport(viewport)}
         ref={mapRef}
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}>
+        <NavigationControl style={navControlStyle} />
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
           const { cluster: isCluster, point_count: pointCount } =
