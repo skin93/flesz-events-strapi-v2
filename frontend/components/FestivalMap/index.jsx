@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import ReactMapGl, { Marker } from 'react-map-gl';
+import ReactMapGl, { Marker, FlyToInterpolator } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import useSupercluster from 'use-supercluster';
 
 import { getMediaUrl } from '@/lib/getMediaUrl';
 import Moment from 'react-moment';
@@ -21,51 +22,121 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const FestivalMap = ({ festivals }) => {
   const router = useRouter();
-
+  const mapRef = useRef();
   const classes = useStyles();
 
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [viewport, setViewport] = useState({
-    latitude: 51.973077,
+    latitude: 51.974077,
     longitude: 19.451946,
     width: '100vw',
     height: '93vh',
     zoom: 5,
   });
 
+  const points = festivals.map((fest) => ({
+    type: 'Feature',
+    properties: {
+      cluster: false,
+      festId: fest.id,
+      festName: fest.name,
+      festSlug: fest.slug,
+      festDesc: fest.description,
+      festImage: fest.image,
+      festCity: fest.location.city,
+      festPlace: fest.location.place,
+      nextEvent: fest.next_event,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [fest.location.longitude, fest.location.latitude],
+    },
+  }));
+
+  const bounds = mapRef.current
+    ? mapRef.current.getMap().getBounds().toArray().flat()
+    : null;
+
+  const { clusters, supercluster } = useSupercluster({
+    points,
+    zoom: viewport.zoom,
+    bounds,
+    options: { radius: 75, maxZoom: 20 },
+  });
+
   return (
     <React.Fragment>
       <ReactMapGl
         minZoom={5}
+        maxZoom={20}
         {...viewport}
         mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}
+        ref={mapRef}
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}>
-        {festivals.map((fest) => (
-          <Marker
-            key={fest.id}
-            latitude={fest.location.latitude}
-            longitude={fest.location.longitude}
-            offsetLeft={-25}
-            offsetTop={-12.5}>
-            <button
-              className='marker-btn'
-              onClick={() => {
-                setSelected(fest);
-                setIsOpen(true);
-              }}>
-              <Image
-                width={25}
-                height={25}
-                alt={`${fest.name}`}
-                src='/icons8-metal-music-96.png'
-              />
-            </button>
-          </Marker>
-        ))}
+        {clusters.map((cluster) => {
+          const [longitude, latitude] = cluster.geometry.coordinates;
+          const { cluster: isCluster, point_count: pointCount } =
+            cluster.properties;
+          if (isCluster) {
+            return (
+              <Marker
+                key={cluster.id}
+                latitude={latitude}
+                longitude={longitude}>
+                <div
+                  style={{
+                    width: `${10 + (pointCount / points.length) * 50}px`,
+                    height: `${10 + (pointCount / points.length) * 50}px`,
+                  }}
+                  onClick={() => {
+                    const expansionZoom = Math.min(
+                      supercluster.getClusterExpansionZoom(cluster.id),
+                      20
+                    );
+                    setViewport({
+                      ...viewport,
+                      latitude,
+                      longitude,
+                      zoom: expansionZoom,
+                      transitionInterpolator: new FlyToInterpolator({
+                        speed: 3,
+                      }),
+                      transitionDuration: 'auto',
+                    });
+                  }}
+                  className={classes.pointCount}>
+                  {pointCount}
+                </div>
+              </Marker>
+            );
+          }
+          return (
+            <Marker
+              key={cluster.properties.festId}
+              latitude={latitude}
+              longitude={longitude}
+              offsetLeft={-40}
+              offsetTop={-20}>
+              <button
+                className='marker-btn'
+                onClick={() => {
+                  setSelected(cluster);
+                  setIsOpen(true);
+                }}>
+                <Image
+                  width={40}
+                  height={40}
+                  alt={`${cluster.properties.festName}`}
+                  src='/icons8-metal-music-96.png'
+                />
+              </button>
+            </Marker>
+          );
+        })}
         {selected && (
           <Dialog
             open={isOpen}
@@ -74,47 +145,50 @@ const FestivalMap = ({ festivals }) => {
             TransitionComponent={Transition}>
             <Image
               quality={100}
-              alt={selected.name}
+              alt={selected.properties.festName}
               aria-label='festival-image'
               layout='responsive'
               objectFit='fill'
               objectPosition='center center'
               width={600}
               height={400}
-              src={getMediaUrl(selected.image)}
+              src={getMediaUrl(selected.properties.festImage)}
             />
 
             <div className={classes.head}>
-              <h2 onClick={() => router.push(`/tags/${selected.slug}`)}>
-                {selected.name}
+              <h2
+                onClick={() =>
+                  router.push(`/tags/${selected.properties.festSlug}`)
+                }>
+                {selected.properties.festName}
               </h2>
               <Typography variant='subtitle2'>
-                {selected.location.city} - {selected.location.place}
+                {selected.properties.festCity} - {selected.properties.festPlace}
               </Typography>
             </div>
 
             <DialogContent dividers className={classes.content}>
               <DialogContentText className={classes.desc}>
-                {selected.description}
+                {selected.properties.festDesc}
               </DialogContentText>
             </DialogContent>
-            {selected.next_event && (
+            {selected.properties.nextEvent && (
               <div className={classes.event}>
                 <Typography variant='subtitle2'>
                   Najbliższe wydarzenie:
                 </Typography>
                 <h2>
-                  {selected.next_event.name} <br />{' '}
-                  {selected.next_event.date ? (
-                    <Fragment>{selected.next_event.date}</Fragment>
+                  {selected.properties.nextEvent.name} <br />{' '}
+                  {selected.properties.nextEvent.date ? (
+                    <Fragment>{selected.properties.nextEvent.date}</Fragment>
                   ) : (
                     <Fragment>
                       <Moment format='DD'>
-                        {selected.next_event.from_date}
+                        {selected.properties.nextEvent.from_date}
                       </Moment>
                       -
                       <Moment format='DD.MM.YYYY'>
-                        {selected.next_event.to_date}
+                        {selected.properties.nextEvent.to_date}
                       </Moment>
                     </Fragment>
                   )}
@@ -150,6 +224,18 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: '24px 0',
+  },
+  pointCount: {
+    cursor: 'pointer',
+    color: theme.palette.light.main,
+    background: theme.palette.primary.dark,
+    borderRadius: '50%',
+    padding: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: '600',
+    fontSize: '1.3em',
   },
 }));
 
