@@ -89,8 +89,8 @@ const FestivalMap = ({ festivals }) => {
                 longitude={longitude}>
                 <div
                   style={{
-                    width: `${10 + (pointCount / points.length) * 50}px`,
-                    height: `${10 + (pointCount / points.length) * 50}px`,
+                    width: `${25 + (pointCount / points.length) * 50}px`,
+                    height: `${25 + (pointCount / points.length) * 50}px`,
                   }}
                   onClick={() => {
                     const expansionZoom = Math.min(
