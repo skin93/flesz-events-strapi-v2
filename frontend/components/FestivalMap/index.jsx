@@ -220,6 +220,8 @@ const useStyles = makeStyles((theme) => ({
   head: {
     '& > h2': {
       cursor: 'pointer',
+      marginTop: '14px',
+      marginBottom: 0,
       color: theme.palette.primary.main,
     },
   },
