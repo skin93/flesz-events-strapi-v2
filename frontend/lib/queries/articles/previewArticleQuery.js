@@ -38,7 +38,7 @@ export const PREVIEW_ARTICLE_QUERY = gql`
         }
       }
       related_articles {
-        articles {
+        articles(sort: "published_at:DESC") {
           title
           slug
           image_cover {
