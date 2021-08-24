@@ -92,32 +92,31 @@ const TagPage = (props) => {
       />
       <Fade in timeout={200}>
         <Container component='section' maxWidth='lg' aria-label='tag-page'>
+          <div className={classes.head}>
+            <div className={classes.overlay} />
+            <Image
+              className={classes.tagImage}
+              priority
+              src={getMediaUrl(data.tags[0].metadata.share_image.media)}
+              layout='fill'
+              objectFit='cover'
+              alt={data.tags[0].name}
+              aria-label='article-cover'
+            />
+            <Typography
+              variant='subtitle2'
+              className={classes.caption}
+              aria-label='tag-image-caption'>
+              {data.tags[0].metadata.share_image.media.caption}
+            </Typography>
+            <div className={classes.tagInfo}>
+              <Typography variant='h6' className={classes.tagTitle}>
+                {data.tags[0].name}
+              </Typography>
+            </div>
+          </div>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
-              <div className={classes.head}>
-                <div className={classes.overlay} />
-                <Image
-                  className={classes.tagImage}
-                  priority
-                  src={getMediaUrl(data.tags[0].metadata.share_image.media)}
-                  layout='fill'
-                  objectFit='cover'
-                  alt={data.tags[0].name}
-                  aria-label='article-cover'
-                />
-                <Typography
-                  variant='subtitle2'
-                  className={classes.caption}
-                  aria-label='tag-image-caption'>
-                  {data.tags[0].metadata.share_image.media.caption}
-                </Typography>
-                <div className={classes.tagInfo}>
-                  <Typography variant='h6' className={classes.tagTitle}>
-                    {data.tags[0].name}
-                  </Typography>
-                </div>
-              </div>
-
               <Grid container spacing={2} className={classes.container}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
@@ -131,20 +130,20 @@ const TagPage = (props) => {
                   </Fade>
                 ))}
               </Grid>
+              {data.tags[0].articles.length > 0 && (
+                <LoadMoreButton
+                  next={next}
+                  count={data.tags[0].articles.length}
+                  onClick={handleShowMoreArticles}
+                />
+              )}
             </React.Fragment>
           ) : (
             <div className={classes.noArticles}>
-              <Typography variant='h1' className={classes.heading}>
-                Nic tu nie ma...
+              <Typography variant='h1' className={classes.nothing}>
+                Brak wpisów...
               </Typography>
             </div>
-          )}
-          {data.tags[0].articles.length > 0 && (
-            <LoadMoreButton
-              next={next}
-              count={data.tags[0].articles.length}
-              onClick={handleShowMoreArticles}
-            />
           )}
         </Container>
       </Fade>
@@ -167,9 +166,12 @@ export async function getServerSideProps({ params }) {
 const useStyles = makeStyles((theme) => ({
   head: {
     position: 'relative',
-    margin: '0 auto',
+    margin: '1rem auto',
     maxWidth: '100%',
     height: '450px',
+    [theme.breakpoints.down('xs')]: {
+      height: '200px',
+    },
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
   },
   overlay: {
@@ -195,12 +197,20 @@ const useStyles = makeStyles((theme) => ({
   },
   tagInfo: {
     position: 'absolute',
-    bottom: '-5%',
+
+    bottom: '-10px',
     left: '50%',
-    transform: 'translate(-50%, 5%)',
+    transform: 'translate(-50%, 10px)',
+    [theme.breakpoints.down('xs')]: {
+      bottom: '-10px',
+      transform: 'translate(-50%, 10px)',
+    },
     zIndex: 100,
   },
   tagTitle: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: 'calc(.4rem + .5vw)',
+    },
     borderRadius: '4px',
     background: theme.palette.black.main,
     padding: '5px 15px',
@@ -226,5 +236,12 @@ const useStyles = makeStyles((theme) => ({
     margin: '30px auto',
     fontWeight: 'bold',
     color: theme.palette.accent.main,
+  },
+  nothing: {
+    marginTop: '3rem',
+    fontSize: '2rem',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1rem',
+    },
   },
 }));
