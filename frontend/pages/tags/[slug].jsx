@@ -105,6 +105,12 @@ const TagPage = (props) => {
                   alt={data.tags[0].name}
                   aria-label='article-cover'
                 />
+                <Typography
+                  variant='subtitle2'
+                  className={classes.caption}
+                  aria-label='tag-image-caption'>
+                  {data.tags[0].metadata.share_image.media.caption}
+                </Typography>
                 <div className={classes.tagInfo}>
                   <Typography variant='h6' className={classes.tagTitle}>
                     {data.tags[0].name}
@@ -176,7 +182,17 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.75,
     zIndex: 100,
   },
-  tagImage: {},
+  caption: {
+    display: 'inline-block',
+    position: 'absolute',
+    zIndex: 100,
+    bottom: 0,
+    left: 0,
+    background: theme.palette.black.main,
+    color: theme.palette.light.main,
+    fontWeight: 'bold',
+    fontSize: 'calc(.6rem + .2vw)',
+  },
   tagInfo: {
     position: 'absolute',
     bottom: '-5%',

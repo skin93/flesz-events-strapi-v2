@@ -140,13 +140,14 @@ const ArticlePage = (props) => {
                   aria-label='article-cover'
                   className={classes.image}
                 />
+                <Typography
+                  variant='subtitle2'
+                  className={classes.caption}
+                  aria-label='article-image-caption'>
+                  {data.articles[0].image_cover.caption}
+                </Typography>
               </div>
-              <Typography
-                variant='subtitle2'
-                className={classes.caption}
-                aria-label='article-image-caption'>
-                {data.articles[0].image_cover.caption}
-              </Typography>
+
               <Typography
                 variant='subtitle1'
                 className={classes.excerpt}
@@ -206,7 +207,18 @@ const useStyles = makeStyles((theme) => ({
     margin: '1rem 0',
   },
   imageWrapper: {
+    position: 'relative',
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
+  },
+  caption: {
+    display: 'inline-block',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    background: theme.palette.black.main,
+    color: theme.palette.light.main,
+    fontWeight: 'bold',
+    fontSize: 'calc(.6rem + .2vw)',
   },
   title: {
     fontWeight: 'bold',
@@ -217,11 +229,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: theme.palette.light.main,
     margin: '30px 0',
-  },
-  caption: {
-    marginTop: '1rem',
-    color: theme.palette.muted.main,
-    fontWeight: 'bold',
   },
   category: {
     color: theme.palette.accent.main,
