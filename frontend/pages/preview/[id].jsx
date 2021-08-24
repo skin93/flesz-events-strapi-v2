@@ -76,7 +76,7 @@ const PreviewArticlePage = (props) => {
           maxWidth='lg'
           aria-label='post-page'
           style={{ flexGrow: 1, padding: '15px' }}>
-          <div style={{ margin: '0 0 30px 0' }}>
+          <div className={classes.chips}>
             <Link href={`/categories/${data.article.category.slug}`}>
               <a>
                 <Chip
@@ -122,20 +122,21 @@ const PreviewArticlePage = (props) => {
           <Divider className={classes.divider} />
           <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
-              <Image
-                src={getMediaUrl(data.article.image_cover)}
-                width={800}
-                height={450}
-                quality={100}
-                layout='responsive'
-                objectFit='cover'
-                objectPosition='center top'
-                alt={data.article.title}
-                aria-label='article-cover'
-              />
+              <div className={classes.imageWrapper}>
+                <Image
+                  src={getMediaUrl(data.article.image_cover)}
+                  width={800}
+                  height={450}
+                  layout='responsive'
+                  objectFit='cover'
+                  objectPosition='center top'
+                  alt={data.article.title}
+                  aria-label='article-cover'
+                />
+              </div>
               <Typography
                 variant='subtitle2'
-                className={classes.coverSrc}
+                className={classes.caption}
                 aria-label='article-cover-src'>
                 {data.article.image_cover.caption}
               </Typography>
@@ -188,7 +189,10 @@ export async function getServerSideProps({ params }) {
 
 const useStyles = makeStyles((theme) => ({
   chips: {
-    margin: '0 0 30px 0',
+    margin: '1rem 0',
+  },
+  imageWrapper: {
+    boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
   },
   title: {
     fontWeight: 'bold',
@@ -200,7 +204,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     margin: '30px 0',
   },
-  coverSrc: {
+  caption: {
+    marginTop: '1rem',
     color: theme.palette.muted.main,
     fontWeight: 'bold',
   },

@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '300px',
     position: 'relative',
-    boxShadow: 'none',
+
+    boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
     '& h2': {
       color: theme.palette.light.main,
     },
@@ -61,7 +62,10 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
     height: '100px',
-    paddingLeft: 0,
+    padding: '5px 15px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   title: {
     textAlign: 'left',
