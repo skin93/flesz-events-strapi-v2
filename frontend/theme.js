@@ -3,6 +3,15 @@ import grey from '@material-ui/core/colors/grey';
 
 const theme = createTheme({
   overrides: {
+    MuiCardContent: {
+      root: {
+        padding: '1rem 1.5rem',
+
+        '&:last-child': {
+          paddingBottom: '1rem',
+        },
+      },
+    },
     MuiDialog: {
       paperScrollBody: {
         textAlign: 'center',
