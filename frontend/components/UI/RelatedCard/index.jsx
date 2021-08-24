@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    boxShadow: 'none',
+    boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
     '& h4': {
       color: theme.palette.light.main,
     },
@@ -54,16 +54,13 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '150px',
     objectFit: 'cover',
-    objectPosition: 'center top',
     pointerEvents: 'none',
   },
   content: {
     width: '100%',
     display: 'flex',
-    padding: '0 0 0 16px',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'flex-start',
     height: '100%',
   },
   title: {
