@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import useSWR from 'swr';
 import { client } from '@/lib/requestClient';
@@ -17,6 +18,7 @@ import Fade from '@material-ui/core/Fade';
 import SEO from '@/components/SEO';
 import BaseCard from '@/components/UI/BaseCard';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+import { getMediaUrl } from '@/lib/getMediaUrl';
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const TagPage = (props) => {
@@ -92,10 +94,24 @@ const TagPage = (props) => {
         <Container component='section' maxWidth='lg' aria-label='tag-page'>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
-              <Typography variant='h6' className={classes.heading}>
-                <span>#</span>
-                {data.tags[0].name}
-              </Typography>
+              <div className={classes.head}>
+                <div className={classes.overlay} />
+                <Image
+                  className={classes.tagImage}
+                  priority
+                  src={getMediaUrl(data.tags[0].metadata.share_image.media)}
+                  layout='fill'
+                  objectFit='cover'
+                  alt={data.tags[0].name}
+                  aria-label='article-cover'
+                />
+                <div className={classes.tagInfo}>
+                  <Typography variant='h6' className={classes.tagTitle}>
+                    {data.tags[0].name}
+                  </Typography>
+                </div>
+              </div>
+
               <Grid container spacing={2} className={classes.container}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
@@ -143,8 +159,36 @@ export async function getServerSideProps({ params }) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  heading: {
-    margin: '30px 0',
+  head: {
+    position: 'relative',
+    margin: '0 auto',
+    maxWidth: '100%',
+    height: '450px',
+    boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'black',
+    opacity: 0.75,
+    zIndex: 100,
+  },
+  tagImage: {},
+  tagInfo: {
+    position: 'absolute',
+    bottom: '-5%',
+    left: '50%',
+    transform: 'translate(-50%, 5%)',
+    zIndex: 100,
+  },
+  tagTitle: {
+    borderRadius: '4px',
+    background: theme.palette.black.main,
+    padding: '5px 15px',
+    border: `3px solid ${theme.palette.accent.main}`,
     fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'uppercase',
@@ -154,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   container: {
-    marginTop: '30px',
+    marginTop: '3rem',
   },
   noArticles: {
     display: 'flex',
