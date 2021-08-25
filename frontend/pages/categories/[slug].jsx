@@ -92,8 +92,7 @@ const CategoryPage = (props) => {
         <Container component='section' maxWidth='lg' aria-label='category-page'>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
-              <Typography variant='h6' className={classes.heading}>
-                <span>#</span>
+              <Typography component='h1' className={classes.heading}>
                 {data.categories[0].name}
               </Typography>
               <Grid container spacing={2} className={classes.container}>
@@ -112,8 +111,8 @@ const CategoryPage = (props) => {
             </React.Fragment>
           ) : (
             <div className={classes.noArticles}>
-              <Typography variant='h1' className={classes.heading}>
-                Nic tu nie ma...
+              <Typography component='h1' className={classes.heading}>
+                BRAK WPISÓW...
               </Typography>
             </div>
           )}
@@ -144,20 +143,19 @@ export async function getServerSideProps({ params }) {
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    margin: '30px 0',
-    fontWeight: 'bold',
     textAlign: 'center',
-    textTransform: 'uppercase',
     color: theme.palette.light.main,
-    '& span': {
-      color: theme.palette.accent.main,
-    },
+    margin: '3rem 0',
+    fontWeight: 600,
+    fontSize: 'calc(2rem + .8vw)',
+    textTransform: 'uppercase',
   },
   container: {
     marginTop: '30px',
   },
   noArticles: {
     display: 'flex',
+    minHeight: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
   },

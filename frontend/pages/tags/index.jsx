@@ -99,7 +99,7 @@ const TagsPage = (props) => {
           maxWidth='lg'
           className={classes.root}
           aria-label='tags-page'>
-          <Typography variant='h6' className={classes.heading}>
+          <Typography component='h1' className={classes.heading}>
             TAGI
           </Typography>
           <form className={classes.form} noValidate autoComplete='off'>
@@ -149,7 +149,10 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: 'center',
     color: theme.palette.light.main,
-    margin: '30px 0',
+    margin: '3rem 0',
+    fontWeight: 600,
+    fontSize: 'calc(2rem + .8vw)',
+    textTransform: 'uppercase',
   },
   form: {
     display: 'block',

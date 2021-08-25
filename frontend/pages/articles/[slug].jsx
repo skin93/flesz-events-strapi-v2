@@ -121,7 +121,6 @@ const ArticlePage = (props) => {
             ))}
           </div>
           <Typography
-            variant='h3'
             component='h1'
             aria-label='article-title'
             className={classes.title}>
@@ -143,7 +142,6 @@ const ArticlePage = (props) => {
                   className={classes.image}
                 />
                 <Typography
-                  variant='subtitle2'
                   className={classes.caption}
                   aria-label='article-image-caption'>
                   {data.articles[0].image_cover.caption}
@@ -151,7 +149,6 @@ const ArticlePage = (props) => {
               </div>
 
               <Typography
-                variant='subtitle1'
                 className={classes.excerpt}
                 aria-label='article-excerpt'>
                 {data.articles[0].excerpt}
@@ -161,7 +158,6 @@ const ArticlePage = (props) => {
                 dangerouslySetInnerHTML={{
                   __html: data.articles[0].content,
                 }}
-                className={classes.content}
                 aria-label='article-content'
               />
               <Divider className={classes.divider} />
@@ -210,6 +206,7 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     marginBottom: '1rem',
+    fontSize: 'calc(.4rem + .4vw)',
   },
   imageWrapper: {
     position: 'relative',
@@ -222,25 +219,24 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     background: theme.palette.black.main,
     color: theme.palette.light.main,
-    fontWeight: 'bold',
-    fontSize: 'calc(.6rem + .2vw)',
+    fontWeight: 600,
+    fontSize: 'calc(.4rem + .4vw)',
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 'calc(1.1rem + 2vw)',
+    fontWeight: 600,
+    fontSize: 'calc(2rem + .8vw)',
   },
   excerpt: {
-    fontSize: 'calc(.7rem + .5vw)',
-    fontWeight: 'bold',
+    fontWeight: 600,
     color: theme.palette.light.main,
     margin: '30px 0',
+    fontSize: 'calc(.8rem + .5vw)',
   },
   category: {
     color: theme.palette.accent.main,
     cursor: 'pointer',
     textTransform: 'uppercase',
     marginRight: '10px',
-    fontSize: 'calc(.7em + .2vw)',
     borderRadius: '0px',
     borderColor: theme.palette.accent.main,
   },
@@ -248,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     textTransform: 'uppercase',
     marginRight: '10px',
-    fontSize: 'calc(.7em + .2vw)',
+
     borderRadius: '0px',
     color: theme.palette.light.main,
     borderColor: theme.palette.light.main,
@@ -256,13 +252,12 @@ const useStyles = makeStyles((theme) => ({
   published_at: {
     borderColor: theme.palette.muted.darker,
     marginRight: '10px',
-    fontSize: 'calc(.7em + .2vw)',
+
     borderRadius: '0px',
   },
   writer: {
     borderColor: theme.palette.muted.darker,
     borderRadius: '0px',
-    fontSize: 'calc(.7em + .2vw)',
   },
   divider: {
     margin: '30px 0',

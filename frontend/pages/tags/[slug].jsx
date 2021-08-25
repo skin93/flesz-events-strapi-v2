@@ -92,31 +92,12 @@ const TagPage = (props) => {
       />
       <Fade in timeout={200}>
         <Container component='section' maxWidth='lg' aria-label='tag-page'>
-          <div className={classes.head}>
-            <div className={classes.overlay} />
-            <Image
-              className={classes.tagImage}
-              priority
-              src={getMediaUrl(data.tags[0].metadata.share_image.media)}
-              layout='fill'
-              objectFit='cover'
-              alt={data.tags[0].name}
-              aria-label='article-cover'
-            />
-            <Typography
-              variant='subtitle2'
-              className={classes.caption}
-              aria-label='tag-image-caption'>
-              {data.tags[0].metadata.share_image.media.caption}
-            </Typography>
-            <div className={classes.tagInfo}>
-              <Typography variant='h6' className={classes.tagTitle}>
-                {data.tags[0].name}
-              </Typography>
-            </div>
-          </div>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
+              <Typography component='h1' className={classes.heading}>
+                <span>#</span>
+                {data.tags[0].name}
+              </Typography>
               <Grid container spacing={2} className={classes.container}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
@@ -130,20 +111,20 @@ const TagPage = (props) => {
                   </Fade>
                 ))}
               </Grid>
-              {data.tags[0].articles.length > 0 && (
-                <LoadMoreButton
-                  next={next}
-                  count={data.tags[0].articles.length}
-                  onClick={handleShowMoreArticles}
-                />
-              )}
             </React.Fragment>
           ) : (
             <div className={classes.noArticles}>
-              <Typography variant='h1' className={classes.nothing}>
-                Brak wpisów...
+              <Typography component='h1' className={classes.heading}>
+                BRAK WPISÓW...
               </Typography>
             </div>
+          )}
+          {data.tags[0].articles.length > 0 && (
+            <LoadMoreButton
+              next={next}
+              count={data.tags[0].articles.length}
+              onClick={handleShowMoreArticles}
+            />
           )}
         </Container>
       </Fade>
@@ -164,62 +145,15 @@ export async function getServerSideProps({ params }) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  head: {
-    position: 'relative',
-    margin: '1rem auto',
-    maxWidth: '100%',
-    height: '450px',
-    [theme.breakpoints.down('xs')]: {
-      height: '200px',
-    },
-    boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'black',
-    opacity: 0.75,
-    zIndex: 100,
-  },
-  caption: {
-    display: 'inline-block',
-    position: 'absolute',
-    zIndex: 100,
-    bottom: 0,
-    left: 0,
-    background: theme.palette.black.main,
-    color: theme.palette.light.main,
-    fontWeight: 'bold',
-    fontSize: 'calc(.6rem + .2vw)',
-  },
-  tagInfo: {
-    position: 'absolute',
-
-    bottom: '-10px',
-    left: '50%',
-    transform: 'translate(-50%, 10px)',
-    [theme.breakpoints.down('xs')]: {
-      bottom: '-10px',
-      transform: 'translate(-50%, 10px)',
-    },
-    zIndex: 100,
-  },
-  tagTitle: {
-    [theme.breakpoints.down('xs')]: {
-      fontSize: 'calc(.4rem + .5vw)',
-    },
-    borderRadius: '4px',
-    background: theme.palette.black.main,
-    padding: '5px 15px',
-    border: `3px solid ${theme.palette.accent.main}`,
-    fontWeight: 'bold',
+  heading: {
     textAlign: 'center',
-    textTransform: 'uppercase',
     color: theme.palette.light.main,
-    '& span': {
+    margin: '3rem 0',
+    fontWeight: 600,
+    fontSize: 'calc(2rem + .8vw)',
+    textTransform: 'uppercase',
+
+    ' & > span': {
       color: theme.palette.accent.main,
     },
   },
@@ -228,6 +162,7 @@ const useStyles = makeStyles((theme) => ({
   },
   noArticles: {
     display: 'flex',
+    minHeight: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -238,10 +173,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.accent.main,
   },
   nothing: {
-    marginTop: '3rem',
-    fontSize: '2rem',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem',
-    },
+    textAlign: 'center',
+    color: theme.palette.light.main,
+    margin: '3rem 0',
+    fontWeight: 600,
+    fontSize: 'calc(2rem + .8vw)',
+    textTransform: 'uppercase',
   },
 }));

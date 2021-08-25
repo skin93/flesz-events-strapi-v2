@@ -67,9 +67,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: theme.palette.light.main,
     margin: 0,
-    fontSize: 'calc(11px + 0.2vw)',
-    [theme.breakpoints.up('lg')]: {
-      fontSize: '13px',
-    },
+    fontSize: 'calc(.5rem + .2vw)',
   },
 }));

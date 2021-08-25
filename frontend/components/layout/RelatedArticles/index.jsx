@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   heading: {
-    textAlign: 'left',
     color: theme.palette.light.main,
+    margin: '3rem 0',
+    fontWeight: 600,
   },
   container: {
     marginTop: '30px',

@@ -68,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   title: {
-    textAlign: 'left',
-    fontWeight: 'bold',
+    textAlign: 'center',
+    fontWeight: 600,
     fontSize: 'calc(1.2em + 0.1vw)',
   },
 }));
