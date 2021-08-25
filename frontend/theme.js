@@ -93,13 +93,8 @@ const theme = createTheme({
           width: '80%',
           fontSize: 'calc(.7rem + .5vw)',
         },
-        h2: {
-          color: '#eee',
-          fontWeight: 'bold',
-          fontSize: 'calc(1rem + 1vw)',
-        },
         p: {
-          fontSize: 'calc(.7rem + .5vw)',
+          fontSize: 'calc(.8rem + .5vw)',
           lineHeight: '1.5',
           color: grey[400],
         },
@@ -163,15 +158,6 @@ const theme = createTheme({
     background: {
       main: 'rgb(36,36,36)',
       lighter: 'rgb(40,40,40)',
-    },
-  },
-  typography: {
-    h1: {
-      fontSize: '3rem',
-    },
-    subtitle1: {
-      fontSize: '1.2rem',
-      fontWeight: 'bold',
     },
   },
 });
