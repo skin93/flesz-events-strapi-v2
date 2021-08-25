@@ -134,7 +134,4 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 'calc(2rem + .8vw)',
     textTransform: 'uppercase',
   },
-  container: {
-    marginTop: '30px',
-  },
 }));

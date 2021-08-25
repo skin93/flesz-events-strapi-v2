@@ -7,16 +7,16 @@ const LoadMoreButton = ({ onClick, onChange, next, count }) => {
   const classes = useStyles();
 
   return (
-    <>
+    <React.Fragment>
       <Button
+        variant='outlined'
         onClick={onClick}
         onChange={onChange}
-        variant='outlined'
         className={classes.loadMoreButton}
         disabled={next >= count}>
         Wczytaj więcej
       </Button>
-    </>
+    </React.Fragment>
   );
 };
 
@@ -25,8 +25,8 @@ export default LoadMoreButton;
 const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
     display: 'block',
-    margin: '30px auto',
-    fontWeight: 'bold',
-    color: theme.palette.accent.main,
+    margin: '3rem auto',
+    fontWeight: 600,
+    color: theme.palette.primary.main,
   },
 }));

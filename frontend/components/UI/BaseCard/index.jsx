@@ -44,20 +44,20 @@ const useStyles = makeStyles((theme) => ({
     '& h2': {
       color: theme.palette.light.main,
     },
-    '&:hover h2': {
-      color: theme.palette.primary.main,
+    '&:hover': {
+      '& img': {
+        transform: 'scale(1.1)',
+      },
+      '& h2': {
+        color: theme.palette.primary.main,
+        transform: 'scale(1.1)',
+      },
     },
-  },
-  category: {
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    fontSize: '.8em',
-    color: theme.palette.accent.main,
-    cursor: 'pointer',
   },
   media: {
     height: '200px',
     pointerEvents: 'none',
+    transition: 'all .2s ease-in-out',
   },
   content: {
     width: '100%',
@@ -71,5 +71,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: 600,
     fontSize: 'calc(1.2em + 0.1vw)',
+    transition: '.2s all ease-in-out',
   },
 }));

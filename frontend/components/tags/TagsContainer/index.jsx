@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.accent.main,
     },
     '&:hover': {
-      backgroundColor: theme.palette.muted.darker,
+      transform: 'scale(1.1)',
     },
   },
 }));

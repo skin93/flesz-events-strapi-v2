@@ -32,6 +32,26 @@ const theme = createTheme({
         marginBottom: '12px',
       },
     },
+    MuiListItem: {
+      button: {
+        transition: 'all .2s ease-in-out',
+        '&:hover': {
+          backgroundColor: 'transparent',
+          color: '#32e0c4',
+          transform: 'scale(1.1)',
+        },
+      },
+    },
+    MuiButton: {
+      root: {
+        transition: 'all .2s ease-in-out',
+        '&:hover': {
+          backgroundColor: 'transparent',
+          color: '#32e0c4',
+          transform: 'scale(1.1)',
+        },
+      },
+    },
     MuiCssBaseline: {
       '@global': {
         figure: {

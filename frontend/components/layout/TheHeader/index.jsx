@@ -97,7 +97,7 @@ const TheHeader = (props) => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <HideOnScroll {...props}>
         <AppBar position='fixed' className={classes.appBar}>
           <Toolbar variant='dense' id='back-to-top-anchor'>
@@ -172,7 +172,7 @@ const TheHeader = (props) => {
       {articlesFound.length > 0 && (
         <ResultsContainer articles={articlesFound} onClick={clear} />
       )}
-    </>
+    </React.Fragment>
   );
 };
 
@@ -199,28 +199,28 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   navbarBrand: {
-    padding: `8px 16px`,
-    display: `flex`,
-    justifyContent: `flex-start`,
-    alignItems: `center`,
+    padding: '8px 16px',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   logo: {
-    display: `flex`,
-    justifyContent: `center`,
-    alignItems: `center`,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   navDisplayFlex: {
-    display: `flex`,
-    justifyContent: `space-between`,
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   active: {
-    textDecoration: `none`,
-    textTransform: `uppercase`,
+    textDecoration: 'none',
+    textTransform: 'uppercase',
     color: theme.palette.accent.main,
   },
   linkText: {
-    textDecoration: `none`,
-    textTransform: `uppercase`,
+    textDecoration: 'none',
+    textTransform: 'uppercase',
     color: theme.palette.light.main,
   },
   search: {
