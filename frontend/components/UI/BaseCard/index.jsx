@@ -45,9 +45,6 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.light.main,
     },
     '&:hover': {
-      '& img': {
-        transform: 'scale(1.1)',
-      },
       '& h2': {
         color: theme.palette.primary.main,
         transform: 'scale(1.1)',
@@ -57,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: '200px',
     pointerEvents: 'none',
-    transition: 'all .2s ease-in-out',
   },
   content: {
     width: '100%',
