@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     color: theme.palette.light.main,
-    margin: '3rem 0',
+    marginTop: '3rem ',
     fontWeight: 600,
   },
   container: {

@@ -225,11 +225,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 600,
     fontSize: 'calc(2rem + .8vw)',
+    margin: '0 0 1rem 0',
   },
   excerpt: {
     fontWeight: 600,
     color: theme.palette.light.main,
-    margin: '30px 0',
+    margin: '1rem 0',
     fontSize: 'calc(.8rem + .5vw)',
   },
   category: {
@@ -260,8 +261,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
   },
   divider: {
-    margin: '30px 0',
+    margin: '1rem 0',
     height: '3px',
     backgroundColor: theme.palette.muted.main,
+    '&:first-of-type': {
+      marginTop: '0',
+    },
   },
 }));

@@ -40,8 +40,8 @@ const RelatedCard = ({ article }) => {
 export default RelatedCard;
 
 const useStyles = makeStyles((theme) => ({
-  root: { 
-    borderRight: `5px solid transparent`,
+  root: {
+    borderRight: '5px solid transparent',
     backgroundColor: 'transparent',
     height: '100px',
     width: '100%',

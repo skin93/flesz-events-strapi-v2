@@ -90,6 +90,9 @@ const theme = createTheme({
             height: '80%',
           },
         },
+        h2: {
+          fontSize: 'calc(1.3rem + .8vw)',
+        },
         blockquote: {
           '& > p': {
             color: grey[50],
