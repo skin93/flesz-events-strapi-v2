@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import clsx from 'clsx';
+
 import useSWR from 'swr';
 import { request } from 'graphql-request';
 import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery';
@@ -88,7 +90,7 @@ const ArticlePage = (props) => {
                 <Chip
                   variant='outlined'
                   label={data.articles[0].category.name}
-                  className={classes.category}
+                  className={clsx(classes.category, classes.chip)}
                 />
               </a>
             </Link>
@@ -98,7 +100,7 @@ const ArticlePage = (props) => {
                   <Chip
                     key={tag.name}
                     label={tag.name}
-                    className={classes.tagItem}
+                    className={clsx(classes.tag, classes.chip)}
                     variant='outlined'
                   />
                 </a>
@@ -106,14 +108,14 @@ const ArticlePage = (props) => {
             ))}
             <Chip
               label={data.articles[0].published_at.split('T')[0]}
-              className={classes.published_at}
+              className={clsx(classes.published_at, classes.chip)}
               variant='outlined'
             />
             {data.articles[0].writers.map((writer) => (
               <Chip
                 label={writer.name}
                 key={writer.name}
-                className={classes.writer}
+                className={clsx(classes.writer, classes.chip)}
                 variant='outlined'
               />
             ))}
@@ -204,7 +206,10 @@ export async function getServerSideProps({ params }) {
 
 const useStyles = makeStyles((theme) => ({
   chips: {
-    margin: '1rem 0',
+    marginTop: '1rem',
+  },
+  chip: {
+    marginBottom: '1rem',
   },
   imageWrapper: {
     position: 'relative',
@@ -239,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     borderColor: theme.palette.accent.main,
   },
-  tagItem: {
+  tag: {
     cursor: 'pointer',
     textTransform: 'uppercase',
     marginRight: '10px',

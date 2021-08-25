@@ -5,6 +5,8 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import clsx from 'clsx';
+
 import useSWR from 'swr';
 import { client } from '@/lib/requestClient';
 import { PREVIEW_ARTICLE_QUERY } from '@/lib/queries/articles/previewArticleQuery';
@@ -82,7 +84,7 @@ const PreviewArticlePage = (props) => {
                 <Chip
                   variant='outlined'
                   label={data.article.category.name}
-                  className={classes.category}
+                  className={clsx(classes.category, classes.chip)}
                 />
               </a>
             </Link>
@@ -92,7 +94,7 @@ const PreviewArticlePage = (props) => {
                   <Chip
                     key={tag.name}
                     label={tag.name}
-                    className={classes.tagItem}
+                    className={clsx(classes.tag, classes.chip)}
                     variant='outlined'
                   />
                 </a>
@@ -100,14 +102,14 @@ const PreviewArticlePage = (props) => {
             ))}
             <Chip
               label={data.article.updatedAt.split('T')[0]}
-              className={classes.updatedAt}
+              className={clsx(classes.updatedAt, classes.chip)}
               variant='outlined'
             />
             {data.article.writers.map((writer) => (
               <Chip
                 label={writer.name}
                 key={writer.name}
-                className={classes.writer}
+                className={clsx(classes.writer, classes.chip)}
                 variant='outlined'
               />
             ))}
@@ -189,7 +191,10 @@ export async function getServerSideProps({ params }) {
 
 const useStyles = makeStyles((theme) => ({
   chips: {
-    margin: '1rem 0',
+    marginTop: '1rem',
+  },
+  chip: {
+    marginBottom: '1rem',
   },
   imageWrapper: {
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
@@ -218,7 +223,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     borderColor: theme.palette.accent.main,
   },
-  tagItem: {
+  tag: {
     cursor: 'pointer',
     textTransform: 'uppercase',
     marginRight: '10px',
