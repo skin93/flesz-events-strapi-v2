@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     transition: '.2s all ease-in-out',
     '&:hover': {
       borderRight: `5px solid ${theme.palette.primary.main}`,
+      transform: 'translateY(-5px)',
     },
   },
   media: {
