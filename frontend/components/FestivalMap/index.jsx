@@ -172,27 +172,19 @@ const FestivalMap = ({ festivals }) => {
                 }>
                 {selected.properties.festName}
               </h2>
-              <Typography variant='subtitle2'>
-                {selected.properties.festCity} - {selected.properties.festPlace}
-              </Typography>
-            </div>
 
-            <DialogContent dividers className={classes.content}>
-              <DialogContentText className={classes.desc}>
-                {selected.properties.festDesc}
-              </DialogContentText>
-            </DialogContent>
-            {selected.properties.nextEvent && (
-              <div className={classes.event}>
-                <Typography variant='subtitle2'>
-                  Najbliższe wydarzenie:
-                </Typography>
-                <h2>
-                  {selected.properties.nextEvent.name} <br />{' '}
+              <Typography variant='subtitle1' component='small'>
+                {selected.properties.festCity} - {selected.properties.festPlace}
+                <br />
+              </Typography>
+              {selected.properties.nextEvent ? (
+                <Fragment>
                   {selected.properties.nextEvent.date ? (
-                    <Fragment>{selected.properties.nextEvent.date}</Fragment>
+                    <Typography variant='subtitle1' component='small'>
+                      {selected.properties.nextEvent.date}
+                    </Typography>
                   ) : (
-                    <Fragment>
+                    <Typography variant='subtitle1' component='small'>
                       <Moment format='DD'>
                         {selected.properties.nextEvent.from_date}
                       </Moment>
@@ -200,12 +192,19 @@ const FestivalMap = ({ festivals }) => {
                       <Moment format='DD.MM.YYYY'>
                         {selected.properties.nextEvent.to_date}
                       </Moment>
-                    </Fragment>
+                    </Typography>
                   )}
-                </h2>
-                <div className='date'></div>
-              </div>
-            )}
+                </Fragment>
+              ) : (
+                <Typography>Brak daty</Typography>
+              )}
+            </div>
+
+            <DialogContent dividers className={classes.content}>
+              <DialogContentText className={classes.desc}>
+                {selected.properties.festDesc}
+              </DialogContentText>
+            </DialogContent>
           </Dialog>
         )}
       </ReactMapGl>
@@ -218,14 +217,18 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   head: {
+    padding: '16px 24px',
     '& > h2': {
       cursor: 'pointer',
-      marginTop: '14px',
-      marginBottom: 0,
+      margin: 0,
       color: theme.palette.primary.main,
+    },
+    '& > h6': {
+      margin: 0,
     },
   },
   desc: {
+    marginBottom: 0,
     color: theme.palette.light.main,
   },
   location: {
@@ -248,6 +251,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     fontWeight: '600',
     fontSize: '1.3em',
+  },
+  event: {
+    padding: '16px 24px',
+  },
+  eventName: {
+    color: 'white',
   },
 }));
 

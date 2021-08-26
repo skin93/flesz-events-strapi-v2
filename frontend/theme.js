@@ -13,8 +13,11 @@ const theme = createTheme({
       },
     },
     MuiDialog: {
+      scrollBody: {
+        textAlign: 'right',
+      },
       paperScrollBody: {
-        textAlign: 'center',
+        textAlign: 'left',
       },
     },
     MuiDialogTitle: {
