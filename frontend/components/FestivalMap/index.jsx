@@ -181,7 +181,9 @@ const FestivalMap = ({ festivals }) => {
                 <Fragment>
                   {selected.properties.nextEvent.date ? (
                     <Typography variant='subtitle1' component='small'>
-                      {selected.properties.nextEvent.date}
+                      <Moment format='DD.MM.YYYY'>
+                        {selected.properties.nextEvent.date}
+                      </Moment>
                     </Typography>
                   ) : (
                     <Typography variant='subtitle1' component='small'>
