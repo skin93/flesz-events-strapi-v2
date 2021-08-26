@@ -6,13 +6,15 @@ const theme = createTheme({
     MuiCardContent: {
       root: {
         padding: '1rem 1.5rem',
-
         '&:last-child': {
           paddingBottom: '1rem',
         },
       },
     },
     MuiDialog: {
+      paper: {
+        margin: 0,
+      },
       scrollBody: {
         textAlign: 'right',
       },
