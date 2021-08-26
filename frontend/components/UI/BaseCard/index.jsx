@@ -39,15 +39,16 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '300px',
     position: 'relative',
+    transition: '.2s all ease-in-out',
 
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
     '& h2': {
       color: theme.palette.light.main,
     },
     '&:hover': {
+      transform: 'translateY(-5px)',
       '& h2': {
         color: theme.palette.primary.main,
-        transform: 'scale(1.1)',
       },
     },
   },
@@ -58,15 +59,15 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
     height: '100px',
-    padding: '5px 15px',
+    padding: '16px 24px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
   },
   title: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 600,
-    fontSize: 'calc(1.2em + 0.1vw)',
+    fontSize: 'calc(1rem + 0.1vw)',
     transition: '.2s all ease-in-out',
   },
 }));
