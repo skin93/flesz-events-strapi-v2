@@ -173,20 +173,20 @@ const FestivalMap = ({ festivals }) => {
                 {selected.properties.festName}
               </h2>
 
-              <Typography variant='subtitle1' component='small'>
+              <Typography component='small'>
                 {selected.properties.festCity} - {selected.properties.festPlace}
                 <br />
               </Typography>
               {selected.properties.nextEvent ? (
                 <Fragment>
                   {selected.properties.nextEvent.date ? (
-                    <Typography variant='subtitle1' component='small'>
+                    <Typography>
                       <Moment format='DD.MM.YYYY'>
                         {selected.properties.nextEvent.date}
                       </Moment>
                     </Typography>
                   ) : (
-                    <Typography variant='subtitle1' component='small'>
+                    <Typography>
                       <Moment format='DD'>
                         {selected.properties.nextEvent.from_date}
                       </Moment>
