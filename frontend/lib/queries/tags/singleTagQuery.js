@@ -1,11 +1,16 @@
 import { gql } from 'graphql-request';
 export const SINGLE_TAG_QUERY = gql`
-  query singleTagQuery($slug: String!) {
+  query singleTagQuery($slug: String!, $start: Int!, $limit: Int!) {
+    articlesConnection {
+      aggregate {
+        count
+      }
+    }
     tags(where: { slug: $slug }, publicationState: LIVE) {
       name
       description
       slug
-      articles(sort: "published_at:DESC") {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
         id
         title
         slug
