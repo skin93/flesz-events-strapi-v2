@@ -7,6 +7,8 @@ import useSWR from 'swr';
 import { client } from '@/lib/requestClient';
 import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -16,16 +18,17 @@ import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
 import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 export default function Home(props) {
   const classes = useStyles();
 
-  const [limit] = useState(90);
-  const [start] = useState(0);
-  const [articlesPerPage] = useState(9);
-  const [articlesToShow, setArticlesToShow] = useState([]);
-  const [next, setNext] = useState(articlesPerPage);
+  const [limit] = useState(9);
+  const [start, setStart] = useState(0);
+
+  const [articlesToShow, setArticlesToShow] = useState(props.data.articles);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetcher = async (query) =>
     await client.request(query, { start, limit });
@@ -36,22 +39,22 @@ export default function Home(props) {
     initialData: props.data,
   });
 
-  const loopWithSlice = useCallback(
-    (start, end) => {
-      const slicedArticles = data.articles.slice(start, end);
-      setArticlesToShow((prev) => [...prev, ...slicedArticles]);
-    },
-    [data]
-  );
+  const getMoreArticles = useCallback(async () => {
+    const res = await client.request(ALL_ARTICLES_QUERY, {
+      start: articlesToShow.length,
+      limit: 3,
+    });
+
+    setArticlesToShow((articlesToShow) => [...articlesToShow, ...res.articles]);
+  }, [articlesToShow]);
 
   useEffect(() => {
-    loopWithSlice(0, articlesPerPage);
-  }, [loopWithSlice, articlesPerPage]);
-
-  const handleShowMoreArticles = useCallback(() => {
-    loopWithSlice(next, next + articlesPerPage);
-    setNext(next + articlesPerPage);
-  }, [next, articlesPerPage, loopWithSlice]);
+    setHasMore(
+      data.articlesConnection.aggregate.count > articlesToShow.length
+        ? true
+        : false
+    );
+  }, [articlesToShow]);
 
   if (error) {
     return (
@@ -90,24 +93,37 @@ export default function Home(props) {
           <Typography component='h1' className={classes.heading}>
             OSTATNIE WPISY
           </Typography>
-          <Grid container spacing={2}>
-            {articlesToShow.map((article) => (
-              <Fade key={article.id} in timeout={200}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Link href={`/articles/${article.slug}`} passHref>
-                    <a>
-                      <BaseCard article={article} />
-                    </a>
-                  </Link>
-                </Grid>
-              </Fade>
-            ))}
-          </Grid>
-          <LoadMoreButton
-            next={next}
-            count={data.articlesConnection.aggregate.count}
-            onClick={handleShowMoreArticles}
-          />
+
+          <InfiniteScroll
+            scrollThreshold={0.8}
+            style={{ overflow: 'hidden' }}
+            dataLength={articlesToShow.length}
+            next={getMoreArticles}
+            hasMore={hasMore}
+            loader={
+              <div className={classes.block}>
+                <CircularProgress />
+              </div>
+            }
+            endMessage={
+              <div className={classes.block}>
+                <p className={classes.endMessage}>Nic więcej nie ma</p>
+              </div>
+            }>
+            <Grid style={{ marginBottom: '3rem' }} container spacing={2}>
+              {articlesToShow.map((article) => (
+                <Fade key={article.id} in timeout={200}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Link href={`/articles/${article.slug}`} passHref>
+                      <a>
+                        <BaseCard article={article} />
+                      </a>
+                    </Link>
+                  </Grid>
+                </Fade>
+              ))}
+            </Grid>
+          </InfiniteScroll>
         </Container>
       </Fade>
     </React.Fragment>
@@ -117,7 +133,7 @@ export default function Home(props) {
 export async function getServerSideProps() {
   const data = await client.request(ALL_ARTICLES_QUERY, {
     start: 0,
-    limit: 90,
+    limit: 9,
   });
 
   return {
@@ -133,5 +149,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontSize: 'calc(2rem + .8vw)',
     textTransform: 'uppercase',
+  },
+  block: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '3rem 0',
+  },
+  endMessage: {
+    margin: 0,
+    color: theme.palette.text.disabled,
   },
 }));
