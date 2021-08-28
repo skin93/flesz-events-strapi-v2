@@ -58,7 +58,7 @@ const TagPage = (props) => {
 
   useEffect(() => {
     setHasMore(
-      data.articlesConnection.aggregate.count > articlesToShow.length
+      data.articlesCountBasedOnTagOrCategory > articlesToShow.length
         ? true
         : false
     );
@@ -108,7 +108,6 @@ const TagPage = (props) => {
                 {data.tags[0].name}
               </Typography>
               <InfiniteScroll
-                scrollThreshold={0.8}
                 style={{ overflow: 'hidden' }}
                 dataLength={articlesToShow.length}
                 next={getMoreArticles}
