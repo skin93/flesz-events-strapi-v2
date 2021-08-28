@@ -1,11 +1,12 @@
 import { gql } from 'graphql-request';
 export const SINGLE_CATEGORY_QUERY = gql`
-  query singleCategoryQuery($slug: String!) {
+  query singleCategoryQuery($slug: String!, $start: Int!, $limit: Int!) {
+    articlesCountBasedOnTagOrCategory(where: { category: { slug: $slug } })
     categories(where: { slug: $slug }, publicationState: LIVE) {
       name
       description
       slug
-      articles(sort: "published_at:DESC") {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
         id
         title
         slug
