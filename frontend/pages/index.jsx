@@ -54,7 +54,7 @@ export default function Home(props) {
         ? true
         : false
     );
-  }, [articlesToShow]);
+  }, [articlesToShow, data.articlesConnection.aggregate.count]);
 
   if (error) {
     return (

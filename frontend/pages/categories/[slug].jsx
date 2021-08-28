@@ -54,7 +54,7 @@ const CategoryPage = (props) => {
       ...articlesToShow,
       ...res.categories[0].articles,
     ]);
-  }, [articlesToShow]);
+  }, [articlesToShow, slug]);
 
   useEffect(() => {
     setHasMore(
@@ -62,7 +62,7 @@ const CategoryPage = (props) => {
         ? true
         : false
     );
-  }, [articlesToShow]);
+  }, [articlesToShow, data.articlesCountBasedOnTagOrCategory]);
 
   if (error) {
     return (
