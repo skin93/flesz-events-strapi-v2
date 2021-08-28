@@ -95,7 +95,6 @@ export default function Home(props) {
           </Typography>
 
           <InfiniteScroll
-            scrollThreshold={0.8}
             style={{ overflow: 'hidden' }}
             dataLength={articlesToShow.length}
             next={getMoreArticles}
