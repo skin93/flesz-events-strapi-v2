@@ -21,6 +21,9 @@ const theme = createTheme({
       paperScrollBody: {
         textAlign: 'left',
       },
+      paperWidthSm: {
+        maxWidth: '800px',
+      },
     },
     MuiDialogTitle: {
       root: {
