@@ -132,14 +132,15 @@ const ArticlePage = (props) => {
               <div className={classes.imageWrapper}>
                 <Image
                   src={getMediaUrl(data.articles[0].image_cover)}
-                  width={800}
-                  height={450}
+                  quality={100}
+                  width={16}
+                  height={9}
+                  priority={true}
+                  placeholder='blur'
                   layout='responsive'
-                  objectFit='cover'
-                  objectPosition='center top'
+                  blurDataURL={getMediaUrl(data.articles[0].image_cover)}
                   alt={data.articles[0].title}
                   aria-label='article-cover'
-                  className={classes.image}
                 />
                 <Typography
                   className={classes.caption}

@@ -112,8 +112,8 @@ const TheHeader = (props) => {
                       src='/biale-logo-pelny-napis-akcent.png'
                       className={classes.logo}
                       alt='logo'
-                      width={150}
-                      height={20}
+                      layout='fill'
+                      objectFit='contain'
                     />
                   </a>
                 </Link>
@@ -199,10 +199,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   navbarBrand: {
-    padding: '8px 16px',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'relative',
+    width: '150px',
+    paddingBottom: '24px',
   },
   logo: {
     display: 'flex',
