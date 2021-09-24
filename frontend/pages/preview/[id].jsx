@@ -124,16 +124,16 @@ const PreviewArticlePage = (props) => {
           <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
               <div className={classes.imageWrapper}>
-              <Image
-                  src={getMediaUrl(data.articles[0].image_cover)}
+                <Image
+                  src={getMediaUrl(data.article.image_cover)}
                   quality={100}
                   width={16}
                   height={9}
                   priority={true}
                   placeholder='blur'
                   layout='responsive'
-                  blurDataURL={getMediaUrl(data.articles[0].image_cover)}
-                  alt={data.articles[0].title}
+                  blurDataURL={getMediaUrl(data.article.image_cover)}
+                  alt={data.article.title}
                   aria-label='article-cover'
                   className={classes.image}
                 />

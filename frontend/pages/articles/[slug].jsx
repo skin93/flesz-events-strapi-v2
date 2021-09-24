@@ -72,7 +72,11 @@ const ArticlePage = (props) => {
     <React.Fragment>
       <SEO
         meta_title={data.articles[0].metadata.meta_title}
+        og_title={data.articles[0].metadata.og_title}
         meta_description={data.articles[0].metadata.meta_description}
+        og_description={data.articles[0].metadata.og_description}
+        og_locale={data.articles[0].metadata.og_locale}
+        og_type={data.articles[0].metadata.og_type}
         share_image={data.articles[0].metadata.share_image}
         follow={data.articles[0].metadata.follow}
         keywords={data.articles[0].metadata.keywords}

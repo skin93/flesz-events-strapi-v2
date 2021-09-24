@@ -5,7 +5,11 @@ import { getMediaUrl } from '@/lib/getMediaUrl';
 
 const SEO = ({
   meta_title,
+  og_title,
   meta_description,
+  og_description,
+  og_type,
+  og_locale,
   share_image,
   index,
   follow,
@@ -39,30 +43,24 @@ const SEO = ({
             : 'Jesteśmy sKoncertowani na muzyce!'
         }
       />
-
       <link
         rel='canonical'
         href={`${process.env.NEXT_PUBLIC_APP_DOMAIN}${router.asPath}`}
       />
-
       <meta
         property='og:title'
         content={
-          meta_title
-            ? `${meta_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`
-            : process.env.NEXT_PUBLIC_APP_NAME
+          og_title
+            ? `${og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`
+            : `${meta_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`
         }
       />
       <meta
         property='og:description'
-        content={
-          meta_description
-            ? meta_description
-            : 'Jesteśmy sKoncertowani na muzyce!'
-        }
+        content={og_description ? og_description : meta_description}
       />
-
-      <meta property='og:type' content='website' />
+      <meta property='og:type' content={og_type ? og_type : 'website'} />
+      <meta property='og:locale' content={og_locale ? og_locale : 'pl_PL'} />
       <meta
         property='og:url'
         content={`${process.env.NEXT_PUBLIC_APP_DOMAIN}${router.asPath}`}
@@ -71,7 +69,6 @@ const SEO = ({
         property='og:site_name'
         content={`${process.env.NEXT_PUBLIC_APP_NAME}`}
       />
-
       <meta
         property='og:image'
         content={

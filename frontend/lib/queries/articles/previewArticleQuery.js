@@ -25,7 +25,11 @@ export const PREVIEW_ARTICLE_QUERY = gql`
       }
       metadata {
         meta_title
+        og_title
         meta_description
+        og_description
+        og_locale
+        og_type
         follow
         keywords
         index

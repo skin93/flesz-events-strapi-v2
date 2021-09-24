@@ -25,7 +25,11 @@ export const SINGLE_ARTICLE_QUERY = gql`
       }
       metadata {
         meta_title
+        og_title
         meta_description
+        og_description
+        og_locale
+        og_type
         follow
         index
         keywords
