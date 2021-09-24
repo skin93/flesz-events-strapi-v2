@@ -33,6 +33,24 @@
     "index": {
       "type": "boolean",
       "default": true
+    },
+    "og_title": {
+      "type": "string",
+      "maxLength": 90,
+      "required": false
+    },
+    "og_description": {
+      "type": "text",
+      "maxLength": 200,
+      "required": false
+    },
+    "og_locale": {
+      "type": "string",
+      "default": "pl_PL"
+    },
+    "og_type": {
+      "type": "string",
+      "default": "article"
     }
   }
 }
