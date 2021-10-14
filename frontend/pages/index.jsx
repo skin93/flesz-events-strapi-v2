@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -30,17 +30,14 @@ export default function Home(props) {
   const [articlesToShow, setArticlesToShow] = useState(props.data.articles);
   const [hasMore, setHasMore] = useState(true);
 
-  const fetcher = async (query) =>
-    await client.request(query, { start, limit });
-
   const q = ALL_ARTICLES_QUERY;
 
-  const { error, data } = useSWR([q, start, limit], fetcher, {
+  const { error, data } = useSWR([q, { start, limit }], fetcher, {
     initialData: props.data,
   });
 
   const getMoreArticles = useCallback(async () => {
-    const res = await client.request(ALL_ARTICLES_QUERY, {
+    const res = await fetcher(ALL_ARTICLES_QUERY, {
       start: articlesToShow.length,
       limit: 3,
     });
@@ -130,7 +127,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const data = await client.request(ALL_ARTICLES_QUERY, {
+  const data = await fetcher(ALL_ARTICLES_QUERY, {
     start: 0,
     limit: 9,
   });

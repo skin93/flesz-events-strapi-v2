@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { SINGLE_TAG_QUERY } from '@/lib/queries/tags/singleTagQuery';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -19,6 +19,7 @@ import Fade from '@material-ui/core/Fade';
 
 import SEO from '@/components/SEO';
 import BaseCard from '@/components/UI/BaseCard';
+
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const TagPage = (props) => {
@@ -34,17 +35,14 @@ const TagPage = (props) => {
   );
   const [hasMore, setHasMore] = useState(true);
 
-  const fetcher = async (query) =>
-    await client.request(query, { slug, start, limit });
-
   const q = SINGLE_TAG_QUERY;
 
-  const { error, data } = useSWR([q, slug, start, limit], fetcher, {
+  const { error, data } = useSWR([q, { slug, start, limit }], fetcher, {
     initialData: props.data,
   });
 
   const getMoreArticles = useCallback(async () => {
-    const res = await client.request(SINGLE_TAG_QUERY, {
+    const res = await fetcher(SINGLE_TAG_QUERY, {
       start: articlesToShow.length,
       limit: 3,
       slug,
@@ -153,7 +151,7 @@ const TagPage = (props) => {
 export default TagPage;
 
 export async function getServerSideProps({ params }) {
-  const data = await client.request(SINGLE_TAG_QUERY, {
+  const data = await fetcher(SINGLE_TAG_QUERY, {
     slug: params.slug,
     start: 0,
     limit: 9,

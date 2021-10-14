@@ -6,7 +6,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { ARTICLES_TITLE_QUERY } from '@/lib/queries/articles/articlesTitleQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -58,10 +58,6 @@ const TheHeader = (props) => {
   const inputRef = useRef();
 
   const [articlesFound, setArticlesFound] = useState([]);
-
-  const fetcher = async (query) => {
-    return await client.request(query);
-  };
 
   const q = ARTICLES_TITLE_QUERY;
 

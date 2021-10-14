@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { SINGLE_CATEGORY_QUERY } from '@/lib/queries/categories/singleCategoryQuery';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -19,6 +19,7 @@ import Fade from '@material-ui/core/Fade';
 
 import SEO from '@/components/SEO';
 import BaseCard from '@/components/UI/BaseCard';
+
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const CategoryPage = (props) => {
@@ -34,17 +35,14 @@ const CategoryPage = (props) => {
   );
   const [hasMore, setHasMore] = useState(true);
 
-  const fetcher = async (query) =>
-    await client.request(query, { slug, start, limit });
-
   const q = SINGLE_CATEGORY_QUERY;
 
-  const { error, data } = useSWR([q, slug, start, limit], fetcher, {
+  const { error, data } = useSWR([q, { slug, start, limit }], fetcher, {
     initialData: props.data,
   });
 
   const getMoreArticles = useCallback(async () => {
-    const res = await client.request(SINGLE_CATEGORY_QUERY, {
+    const res = await fetcher(SINGLE_CATEGORY_QUERY, {
       start: articlesToShow.length,
       limit: 3,
       slug,
@@ -152,7 +150,7 @@ const CategoryPage = (props) => {
 export default CategoryPage;
 
 export async function getServerSideProps({ params }) {
-  const data = await client.request(SINGLE_CATEGORY_QUERY, {
+  const data = await fetcher(SINGLE_CATEGORY_QUERY, {
     slug: params.slug,
     start: 0,
     limit: 9,

@@ -8,7 +8,6 @@ import * as gtag from '@/lib/gtag';
 import theme from '../theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Container } from '@material-ui/core';
 
 import TheHeader from '@/components/layout/TheHeader';
 import TheFooter from '@/components/layout/TheFooter';

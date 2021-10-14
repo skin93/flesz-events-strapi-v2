@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { PREVIEW_ARTICLE_QUERY } from '@/lib/queries/articles/previewArticleQuery';
 import { getMediaUrl } from '@/lib/getMediaUrl';
 
@@ -22,6 +22,7 @@ import Divider from '@material-ui/core/Divider';
 
 import SEO from '@/components/SEO';
 import RelatedArticles from '@/components/layout/RelatedArticles';
+
 const Skeleton = dynamic(() => import('@material-ui/lab/Skeleton'));
 
 const PreviewArticlePage = (props) => {
@@ -30,8 +31,6 @@ const PreviewArticlePage = (props) => {
   const classes = useStyles();
 
   const q = PREVIEW_ARTICLE_QUERY;
-
-  const fetcher = async (query, id) => await client.request(query, { id });
 
   const { error, data } = useSWR([q, id], fetcher, {
     initialData: props.data,
@@ -181,7 +180,7 @@ const PreviewArticlePage = (props) => {
 export default PreviewArticlePage;
 
 export async function getServerSideProps({ params }) {
-  const data = await client.request(PREVIEW_ARTICLE_QUERY, {
+  const data = await fetcher(PREVIEW_ARTICLE_QUERY, {
     id: params.id,
   });
 

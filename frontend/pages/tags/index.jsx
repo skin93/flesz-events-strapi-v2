@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 
 import useSWR from 'swr';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
 import { ALL_TAGS_QUERY } from '@/lib/queries/tags/allTagsQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,6 +18,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SEO from '@/components/SEO';
 import TagsContainer from '@/components/tags/TagsContainer';
 import LoadMoreButton from '@/components/UI/LoadMoreButton';
+
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
 const TagsPage = (props) => {
@@ -27,8 +28,6 @@ const TagsPage = (props) => {
   const [tagsToShow, setTagsToShow] = useState([]);
   const [next, setNext] = useState(tagsPerPage);
   const [tagsFound, setTagsFound] = useState([]);
-
-  const fetcher = async (query) => await client.request(query);
 
   const q = ALL_TAGS_QUERY;
 
@@ -138,7 +137,7 @@ const TagsPage = (props) => {
 export default TagsPage;
 
 export async function getServerSideProps() {
-  const data = await client.request(ALL_TAGS_QUERY);
+  const data = await fetcher(ALL_TAGS_QUERY);
 
   return {
     props: { data },

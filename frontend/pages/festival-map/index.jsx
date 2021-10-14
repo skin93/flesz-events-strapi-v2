@@ -9,13 +9,12 @@ import Fade from '@material-ui/core/Fade';
 
 import useSWR from 'swr';
 import { ALL_FESTIVALS_QUERY } from '@/lib/queries/festivals/allFestivalsQuery';
-import { client } from '@/lib/requestClient';
+import { fetcher } from '@/lib/fetcher';
+
 import { CircularProgress } from '@material-ui/core';
 import SEO from '@/components/SEO';
 
 const FestivalMapPage = (props) => {
-  const fetcher = async (query) => await client.request(query);
-
   const q = ALL_FESTIVALS_QUERY;
 
   const { error, data } = useSWR(q, fetcher, {
@@ -39,7 +38,7 @@ const FestivalMapPage = (props) => {
     return <CircularProgress />;
   }
 
-  if(data) {
+  if (data) {
     return (
       <React.Fragment>
         <SEO
@@ -56,11 +55,11 @@ const FestivalMapPage = (props) => {
         </Fade>
       </React.Fragment>
     );
-  };
   }
+};
 
 export async function getServerSideProps() {
-  const data = await client.request(ALL_FESTIVALS_QUERY);
+  const data = await fetcher(ALL_FESTIVALS_QUERY);
 
   return {
     props: { data },
