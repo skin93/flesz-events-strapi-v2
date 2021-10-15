@@ -87,15 +87,17 @@ const TagPage = (props) => {
     );
   }
 
+  const tag = data?.tags[0];
+
   return (
     <React.Fragment>
       <SEO
-        meta_title={data.tags[0].metadata.meta_title}
-        meta_description={data.tags[0].metadata.meta_description}
-        share_image={data.tags[0].metadata.share_image}
-        keywords={data.tags[0].metadata.keywords}
-        index={data.tags[0].metadata.index}
-        follow={data.tags[0].metadata.follow}
+        meta_title={tag.metadata.meta_title}
+        meta_description={tag.metadata.meta_description}
+        share_image={tag.metadata.share_image}
+        keywords={tag.metadata.keywords}
+        index={tag.metadata.index}
+        follow={tag.metadata.follow}
       />
       <Fade in timeout={200}>
         <Container component='section' maxWidth='lg' aria-label='tag-page'>
@@ -103,7 +105,7 @@ const TagPage = (props) => {
             <React.Fragment>
               <Typography component='h1' className={classes.heading}>
                 <span>#</span>
-                {data.tags[0].name}
+                {tag.name}
               </Typography>
               <InfiniteScroll
                 style={{ overflow: 'hidden' }}
