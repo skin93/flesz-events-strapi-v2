@@ -147,6 +147,7 @@ const ArticlePage = (props) => {
                   aria-label='article-cover'
                 />
                 <Typography
+                  variant='caption'
                   className={classes.caption}
                   aria-label='article-image-caption'>
                   {article.image_cover.caption}
