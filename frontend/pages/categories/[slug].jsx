@@ -30,7 +30,9 @@ const CategoryPage = (props) => {
   const [limit] = useState(9);
   const [start, setStart] = useState(0);
 
-  const [articlesToShow, setArticlesToShow] = useState(props.data);
+  const [articlesToShow, setArticlesToShow] = useState(
+    props.data.categories[0].articles
+  );
   const [hasMore, setHasMore] = useState(true);
 
   const q = SINGLE_CATEGORY_QUERY;
