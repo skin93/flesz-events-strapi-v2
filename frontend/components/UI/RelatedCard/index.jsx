@@ -73,6 +73,5 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     color: theme.palette.light.main,
     margin: 0,
-    fontSize: 'calc(.5rem + .2vw)',
   },
 }));

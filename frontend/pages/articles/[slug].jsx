@@ -9,6 +9,7 @@ import clsx from 'clsx';
 
 import useSWR from 'swr';
 import { request } from 'graphql-request';
+import { fetcher } from '@/lib/fetcher';
 import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -33,10 +34,7 @@ const ArticlePage = (props) => {
 
   const q = SINGLE_ARTICLE_QUERY;
 
-  const fetcher = (query, slug) =>
-    request(process.env.NEXT_PUBLIC_API_STRAPI, query, { slug });
-
-  const { error, data } = useSWR([q, slug], fetcher, {
+  const { error, data } = useSWR([q, { slug }], fetcher, {
     initialData: props.data,
   });
 
@@ -68,19 +66,21 @@ const ArticlePage = (props) => {
     );
   }
 
+  const article = data?.articles[0];
+
   return (
     <React.Fragment>
       <SEO
-        meta_title={data.articles[0].metadata.meta_title}
-        og_title={data.articles[0].metadata.og_title}
-        meta_description={data.articles[0].metadata.meta_description}
-        og_description={data.articles[0].metadata.og_description}
-        og_locale={data.articles[0].metadata.og_locale}
-        og_type={data.articles[0].metadata.og_type}
-        share_image={data.articles[0].metadata.share_image}
-        follow={data.articles[0].metadata.follow}
-        keywords={data.articles[0].metadata.keywords}
-        index={data.articles[0].metadata.index}
+        meta_title={article.metadata.meta_title}
+        og_title={article.metadata.og_title}
+        meta_description={article.metadata.meta_description}
+        og_description={article.metadata.og_description}
+        og_locale={article.metadata.og_locale}
+        og_type={article.metadata.og_type}
+        share_image={article.metadata.share_image}
+        follow={article.metadata.follow}
+        keywords={article.metadata.keywords}
+        index={article.metadata.index}
       />
       <Fade in timeout={200}>
         <Container
@@ -89,16 +89,16 @@ const ArticlePage = (props) => {
           aria-label='article-page'
           style={{ flexGrow: 1, padding: '15px' }}>
           <div className={classes.chips}>
-            <Link href={`/categories/${data.articles[0].category.slug}`}>
+            <Link href={`/categories/${article.category.slug}`}>
               <a>
                 <Chip
                   variant='outlined'
-                  label={data.articles[0].category.name}
+                  label={article.category.name}
                   className={clsx(classes.category, classes.chip)}
                 />
               </a>
             </Link>
-            {data.articles[0].tags.map((tag) => (
+            {article.tags.map((tag) => (
               <Link key={tag.slug} href={`/tags/${tag.slug}`}>
                 <a>
                   <Chip
@@ -111,11 +111,11 @@ const ArticlePage = (props) => {
               </Link>
             ))}
             <Chip
-              label={data.articles[0].published_at.split('T')[0]}
+              label={article.published_at.split('T')[0]}
               className={clsx(classes.published_at, classes.chip)}
               variant='outlined'
             />
-            {data.articles[0].writers.map((writer) => (
+            {article.writers.map((writer) => (
               <Chip
                 label={writer.name}
                 key={writer.name}
@@ -125,48 +125,49 @@ const ArticlePage = (props) => {
             ))}
           </div>
           <Typography
-            component='h1'
+            variant='h1'
             aria-label='article-title'
             className={classes.title}>
-            {data.articles[0].title}
+            {article.title}
           </Typography>
           <Divider className={classes.divider} />
           <Grid container justifyContent='space-between'>
             <Grid item xs={12} lg={8} component='article'>
               <div className={classes.imageWrapper}>
                 <Image
-                  src={getMediaUrl(data.articles[0].image_cover)}
+                  src={getMediaUrl(article.image_cover)}
                   quality={100}
                   width={16}
                   height={9}
                   priority={true}
                   placeholder='blur'
                   layout='responsive'
-                  blurDataURL={getMediaUrl(data.articles[0].image_cover)}
-                  alt={data.articles[0].title}
+                  blurDataURL={getMediaUrl(article.image_cover)}
+                  alt={article.title}
                   aria-label='article-cover'
                 />
                 <Typography
                   className={classes.caption}
                   aria-label='article-image-caption'>
-                  {data.articles[0].image_cover.caption}
+                  {article.image_cover.caption}
                 </Typography>
               </div>
 
               <Typography
+                variant='subtitle1'
                 className={classes.excerpt}
                 aria-label='article-excerpt'>
-                {data.articles[0].excerpt}
+                {article.excerpt}
               </Typography>
               <Divider className={classes.divider} />
               <div
                 dangerouslySetInnerHTML={{
-                  __html: data.articles[0].content,
+                  __html: article.content,
                 }}
                 aria-label='article-content'
               />
               <Divider className={classes.divider} />
-              <Disqus article={data.articles[0]} />
+              <Disqus article={article} />
             </Grid>
             <Grid
               item
@@ -176,10 +177,8 @@ const ArticlePage = (props) => {
               spacing={2}
               justifyContent='center'
               component='aside'>
-              {data.articles[0].related_articles && (
-                <RelatedArticles
-                  articles={data.articles[0].related_articles.articles}
-                />
+              {article.related_articles && (
+                <RelatedArticles articles={article.related_articles.articles} />
               )}
             </Grid>
           </Grid>
@@ -192,13 +191,9 @@ const ArticlePage = (props) => {
 export default ArticlePage;
 
 export async function getServerSideProps({ params }) {
-  const data = await request(
-    process.env.NEXT_PUBLIC_API_STRAPI,
-    SINGLE_ARTICLE_QUERY,
-    {
-      slug: params.slug,
-    }
-  );
+  const data = await fetcher(SINGLE_ARTICLE_QUERY, {
+    slug: params.slug,
+  });
 
   return {
     props: { data },
@@ -211,7 +206,6 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     marginBottom: '1rem',
-    fontSize: 'calc(.4rem + .4vw)',
   },
   imageWrapper: {
     position: 'relative',
@@ -225,18 +219,15 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.black.main,
     color: theme.palette.light.main,
     fontWeight: 600,
-    fontSize: 'calc(.4rem + .4vw)',
   },
   title: {
     fontWeight: 600,
-    fontSize: 'calc(2rem + .8vw)',
     margin: '0 0 1rem 0',
   },
   excerpt: {
     fontWeight: 600,
     color: theme.palette.light.main,
     margin: '1rem 0',
-    fontSize: 'calc(.8rem + .5vw)',
   },
   category: {
     color: theme.palette.accent.main,

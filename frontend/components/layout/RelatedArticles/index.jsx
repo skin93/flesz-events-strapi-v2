@@ -17,7 +17,7 @@ const RelatedArticles = ({ articles }) => {
 
   return (
     <section className={classes.root} aria-label='related-articles'>
-      <Typography variant='h6' component='h1' className={classes.heading}>
+      <Typography variant='h4' className={classes.heading}>
         Zobacz także:
       </Typography>
       <Grid

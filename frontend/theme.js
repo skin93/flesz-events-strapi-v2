@@ -36,8 +36,17 @@ const theme = createTheme({
       },
     },
     MuiTypography: {
+      h1: {
+        fontSize: 'clamp(2rem, 3vw, 4rem)',
+      },
+      h4: {
+        fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+      },
+      subtitle1: {
+        fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+      },
       subtitle2: {
-        marginBottom: '12px',
+        fontSize: 'clamp(.6rem, 3vw, .8rem)',
       },
     },
     MuiListItem: {
@@ -98,8 +107,43 @@ const theme = createTheme({
             height: '80%',
           },
         },
+        body: {
+          lineHeight: '1.5',
+        },
+        h1: {
+          fontSize: 'clamp(2rem, 3vw, 3rem)',
+        },
         h2: {
-          fontSize: 'calc(1.3rem + .8vw)',
+          fontSize: 'clamp(1.7rem, 3vw, 2.5rem)',
+        },
+        h3: {
+          fontSize: 'clamp(1.4rem, 3vw, 2rem)',
+        },
+        h4: {
+          fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+        },
+        p: {
+          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+          color: grey[400],
+        },
+        ul: {
+          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+          '& > li': {
+            listStyle: 'square',
+          },
+        },
+        ol: {
+          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+        },
+        li: {
+          '&::marker': {
+            color: '#32e0c4',
+          },
+        },
+        '.marker-btn': {
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
         },
         blockquote: {
           '& > p': {
@@ -124,11 +168,6 @@ const theme = createTheme({
           width: '80%',
           fontSize: 'calc(.7rem + .5vw)',
         },
-        p: {
-          fontSize: 'calc(.8rem + .5vw)',
-          lineHeight: '1.5',
-          color: grey[400],
-        },
         span: {
           backgroundColor: 'transparent',
         },
@@ -138,31 +177,6 @@ const theme = createTheme({
         },
         strong: {
           color: '#eee',
-        },
-        ul: {
-          paddingLeft: '0px',
-          margin: '0 auto',
-        },
-        ol: {
-          paddingLeft: '0xp',
-          margin: '0 auto',
-        },
-        li: {
-          lineHeight: '1.5',
-          fontSize: 'calc(.7rem + .5vw)',
-          '&::marker': {
-            color: '#32e0c4',
-          },
-        },
-        ul: {
-          li: {
-            listStyle: 'square',
-          },
-        },
-        '.marker-btn': {
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
         },
       },
     },

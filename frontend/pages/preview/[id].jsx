@@ -32,7 +32,7 @@ const PreviewArticlePage = (props) => {
 
   const q = PREVIEW_ARTICLE_QUERY;
 
-  const { error, data } = useSWR([q, id], fetcher, {
+  const { error, data } = useSWR([q, { id }], fetcher, {
     initialData: props.data,
   });
 
@@ -114,7 +114,7 @@ const PreviewArticlePage = (props) => {
             ))}
           </div>
           <Typography
-            component='h1'
+            variant='h1'
             aria-label='article-title'
             className={classes.title}>
             {data.article.title}
@@ -144,6 +144,7 @@ const PreviewArticlePage = (props) => {
               </div>
 
               <Typography
+                variant='subtitle1'
                 className={classes.excerpt}
                 aria-label='article-excerpt'>
                 {data.article.excerpt}
@@ -195,21 +196,10 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     marginBottom: '1rem',
-    fontSize: 'calc(.5rem + .4vw)',
   },
   imageWrapper: {
     position: 'relative',
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
-  },
-  title: {
-    fontWeight: 600,
-    fontSize: 'calc(2rem + .8vw)',
-  },
-  excerpt: {
-    fontWeight: 600,
-    color: theme.palette.light.main,
-    margin: '30px 0',
-    fontSize: 'calc(.8rem + .5vw)',
   },
   caption: {
     display: 'inline-block',
@@ -219,7 +209,15 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.black.main,
     color: theme.palette.light.main,
     fontWeight: 600,
-    fontSize: 'calc(.4rem + .4vw)',
+  },
+  title: {
+    fontWeight: 600,
+    margin: '0 0 1rem 0',
+  },
+  excerpt: {
+    fontWeight: 600,
+    color: theme.palette.light.main,
+    margin: '1rem 0',
   },
   category: {
     color: theme.palette.accent.main,
@@ -233,13 +231,15 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     textTransform: 'uppercase',
     marginRight: '10px',
+
     borderRadius: '0px',
     color: theme.palette.light.main,
     borderColor: theme.palette.light.main,
   },
-  updatedAt: {
+  published_at: {
     borderColor: theme.palette.muted.darker,
     marginRight: '10px',
+
     borderRadius: '0px',
   },
   writer: {
@@ -247,8 +247,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
   },
   divider: {
-    margin: '30px 0',
+    margin: '1rem 0',
     height: '3px',
     backgroundColor: theme.palette.muted.main,
+    '&:first-of-type': {
+      marginTop: '0',
+    },
   },
 }));

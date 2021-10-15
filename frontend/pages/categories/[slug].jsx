@@ -30,9 +30,7 @@ const CategoryPage = (props) => {
   const [limit] = useState(9);
   const [start, setStart] = useState(0);
 
-  const [articlesToShow, setArticlesToShow] = useState(
-    props.data.categories[0].articles
-  );
+  const [articlesToShow, setArticlesToShow] = useState(props.data);
   const [hasMore, setHasMore] = useState(true);
 
   const q = SINGLE_CATEGORY_QUERY;
@@ -87,22 +85,24 @@ const CategoryPage = (props) => {
     );
   }
 
+  const category = data?.categories[0];
+
   return (
     <React.Fragment>
       <SEO
-        meta_title={data.categories[0].metadata.meta_title}
-        meta_description={data.categories[0].metadata.meta_description}
-        share_image={data.categories[0].metadata.share_image}
-        keywords={data.categories[0].metadata.keywords}
-        index={data.categories[0].metadata.index}
-        follow={data.categories[0].metadata.follow}
+        meta_title={category.metadata.meta_title}
+        meta_description={category.metadata.meta_description}
+        share_image={category.metadata.share_image}
+        keywords={category.metadata.keywords}
+        index={category.metadata.index}
+        follow={category.metadata.follow}
       />
       <Fade in timeout={200}>
         <Container component='section' maxWidth='lg' aria-label='category-page'>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
               <Typography component='h1' className={classes.heading}>
-                {data.categories[0].name}
+                {category.name}
               </Typography>
               <InfiniteScroll
                 style={{ overflow: 'hidden' }}
