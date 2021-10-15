@@ -48,6 +48,9 @@ const theme = createTheme({
       subtitle2: {
         fontSize: 'clamp(.6rem, 3vw, .8rem)',
       },
+      caption: {
+        fontSize: 'clamp(.6rem, 2vw, .8rem)',
+      },
     },
     MuiListItem: {
       button: {
@@ -72,39 +75,40 @@ const theme = createTheme({
     MuiCssBaseline: {
       '@global': {
         figure: {
-          display: 'flex',
-          justifyContent: 'center',
-          textAlign: 'left',
-          fontSize: 'calc(.7rem + .5vw)',
-          lineHeight: '1.5',
-          margin: '30px',
-          '& img': {
+          display: 'block',
+          textAlign: 'center',
+          margin: '30px 0',
+          '& > img': {
             width: '100%',
             height: '100%',
-            maxWidth: '800px',
-            maxHeight: '450px',
+            maxHeight: '600px',
             objectFit: 'contain',
           },
-        },
-        '.leaflet-top': {
-          display: 'none',
-        },
-        '.leaflet-left': {
-          display: 'none',
+          '& > figcaption': {
+            fontWeight: 700,
+            fontSize: '.75rem',
+            fontSize: 'clamp(.6rem, 2vw, .8rem)',
+          },
         },
         '.raw-html-embed': {
-          position: 'relative',
-          overflow: 'hidden',
-          width: '100%',
-          paddingTop: '56.25%',
+          display: 'flex',
+          justifyContent: 'center',
 
-          '& iframe': {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-50%)',
-            width: '80%',
-            height: '80%',
+          '& > iframe': {
+            background: 'white',
+            maxWidth: '540px',
+            width: 'calc(100% - 2px)',
+            borderRadius: '3px',
+            boxShadow: 'none',
+            display: 'block',
+            margin: '0 auto',
+            minWidth: '326px',
+            padding: '0px',
+            margin: '30px 0',
+          },
+
+          '& > iframe.youtube': {
+            maxWidth: '800px',
           },
         },
         body: {
@@ -146,6 +150,7 @@ const theme = createTheme({
           cursor: 'pointer',
         },
         blockquote: {
+          maxWidth: '800px',
           '& > p': {
             color: grey[50],
           },
