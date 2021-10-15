@@ -108,7 +108,8 @@ const theme = createTheme({
           },
 
           '& > iframe.youtube': {
-            maxWidth: '800px',
+            maxWidth: '560px',
+            maxHeight: '315px',
           },
         },
         body: {
@@ -149,29 +150,34 @@ const theme = createTheme({
           border: 'none',
           cursor: 'pointer',
         },
+
         blockquote: {
           maxWidth: '800px',
-          '& > p': {
-            color: grey[50],
-          },
           fontWeight: 600,
           fontStyle: 'italic',
           quotes: '"“" "”"',
           position: 'relative',
+          padding: '30px',
+          lineHeight: '2rem',
+          margin: '0 auto',
+
+          '& > p': {
+            color: grey[50],
+          },
+
           '&::before': {
             content: 'open-quote',
             position: 'absolute',
             top: 60,
-            left: -40,
-            fontSize: '6em',
+            left: -20,
+            fontSize: '6rem',
             color: '#32e0c4',
           },
-          backgroundColor: 'transparent',
-          padding: '30px',
-          lineHeight: '2em',
-          margin: '0 auto',
-          width: '80%',
-          fontSize: 'calc(.7rem + .5vw)',
+        },
+        'blockquote.instagram-media': {
+          '&::before': {
+            content: 'close-quote',
+          },
         },
         span: {
           backgroundColor: 'transparent',

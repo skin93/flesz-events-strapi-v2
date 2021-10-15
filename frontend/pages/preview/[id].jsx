@@ -236,7 +236,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     borderColor: theme.palette.light.main,
   },
-  published_at: {
+  updatedAt: {
     borderColor: theme.palette.muted.darker,
     marginRight: '10px',
 
