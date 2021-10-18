@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -28,6 +28,11 @@ import { getMediaUrl } from '@/lib/getMediaUrl';
 import Disqus from '@/components/Disqus';
 
 const ArticlePage = (props) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.instgrm.Embeds.process();
+    }
+  }, []);
   const router = useRouter();
   const slug = router.query.slug;
   const classes = useStyles();
