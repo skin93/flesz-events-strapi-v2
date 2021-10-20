@@ -44,7 +44,7 @@ const CategoryPage = (props) => {
   const getMoreArticles = useCallback(async () => {
     const res = await fetcher(SINGLE_CATEGORY_QUERY, {
       start: articlesToShow.length,
-      limit: 3,
+      limit: 9,
       slug,
     });
 

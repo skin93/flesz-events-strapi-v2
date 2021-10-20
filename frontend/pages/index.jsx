@@ -16,7 +16,6 @@ import Fade from '@material-ui/core/Fade';
 
 import BaseCard from '@/components/UI/BaseCard';
 import SEO from '@/components/SEO';
-import LoadMoreButton from '@/components/UI/LoadMoreButton';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
@@ -39,7 +38,7 @@ const Home = (props) => {
   const getMoreArticles = useCallback(async () => {
     const res = await fetcher(ALL_ARTICLES_QUERY, {
       start: articlesToShow.length,
-      limit: 3,
+      limit: 9,
     });
 
     setArticlesToShow((articlesToShow) => [...articlesToShow, ...res.articles]);
