@@ -10,6 +10,7 @@ export const ALL_ARTICLES_QUERY = gql`
       id
       title
       slug
+      createdAt
       image_cover {
         alternativeText
         url

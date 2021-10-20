@@ -21,7 +21,7 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
 
-export default function Home(props) {
+const Home = (props) => {
   const classes = useStyles();
 
   const [limit] = useState(9);
@@ -124,7 +124,9 @@ export default function Home(props) {
       </Fade>
     </React.Fragment>
   );
-}
+};
+
+export default Home;
 
 export async function getServerSideProps() {
   const data = await fetcher(ALL_ARTICLES_QUERY, {

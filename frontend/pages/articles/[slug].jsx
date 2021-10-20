@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
 import useSWR from 'swr';
-import { request } from 'graphql-request';
 import { fetcher } from '@/lib/fetcher';
 import { SINGLE_ARTICLE_QUERY } from '@/lib/queries/articles/singleArticleQuery';
 
@@ -28,11 +27,6 @@ import { getMediaUrl } from '@/lib/getMediaUrl';
 import Disqus from '@/components/Disqus';
 
 const ArticlePage = (props) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.instgrm.Embeds.process();
-    }
-  }, []);
   const router = useRouter();
   const slug = router.query.slug;
   const classes = useStyles();

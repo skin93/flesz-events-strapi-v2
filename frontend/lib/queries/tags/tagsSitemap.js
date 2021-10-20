@@ -1,7 +1,8 @@
 import { gql } from 'graphql-request';
-export const ALL_CATEGORIES_QUERY = gql`
+export const TAGS_SITEMAP = gql`
   query {
-    categories(publicationState: LIVE) {
+    tags {
+      id
       name
       slug
       createdAt

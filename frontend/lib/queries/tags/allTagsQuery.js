@@ -5,6 +5,7 @@ export const ALL_TAGS_QUERY = gql`
       id
       name
       slug
+      createdAt
       description
     }
     tagsConnection {
