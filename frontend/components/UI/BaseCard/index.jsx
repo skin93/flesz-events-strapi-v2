@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'transparent',
-    width: '100%',
+    width: 'calc(100% - 16px)',
     height: '300px',
     position: 'relative',
     transition: '.2s all ease-in-out',

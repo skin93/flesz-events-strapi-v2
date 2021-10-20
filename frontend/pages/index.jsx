@@ -86,7 +86,7 @@ const Home = (props) => {
           maxWidth='lg'
           className={classes.root}
           aria-label='home-page'>
-          <Typography component='h1' className={classes.heading}>
+          <Typography variant='h1' className={classes.heading}>
             OSTATNIE WPISY
           </Typography>
 
@@ -105,7 +105,7 @@ const Home = (props) => {
                 <p className={classes.endMessage}>Nic więcej nie ma</p>
               </div>
             }>
-            <Grid className={classes.articles} container spacing={2}>
+            <Grid className={classes.articles} container spacing={3}>
               {articlesToShow.map((article) => (
                 <Fade key={article.id} in timeout={200}>
                   <Grid item xs={12} sm={6} md={4}>
@@ -144,7 +144,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     margin: '3rem 0 0 0',
     fontWeight: 600,
-    fontSize: 'calc(2rem + .8vw)',
     textTransform: 'uppercase',
   },
   block: {

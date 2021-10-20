@@ -103,7 +103,7 @@ const CategoryPage = (props) => {
         <Container component='section' maxWidth='lg' aria-label='category-page'>
           {articlesToShow.length > 0 ? (
             <React.Fragment>
-              <Typography component='h1' className={classes.heading}>
+              <Typography variant='h1' className={classes.heading}>
                 {category.name}
               </Typography>
               <InfiniteScroll
@@ -138,7 +138,7 @@ const CategoryPage = (props) => {
             </React.Fragment>
           ) : (
             <div className={classes.noArticles}>
-              <Typography component='h1' className={classes.heading}>
+              <Typography variant='h1' className={classes.heading}>
                 BRAK WPISÓW...
               </Typography>
             </div>
@@ -169,7 +169,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     margin: '3rem 0 0 0',
     fontWeight: 600,
-    fontSize: 'calc(2rem + .8vw)',
     textTransform: 'uppercase',
   },
   container: {
