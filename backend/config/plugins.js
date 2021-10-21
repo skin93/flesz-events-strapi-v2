@@ -5,7 +5,7 @@ module.exports = {
     shadowCRUD: true,
     playgroundAlways: false,
     depthLimit: 7,
-    amountLimit: -1,
+    amountLimit: 1000,
     apolloServer: {
       tracing: false,
     },
