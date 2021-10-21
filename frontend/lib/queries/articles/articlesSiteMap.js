@@ -1,11 +1,11 @@
 import { gql } from 'graphql-request';
 export const ARTICLES_SITEMAP = gql`
   query {
-    articles {
+    articles(sort: "updatedAt:DESC") {
       id
       title
       slug
-      createdAt
+      updatedAt
     }
   }
 `;

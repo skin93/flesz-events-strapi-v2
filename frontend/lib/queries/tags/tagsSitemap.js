@@ -1,11 +1,11 @@
 import { gql } from 'graphql-request';
 export const TAGS_SITEMAP = gql`
   query {
-    tags {
+    tags(sort: "updatedAt:DESC") {
       id
       name
       slug
-      createdAt
+      updatedAt
     }
   }
 `;
