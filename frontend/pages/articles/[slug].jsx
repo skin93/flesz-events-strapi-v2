@@ -141,6 +141,8 @@ const ArticlePage = (props) => {
                   priority={true}
                   placeholder='blur'
                   layout='responsive'
+                  objectFit='cover'
+                  objectPosition='center'
                   blurDataURL={getMediaUrl(article.image_cover)}
                   alt={article.title}
                   aria-label='article-cover'
