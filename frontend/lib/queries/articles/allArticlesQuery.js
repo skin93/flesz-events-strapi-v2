@@ -15,6 +15,10 @@ export const ALL_ARTICLES_QUERY = gql`
         alternativeText
         url
       }
+      category {
+        name
+        slug
+      }
     }
     articlesConnection {
       aggregate {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -93,7 +93,7 @@ const TheHeader = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <HideOnScroll {...props}>
         <AppBar position='fixed' className={classes.appBar}>
           <Toolbar variant='dense' id='back-to-top-anchor'>
@@ -168,7 +168,7 @@ const TheHeader = (props) => {
       {articlesFound.length > 0 && (
         <ResultsContainer articles={articlesFound} onClick={clear} />
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };
 

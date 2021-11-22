@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { Fragment, useState, useEffect, useCallback } from 'react';
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -78,7 +78,7 @@ const Home = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       <SEO index={true} />
       <Fade in timeout={200}>
         <Container
@@ -108,7 +108,7 @@ const Home = (props) => {
             <Grid className={classes.articles} container spacing={3}>
               {articlesToShow.map((article) => (
                 <Fade key={article.id} in timeout={200}>
-                  <Grid item xs={12} sm={6} md={4}>
+                  <Grid item xs={12} md={6}>
                     <Link href={`/articles/${article.slug}`} passHref>
                       <a>
                         <BaseCard article={article} />
@@ -121,7 +121,7 @@ const Home = (props) => {
           </InfiniteScroll>
         </Container>
       </Fade>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

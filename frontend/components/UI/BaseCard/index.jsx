@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -33,41 +34,42 @@ export default BaseCard;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'transparent',
     width: 'calc(100% - 16px)',
     height: '300px',
-    position: 'relative',
-    transition: '.2s all ease-in-out',
-
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
-    '& h2': {
-      color: theme.palette.light.main,
-    },
     '&:hover': {
-      transform: 'translateY(-5px)',
-      '& h2': {
-        color: theme.palette.primary.main,
+      '& > img': {
+        transform: 'scale(1.2) rotate(-5deg)',
       },
     },
   },
   media: {
-    height: '200px',
+    height: '100%',
     pointerEvents: 'none',
+    transition: '.3s transform ease-in-out',
   },
   content: {
-    width: '100%',
-    height: '100px',
-    padding: '16px 24px',
+    position: 'absolute',
+    inset: '0 0 0 0',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    transition: '.3s all ease-in-out',
+    '&:hover': {
+      backgroundColor: 'rgba(0,0,0,0.6)',
+    },
   },
   title: {
     textAlign: 'left',
     fontWeight: 600,
-    fontSize: 'calc(1rem + 0.1vw)',
+    fontSize: 'calc(1.3rem + 0.1vw)',
     transition: '.2s all ease-in-out',
+    backgroundColor: 'rgba(0,0,0,0.8)',
   },
 }));
