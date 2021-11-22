@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     backgroundColor: 'transparent',
     width: 'calc(100% - 16px)',
-    height: '300px',
+    height: '200px',
+    [theme.breakpoints.up('sm')]: {
+      height: '300px',
+    },
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
     '&:hover': {
       '& > img': {
