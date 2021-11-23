@@ -3,6 +3,11 @@ import grey from '@material-ui/core/colors/grey';
 
 const theme = createTheme({
   overrides: {
+    MuiCardContent: {
+      root: {
+        padding: '0 !important',
+      },
+    },
     MuiDialog: {
       paper: {
         margin: 0,

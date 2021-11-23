@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'transparent',
     width: 'calc(100% - 16px)',
     height: '200px',
     [theme.breakpoints.up('sm')]: {
@@ -45,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     },
     boxShadow: 'rgba(0, 0, 0, 0.7) 0px 5px 15px',
     '&:hover': {
+      '&  h2': {
+        backgroundColor: 'rgba(0,0,0,0.8)',
+      },
       '& > img': {
         transform: 'scale(1.2) rotate(-5deg)',
       },
@@ -65,14 +67,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(0,0,0,0.8)',
     transition: '.3s all ease-in-out',
     '&:hover': {
-      backgroundColor: 'rgba(0,0,0,0.6)',
+      backgroundColor: 'rgba(0,0,0,0.2)',
     },
   },
   title: {
     textAlign: 'left',
+    padding: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
     fontWeight: 600,
-    fontSize: 'calc(1.3rem + 0.1vw)',
+
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 'calc(1.3rem + .1vw)',
+      padding: '20px',
+    },
+    fontSize: '1rem',
     transition: '.2s all ease-in-out',
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'transparent',
+    width: '100%',
   },
 }));
