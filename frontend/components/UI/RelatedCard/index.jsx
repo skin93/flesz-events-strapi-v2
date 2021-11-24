@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
   },
   title: {
+    paddingInline: '20px',
     fontWeight: 600,
     color: theme.palette.light.main,
     margin: 0,
