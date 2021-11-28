@@ -21,7 +21,7 @@ import {
 import Slide from '@material-ui/core/Slide';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='left' ref={ref} {...props} />;
+  return <Slide direction='down' ref={ref} {...props} />;
 });
 
 const navControlStyle = {
@@ -153,15 +153,20 @@ const FestivalMap = ({ festivals }) => {
             scroll='body'
             onClose={() => setIsOpen(false)}
             TransitionComponent={Transition}>
+            <button
+              onClick={() => setIsOpen(false)}
+              className={classes.closeButton}>
+              X
+            </button>
             <Image
               quality={100}
               alt={selected.properties.festName}
               aria-label='festival-image'
               layout='responsive'
-              objectFit='fill'
-              objectPosition='center center'
-              width={600}
-              height={400}
+              objectFit='cover'
+              objectPosition='center'
+              width={833}
+              height={469}
               src={getMediaUrl(selected.properties.festImage)}
             />
 
@@ -174,7 +179,11 @@ const FestivalMap = ({ festivals }) => {
               </h2>
 
               <Typography component='small'>
-                {selected.properties.festCity} - {selected.properties.festPlace}
+                {selected.properties.festCity}
+
+                {selected.properties.festPlace &&
+                  `- ${selected.properties.festPlace}`}
+
                 <br />
               </Typography>
               {selected.properties.nextEvent ? (
@@ -259,6 +268,18 @@ const useStyles = makeStyles((theme) => ({
   },
   eventName: {
     color: 'white',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: '5px 10px',
+    fontSize: '1rem',
+    zIndex: 100,
+    cursor: 'pointer',
+    background: theme.palette.background.paper,
+    border: 'none',
+    color: theme.palette.primary.main,
   },
 }));
 

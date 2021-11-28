@@ -3,6 +3,11 @@ import grey from '@material-ui/core/colors/grey';
 
 const theme = createTheme({
   overrides: {
+    MuiPaper: {
+      rounded: {
+        borderRadius: 0,
+      },
+    },
     MuiCardContent: {
       root: {
         padding: '0 !important',
@@ -10,16 +15,16 @@ const theme = createTheme({
     },
     MuiDialog: {
       paper: {
-        margin: 0,
+        position: 'relative',
       },
       scrollBody: {
-        textAlign: 'right',
+        textAlign: 'center',
       },
       paperScrollBody: {
         textAlign: 'left',
       },
       paperWidthSm: {
-        maxWidth: '800px',
+        maxWidth: '640px',
       },
     },
     MuiDialogTitle: {
