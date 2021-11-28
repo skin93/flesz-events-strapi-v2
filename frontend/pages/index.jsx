@@ -85,6 +85,7 @@ const Home = (props) => {
           component='section'
           maxWidth='lg'
           className={classes.root}
+          style={{ flexGrow: 1, padding: '15px' }}
           aria-label='home-page'>
           <Typography variant='h1' className={classes.heading}>
             OSTATNIE WPISY
@@ -105,7 +106,11 @@ const Home = (props) => {
                 <p className={classes.endMessage}>Nic więcej nie ma</p>
               </div>
             }>
-            <Grid className={classes.articles} container spacing={3}>
+            <Grid
+              className={classes.articles}
+              container
+              justifyContent='space-between'
+              spacing={3}>
               {articlesToShow.map((article) => (
                 <Fade key={article.id} in timeout={200}>
                   <Grid item xs={12} md={6}>

@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: '100%',
-    width: '150px',
+    width: '100%',
+    maxWidth: '150px',
     objectFit: 'cover',
     pointerEvents: 'none',
   },

@@ -46,9 +46,10 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       '&  h2': {
         backgroundColor: 'rgba(0,0,0,0.8)',
+        color: theme.palette.primary.main,
       },
       '& > img': {
-        transform: 'scale(1.2) rotate(-5deg)',
+        transform: 'scale(1.1) ',
       },
     },
   },
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'rgba(0,0,0,0.6)',
     transition: '.3s all ease-in-out',
     '&:hover': {
       backgroundColor: 'rgba(0,0,0,0.2)',
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
 
     [theme.breakpoints.up('sm')]: {
-      fontSize: 'calc(1.3rem + .1vw)',
+      fontSize: 'calc(1.1rem + .1vw)',
       padding: '20px',
     },
     fontSize: '1rem',

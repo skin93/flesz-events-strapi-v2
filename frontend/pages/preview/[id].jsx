@@ -131,10 +131,11 @@ const PreviewArticlePage = (props) => {
                   priority={true}
                   placeholder='blur'
                   layout='responsive'
+                  objectFit='cover'
+                  objectPosition='center'
                   blurDataURL={getMediaUrl(data.article.image_cover)}
                   alt={data.article.title}
                   aria-label='article-cover'
-                  className={classes.image}
                 />
                 <Typography
                   className={classes.caption}

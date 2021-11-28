@@ -94,10 +94,8 @@ const theme = createTheme({
           '& > iframe': {
             background: 'white',
             maxWidth: '540px',
-            width: 'calc(100% - 2px)',
-            borderRadius: '3px',
+            width: '100%',
             boxShadow: 'none',
-            display: 'block',
             margin: '0 auto',
             minWidth: '326px',
             padding: '0px',
