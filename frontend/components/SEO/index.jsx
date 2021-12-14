@@ -16,10 +16,10 @@ const SEO = ({
   keywords,
 }) => {
   const router = useRouter();
-  const robots = [
-    index === true ? 'index' : 'noindex',
-    follow === true ? ' dofollow' : ' nofollow',
-  ];
+  // const robots = [
+  //   index === false ? 'noindex' : '',
+  //   follow === false ? 'nofollow' : '',
+  // ];
   return (
     <Head>
       <title>
@@ -33,7 +33,7 @@ const SEO = ({
         name='viewport'
         content='minimum-scale=1, initial-scale=1, width=device-width'
       />
-      <meta name='robots' content={robots} />
+      {index && !follow ? <meta name='robots' content='nofollow'/> : <meta name='robots' content='noindex,nofollow'/>  }
       {keywords && <meta name='keywords' content={keywords} />}
       <meta
         name='description'
