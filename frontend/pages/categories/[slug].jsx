@@ -1,96 +1,57 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { Fragment, useState, useEffect, useCallback } from "react";
 
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import { fetcher, categoriesFetcher } from "@/lib/fetcher";
+import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
 
-import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
-import { SINGLE_CATEGORY_QUERY } from '@/lib/queries/categories/singleCategoryQuery';
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Fade from "@material-ui/core/Fade";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Fade from '@material-ui/core/Fade';
+import SEO from "@/components/SEO";
+import BaseCard from "@/components/UI/BaseCard";
+import { ALL_CATEGORIES_QUERY } from "@/lib/queries/categories/allCategoriesQuery";
 
-import SEO from '@/components/SEO';
-import BaseCard from '@/components/UI/BaseCard';
-
-const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
-
-const CategoryPage = (props) => {
-  const router = useRouter();
-  const slug = router.query.slug;
+const CategoryPage = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(9);
-  const [start, setStart] = useState(0);
+  const [limit] = useState(6);
 
   const [articlesToShow, setArticlesToShow] = useState(
-    props.data.categories[0].articles
+    data?.categories[0].articles
   );
   const [hasMore, setHasMore] = useState(true);
-
-  const q = SINGLE_CATEGORY_QUERY;
-
-  const { error, data } = useSWR([q, { slug, start, limit }], fetcher, {
-    initialData: props.data,
-  });
 
   const getMoreArticles = useCallback(async () => {
     const res = await fetcher(SINGLE_CATEGORY_QUERY, {
       start: articlesToShow.length,
-      limit: 9,
-      slug,
+      limit,
+      slug: data?.categories[0].slug,
     });
 
     setArticlesToShow((articlesToShow) => [
       ...articlesToShow,
-      ...res.categories[0].articles,
+      ...res?.categories[0].articles,
     ]);
-  }, [articlesToShow, slug]);
+  }, [articlesToShow]);
 
   useEffect(() => {
     setHasMore(
-      data.articlesCountBasedOnTagOrCategory > articlesToShow.length
+      data?.articlesCountBasedOnTagOrCategory > articlesToShow.length
         ? true
         : false
     );
-  }, [articlesToShow, data.articlesCountBasedOnTagOrCategory]);
-
-  if (error) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <p>Coś poszło nie tak...</p>
-      </div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <Grid container spacing={2}>
-        {[0, 1, 2, 3, 4, 5].map((x) => (
-          <Grid item key={x} xs={12} sm={6} md={4}>
-            <SkeletonCard />
-          </Grid>
-        ))}
-      </Grid>
-    );
-  }
+  }, [articlesToShow, data?.articlesCountBasedOnTagOrCategory]);
 
   const category = data?.categories[0];
 
   return (
-    <React.Fragment>
+    <Fragment>
       <SEO
         meta_title={category.metadata.meta_title}
         meta_description={category.metadata.meta_description}
@@ -99,103 +60,129 @@ const CategoryPage = (props) => {
         index={category.metadata.index}
         follow={category.metadata.follow}
       />
-      <Fade in timeout={200}>
-        <Container component='section' maxWidth='lg' aria-label='category-page'>
-          {articlesToShow.length > 0 ? (
-            <React.Fragment>
-              <Typography variant='h1' className={classes.heading}>
-                {category.name}
-              </Typography>
-              <InfiniteScroll
-                style={{ overflow: 'hidden' }}
-                dataLength={articlesToShow.length}
-                next={getMoreArticles}
-                hasMore={hasMore}
-                loader={
-                  <div className={classes.block}>
-                    <CircularProgress />
-                  </div>
-                }
-                endMessage={
-                  <div className={classes.block}>
-                    <p className={classes.endMessage}>Nic więcej nie ma</p>
-                  </div>
-                }>
-                <Grid className={classes.articles} container spacing={2}>
-                  {articlesToShow.map((article) => (
-                    <Fade key={article.id} in timeout={200}>
-                      <Grid item xs={12} md={6}>
-                        <Link href={`/articles/${article.slug}`} passHref>
-                          <a>
-                            <BaseCard article={article} />
-                          </a>
-                        </Link>
-                      </Grid>
-                    </Fade>
-                  ))}
-                </Grid>
-              </InfiniteScroll>
-            </React.Fragment>
-          ) : (
-            <div className={classes.noArticles}>
-              <Typography variant='h1' className={classes.heading}>
-                BRAK WPISÓW...
-              </Typography>
-            </div>
-          )}
-        </Container>
-      </Fade>
-    </React.Fragment>
+      <Container component="section" maxWidth="lg" aria-label="category-page">
+        {articlesToShow.length > 0 ? (
+          <Fragment>
+            <Typography variant="h1" className={classes.heading}>
+              {category.name}
+            </Typography>
+            <InfiniteScroll
+              style={{ overflow: "hidden" }}
+              dataLength={articlesToShow.length}
+              next={getMoreArticles}
+              hasMore={hasMore}
+              loader={
+                <div className={classes.block}>
+                  <CircularProgress />
+                </div>
+              }
+              endMessage={
+                <div className={classes.block}>
+                  <p className={classes.endMessage}>Nic więcej nie ma</p>
+                </div>
+              }
+            >
+              <Grid className={classes.articles} container spacing={2}>
+                {articlesToShow.map((article) => (
+                  <Fade key={article.id} in timeout={200}>
+                    <Grid item xs={12} md={6}>
+                      <Link href={`/articles/${article.slug}`} passHref>
+                        <a>
+                          <BaseCard article={article} />
+                        </a>
+                      </Link>
+                    </Grid>
+                  </Fade>
+                ))}
+              </Grid>
+            </InfiniteScroll>
+          </Fragment>
+        ) : (
+          <div className={classes.noArticles}>
+            <Typography variant="h1" className={classes.heading}>
+              BRAK WPISÓW...
+            </Typography>
+          </div>
+        )}
+      </Container>
+    </Fragment>
   );
 };
 
 export default CategoryPage;
 
-export async function getServerSideProps({ params }) {
-  const data = await fetcher(SINGLE_CATEGORY_QUERY, {
-    slug: params.slug,
-    start: 0,
-    limit: 9,
-  });
+export async function getStaticPaths() {
+  const data = await categoriesFetcher(ALL_CATEGORIES_QUERY);
 
-  return {
-    props: { data },
-  };
+  const paths = data.categories.map((category) => ({
+    params: { slug: category.slug },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const data = await fetcher(SINGLE_CATEGORY_QUERY, {
+      slug: params.slug,
+      start: 0,
+      limit: 6,
+    });
+
+    if (!data) {
+      return { notFound: true };
+    }
+
+    return {
+      props: { data },
+      revalidate: 10,
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.light.main,
-    margin: '3rem 0 0 0',
+    margin: "3rem 0 0 0 ",
     fontWeight: 600,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
+    " & > span": {
+      color: theme.palette.accent.main,
+    },
+  },
+  noHeading: {
+    color: theme.palette.light.main,
+    fontWeight: 600,
+    textTransform: "uppercase",
   },
   container: {
-    marginTop: '30px',
+    marginTop: "30px",
   },
   noArticles: {
-    display: 'flex',
-    minHeight: '100vh',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
   loadMoreButton: {
-    display: 'block',
-    margin: '30px auto',
-    fontWeight: 'bold',
+    display: "block",
+    margin: "30px auto",
+    fontWeight: "bold",
     color: theme.palette.accent.main,
   },
   block: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '3rem 0',
+    display: "flex",
+    justifyContent: "center",
+    margin: "3rem 0",
   },
   endMessage: {
     margin: 0,
     color: theme.palette.text.disabled,
   },
   articles: {
-    margin: '3rem 0 0 0',
+    margin: "3rem 0 0 0",
   },
 }));

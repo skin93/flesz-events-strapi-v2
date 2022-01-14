@@ -1,44 +1,34 @@
-import { Fragment, useState, useEffect, useCallback } from 'react';
+import { Fragment, useState, useEffect, useCallback } from "react";
 
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import Link from "next/link";
 
-import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
-import { ALL_ARTICLES_QUERY } from '@/lib/queries/articles/allArticlesQuery';
+import { fetcher } from "@/lib/fetcher";
+import { ALL_ARTICLES_QUERY } from "@/lib/queries/articles/allArticlesQuery";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Fade from '@material-ui/core/Fade';
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Fade from "@material-ui/core/Fade";
 
-import BaseCard from '@/components/UI/BaseCard';
-import SEO from '@/components/SEO';
-import Container from '@material-ui/core/Container';
-import CircularProgress from '@material-ui/core/CircularProgress';
-const SkeletonCard = dynamic(() => import('@/components/UI/SkeletonCard'));
+import BaseCard from "@/components/UI/BaseCard";
+import SEO from "@/components/SEO";
+import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Home = (props) => {
+const Home = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(9);
-  const [start, setStart] = useState(0);
+  const [limit] = useState(6);
 
-  const [articlesToShow, setArticlesToShow] = useState(props.data.articles);
+  const [articlesToShow, setArticlesToShow] = useState(data?.articles);
   const [hasMore, setHasMore] = useState(true);
-
-  const q = ALL_ARTICLES_QUERY;
-
-  const { error, data } = useSWR([q, { start, limit }], fetcher, {
-    initialData: props.data,
-  });
 
   const getMoreArticles = useCallback(async () => {
     const res = await fetcher(ALL_ARTICLES_QUERY, {
       start: articlesToShow.length,
-      limit: 9,
+      limit,
     });
 
     setArticlesToShow((articlesToShow) => [...articlesToShow, ...res.articles]);
@@ -46,121 +36,107 @@ const Home = (props) => {
 
   useEffect(() => {
     setHasMore(
-      data.articlesConnection.aggregate.count > articlesToShow.length
+      data?.articlesConnection.aggregate.count > articlesToShow.length
         ? true
         : false
     );
-  }, [articlesToShow, data.articlesConnection.aggregate.count]);
-
-  if (error) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <p>Coś poszło nie tak...</p>
-      </div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <Grid container spacing={2} className={classes.container}>
-        {[0, 1, 2, 3, 4, 5].map((x) => (
-          <Grid item xs={12} md={4} key={x}>
-            <SkeletonCard />
-          </Grid>
-        ))}
-      </Grid>
-    );
-  }
+  }, [articlesToShow, data?.articlesConnection.aggregate.count]);
 
   return (
     <Fragment>
       <SEO index={true} />
-      <Fade in timeout={200}>
-        <Container
-          component='section'
-          maxWidth='lg'
-          className={classes.root}
-          style={{ flexGrow: 1, padding: '15px' }}
-          aria-label='home-page'>
-          <Typography variant='h1' className={classes.heading}>
-            OSTATNIE WPISY
-          </Typography>
 
-          <InfiniteScroll
-            style={{ overflow: 'hidden' }}
-            dataLength={articlesToShow.length}
-            next={getMoreArticles}
-            hasMore={hasMore}
-            loader={
-              <div className={classes.block}>
-                <CircularProgress />
-              </div>
-            }
-            endMessage={
-              <div className={classes.block}>
-                <p className={classes.endMessage}>Nic więcej nie ma</p>
-              </div>
-            }>
-            <Grid
-              className={classes.articles}
-              container
-              justifyContent='space-between'
-              spacing={3}>
-              {articlesToShow.map((article) => (
-                <Fade key={article.id} in timeout={200}>
-                  <Grid item xs={12} md={6}>
-                    <Link href={`/articles/${article.slug}`} passHref>
-                      <a>
-                        <BaseCard article={article} />
-                      </a>
-                    </Link>
-                  </Grid>
-                </Fade>
-              ))}
-            </Grid>
-          </InfiniteScroll>
-        </Container>
-      </Fade>
+      <Container
+        component="section"
+        maxWidth="lg"
+        className={classes.root}
+        style={{ flexGrow: 1, padding: "15px" }}
+        aria-label="home-page"
+      >
+        <Typography variant="h1" className={classes.heading}>
+          OSTATNIE WPISY
+        </Typography>
+
+        <InfiniteScroll
+          style={{ overflowX: "hidden" }}
+          dataLength={articlesToShow.length}
+          next={getMoreArticles}
+          hasMore={hasMore}
+          loader={
+            <div className={classes.block}>
+              <CircularProgress />
+            </div>
+          }
+          endMessage={
+            <div className={classes.block}>
+              <p className={classes.endMessage}>Nic więcej nie ma</p>
+            </div>
+          }
+        >
+          <Grid
+            className={classes.articles}
+            container
+            justifyContent="space-between"
+            spacing={3}
+          >
+            {articlesToShow.map((article) => (
+              <Fade key={article.id} in timeout={500}>
+                <Grid item xs={12} md={6}>
+                  <Link href={`/articles/${article.slug}`} passHref>
+                    <a>
+                      <BaseCard article={article} />
+                    </a>
+                  </Link>
+                </Grid>
+              </Fade>
+            ))}
+          </Grid>
+        </InfiniteScroll>
+      </Container>
     </Fragment>
   );
 };
 
 export default Home;
 
-export async function getServerSideProps() {
-  const data = await fetcher(ALL_ARTICLES_QUERY, {
-    start: 0,
-    limit: 9,
-  });
+export async function getStaticProps() {
+  try {
+    const data = await fetcher(ALL_ARTICLES_QUERY, {
+      start: 0,
+      limit: 6,
+    });
 
-  return {
-    props: { data },
-  };
+    if (!data) {
+      return { notFound: true };
+    }
+
+    return {
+      props: { data },
+      revalidate: 10,
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.light.main,
-    margin: '3rem auto 0 auto',
+    margin: "3rem auto 0 auto",
     fontWeight: 600,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   block: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '3rem 0',
+    display: "flex",
+    justifyContent: "center",
+    marginBlock: "3rem",
   },
   endMessage: {
     margin: 0,
     color: theme.palette.text.disabled,
   },
   articles: {
-    margin: '3rem 0 0 0',
+    margin: "3rem 0 0 0",
   },
 }));

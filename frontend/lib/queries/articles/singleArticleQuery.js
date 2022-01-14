@@ -1,7 +1,10 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 export const SINGLE_ARTICLE_QUERY = gql`
-  query singleArticleQuery($slug: String!) {
-    articles(publicationState: LIVE, where: { slug: $slug }) {
+  query singleArticleQuery(
+    $slug: String!
+    $previewMode: PublicationState = LIVE
+  ) {
+    articles(publicationState: $previewMode, where: { slug: $slug }) {
       title
       excerpt
       content
@@ -20,6 +23,7 @@ export const SINGLE_ARTICLE_QUERY = gql`
         slug
       }
       published_at
+      createdAt
       writers {
         name
       }
@@ -38,6 +42,8 @@ export const SINGLE_ARTICLE_QUERY = gql`
             url
             caption
             alternativeText
+            width
+            height
           }
         }
       }
