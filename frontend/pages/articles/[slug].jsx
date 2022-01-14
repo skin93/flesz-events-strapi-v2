@@ -1,10 +1,9 @@
 import { Fragment } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
 import clsx from "clsx";
-import { fetcher, articlesFetcher } from "@/lib/fetcher";
+import { fetcher } from "@/lib/fetcher";
 import { SINGLE_ARTICLE_QUERY } from "@/lib/queries/articles/singleArticleQuery";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,7 +18,6 @@ import RelatedArticles from "@/components/layout/RelatedArticles";
 
 import { getMediaUrl } from "@/lib/getMediaUrl";
 import Disqus from "@/components/Disqus";
-import { ARTICLES_TITLE_QUERY } from "@/lib/queries/articles/articlesTitleQuery";
 
 const ArticlePage = ({ data }) => {
   const classes = useStyles();
@@ -164,17 +162,7 @@ const ArticlePage = ({ data }) => {
 
 export default ArticlePage;
 
-export async function getStaticPaths() {
-  const data = await articlesFetcher(ARTICLES_TITLE_QUERY);
-
-  const paths = data.articles.map((article) => ({
-    params: { slug: article.slug },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const previewMode = context.preview == true ? "PREVIEW" : "LIVE";
   const slug = context.params.slug;
   try {
@@ -189,7 +177,6 @@ export async function getStaticProps(context) {
 
     return {
       props: { data },
-      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };

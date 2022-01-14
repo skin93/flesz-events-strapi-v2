@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
-import { fetcher, categoriesFetcher } from "@/lib/fetcher";
+import { fetcher } from "@/lib/fetcher";
 import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -15,7 +15,6 @@ import Fade from "@material-ui/core/Fade";
 
 import SEO from "@/components/SEO";
 import BaseCard from "@/components/UI/BaseCard";
-import { ALL_CATEGORIES_QUERY } from "@/lib/queries/categories/allCategoriesQuery";
 
 const CategoryPage = ({ data }) => {
   const classes = useStyles();
@@ -111,17 +110,7 @@ const CategoryPage = ({ data }) => {
 
 export default CategoryPage;
 
-export async function getStaticPaths() {
-  const data = await categoriesFetcher(ALL_CATEGORIES_QUERY);
-
-  const paths = data.categories.map((category) => ({
-    params: { slug: category.slug },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   try {
     const data = await fetcher(SINGLE_CATEGORY_QUERY, {
       slug: params.slug,
@@ -135,7 +124,6 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { data },
-      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };

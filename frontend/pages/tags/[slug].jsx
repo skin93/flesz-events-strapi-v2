@@ -1,11 +1,9 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-import { fetcher, tagsFetcher } from "@/lib/fetcher";
+import { fetcher } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
-import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -113,17 +111,7 @@ const TagPage = ({ data }) => {
 
 export default TagPage;
 
-export async function getStaticPaths() {
-  const data = await tagsFetcher(ALL_TAGS_QUERY);
-
-  const paths = data.tags.map((tag) => ({
-    params: { slug: tag.slug },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   try {
     const data = await fetcher(SINGLE_TAG_QUERY, {
       slug: params.slug,
@@ -137,7 +125,6 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { data },
-      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };
