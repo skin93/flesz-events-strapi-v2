@@ -1,27 +1,27 @@
-import React, { Fragment, useState, useRef } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { Fragment, useState, useRef, forwardRef } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import ReactMapGl, {
   Marker,
   FlyToInterpolator,
   NavigationControl,
-} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import useSupercluster from 'use-supercluster';
+} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import useSupercluster from "use-supercluster";
 
-import { getMediaUrl } from '@/lib/getMediaUrl';
-import Moment from 'react-moment';
-import { makeStyles } from '@material-ui/core/styles';
+import { getMediaUrl } from "@/lib/getMediaUrl";
+import Moment from "react-moment";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   Dialog,
   DialogContent,
   DialogContentText,
-} from '@material-ui/core';
-import Slide from '@material-ui/core/Slide';
+} from "@material-ui/core";
+import Slide from "@material-ui/core/Slide";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='down' ref={ref} {...props} />;
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
 });
 
 const navControlStyle = {
@@ -40,13 +40,13 @@ const FestivalMap = ({ festivals }) => {
   const [viewport, setViewport] = useState({
     latitude: 51.974077,
     longitude: 19.451946,
-    width: '100vw',
-    height: '93vh',
+    width: "100vw",
+    height: "93vh",
     zoom: 5,
   });
 
   const points = festivals.map((fest) => ({
-    type: 'Feature',
+    type: "Feature",
     properties: {
       cluster: false,
       festId: fest.id,
@@ -59,7 +59,7 @@ const FestivalMap = ({ festivals }) => {
       nextEvent: fest.next_event,
     },
     geometry: {
-      type: 'Point',
+      type: "Point",
       coordinates: [fest.location.longitude, fest.location.latitude],
     },
   }));
@@ -76,7 +76,7 @@ const FestivalMap = ({ festivals }) => {
   });
 
   return (
-    <React.Fragment>
+    <Fragment>
       <ReactMapGl
         attributionControl
         minZoom={5}
@@ -85,7 +85,8 @@ const FestivalMap = ({ festivals }) => {
         mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
         onViewportChange={(viewport) => setViewport(viewport)}
         ref={mapRef}
-        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}>
+        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+      >
         <NavigationControl style={navControlStyle} />
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
@@ -96,7 +97,8 @@ const FestivalMap = ({ festivals }) => {
               <Marker
                 key={cluster.id}
                 latitude={latitude}
-                longitude={longitude}>
+                longitude={longitude}
+              >
                 <div
                   style={{
                     width: `${25 + (pointCount / points.length) * 50}px`,
@@ -115,10 +117,11 @@ const FestivalMap = ({ festivals }) => {
                       transitionInterpolator: new FlyToInterpolator({
                         speed: 3,
                       }),
-                      transitionDuration: 'auto',
+                      transitionDuration: "auto",
                     });
                   }}
-                  className={classes.pointCount}>
+                  className={classes.pointCount}
+                >
                   {pointCount}
                 </div>
               </Marker>
@@ -130,18 +133,20 @@ const FestivalMap = ({ festivals }) => {
               latitude={latitude}
               longitude={longitude}
               offsetLeft={-40}
-              offsetTop={-20}>
+              offsetTop={-20}
+            >
               <button
-                className='marker-btn'
+                className="marker-btn"
                 onClick={() => {
                   setSelected(cluster);
                   setIsOpen(true);
-                }}>
+                }}
+              >
                 <Image
                   width={40}
                   height={40}
                   alt={`${cluster.properties.festName}`}
-                  src='/icons8-metal-music-96.png'
+                  src="/icons8-metal-music-96.png"
                 />
               </button>
             </Marker>
@@ -150,21 +155,23 @@ const FestivalMap = ({ festivals }) => {
         {selected && (
           <Dialog
             open={isOpen}
-            scroll='body'
+            scroll="body"
             onClose={() => setIsOpen(false)}
-            TransitionComponent={Transition}>
+            TransitionComponent={Transition}
+          >
             <button
               onClick={() => setIsOpen(false)}
-              className={classes.closeButton}>
+              className={classes.closeButton}
+            >
               X
             </button>
             <Image
               quality={100}
               alt={selected.properties.festName}
-              aria-label='festival-image'
-              layout='responsive'
-              objectFit='cover'
-              objectPosition='center'
+              aria-label="festival-image"
+              layout="responsive"
+              objectFit="cover"
+              objectPosition="center"
               width={833}
               height={469}
               src={getMediaUrl(selected.properties.festImage)}
@@ -174,15 +181,16 @@ const FestivalMap = ({ festivals }) => {
               <h2
                 onClick={() =>
                   router.push(`/tags/${selected.properties.festSlug}`)
-                }>
+                }
+              >
                 {selected.properties.festName}
               </h2>
 
-              <Typography component='small'>
+              <Typography component="small">
                 {selected.properties.festCity}
 
                 {selected.properties.festPlace &&
-                  `- ${selected.properties.festPlace}`}
+                  ` - ${selected.properties.festPlace}`}
 
                 <br />
               </Typography>
@@ -190,17 +198,17 @@ const FestivalMap = ({ festivals }) => {
                 <Fragment>
                   {selected.properties.nextEvent.date ? (
                     <Typography>
-                      <Moment format='DD.MM.YYYY'>
+                      <Moment format="DD.MM.YYYY">
                         {selected.properties.nextEvent.date}
                       </Moment>
                     </Typography>
                   ) : (
                     <Typography>
-                      <Moment format='DD'>
+                      <Moment format="DD">
                         {selected.properties.nextEvent.from_date}
                       </Moment>
                       -
-                      <Moment format='DD.MM.YYYY'>
+                      <Moment format="DD.MM.YYYY">
                         {selected.properties.nextEvent.to_date}
                       </Moment>
                     </Typography>
@@ -219,22 +227,22 @@ const FestivalMap = ({ festivals }) => {
           </Dialog>
         )}
       </ReactMapGl>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   markerHeading: {
-    cursor: 'pointer',
+    cursor: "pointer",
   },
   head: {
-    padding: '16px 24px',
-    '& > h2': {
-      cursor: 'pointer',
+    padding: "16px 24px",
+    "& > h2": {
+      cursor: "pointer",
       margin: 0,
       color: theme.palette.primary.main,
     },
-    '& > h6': {
+    "& > h6": {
       margin: 0,
     },
   },
@@ -246,39 +254,39 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   event: {
-    padding: '16px 24px',
+    padding: "16px 24px",
   },
   button: {
-    margin: '24px 0',
+    margin: "24px 0",
   },
   pointCount: {
-    cursor: 'pointer',
+    cursor: "pointer",
     color: theme.palette.black.main,
     background: theme.palette.primary.main,
-    borderRadius: '50%',
-    padding: '10px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: '600',
-    fontSize: '1.3em',
+    borderRadius: "50%",
+    padding: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "600",
+    fontSize: "1.3em",
   },
   event: {
-    padding: '16px 24px',
+    padding: "16px 24px",
   },
   eventName: {
-    color: 'white',
+    color: "white",
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    padding: '5px 10px',
-    fontSize: '1rem',
+    padding: "5px 10px",
+    fontSize: "1rem",
     zIndex: 100,
-    cursor: 'pointer',
+    cursor: "pointer",
     background: theme.palette.background.paper,
-    border: 'none',
+    border: "none",
     color: theme.palette.primary.main,
   },
 }));

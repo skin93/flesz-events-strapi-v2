@@ -1,21 +1,21 @@
-import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../theme';
+import { Children } from "react";
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import { ServerStyleSheets } from "@material-ui/core/styles";
+import theme from "../theme";
 
-import { GA_TRACKING_ID } from '../lib/gtag';
+import { GA_TRACKING_ID } from "../lib/gtag";
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang='pl'>
+      <Html lang="pl">
         <Head>
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           {/* PWA primary color */}
-          <meta name='theme-color' content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <script
             async
@@ -35,10 +35,11 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body
-          style={{ padding: 0, margin: 0, backgroundColor: 'rgb(36,36,36)' }}>
+          style={{ padding: 0, margin: 0, backgroundColor: "rgb(36,36,36)" }}
+        >
           <Main />
           <NextScript />
-          <script async src='https://instagram.com/embed.js'></script>
+          <script async src="https://instagram.com/embed.js"></script>
         </body>
       </Html>
     );
@@ -85,7 +86,7 @@ MyDocument.getInitialProps = async (ctx) => {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
-      ...React.Children.toArray(initialProps.styles),
+      ...Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
     ],
   };

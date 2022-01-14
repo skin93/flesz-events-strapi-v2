@@ -1,22 +1,22 @@
-import React from 'react';
-
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { Fragment } from "react";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 const LoadMoreButton = ({ onClick, onChange, next, count }) => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Button
-        variant='outlined'
+        variant="outlined"
         onClick={onClick}
         onChange={onChange}
         className={classes.loadMoreButton}
-        disabled={next >= count}>
+        disabled={next >= count}
+      >
         Wczytaj więcej
       </Button>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -24,8 +24,8 @@ export default LoadMoreButton;
 
 const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
-    display: 'block',
-    margin: '3rem auto',
+    display: "block",
+    margin: "3rem auto",
     fontWeight: 600,
     color: theme.palette.primary.main,
   },

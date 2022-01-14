@@ -1,7 +1,7 @@
-import React from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { getMediaUrl } from '@/lib/getMediaUrl';
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { getMediaUrl } from "@/lib/getMediaUrl";
+import { getPublicMedia } from "@/lib/getPublicMedia";
 
 const SEO = ({
   meta_title,
@@ -11,9 +11,11 @@ const SEO = ({
   og_type,
   og_locale,
   share_image,
+  public_image,
+  width,
+  height,
   index,
   follow,
-  keywords,
 }) => {
   const router = useRouter();
   // const robots = [
@@ -27,28 +29,33 @@ const SEO = ({
           ? `${meta_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`
           : process.env.NEXT_PUBLIC_APP_NAME}
       </title>
-      <link rel='icon' type='image/png' href='/favicon.ico' />
-      <link rel='apple-touch-icon' href='/favicon.ico' />
+      <link rel="icon" type="image/png" href="/favicon.ico" />
+      <link rel="apple-touch-icon" href="/favicon.ico" />
       <meta
-        name='viewport'
-        content='minimum-scale=1, initial-scale=1, width=device-width'
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width"
       />
-      {index && !follow ? <meta name='robots' content='nofollow'/> : <meta name='robots' content='noindex,nofollow'/>  }
-      {keywords && <meta name='keywords' content={keywords} />}
+      {index && !follow ? (
+        <meta name="robots" content="index, nofollow" />
+      ) : index && follow ? (
+        <meta name="robots" content="index, follow" />
+      ) : (
+        <meta name="robots" content="noindex, nofollow" />
+      )}
       <meta
-        name='description'
+        name="description"
         content={
           meta_description
             ? meta_description
-            : 'Jesteśmy sKoncertowani na muzyce!'
+            : "Jesteśmy sKoncertowani na muzyce!"
         }
       />
       <link
-        rel='canonical'
+        rel="canonical"
         href={`${process.env.NEXT_PUBLIC_APP_DOMAIN}${router.asPath}`}
       />
       <meta
-        property='og:title'
+        property="og:title"
         content={
           og_title
             ? `${og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`
@@ -56,37 +63,41 @@ const SEO = ({
         }
       />
       <meta
-        property='og:description'
+        property="og:description"
         content={og_description ? og_description : meta_description}
       />
-      <meta property='og:type' content={og_type ? og_type : 'website'} />
-      <meta property='og:locale' content={og_locale ? og_locale : 'pl_PL'} />
+      <meta property="og:type" content={og_type ? og_type : "website"} />
+      <meta property="og:locale" content={og_locale ? og_locale : "pl_PL"} />
       <meta
-        property='og:url'
+        property="og:url"
         content={`${process.env.NEXT_PUBLIC_APP_DOMAIN}${router.asPath}`}
       />
       <meta
-        property='og:site_name'
+        property="og:site_name"
         content={`${process.env.NEXT_PUBLIC_APP_NAME}`}
       />
       <meta
-        property='og:image'
+        property="og:image"
         content={
           share_image
             ? getMediaUrl(share_image.media)
-            : 'https://flesz.events/logo-publikacja.png'
+            : public_image
+            ? public_image
+            : "%PUBLIC_URL%/logo-publikacja.png"
         }
       />
+      <meta property="og:image:width" content={width ? width : 1200} />
+      <meta property="og:image:height" content={height ? height : 628} />
       <meta
-        property='og:image:secure_url'
+        property="og:image:secure_url"
         content={
           share_image
             ? getMediaUrl(share_image.media)
-            : 'https://flesz.events/logo-publikacja.png'
+            : "https://flesz.events/logo-publikacja.png"
         }
       />
-      <meta property='og:image:type' content='image/png' />
-      <meta property='fb:app_id' content={`${process.env.NEXT_PUBLIC_FB_ID}`} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="fb:app_id" content={`${process.env.NEXT_PUBLIC_FB_ID}`} />
     </Head>
   );
 };

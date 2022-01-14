@@ -1,12 +1,9 @@
-import React from 'react';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const SkeletonCard = () => {
   return (
     <div>
-      <Skeleton variant='rect' width={210} height={118} />
-      <Skeleton variant='text' width={210} />
-      <Skeleton variant='text' width={100} />
+      <Skeleton variant="rect" width="100%" height={200} />
     </div>
   );
 };
