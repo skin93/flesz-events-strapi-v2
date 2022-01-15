@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: "Invalid slug" });
   }
 
-  res.setPreviewData(article, { maxAge: 1 * 10 });
+  res.setPreviewData(article, { maxAge: 60 * 60 });
 
   res.writeHead(307, { Location: `/articles/${slug}` });
   res.end();
