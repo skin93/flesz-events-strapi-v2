@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 import clsx from "clsx";
 import { fetcher } from "@/lib/fetcher";
@@ -13,7 +14,6 @@ import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 
-import SEO from "@/components/SEO";
 import RelatedArticles from "@/components/layout/RelatedArticles";
 
 import { getMediaUrl } from "@/lib/getMediaUrl";
@@ -26,19 +26,26 @@ const ArticlePage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO
-        meta_title={article.metadata.meta_title}
-        og_title={article.metadata.og_title}
-        meta_description={article.metadata.meta_description}
-        og_description={article.metadata.og_description}
-        og_locale={article.metadata.og_locale}
-        og_type={article.metadata.og_type}
-        share_image={article.metadata.share_image}
-        width={article.metadata.share_image.media.width}
-        height={article.metadata.share_image.media.height}
-        follow={article.metadata.follow}
-        keywords={article.metadata.keywords}
-        index={article.metadata.index}
+      <NextSeo
+        title={article.title}
+        description={article.excerpt}
+        nofollow={!article.metadata.follow}
+        noindex={!article.metadata.index}
+        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`}
+        openGraph={{
+          title: article.metadata.og_title,
+          descirption: article.metadata.og_description,
+          type: article.metadata.og_type,
+          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`,
+          images: [
+            {
+              url: getMediaUrl(article.metadata.share_image.media),
+              width: article.metadata.share_image.media.width,
+              height: article.metadata.share_image.media.height,
+              alt: article.metadata.share_image.media.alternativeText,
+            },
+          ],
+        }}
       />
       <Container
         component="section"

@@ -14,8 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Fade from "@material-ui/core/Fade";
 
-import SEO from "@/components/SEO";
 import BaseCard from "@/components/UI/BaseCard";
+import { NextSeo } from "next-seo";
 
 const TagPage = ({ data }) => {
   const classes = useStyles();
@@ -50,13 +50,18 @@ const TagPage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO
-        meta_title={tag.metadata.meta_title}
-        meta_description={tag.metadata.meta_description}
-        share_image={tag.metadata.share_image}
-        keywords={tag.metadata.keywords}
-        index={tag.metadata.index}
-        follow={tag.metadata.follow}
+      <NextSeo
+        title={tag.name}
+        description={tag.description}
+        nofollow={!tag.metadata.follow}
+        noindex={!tag.metadata.index}
+        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`}
+        openGraph={{
+          title: tag.metadata.og_title,
+          descirption: tag.metadata.og_description,
+          type: tag.metadata.og_type,
+          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`,
+        }}
       />
 
       <Container component="section" maxWidth="lg" aria-label="tag-page">

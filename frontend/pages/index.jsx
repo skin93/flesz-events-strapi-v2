@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
+import { NextSeo } from "next-seo";
 
 import Link from "next/link";
 
@@ -13,7 +14,6 @@ import Grid from "@material-ui/core/Grid";
 import Fade from "@material-ui/core/Fade";
 
 import BaseCard from "@/components/UI/BaseCard";
-import SEO from "@/components/SEO";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -44,8 +44,7 @@ const Home = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO index={true} />
-
+      <NextSeo nofollow={true} />
       <Container
         component="section"
         maxWidth="lg"

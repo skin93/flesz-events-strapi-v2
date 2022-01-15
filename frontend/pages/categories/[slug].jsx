@@ -13,8 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Fade from "@material-ui/core/Fade";
 
-import SEO from "@/components/SEO";
 import BaseCard from "@/components/UI/BaseCard";
+import { NextSeo } from "next-seo";
 
 const CategoryPage = ({ data }) => {
   const classes = useStyles();
@@ -51,13 +51,18 @@ const CategoryPage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO
-        meta_title={category.metadata.meta_title}
-        meta_description={category.metadata.meta_description}
-        share_image={category.metadata.share_image}
-        keywords={category.metadata.keywords}
-        index={category.metadata.index}
-        follow={category.metadata.follow}
+      <NextSeo
+        title={category.name}
+        description={category.description}
+        nofollow={!category.metadata.follow}
+        noindex={!category.metadata.index}
+        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`}
+        openGraph={{
+          title: category.metadata.og_title,
+          descirption: category.metadata.og_description,
+          type: category.metadata.og_type,
+          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`,
+        }}
       />
       <Container component="section" maxWidth="lg" aria-label="category-page">
         {articlesToShow.length > 0 ? (

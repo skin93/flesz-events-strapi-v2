@@ -10,9 +10,9 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
-import SEO from "@/components/SEO";
 import TagsContainer from "@/components/tags/TagsContainer";
 import LoadMoreButton from "@/components/UI/LoadMoreButton";
+import { NextSeo } from "next-seo";
 
 const TagsPage = ({ data }) => {
   const classes = useStyles();
@@ -47,7 +47,17 @@ const TagsPage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO meta_title="Tagi" meta_description="Zbiór wszystkich tagów." />
+      <NextSeo
+        title="Tagi"
+        description="Zbiór wszystkich tagów"
+        nofollow={true}
+        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`}
+        openGraph={{
+          title: "Tagi",
+          descirption: "Zbiór wszystkich tagów",
+          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`,
+        }}
+      />
       <Container
         component="section"
         maxWidth="lg"

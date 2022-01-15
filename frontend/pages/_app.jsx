@@ -1,6 +1,8 @@
 import { useEffect, useState, Fragment } from "react";
 import Router, { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { DefaultSeo } from "next-seo";
+import SEO from "../next-seo.config";
 import PropTypes from "prop-types";
 
 import * as gtag from "@/lib/gtag";
@@ -41,6 +43,7 @@ export default function MyApp(props) {
 
   return (
     <Fragment>
+      <DefaultSeo {...SEO} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {loading ? (

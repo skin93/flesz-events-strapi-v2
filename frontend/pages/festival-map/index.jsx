@@ -8,17 +8,30 @@ const MapWithNoSSR = dynamic(() => import("@/components/FestivalMap"), {
 import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { fetcher } from "@/lib/fetcher";
 
-import SEO from "@/components/SEO";
+import { NextSeo } from "next-seo";
 
 const FestivalMapPage = (props) => {
   return (
     <Fragment>
-      <SEO
-        public_image="%PUBLIC_URL%/festiwalowa-mapa-polski.png"
-        meta_title="Festiwalowa mapa Polski"
-        meta_description="Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!"
-        follow={false}
-        index={true}
+      <NextSeo
+        title="Festiwalowa Mapa Polski"
+        description="Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!"
+        nofollow={true}
+        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`}
+        openGraph={{
+          title: "Festiwalowa Mapa Polski",
+          descirption:
+            "Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!",
+          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`,
+          images: [
+            {
+              url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/festiwalowa-mapa-polski.jpg`,
+              width: 1280,
+              height: 720,
+              alt: "Festiwalowa Mapa Polski",
+            },
+          ],
+        }}
       />
       <section aria-label="festival-map">
         <MapWithNoSSR festivals={props.data.festivals} />
