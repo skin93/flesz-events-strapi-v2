@@ -33,7 +33,7 @@ const ArticlePage = ({ data }) => {
         noindex={!article.metadata.index}
         cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`}
         openGraph={{
-          title: article.metadata.og_title,
+          title: `${article.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: article.metadata.og_description,
           type: article.metadata.og_type,
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`,

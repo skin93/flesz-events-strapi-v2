@@ -53,7 +53,7 @@ const TagsPage = ({ data }) => {
         nofollow={true}
         cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`}
         openGraph={{
-          title: "Tagi",
+          title: "Tagi | Flesz.Events",
           descirption: "Zbiór wszystkich tagów",
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`,
         }}

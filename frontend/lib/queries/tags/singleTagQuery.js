@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 export const SINGLE_TAG_QUERY = gql`
   query singleTagQuery($slug: String!, $start: Int!, $limit: Int!) {
     articlesCountBasedOnTagOrCategory(where: { tags: { slug: $slug } })
@@ -22,9 +22,13 @@ export const SINGLE_TAG_QUERY = gql`
       }
       metadata {
         meta_title
+        og_title
         meta_description
-        index
+        og_description
+        og_locale
+        og_type
         follow
+        index
         keywords
         share_image {
           media {
