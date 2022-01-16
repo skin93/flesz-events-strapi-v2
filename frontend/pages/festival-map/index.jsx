@@ -42,7 +42,7 @@ const FestivalMapPage = (props) => {
 
 export async function getStaticProps() {
   try {
-    const data = await fetcher(ALL_FESTIVALS_QUERY, {});
+    const data = await fetcher(ALL_FESTIVALS_QUERY);
 
     if (!data) {
       return { notFound: true };
@@ -50,6 +50,7 @@ export async function getStaticProps() {
 
     return {
       props: { data },
+      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };
