@@ -35,6 +35,8 @@ export const SINGLE_TAG_QUERY = gql`
             url
             caption
             alternativeText
+            width
+            height
           }
         }
       }

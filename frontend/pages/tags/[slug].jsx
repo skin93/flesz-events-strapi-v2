@@ -16,6 +16,7 @@ import Fade from "@material-ui/core/Fade";
 
 import BaseCard from "@/components/UI/BaseCard";
 import { NextSeo } from "next-seo";
+import { getMediaUrl } from "@/lib/getMediaUrl";
 
 const TagPage = ({ data }) => {
   const classes = useStyles();
@@ -61,6 +62,23 @@ const TagPage = ({ data }) => {
           descirption: tag.metadata.og_description,
           type: tag.metadata.og_type,
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`,
+          images: tag.metadata.share_image
+            ? [
+                {
+                  url: getMediaUrl(tag.metadata.share_image.media),
+                  width: tag.metadata.share_image.media.width,
+                  height: tag.metadata.share_image.media.height,
+                  alt: tag.metadata.share_image.media.alternativeText,
+                },
+              ]
+            : [
+                {
+                  url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.png`,
+                  width: 1200,
+                  height: 628,
+                  alt: "Flesz.Events logo",
+                },
+              ],
         }}
       />
 
