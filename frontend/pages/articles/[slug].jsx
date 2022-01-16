@@ -4,7 +4,7 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 import clsx from "clsx";
-import { fetcher } from "@/lib/fetcher";
+import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_ARTICLE_QUERY } from "@/lib/queries/articles/singleArticleQuery";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -173,7 +173,7 @@ export async function getServerSideProps(context) {
   const previewMode = context.preview == true ? "PREVIEW" : "LIVE";
   const slug = context.params.slug;
   try {
-    const data = await fetcher(SINGLE_ARTICLE_QUERY, {
+    const data = await fetchWithArgs(SINGLE_ARTICLE_QUERY, {
       slug,
       previewMode,
     });

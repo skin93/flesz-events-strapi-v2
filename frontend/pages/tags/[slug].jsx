@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
 
-import { fetcher } from "@/lib/fetcher";
+import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -26,7 +26,7 @@ const TagPage = ({ data }) => {
   const [hasMore, setHasMore] = useState(true);
 
   const getMoreArticles = useCallback(async () => {
-    const res = await fetcher(SINGLE_TAG_QUERY, {
+    const res = await fetchWithArgs(SINGLE_TAG_QUERY, {
       start: articlesToShow.length,
       limit,
       slug: data?.tags[0].slug,
@@ -118,7 +118,7 @@ export default TagPage;
 
 export async function getServerSideProps({ params }) {
   try {
-    const data = await fetcher(SINGLE_TAG_QUERY, {
+    const data = await fetchWithArgs(SINGLE_TAG_QUERY, {
       slug: params.slug,
       start: 0,
       limit: 6,

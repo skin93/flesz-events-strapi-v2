@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
 
-import { tagsFetcher } from "@/lib/fetcher";
+import { fetcher } from "@/lib/fetcher";
 import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -103,7 +103,7 @@ export default TagsPage;
 
 export async function getStaticProps() {
   try {
-    const data = await tagsFetcher(ALL_TAGS_QUERY);
+    const data = await fetcher(ALL_TAGS_QUERY);
 
     if (!data) {
       return { notFound: true };

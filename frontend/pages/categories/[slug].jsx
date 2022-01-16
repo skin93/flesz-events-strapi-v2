@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
-import { fetcher } from "@/lib/fetcher";
+import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -27,7 +27,7 @@ const CategoryPage = ({ data }) => {
   const [hasMore, setHasMore] = useState(true);
 
   const getMoreArticles = useCallback(async () => {
-    const res = await fetcher(SINGLE_CATEGORY_QUERY, {
+    const res = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
       start: articlesToShow.length,
       limit,
       slug: data?.categories[0].slug,
@@ -117,7 +117,7 @@ export default CategoryPage;
 
 export async function getServerSideProps({ params }) {
   try {
-    const data = await fetcher(SINGLE_CATEGORY_QUERY, {
+    const data = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
       slug: params.slug,
       start: 0,
       limit: 6,
