@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 export const ALL_ARTICLES_QUERY = gql`
   query allArticlesQuery($start: Int!, $limit: Int!) {
     articles(
@@ -20,7 +20,7 @@ export const ALL_ARTICLES_QUERY = gql`
         slug
       }
     }
-    articlesConnection {
+    articlesConnection(where: { published_at_null: false }) {
       aggregate {
         count
       }

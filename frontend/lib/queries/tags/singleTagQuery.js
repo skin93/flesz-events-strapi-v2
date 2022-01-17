@@ -1,7 +1,9 @@
 import { gql } from "graphql-request";
 export const SINGLE_TAG_QUERY = gql`
   query singleTagQuery($slug: String!, $start: Int!, $limit: Int!) {
-    articlesCountBasedOnTagOrCategory(where: { tags: { slug: $slug } })
+    articlesCountBasedOnTagOrCategory(
+      where: { tags: { slug: $slug }, published_at_null: false }
+    )
     tags(where: { slug: $slug }, publicationState: LIVE) {
       name
       description
