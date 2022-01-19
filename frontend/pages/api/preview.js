@@ -1,4 +1,4 @@
-import { fetcher } from "@/lib/fetcher";
+import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_ARTICLE_QUERY } from "@/lib/queries/articles/singleArticleQuery";
 
 export default async function handler(req, res) {
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   const slug = req.query.slug;
-  const article = await fetcher(SINGLE_ARTICLE_QUERY, {
+  const article = await fetchWithArgs(SINGLE_ARTICLE_QUERY, {
     slug,
   });
   if (!article) {
