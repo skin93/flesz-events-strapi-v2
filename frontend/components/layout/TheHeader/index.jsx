@@ -1,34 +1,34 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef, useState } from "react";
 
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 
-import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
-import { ARTICLES_TITLE_QUERY } from '@/lib/queries/articles/articlesTitleQuery';
+import useSWR from "swr";
+import { fetcher } from "@/lib/fetcher";
+import { ARTICLES_TITLE_QUERY } from "@/lib/queries/articles/articlesTitleQuery";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { alpha } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
+import { alpha } from "@material-ui/core/styles";
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import Container from '@material-ui/core/Container';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Slide from '@material-ui/core/Slide';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import Container from "@material-ui/core/Container";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Slide from "@material-ui/core/Slide";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import FacebookIcon from "@material-ui/icons/Facebook";
 
-const SiteDrawer = dynamic(() => import('@/components/layout/SiteDrawer'));
+const SiteDrawer = dynamic(() => import("@/components/layout/SiteDrawer"));
 
 const ResultsContainer = dynamic(() =>
-  import('@/components/UI/ResultsContainer')
+  import("@/components/UI/ResultsContainer")
 );
 
 const HideOnScroll = (props) => {
@@ -36,17 +36,17 @@ const HideOnScroll = (props) => {
   const trigger = useScrollTrigger();
 
   return (
-    <Slide appear={false} direction='down' in={!trigger}>
+    <Slide appear={false} direction="down" in={!trigger}>
       {children}
     </Slide>
   );
 };
 
 const navLinks = [
-  { title: 'news', path: '/categories/news' },
-  { title: 'festiwale', path: '/categories/festiwale' },
-  { title: 'koncerty', path: '/categories/koncerty' },
-  { title: 'mapa', path: '/festival-map' },
+  { title: "news", path: "/categories/news" },
+  { title: "festiwale", path: "/categories/festiwale" },
+  { title: "koncerty", path: "/categories/koncerty" },
+  { title: "mapa", path: "/festival-map" },
   // { title: 'relacje', path: '/categories/relacje' },
   // { title: 'patronat', path: '/categories/patronat' },
   // { title: 'polecamy', path: '/categories/polecamy' },
@@ -67,58 +67,74 @@ const TheHeader = (props) => {
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <p>Coś poszło nie tak...</p>
       </div>
     );
   }
 
+  if (!data) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   const handleChange = () => {
-    const articlesFound = data.articles.filter(
-      (article) =>
-        inputRef.current.value !== '' &&
-        article.title
-          .toLowerCase()
-          .includes(inputRef.current.value.toLowerCase())
+    if (inputRef.current.value === "") {
+      return;
+    }
+    const articlesFound = data.articles.filter((article) =>
+      article.title.toLowerCase().includes(inputRef.current.value.toLowerCase())
     );
     setArticlesFound(articlesFound);
   };
 
   const clear = () => {
     setArticlesFound([]);
-    inputRef.current.value = '';
+    inputRef.current.value = "";
   };
 
   return (
     <Fragment>
       <HideOnScroll {...props}>
-        <AppBar position='fixed' className={classes.appBar}>
-          <Toolbar variant='dense' id='back-to-top-anchor'>
-            <Container maxWidth='lg' className={classes.navbarDisplayFlex}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar variant="dense" id="back-to-top-anchor">
+            <Container maxWidth="lg" className={classes.navbarDisplayFlex}>
               <div
                 className={classes.navbarBrand}
-                color='inherit'
-                aria-label='home'>
-                <Link href='/'>
+                color="inherit"
+                aria-label="home"
+              >
+                <Link href="/">
                   <a>
                     <Image
-                      src='/biale-logo-pelny-napis-akcent.png'
+                      src="/biale-logo-pelny-napis-akcent.png"
                       className={classes.logo}
-                      alt='logo'
-                      layout='fill'
-                      objectFit='contain'
+                      alt="logo"
+                      layout="fill"
+                      objectFit="contain"
                     />
                   </a>
                 </Link>
               </div>
               <Hidden smDown>
                 <List
-                  component='nav'
-                  aria-label='main-navigation'
-                  className={classes.navDisplayFlex}>
+                  component="nav"
+                  aria-label="main-navigation"
+                  className={classes.navDisplayFlex}
+                >
                   {navLinks.map(({ title, path }) => (
                     <Link href={`${path}`} key={title} passHref>
                       <a
@@ -126,14 +142,15 @@ const TheHeader = (props) => {
                           router.asPath === `${path}`
                             ? `${classes.active}`
                             : `${classes.linkText}`
-                        }>
+                        }
+                      >
                         <ListItem button>
                           <ListItemText primary={title} />
                         </ListItem>
                       </a>
                     </Link>
                   ))}
-                  <Link href='https://facebook.com/flesz.events' passHref>
+                  <Link href="https://facebook.com/flesz.events" passHref>
                     <ListItem button>
                       <FacebookIcon className={classes.icon} />
                     </ListItem>
@@ -147,13 +164,13 @@ const TheHeader = (props) => {
                   </div>
                   <InputBase
                     inputRef={inputRef}
-                    placeholder='Szukaj...'
+                    placeholder="Szukaj..."
                     onChange={handleChange}
                     classes={{
                       root: classes.inputRoot,
                       input: classes.inputInput,
                     }}
-                    inputProps={{ 'aria-label': 'search' }}
+                    inputProps={{ "aria-label": "search" }}
                   />
                 </div>
               </Hidden>
@@ -187,62 +204,62 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
   navbarDisplayFlex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   navbarBrand: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    position: 'relative',
-    width: '150px',
-    paddingBottom: '24px',
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "relative",
+    width: "150px",
+    paddingBottom: "24px",
   },
   logo: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   navDisplayFlex: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: "flex",
+    justifyContent: "space-between",
   },
   active: {
-    textDecoration: 'none',
-    textTransform: 'uppercase',
+    textDecoration: "none",
+    textTransform: "uppercase",
     color: theme.palette.accent.main,
   },
   linkText: {
-    textDecoration: 'none',
-    textTransform: 'uppercase',
+    textDecoration: "none",
+    textTransform: "uppercase",
     color: theme.palette.light.main,
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      width: "auto",
     },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     color: theme.palette.light.main,
   },
   inputRoot: {
@@ -252,12 +269,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
       },
     },
   },
