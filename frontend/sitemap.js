@@ -1,10 +1,10 @@
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_APP_DOMAIN || 'https://flesz.events',
+  siteUrl: process.env.NEXT_PUBLIC_APP_DOMAIN || 'https://fleszevents.pl',
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ['/server-sitemap.xml', '/preview'], // <= exclude here
+  exclude: ['/server-sitemap.xml'], // <= exclude here
   robotsTxtOptions: {
     policies: [
       {

@@ -17,7 +17,7 @@ const TheFooter = () => {
             </ListItem>
           </a>
         </Link>
-        <span>&copy; Flesz.Events</span>
+        <span>&copy; FleszEvents</span>
       </Container>
     </footer>
   );
