@@ -48,11 +48,12 @@ export default function MyApp(props) {
         <CssBaseline />
         {loading ? (
           <PageTransition timeout={500} classNames="page-transition">
-            <Loader />
+            <Loader key={"loader"} />
           </PageTransition>
         ) : (
           <PageTransition timeout={500} classNames="page-transition">
             <div
+              key={router.asPath}
               style={{
                 position: "relative",
                 display: "flex",
@@ -62,14 +63,7 @@ export default function MyApp(props) {
               }}
             >
               <TheHeader />
-              <main
-                component="main"
-                style={{
-                  margin: "0 auto",
-                  overflow: "hidden",
-                  width: "100%",
-                }}
-              >
+              <main style={{ margin: "1rem" }} component="main">
                 <Component key={router.asPath} {...pageProps} />
               </main>
               {router.asPath !== "/festival-map" && <TheFooter />}

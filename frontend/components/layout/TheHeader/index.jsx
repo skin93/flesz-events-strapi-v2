@@ -47,15 +47,13 @@ const navLinks = [
   { title: "festiwale", path: "/categories/festiwale" },
   { title: "koncerty", path: "/categories/koncerty" },
   { title: "mapa", path: "/festival-map" },
-  // { title: 'relacje', path: '/categories/relacje' },
-  // { title: 'patronat', path: '/categories/patronat' },
-  // { title: 'polecamy', path: '/categories/polecamy' },
 ];
 
 const TheHeader = (props) => {
   const classes = useStyles();
   const router = useRouter();
   const inputRef = useRef();
+  const [search, setSearch] = useState("");
 
   const [articlesFound, setArticlesFound] = useState([]);
 
@@ -91,19 +89,21 @@ const TheHeader = (props) => {
     );
   }
 
-  const handleChange = () => {
-    if (inputRef.current.value === "") {
+  const handleChange = (e) => {
+    if (e.target.value === "") {
+      clear();
       return;
     }
+    setSearch(e.target.value);
     const articlesFound = data.articles.filter((article) =>
-      article.title.toLowerCase().includes(inputRef.current.value.toLowerCase())
+      article.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setArticlesFound(articlesFound);
   };
 
   const clear = () => {
     setArticlesFound([]);
-    inputRef.current.value = "";
+    setSearch("");
   };
 
   return (
@@ -118,15 +118,11 @@ const TheHeader = (props) => {
                 aria-label="home"
               >
                 <Link href="/">
-                  <a>
-                    <Image
-                      src="/biale-logo-pelny-napis-akcent.png"
-                      className={classes.logo}
-                      alt="logo"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </a>
+                  <img
+                    src="/biale-logo-pelny-napis-akcent.png"
+                    className={classes.logo}
+                    alt="logo"
+                  />
                 </Link>
               </div>
               <Hidden smDown>
@@ -163,7 +159,7 @@ const TheHeader = (props) => {
                     <SearchIcon />
                   </div>
                   <InputBase
-                    inputRef={inputRef}
+                    value={search}
                     placeholder="Szukaj..."
                     onChange={handleChange}
                     classes={{
@@ -217,12 +213,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     position: "relative",
     width: "150px",
-    paddingBottom: "24px",
   },
   logo: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    cursor: "pointer",
   },
   navDisplayFlex: {
     display: "flex",

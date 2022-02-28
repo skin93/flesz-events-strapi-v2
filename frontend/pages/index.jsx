@@ -49,7 +49,6 @@ const Home = ({ data }) => {
         component="section"
         maxWidth="lg"
         className={classes.root}
-        style={{ flexGrow: 1, padding: "15px" }}
         aria-label="home-page"
       >
         <Typography variant="h1" className={classes.heading}>
@@ -81,7 +80,11 @@ const Home = ({ data }) => {
             {articlesToShow.map((article) => (
               <Fade key={article.id} in timeout={500}>
                 <Grid item xs={12} md={6}>
-                  <Link href={`/articles/${article.slug}`} passHref>
+                  <Link
+                    scroll={false}
+                    href={`/articles/${article.slug}`}
+                    passHref
+                  >
                     <a>
                       <BaseCard article={article} />
                     </a>
@@ -98,7 +101,7 @@ const Home = ({ data }) => {
 
 export default Home;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const data = await fetchWithArgs(ALL_ARTICLES_QUERY, {
       start: 0,
@@ -111,7 +114,6 @@ export async function getStaticProps() {
 
     return {
       props: { data },
-      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };
@@ -122,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,
-    margin: "3rem auto 0 auto",
+    margin: "2rem auto 0 auto",
     fontWeight: 600,
     textTransform: "uppercase",
   },

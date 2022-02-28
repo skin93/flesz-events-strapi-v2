@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
@@ -20,6 +20,28 @@ import { getMediaUrl } from "@/lib/getMediaUrl";
 import Disqus from "@/components/Disqus";
 
 const ArticlePage = ({ data }) => {
+  useEffect(() => {
+    const fbIframes = document.querySelectorAll(".fb");
+    fbIframes?.forEach((iframe) => {
+      const iframeHeight = iframe.getAttribute("height");
+      iframe.parentElement.style["height"] = `${iframeHeight}px`;
+      iframe.parentElement.style["marginBlock"] = "1.5rem";
+      iframe.parentElement.style["paddingTop"] = 0;
+    });
+  }, []);
+
+  useEffect(() => {
+    const instagramIframes = document.querySelectorAll(".instagram-media");
+    instagramIframes?.forEach((iframe) => {
+      const iframeHeight = iframe.getAttribute("height");
+      // const iframeWidth = iframe.getAttribute("width");
+      // iframe.parentElement.style["width"] = `${iframeWidth}px`;
+      iframe.parentElement.style["height"] = `${iframeHeight}px`;
+      iframe.parentElement.style["marginBlock"] = "1.5rem";
+      iframe.parentElement.style["paddingTop"] = 0;
+    });
+  }, []);
+
   const classes = useStyles();
 
   const article = data?.articles[0];
@@ -47,12 +69,7 @@ const ArticlePage = ({ data }) => {
           ],
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        aria-label="article-page"
-        style={{ flexGrow: 1, padding: "15px" }}
-      >
+      <Container component="section" maxWidth="lg" aria-label="article-page">
         <div className={classes.chips}>
           <Link href={`/categories/${article.category.slug}`}>
             <a>
@@ -107,7 +124,7 @@ const ArticlePage = ({ data }) => {
         </Typography>
         <Divider className={classes.divider} />
         <Grid container justifyContent="space-between">
-          <Grid item xs={12} lg={8} component="article">
+          <Grid item xs={12} lg={7} component="article" className="left_column">
             <div className={classes.imageWrapper}>
               <Image
                 src={getMediaUrl(article.image_cover)}
@@ -117,7 +134,6 @@ const ArticlePage = ({ data }) => {
                 priority={true}
                 layout="responsive"
                 objectFit="cover"
-                objectPosition="center"
                 blurDataURL={getMediaUrl(article.image_cover)}
                 alt={article.title}
                 aria-label="article-cover"
@@ -152,8 +168,8 @@ const ArticlePage = ({ data }) => {
             item
             xs={12}
             lg={4}
+            className={classes.rightColumn}
             container
-            spacing={2}
             justifyContent="center"
             component="aside"
           >
@@ -191,9 +207,6 @@ export async function getServerSideProps(context) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  chips: {
-    marginTop: "1rem",
-  },
   chip: {
     marginBottom: "1rem",
   },

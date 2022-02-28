@@ -44,7 +44,6 @@ export default RelatedArticles;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "15px",
     width: "100%",
   },
   heading: {

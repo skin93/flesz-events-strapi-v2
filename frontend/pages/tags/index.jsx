@@ -21,6 +21,7 @@ const TagsPage = ({ data }) => {
   const [tagsToShow, setTagsToShow] = useState([]);
   const [next, setNext] = useState(tagsPerPage);
   const [tagsFound, setTagsFound] = useState([]);
+  const [search, setSearch] = useState("");
 
   const loopWithSlice = useCallback((start, end) => {
     const slicedTags = data.tags.slice(start, end);
@@ -36,14 +37,26 @@ const TagsPage = ({ data }) => {
     setNext(next + tagsPerPage);
   }, [loopWithSlice, next, tagsPerPage]);
 
-  const handleChange = useCallback((e) => {
-    const tagsFound = data.tags.filter(
-      (tag) =>
-        e.target.value !== "" &&
-        tag.name.toLowerCase().includes(e.target.value.toLowerCase())
+  const handleChange = (e) => {
+    if (e.target.value === "") {
+      clear();
+      return;
+    }
+
+    setSearch(e.target.value);
+
+    const tagsFound = data.tags.filter((tag) =>
+      tag.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
+
     setTagsFound(tagsFound);
-  }, []);
+    console.log(search.split("").length);
+  };
+
+  const clear = () => {
+    setTagsFound([]);
+    setSearch("");
+  };
 
   return (
     <Fragment>
@@ -69,6 +82,7 @@ const TagsPage = ({ data }) => {
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
+            value={search}
             onChange={handleChange}
             className={classes.textField}
             id="outlined-basic"
@@ -83,9 +97,9 @@ const TagsPage = ({ data }) => {
             }}
           />
         </form>
-        {tagsFound.length > 0 ? (
+        {search !== "" && tagsFound.length > 0 ? (
           <TagsContainer aria-label="tags-filtered" tags={tagsFound} />
-        ) : (
+        ) : search !== "" && tagsFound.length === 0 ? null : (
           <TagsContainer aria-label="all-tags" tags={tagsToShow} />
         )}
         <LoadMoreButton
@@ -101,7 +115,7 @@ const TagsPage = ({ data }) => {
 
 export default TagsPage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const data = await fetcher(ALL_TAGS_QUERY);
 
@@ -111,7 +125,6 @@ export async function getStaticProps() {
 
     return {
       props: { data },
-      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };
@@ -122,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,
-    margin: "3rem 0",
+    margin: "2rem 0 3rem 0",
     fontWeight: 600,
     fontSize: "calc(2rem + .8vw)",
     textTransform: "uppercase",

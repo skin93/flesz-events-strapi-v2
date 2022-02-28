@@ -10,9 +10,9 @@ const ResultsContainer = ({ articles, onClick }) => {
       <Container
         maxWidth="lg"
         aria-label="Results container"
-        className={classes.results}
+        className={classes.container}
       >
-        <ul>
+        <ul className={classes.results}>
           {articles.map((article) => (
             <li key={article.id} className={classes.resultItem}>
               <Link href={`/articles/${article.slug}`} passHref>
@@ -29,7 +29,7 @@ const ResultsContainer = ({ articles, onClick }) => {
 export default ResultsContainer;
 
 const useStyles = makeStyles((theme) => ({
-  results: {
+  container: {
     margin: "3rem auto 0 auto",
     display: "flex",
     flexDirection: "column",
@@ -42,14 +42,22 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.light.main,
     },
   },
+  results: {
+    padding: "1rem 2rem",
+    textAlign: "right",
+  },
   resultItem: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    listStyle: "none",
     lineHeight: 2,
+    transform: "scale(1)",
+    transition: ".2s all ease-in-out",
     "&:hover": {
-      backgroundColor: "rgba(0,0,0,0.2)",
+      transform: "scale(1.03)",
+    },
+    "& a": {
+      "&:hover": {
+        color: theme.palette.accent.main,
+      },
     },
   },
 }));
