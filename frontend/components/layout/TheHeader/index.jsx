@@ -75,20 +75,6 @@ const TheHeader = (props) => {
     );
   }
 
-  if (!data) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
   const handleChange = (e) => {
     if (e.target.value === "") {
       clear();
