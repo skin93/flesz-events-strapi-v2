@@ -49,8 +49,8 @@ const ArticlePage = ({ data }) => {
   return (
     <Fragment>
       <NextSeo
-        title={article.title}
-        description={article.excerpt}
+        title={article.metadata.meta_title}
+        description={article.metadata.meta_description}
         nofollow={!article.metadata.follow}
         noindex={!article.metadata.index}
         cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`}

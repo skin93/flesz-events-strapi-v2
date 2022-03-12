@@ -52,8 +52,8 @@ const CategoryPage = ({ data }) => {
   return (
     <Fragment>
       <NextSeo
-        title={category.name}
-        description={category.description}
+        title={category.metadata.meta_title}
+        description={category.metadata.meta_description}
         nofollow={!category.metadata.follow}
         noindex={!category.metadata.index}
         cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`}

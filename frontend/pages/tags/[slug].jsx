@@ -52,8 +52,8 @@ const TagPage = ({ data }) => {
   return (
     <Fragment>
       <NextSeo
-        title={tag.name}
-        description={tag.description}
+        title={tag.metadata.meta_title}
+        description={tag.metadata.meta_description}
         nofollow={!tag.metadata.follow}
         noindex={!tag.metadata.index}
         cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`}
