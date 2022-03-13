@@ -74,7 +74,7 @@ const TagsPage = ({ data }) => {
       <Container
         component="section"
         maxWidth="lg"
-        className={classes.root}
+        className={classes.container}
         aria-label="tags-page"
       >
         <Typography component="h1" className={classes.heading}>
@@ -132,6 +132,9 @@ export async function getServerSideProps() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingInline: "1rem",
+  },
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,

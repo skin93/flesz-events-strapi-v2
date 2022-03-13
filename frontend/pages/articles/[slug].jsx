@@ -69,7 +69,12 @@ const ArticlePage = ({ data }) => {
           ],
         }}
       />
-      <Container component="section" maxWidth="lg" aria-label="article-page">
+      <Container
+        component="section"
+        maxWidth="lg"
+        aria-label="article-page"
+        className={classes.container}
+      >
         <div className={classes.chips}>
           <Link href={`/categories/${article.category.slug}`}>
             <a>
@@ -207,6 +212,9 @@ export async function getServerSideProps(context) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingInline: "1rem",
+  },
   chip: {
     marginBottom: "1rem",
   },

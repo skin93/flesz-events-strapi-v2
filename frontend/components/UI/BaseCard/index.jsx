@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    width: "calc(100% - 16px)",
+    width: "100%",
     height: "200px",
     [theme.breakpoints.up("sm")]: {
       height: "300px",

@@ -3,11 +3,6 @@ import grey from "@material-ui/core/colors/grey";
 
 const theme = createTheme({
   overrides: {
-    MuiContainer: {
-      root: {
-        paddingInline: "0 !important",
-      },
-    },
     MuiPaper: {
       rounded: {
         borderRadius: 0,
@@ -53,7 +48,7 @@ const theme = createTheme({
         fontSize: "clamp(1rem, 2vw, 1.2rem)",
       },
       subtitle2: {
-        fontSize: "clamp(.5rem, 3vw, .7rem)",
+        fontSize: "clamp(.5rem, 3vw, .8rem)",
       },
       caption: {
         fontSize: "clamp(.6rem, 2vw, .8rem)",
@@ -163,11 +158,14 @@ const theme = createTheme({
 
         blockquote: {
           fontStyle: "italic",
+          fontWeight: 100,
           padding: "1em",
           lineHeight: "2rem",
-          margin: "0 auto",
+          letterSpacing: "2px",
+          margin: "1rem auto",
           borderLeft: "10px solid #32e0c4",
-          backgroundColor: grey[800],
+          backgroundColor: "transparent",
+          color: "#eee",
         },
         span: {
           backgroundColor: "transparent",

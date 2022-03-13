@@ -96,8 +96,12 @@ const TheHeader = (props) => {
     <Fragment>
       <HideOnScroll {...props}>
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar variant="dense" id="back-to-top-anchor">
-            <Container maxWidth="lg" className={classes.navbarDisplayFlex}>
+          <Toolbar
+            variant="dense"
+            id="back-to-top-anchor"
+            style={{ paddingInline: 0 }}
+          >
+            <Container maxWidth="lg" className={classes.container}>
               <div
                 className={classes.navbarBrand}
                 color="inherit"
@@ -188,10 +192,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textAlign: "center",
   },
-  navbarDisplayFlex: {
+  container: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingInline: "1rem",
   },
   navbarBrand: {
     display: "flex",

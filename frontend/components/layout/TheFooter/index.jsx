@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    padding: "1rem",
+    padding: "8px 1rem",
   },
   linkText: {
     textDecoration: "none",

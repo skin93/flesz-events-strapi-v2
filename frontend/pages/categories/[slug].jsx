@@ -64,7 +64,12 @@ const CategoryPage = ({ data }) => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`,
         }}
       />
-      <Container component="section" maxWidth="lg" aria-label="category-page">
+      <Container
+        component="section"
+        maxWidth="lg"
+        aria-label="category-page"
+        className={classes.container}
+      >
         {articlesToShow.length > 0 ? (
           <Fragment>
             <Typography variant="h1" className={classes.heading}>
@@ -86,7 +91,7 @@ const CategoryPage = ({ data }) => {
                 </div>
               }
             >
-              <Grid className={classes.articles} container spacing={2}>
+              <Grid className={classes.articles} container spacing={4} xs={12}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
                     <Grid item xs={12} md={6}>
@@ -136,10 +141,13 @@ export async function getServerSideProps({ params }) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingInline: 0,
+  },
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,
-    margin: "3rem 0 0 0 ",
+    marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",
     " & > span": {
@@ -150,9 +158,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     fontWeight: 600,
     textTransform: "uppercase",
-  },
-  container: {
-    marginTop: "30px",
   },
   noArticles: {
     position: "absolute",
@@ -169,13 +174,13 @@ const useStyles = makeStyles((theme) => ({
   block: {
     display: "flex",
     justifyContent: "center",
-    margin: "3rem 0",
+    marginTop: "3rem",
   },
   endMessage: {
     margin: 0,
     color: theme.palette.text.disabled,
   },
   articles: {
-    margin: "3rem 0 0 0",
+    margin: 0,
   },
 }));

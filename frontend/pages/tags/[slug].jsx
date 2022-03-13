@@ -82,7 +82,12 @@ const TagPage = ({ data }) => {
         }}
       />
 
-      <Container component="section" maxWidth="lg" aria-label="tag-page">
+      <Container
+        component="section"
+        maxWidth="lg"
+        aria-label="tag-page"
+        className={classes.container}
+      >
         {articlesToShow.length > 0 ? (
           <Fragment>
             <Typography variant="h1" className={classes.heading}>
@@ -105,7 +110,7 @@ const TagPage = ({ data }) => {
                 </div>
               }
             >
-              <Grid className={classes.articles} container spacing={2}>
+              <Grid className={classes.articles} container spacing={4} xs={12}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
                     <Grid item xs={12} md={6}>
@@ -158,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,
-    margin: "3rem 0 0 0 ",
+    marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",
     " & > span": {
@@ -171,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
   },
   container: {
-    marginTop: "3rem",
+    paddingInline: 0,
   },
   noArticles: {
     position: "absolute",
@@ -196,13 +201,13 @@ const useStyles = makeStyles((theme) => ({
   block: {
     display: "flex",
     justifyContent: "center",
-    margin: "3rem 0",
+    marginTop: "3rem",
   },
   endMessage: {
     margin: 0,
     color: theme.palette.text.disabled,
   },
   articles: {
-    margin: "3rem 0 0 0 ",
+    margin: 0,
   },
 }));

@@ -48,7 +48,7 @@ const Home = ({ data }) => {
       <Container
         component="section"
         maxWidth="lg"
-        className={classes.root}
+        className={classes.container}
         aria-label="home-page"
       >
         <Typography variant="h1" className={classes.heading}>
@@ -56,7 +56,7 @@ const Home = ({ data }) => {
         </Typography>
 
         <InfiniteScroll
-          style={{ overflowX: "hidden" }}
+          style={{ overflow: "hidden" }}
           dataLength={articlesToShow.length}
           next={getMoreArticles}
           hasMore={hasMore}
@@ -71,12 +71,7 @@ const Home = ({ data }) => {
             </div>
           }
         >
-          <Grid
-            className={classes.articles}
-            container
-            justifyContent="space-between"
-            spacing={3}
-          >
+          <Grid className={classes.articles} container spacing={4} xs={12}>
             {articlesToShow.map((article) => (
               <Fade key={article.id} in timeout={500}>
                 <Grid item xs={12} md={6}>
@@ -121,23 +116,26 @@ export async function getServerSideProps() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingInline: 0,
+  },
   heading: {
     textAlign: "center",
     color: theme.palette.light.main,
-    margin: "2rem auto 0 auto",
+    marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",
   },
   block: {
     display: "flex",
     justifyContent: "center",
-    marginBlock: "3rem",
+    marginTop: "3rem",
   },
   endMessage: {
     margin: 0,
     color: theme.palette.text.disabled,
   },
   articles: {
-    margin: "3rem 0 0 0",
+    margin: 0,
   },
 }));
