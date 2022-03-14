@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 export const PREVIEW_ARTICLE_QUERY = gql`
   query previewArticleQuery($id: ID!) {
     article(id: $id, publicationState: PREVIEW) {
@@ -31,7 +31,6 @@ export const PREVIEW_ARTICLE_QUERY = gql`
         og_locale
         og_type
         follow
-        keywords
         index
         share_image {
           media {

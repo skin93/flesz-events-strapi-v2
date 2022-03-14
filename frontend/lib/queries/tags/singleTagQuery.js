@@ -31,7 +31,6 @@ export const SINGLE_TAG_QUERY = gql`
         og_type
         follow
         index
-        keywords
         share_image {
           media {
             url

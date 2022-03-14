@@ -9,7 +9,7 @@
   "attributes": {
     "meta_title": {
       "type": "string",
-      "maxLength": 60,
+      "maxLength": 70,
       "required": true,
       "unique": false
     },
@@ -22,9 +22,6 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.share-image"
-    },
-    "keywords": {
-      "type": "text"
     },
     "follow": {
       "type": "boolean",
