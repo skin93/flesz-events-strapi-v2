@@ -53,7 +53,7 @@ const ArticlePage = ({ data }) => {
         description={article.metadata.meta_description}
         nofollow={!article.metadata.follow}
         noindex={!article.metadata.index}
-        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`}
         openGraph={{
           title: `${article.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: article.metadata.og_description,

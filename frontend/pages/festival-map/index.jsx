@@ -17,7 +17,7 @@ const FestivalMapPage = (props) => {
         title="Festiwalowa Mapa Polski"
         description="Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!"
         nofollow={true}
-        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`}
         openGraph={{
           title: `Festiwalowa Mapa Polski| ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption:

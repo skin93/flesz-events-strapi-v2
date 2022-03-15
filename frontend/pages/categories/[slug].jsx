@@ -56,7 +56,7 @@ const CategoryPage = ({ data }) => {
         description={category.metadata.meta_description}
         nofollow={!category.metadata.follow}
         noindex={!category.metadata.index}
-        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`}
         openGraph={{
           title: `${category.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: category.metadata.og_description,

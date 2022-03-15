@@ -64,7 +64,7 @@ const TagsPage = ({ data }) => {
         title="Tagi"
         description="Zbiór wszystkich tagów"
         nofollow={true}
-        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`}
         openGraph={{
           title: `Tagi | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: "Zbiór wszystkich tagów",

@@ -56,7 +56,7 @@ const TagPage = ({ data }) => {
         description={tag.metadata.meta_description}
         nofollow={!tag.metadata.follow}
         noindex={!tag.metadata.index}
-        cannonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`}
         openGraph={{
           title: `${tag.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: tag.metadata.og_description,
