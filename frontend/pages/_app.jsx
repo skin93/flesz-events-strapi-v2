@@ -1,11 +1,11 @@
 import { useEffect, useState, Fragment } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import PropTypes from "prop-types";
 
-import * as gtag from "@/lib/gtag";
+import TagManager from "react-gtm-module";
 
 import theme from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -16,8 +16,6 @@ import TheFooter from "@/components/layout/TheFooter";
 import { PageTransition } from "next-page-transitions";
 
 const Loader = dynamic(() => import("@/components/UI/Loader"));
-
-Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
 export default function MyApp(props) {
   const router = useRouter();
@@ -39,6 +37,10 @@ export default function MyApp(props) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+  }, []);
+
+  useEffect(() => {
+    TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM });
   }, []);
 
   return (
