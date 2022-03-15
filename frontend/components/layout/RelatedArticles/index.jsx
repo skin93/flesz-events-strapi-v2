@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   heading: {
-    color: theme.palette.light.main,
     marginTop: "3rem ",
     fontWeight: 600,
   },

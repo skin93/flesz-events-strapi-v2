@@ -28,7 +28,7 @@ export default TheFooter;
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "auto",
-    backgroundColor: theme.palette.muted.darker,
+    backgroundColor: theme.palette.background.default,
   },
   container: {
     display: "flex",

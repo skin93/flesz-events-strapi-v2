@@ -137,7 +137,6 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    color: theme.palette.light.main,
     margin: "2rem 0 3rem 0",
     fontWeight: 600,
     fontSize: "calc(2rem + .8vw)",
@@ -155,6 +154,6 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     margin: "30px auto",
     textAlign: "center",
-    color: theme.palette.accent.main,
+    color: theme.palette.primary.main,
   },
 }));

@@ -228,7 +228,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     background: theme.palette.black.main,
-    color: theme.palette.light.main,
     fontWeight: 600,
   },
   title: {
@@ -237,40 +236,37 @@ const useStyles = makeStyles((theme) => ({
   },
   excerpt: {
     fontWeight: 600,
-    color: theme.palette.light.main,
+
     margin: "1rem 0",
   },
   category: {
-    color: theme.palette.accent.main,
+    color: theme.palette.primary.main,
     cursor: "pointer",
     textTransform: "uppercase",
     marginRight: "10px",
     borderRadius: "0px",
-    borderColor: theme.palette.accent.main,
+    borderColor: theme.palette.primary.main,
   },
   tag: {
     cursor: "pointer",
     textTransform: "uppercase",
     marginRight: "10px",
-
     borderRadius: "0px",
-    color: theme.palette.light.main,
     borderColor: theme.palette.light.main,
   },
   published_at: {
-    borderColor: theme.palette.muted.darker,
+    borderColor: theme.palette.background.default,
     marginRight: "10px",
 
     borderRadius: "0px",
   },
   writer: {
-    borderColor: theme.palette.muted.darker,
+    borderColor: theme.palette.background.default,
     borderRadius: "0px",
   },
   divider: {
     margin: "1rem 0",
     height: "3px",
-    backgroundColor: theme.palette.muted.main,
     "&:first-of-type": {
       marginTop: "0",
     },

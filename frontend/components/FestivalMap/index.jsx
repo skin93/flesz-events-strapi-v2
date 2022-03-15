@@ -248,7 +248,6 @@ const useStyles = makeStyles((theme) => ({
   },
   desc: {
     marginBottom: 0,
-    color: theme.palette.light.main,
   },
   location: {
     color: theme.palette.text.secondary,
@@ -268,7 +267,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "1.3em",
   },
   event: {

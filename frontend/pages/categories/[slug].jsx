@@ -146,16 +146,14 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    color: theme.palette.light.main,
     marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",
     " & > span": {
-      color: theme.palette.accent.main,
+      color: theme.palette.primary.main,
     },
   },
   noHeading: {
-    color: theme.palette.light.main,
     fontWeight: 600,
     textTransform: "uppercase",
   },
@@ -169,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     margin: "30px auto",
     fontWeight: "bold",
-    color: theme.palette.accent.main,
+    color: theme.palette.primary.main,
   },
   block: {
     display: "flex",

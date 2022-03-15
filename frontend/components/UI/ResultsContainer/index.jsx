@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     backgroundColor: theme.palette.background.default,
     "& > h2": {
-      color: theme.palette.primary.main,
       marginLeft: "auto",
     },
     "&  a": {
@@ -56,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& a": {
       "&:hover": {
-        color: theme.palette.accent.main,
+        color: theme.palette.primary.main,
       },
     },
   },

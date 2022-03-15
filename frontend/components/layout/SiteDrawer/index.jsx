@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   active: {
     textDecoration: `none`,
     textTransform: `uppercase`,
-    color: theme.palette.accent.main,
+    color: theme.palette.primary.main,
   },
   linkText: {
     textDecoration: `none`,

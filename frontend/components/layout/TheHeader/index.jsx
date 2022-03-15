@@ -182,9 +182,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.black.main,
   },
   offset: theme.mixins.toolbar,
-  home: {
-    color: theme.palette.light.main,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -217,7 +214,7 @@ const useStyles = makeStyles((theme) => ({
   active: {
     textDecoration: "none",
     textTransform: "uppercase",
-    color: theme.palette.accent.main,
+    color: theme.palette.primary.main,
   },
   linkText: {
     textDecoration: "none",
@@ -246,9 +243,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: theme.palette.light.main,
-  },
-  inputRoot: {
     color: theme.palette.light.main,
   },
   inputInput: {

@@ -121,7 +121,6 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    color: theme.palette.light.main,
     marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",

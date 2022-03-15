@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "inherit",
     transition: "all .2s ease-in-out",
     "& span": {
-      color: theme.palette.accent.main,
+      color: theme.palette.primary.main,
     },
     "&:hover": {
       transform: "scale(1.1)",

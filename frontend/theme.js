@@ -1,6 +1,19 @@
 import { createTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 
+let palette = {
+  type: "dark",
+  primary: {
+    main: "#32e0c4",
+  },
+  light: {
+    main: grey[200],
+  },
+  black: {
+    main: grey[900],
+  },
+};
+
 const theme = createTheme({
   overrides: {
     MuiPaper: {
@@ -59,7 +72,7 @@ const theme = createTheme({
         transition: "all .2s ease-in-out",
         "&:hover": {
           backgroundColor: "transparent",
-          color: "#32e0c4",
+          color: palette.primary.main,
           transform: "scale(1.1)",
         },
       },
@@ -69,7 +82,7 @@ const theme = createTheme({
         transition: "all .2s ease-in-out",
         "&:hover": {
           backgroundColor: "transparent",
-          color: "#32e0c4",
+          color: palette.primary.main,
           transform: "scale(1.1)",
         },
       },
@@ -113,28 +126,32 @@ const theme = createTheme({
           },
         },
         body: {
+          padding: 0,
+          margin: 0,
           lineHeight: "1.5",
-          color: grey[400],
+          backgroundColor: grey[900],
+          "& ::selection": {
+            backgroundColor: grey[900],
+            color: palette.primary.main,
+          },
         },
 
         h1: {
           fontSize: "clamp(2rem, 3vw, 3rem)",
-          color: grey[50],
         },
         h2: {
           fontSize: "clamp(1.7rem, 3vw, 2.5rem)",
-          color: grey[50],
         },
         h3: {
           fontSize: "clamp(1.4rem, 3vw, 2rem)",
-          color: grey[50],
         },
         h4: {
           fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
-          color: grey[50],
         },
         p: {
           fontSize: "clamp(1rem, 2vw, 1.2rem)",
+          color: grey[200],
+          fontWeight: 300,
         },
         ul: {
           fontSize: "clamp(1rem, 2vw, 1.2rem)",
@@ -147,7 +164,7 @@ const theme = createTheme({
         },
         li: {
           "&::marker": {
-            color: "#32e0c4",
+            color: palette.primary.main,
           },
         },
         ".marker-btn": {
@@ -171,39 +188,16 @@ const theme = createTheme({
           backgroundColor: "transparent",
         },
         a: {
-          color: "#32e0c4",
+          color: palette.primary.main,
           textDecoration: "none",
         },
         strong: {
-          color: "#eee",
+          color: grey[50],
         },
       },
     },
   },
-  palette: {
-    primary: {
-      main: "#32e0c4",
-      darker: "#248f7e",
-    },
-    type: "dark",
-    accent: {
-      main: "#32e0c4",
-    },
-    light: {
-      main: grey[200],
-    },
-    black: {
-      main: "#212121",
-    },
-    muted: {
-      main: "rgb(179, 179, 179)",
-      darker: "rgba(179, 179, 179, 0.1)",
-    },
-    background: {
-      main: "rgb(36,36,36)",
-      lighter: "rgb(40,40,40)",
-    },
-  },
+  palette,
 });
 
 export default theme;
