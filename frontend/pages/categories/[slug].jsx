@@ -91,7 +91,7 @@ const CategoryPage = ({ data }) => {
                 </div>
               }
             >
-              <Grid className={classes.articles} container spacing={4} xs={12}>
+              <Grid className={classes.articles} container spacing={4}>
                 {articlesToShow.map((article) => (
                   <Fade key={article.id} in timeout={200}>
                     <Grid item xs={12} md={6}>
@@ -180,5 +180,6 @@ const useStyles = makeStyles((theme) => ({
   },
   articles: {
     margin: 0,
+    maxWidth: "100%",
   },
 }));
