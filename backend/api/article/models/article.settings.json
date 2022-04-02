@@ -67,6 +67,10 @@
     },
     "publish_at": {
       "type": "datetime"
+    },
+    "events": {
+      "via": "article",
+      "collection": "event"
     }
   }
 }

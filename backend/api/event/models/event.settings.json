@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "name": "Event",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "date": {
+      "type": "date"
+    },
+    "metadata": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.metadata"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "tags": {
+      "collection": "tag",
+      "via": "events",
+      "dominant": true
+    },
+    "article": {
+      "model": "article",
+      "via": "events"
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "place": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
