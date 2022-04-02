@@ -1,7 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -14,16 +13,17 @@ import { alpha } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Container from "@material-ui/core/Container";
 import Hidden from "@material-ui/core/Hidden";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Slide from "@material-ui/core/Slide";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkButton from "@/components/UI/LinkButton";
 
 const SiteDrawer = dynamic(() => import("@/components/layout/SiteDrawer"));
 
@@ -43,10 +43,15 @@ const HideOnScroll = (props) => {
 };
 
 const navLinks = [
-  { title: "news", path: "/categories/news" },
+  { title: "newsy", path: "/categories/newsy" },
   { title: "festiwale", path: "/categories/festiwale" },
   { title: "koncerty", path: "/categories/koncerty" },
-  { title: "mapa", path: "/festival-map" },
+  { title: "patronat", path: "/categories/patronat" },
+];
+
+const items = [
+  { title: "eventy", path: "/events" },
+  { title: "festiwalowa mapa", path: "/festival-map" },
 ];
 
 const TheHeader = (props) => {
@@ -54,6 +59,16 @@ const TheHeader = (props) => {
   const router = useRouter();
   const inputRef = useRef();
   const [search, setSearch] = useState("");
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleAnchor = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const [articlesFound, setArticlesFound] = useState([]);
 
@@ -116,34 +131,38 @@ const TheHeader = (props) => {
                 </Link>
               </div>
               <Hidden smDown>
-                <List
-                  component="nav"
-                  aria-label="main-navigation"
-                  className={classes.navDisplayFlex}
-                >
-                  {navLinks.map(({ title, path }) => (
-                    <Link href={`${path}`} key={title} passHref>
-                      <a
-                        className={
-                          router.asPath === `${path}`
-                            ? `${classes.active}`
-                            : `${classes.linkText}`
-                        }
-                      >
-                        <ListItem button>
-                          <ListItemText primary={title} />
-                        </ListItem>
-                      </a>
-                    </Link>
+                <nav aria-label="main-navigation" className={classes.navbar}>
+                  <Button
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleAnchor}
+                  >
+                    Wpisy
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    {navLinks.map(({ title, path }) => (
+                      <MenuItem onClick={handleClose}>
+                        <LinkButton href={path} title={title} />
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                  {items.map(({ title, path }) => (
+                    <LinkButton href={path} title={title} />
                   ))}
                   <Link href="https://facebook.com/flesz.events" passHref>
-                    <ListItem button>
-                      <FacebookIcon className={classes.icon} />
-                    </ListItem>
+                    <Button className={classes.icon}>
+                      <FacebookIcon />
+                    </Button>
                   </Link>
-                </List>
+                </nav>
               </Hidden>
-              <Hidden mdDown>
+              <Hidden smDown>
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
@@ -161,7 +180,7 @@ const TheHeader = (props) => {
                 </div>
               </Hidden>
               <Hidden mdUp>
-                <SiteDrawer navLinks={navLinks} />
+                <SiteDrawer navLinks={navLinks} items={items} />
               </Hidden>
             </Container>
           </Toolbar>
@@ -207,21 +226,19 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     cursor: "pointer",
   },
-  navDisplayFlex: {
+  navbar: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    [theme.breakpoints.up("md")]: {
+      flex: 5,
+    },
   },
-  active: {
-    textDecoration: "none",
-    textTransform: "uppercase",
-    color: theme.palette.primary.main,
-  },
-  linkText: {
-    textDecoration: "none",
-    textTransform: "uppercase",
-    color: theme.palette.light.main,
-  },
+
   search: {
+    flex: 1,
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),

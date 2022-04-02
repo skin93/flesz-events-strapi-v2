@@ -7,15 +7,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/icons/Menu";
+import Button from "@material-ui/core/Button";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import FacebookIcon from "@material-ui/icons/Facebook";
 
 import Drawer from "@material-ui/core/Drawer";
+import Divider from "@material-ui/core/Divider";
+import LinkButton from "@/components/UI/LinkButton";
 
-const SiteDrawer = ({ navLinks }) => {
+const SiteDrawer = ({ navLinks, items }) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -41,32 +41,20 @@ const SiteDrawer = ({ navLinks }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List
-        component="nav"
-        aria-labelledby="main navigation"
-        className={classes.list}
-      >
+      <nav aria-labelledby="main navigation" className={classes.navbar}>
         {navLinks.map(({ title, path }) => (
-          <Link href={`${path}`} key={title} passHref>
-            <a
-              className={
-                router.asPath === `${path}`
-                  ? `${classes.active}`
-                  : `${classes.linkText}`
-              }
-            >
-              <ListItem button>
-                <ListItemText primary={title} />
-              </ListItem>
-            </a>
-          </Link>
+          <LinkButton href={path} title={title} />
+        ))}
+        <Divider />
+        {items.map(({ title, path }) => (
+          <LinkButton href={path} title={title} />
         ))}
         <Link href="https://facebook.com/flesz.events" passHref>
-          <ListItem button>
-            <FacebookIcon className={classes.icon} />
-          </ListItem>
+          <Button className={classes.icon}>
+            <FacebookIcon />
+          </Button>
         </Link>
-      </List>
+      </nav>
     </div>
   );
 
@@ -93,8 +81,11 @@ const SiteDrawer = ({ navLinks }) => {
 export default SiteDrawer;
 
 const useStyles = makeStyles((theme) => ({
-  list: {
+  navbar: {
     width: 250,
+    display: "flex",
+    flexDirection: "column",
+    // alignItems: "flex-start",
   },
   active: {
     textDecoration: `none`,
@@ -108,5 +99,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.light.main,
+    "& > .MuiButton-label": {
+      justifyContent: "flex-start",
+    },
   },
 }));
