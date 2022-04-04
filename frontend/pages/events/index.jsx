@@ -64,12 +64,12 @@ const EventsPage = ({ data }) => {
   return (
     <Fragment>
       <NextSeo
-        title="Wydarzenia"
+        title="Eventy"
         description="Lista nadchodzących wydarzeń"
         nofollow={true}
         canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/events`}
         openGraph={{
-          title: `Wydarzenia | ${process.env.NEXT_PUBLIC_APP_NAME}`,
+          title: `Eventy | ${process.env.NEXT_PUBLIC_APP_NAME}`,
           descirption: "Lista nadchodzących wydarzeń",
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/events`,
         }}
