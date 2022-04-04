@@ -19,6 +19,7 @@ const TheFooter = () => {
   ];
 
   const items = [
+    { title: "tagi", path: "/tags" },
     { title: "eventy", path: "/events" },
     { title: "festiwalowa mapa", path: "/festival-map" },
   ];
@@ -59,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     display: "flex",
-    gap: "100px",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "flex-end",
@@ -67,20 +67,24 @@ const useStyles = makeStyles((theme) => ({
   },
   navigations: {
     display: "flex",
+    alignItems: "flex-start",
     flexDirection: "column",
   },
   items: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "flex-start",
+
+    "& .MuiButton-label": {
+      justifyContent: "flex-start",
+    },
   },
   socials: {
     display: "flex",
-    alignItems: "flex-end",
-    flexDirection: "column",
   },
   icon: {
     "& > .MuiButton-label": {
-      justifyContent: "flex-end",
+      justifyContent: "flex-start",
     },
     color: theme.palette.light.main,
   },
