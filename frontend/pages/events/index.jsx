@@ -39,11 +39,6 @@ const EventsPage = ({ data }) => {
   }, [loopWithSlice, next, eventsPerPage]);
 
   const handleChange = (e) => {
-    if (e.target.value === "") {
-      clear();
-      return;
-    }
-
     setSearch(e.target.value);
 
     const eventsFiltered = data.events.filter(
@@ -54,11 +49,6 @@ const EventsPage = ({ data }) => {
     );
 
     setEventsFound(eventsFiltered);
-  };
-
-  const clear = () => {
-    setEventsFound([]);
-    setSearch("");
   };
 
   return (
