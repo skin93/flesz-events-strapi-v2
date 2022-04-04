@@ -1,13 +1,17 @@
 import { createTheme } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
+import { grey, cyan } from "@material-ui/core/colors";
 
 let palette = {
   type: "dark",
   primary: {
     main: "#32e0c4",
   },
+  secondary: {
+    main: "#63ADF2",
+    lighter: "#A6D4FF",
+  },
   light: {
-    main: grey[200],
+    main: grey[50],
   },
   black: {
     main: grey[900],
@@ -150,8 +154,8 @@ const theme = createTheme({
         },
         p: {
           fontSize: "clamp(1rem, 2vw, 1.2rem)",
-          color: grey[200],
-          fontWeight: 300,
+          color: grey[500],
+          fontWeight: 400,
         },
         ul: {
           fontSize: "clamp(1rem, 2vw, 1.2rem)",
@@ -166,7 +170,12 @@ const theme = createTheme({
           "&::marker": {
             color: palette.primary.main,
           },
+
+          "& > s": {
+            color: grey[400],
+          },
         },
+
         ".marker-btn": {
           background: "none",
           border: "none",
@@ -188,11 +197,21 @@ const theme = createTheme({
           backgroundColor: "transparent",
         },
         a: {
-          color: palette.primary.main,
+          color: palette.secondary.main,
           textDecoration: "none",
+          transition: "color .3s ease-in-out",
+
+          "& > strong": {
+            color: palette.secondary.main,
+          },
+
+          "&:hover": {
+            color: palette.secondary.lighter,
+          },
         },
         strong: {
           color: grey[50],
+          fontWeight: 900,
         },
       },
     },
