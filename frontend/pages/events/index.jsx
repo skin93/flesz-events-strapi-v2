@@ -39,16 +39,23 @@ const EventsPage = ({ data }) => {
   }, [loopWithSlice, next, eventsPerPage]);
 
   const handleChange = (e) => {
+    if (e.target.value === "") {
+      clear();
+      return;
+    }
+
     setSearch(e.target.value);
 
-    const eventsFiltered = data.events.filter(
-      (event) =>
-        event.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        event.city.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        event.place.toLowerCase().includes(e.target.value.toLowerCase())
+    const eventsFound = data.events.filter((event) =>
+      event.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
-    setEventsFound(eventsFiltered);
+    setEventsFound(eventsFound);
+  };
+
+  const clear = () => {
+    setEventsFound([]);
+    setSearch("");
   };
 
   return (
