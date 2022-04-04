@@ -147,13 +147,13 @@ const TheHeader = (props) => {
                     onClose={handleClose}
                   >
                     {navLinks.map(({ title, path }) => (
-                      <MenuItem onClick={handleClose}>
+                      <MenuItem key={title} onClick={handleClose}>
                         <LinkButton href={path} title={title} />
                       </MenuItem>
                     ))}
                   </Menu>
                   {items.map(({ title, path }) => (
-                    <LinkButton href={path} title={title} />
+                    <LinkButton key={title} href={path} title={title} />
                   ))}
                   <Link href="https://facebook.com/flesz.events" passHref>
                     <Button className={classes.icon}>

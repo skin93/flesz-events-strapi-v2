@@ -43,11 +43,11 @@ const SiteDrawer = ({ navLinks, items }) => {
     >
       <nav aria-labelledby="main navigation" className={classes.navbar}>
         {navLinks.map(({ title, path }) => (
-          <LinkButton href={path} title={title} />
+          <LinkButton key={title} href={path} title={title} />
         ))}
         <Divider />
         {items.map(({ title, path }) => (
-          <LinkButton href={path} title={title} />
+          <LinkButton key={title} href={path} title={title} />
         ))}
         <Link href="https://facebook.com/flesz.events" passHref>
           <Button className={classes.icon}>

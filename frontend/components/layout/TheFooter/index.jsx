@@ -28,12 +28,12 @@ const TheFooter = () => {
       <Container maxWidth="lg" className={classes.container}>
         <div className={classes.navigations}>
           {navLinks.map(({ title, path }) => (
-            <LinkButton href={path} title={title} />
+            <LinkButton key={title} href={path} title={title} />
           ))}
         </div>
         <div className={classes.items}>
           {items.map(({ title, path }) => (
-            <LinkButton href={path} title={title} />
+            <LinkButton key={title} href={path} title={title} />
           ))}
         </div>
 
