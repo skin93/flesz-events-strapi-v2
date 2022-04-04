@@ -20,15 +20,6 @@
     "date": {
       "type": "date"
     },
-    "metadata": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.metadata"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "name"
-    },
     "tags": {
       "collection": "tag",
       "via": "events",
