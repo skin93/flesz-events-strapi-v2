@@ -24,12 +24,18 @@ const EventsContainer = ({ events }) => {
               <a>
                 <div className={classes.eventItem}>
                   <div className={classes.eventInfo}>
-                    <Typography className={classes.eventName} component="h3">
-                      <Moment className={classes.eventDate} format="DD.MM.YY">
-                        {event.date}
-                      </Moment>{" "}
-                      <span className={classes.divider}>/</span> {event.name}
-                    </Typography>
+                    {event.end_date ? (
+                      <Typography className={classes.eventName} component="h3">
+                        <Moment format="DD">{event.date}</Moment>-
+                        <Moment format="DD.MM.YY">{event.end_date}</Moment>{" "}
+                        <span className={classes.divider}>/</span> {event.name}
+                      </Typography>
+                    ) : (
+                      <Typography className={classes.eventName} component="h3">
+                        <Moment format="DD.MM.YY">{event.date}</Moment>{" "}
+                        <span className={classes.divider}>/</span> {event.name}
+                      </Typography>
+                    )}
                     <Typography
                       className={classes.eventLocalization}
                       component="span"
@@ -81,9 +87,6 @@ const useStyles = makeStyles((theme) => ({
   eventLocalization: {
     fontSize: "1rem",
     color: theme.palette.grey[500],
-  },
-  eventDate: {
-    backgroundColor: theme.palette.primary.color,
   },
   divider: {
     color: theme.palette.primary.main,

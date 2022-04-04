@@ -36,6 +36,9 @@
     "place": {
       "type": "string",
       "required": true
+    },
+    "end_date": {
+      "type": "date"
     }
   }
 }

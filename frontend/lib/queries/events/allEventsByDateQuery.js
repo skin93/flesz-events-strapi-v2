@@ -5,6 +5,7 @@ export const ALL_EVENTS_BY_DATE_QUERY = gql`
     events(where: { date_gte: $date }, sort: "date") {
       name
       date
+      end_date
       city
       place
       article {
