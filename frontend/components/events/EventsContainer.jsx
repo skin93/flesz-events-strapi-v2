@@ -25,7 +25,10 @@ const EventsContainer = ({ events }) => {
                 <div className={classes.eventItem}>
                   <div className={classes.eventInfo}>
                     <Typography className={classes.eventName} component="h3">
-                      {event.name}
+                      <Moment className={classes.eventDate} format="DD.MM.YY">
+                        {event.date}
+                      </Moment>{" "}
+                      <span className={classes.divider}>/</span> {event.name}
                     </Typography>
                     <Typography
                       className={classes.eventLocalization}
@@ -34,9 +37,6 @@ const EventsContainer = ({ events }) => {
                       {event.city} / {event.place}
                     </Typography>
                   </div>
-                  <Moment className={classes.eventDate} format="DD.MM.YY">
-                    {event.date}
-                  </Moment>
                 </div>
               </a>
             </Link>
@@ -72,18 +72,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   eventInfo: {
-    flex: 3,
+    flex: 1,
   },
   eventName: {
     fontSize: "calc(1rem + 0.8vw)",
+    textTransform: "uppercase",
   },
   eventLocalization: {
     fontSize: "1rem",
     color: theme.palette.grey[500],
   },
   eventDate: {
-    fontSize: "calc(1rem + 0.8vw)",
-    flex: 2,
-    textAlign: "right",
+    backgroundColor: theme.palette.primary.color,
+  },
+  divider: {
+    color: theme.palette.primary.main,
   },
 }));
