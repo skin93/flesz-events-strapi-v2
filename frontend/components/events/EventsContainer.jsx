@@ -24,7 +24,17 @@ const EventsContainer = ({ events }) => {
               <a>
                 <div className={classes.eventItem}>
                   <div className={classes.eventInfo}>
-                    {event.end_date ? (
+                    {event.end_date &&
+                    event.end_date.split("-")[1] !==
+                      event.date.split("-")[1] ? (
+                      <Typography className={classes.eventName} component="h3">
+                        <Moment format="DD.MM">{event.date}</Moment>-
+                        <Moment format="DD.MM.YY">{event.end_date}</Moment>{" "}
+                        <span className={classes.divider}>/</span> {event.name}
+                      </Typography>
+                    ) : event.end_date &&
+                      event.end_date.split("-")[1] ===
+                        event.date.split("-")[1] ? (
                       <Typography className={classes.eventName} component="h3">
                         <Moment format="DD">{event.date}</Moment>-
                         <Moment format="DD.MM.YY">{event.end_date}</Moment>{" "}
