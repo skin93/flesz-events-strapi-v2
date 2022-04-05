@@ -183,15 +183,24 @@ const theme = createTheme({
         },
 
         blockquote: {
+          position: "relative",
+          fontWeight: 800,
           fontStyle: "italic",
-          fontWeight: 100,
-          padding: "1em",
           lineHeight: "2rem",
           letterSpacing: "2px",
+          padding: "30px 0",
+          width: "100%",
+          maxWidth: "500px",
+          zIndex: 1,
           margin: "1rem auto",
-          borderLeft: "10px solid #32e0c4",
+          lineHeight: "2rem",
+          borderTop: `solid 1px ${palette.primary.main} `,
+          borderBottom: `solid 1px ${palette.primary.main} `,
           backgroundColor: "transparent",
-          color: "#eee",
+
+          "& p": {
+            color: grey[50],
+          },
         },
         span: {
           backgroundColor: "transparent",
