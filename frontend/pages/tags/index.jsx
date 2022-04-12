@@ -17,7 +17,7 @@ import { NextSeo } from "next-seo";
 const TagsPage = ({ data }) => {
   const classes = useStyles();
 
-  const [tagsPerPage] = useState(12);
+  const [tagsPerPage] = useState(24);
   const [tagsToShow, setTagsToShow] = useState([]);
   const [next, setNext] = useState(tagsPerPage);
   const [tagsFound, setTagsFound] = useState([]);
@@ -38,24 +38,13 @@ const TagsPage = ({ data }) => {
   }, [loopWithSlice, next, tagsPerPage]);
 
   const handleChange = (e) => {
-    if (e.target.value === "") {
-      clear();
-      return;
-    }
-
     setSearch(e.target.value);
 
-    const tagsFound = data.tags.filter((tag) =>
-      tag.name.toLowerCase().includes(e.target.value.toLowerCase())
+    const tagsFound = data.tags.filter(({ name }) =>
+      name.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     setTagsFound(tagsFound);
-    console.log(search.split("").length);
-  };
-
-  const clear = () => {
-    setTagsFound([]);
-    setSearch("");
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState, useMemo } from "react";
 import moment from "moment";
 
 import { fetchWithArgs } from "@/lib/fetcher";
@@ -7,12 +7,27 @@ import { ALL_EVENTS_BY_DATE_QUERY } from "@/lib/queries/events/allEventsByDateQu
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 import EventsContainer from "@/components/events/EventsContainer";
 import { NextSeo } from "next-seo";
 
 const EventsPage = ({ data }) => {
   const classes = useStyles();
+  const [search, setSearch] = useState("");
+
+  const filteredEvents = useMemo(
+    () =>
+      data?.events.filter(
+        (event) =>
+          event.name.toLowerCase().includes(search.toLowerCase()) ||
+          event.city.toLowerCase().includes(search.toLowerCase()) ||
+          event.place.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search]
+  );
 
   return (
     <Fragment>
@@ -36,7 +51,24 @@ const EventsPage = ({ data }) => {
         <Typography component="h1" className={classes.heading}>
           NAJBLIŻSZE EVENTY
         </Typography>
-        <EventsContainer aria-label="all-events" events={data.events} />
+        <form className={classes.form} noValidate autoComplete="off">
+          <TextField
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className={classes.textField}
+            id="outlined-basic"
+            label="Podaj nazwę zespołu / festiwalu / miasta / klubu"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </form>
+        <EventsContainer aria-label="filtered-events" events={filteredEvents} />
       </Container>
     </Fragment>
   );
