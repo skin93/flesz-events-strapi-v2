@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 import { Fade } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import Link from "next/link";
 
-const ResultsContainer = ({ articles, onClick }) => {
+const ResultsContainer = ({ articles }) => {
   const classes = useStyles();
   return (
     <Fade in timeout={500}>
@@ -16,7 +17,7 @@ const ResultsContainer = ({ articles, onClick }) => {
           {articles.map((article) => (
             <li key={article.id} className={classes.resultItem}>
               <Link href={`/articles/${article.slug}`} passHref>
-                <a onClick={onClick}>{article.title}</a>
+                <a>{article.title}</a>
               </Link>
             </li>
           ))}

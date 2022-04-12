@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -70,8 +70,6 @@ const TheHeader = (props) => {
     setAnchorEl(null);
   };
 
-  const [articlesFound, setArticlesFound] = useState([]);
-
   const q = ARTICLES_TITLE_QUERY;
 
   const { data, error } = useSWR(q, fetcher);
@@ -90,22 +88,13 @@ const TheHeader = (props) => {
     );
   }
 
-  const handleChange = (e) => {
-    if (e.target.value === "") {
-      clear();
-      return;
-    }
-    setSearch(e.target.value);
-    const articlesFound = data.articles.filter((article) =>
-      article.title.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setArticlesFound(articlesFound);
-  };
-
-  const clear = () => {
-    setArticlesFound([]);
-    setSearch("");
-  };
+  const filteredArticles = useMemo(
+    () =>
+      data?.articles.filter(({ title }) =>
+        title.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search]
+  );
 
   return (
     <Fragment>
@@ -170,7 +159,9 @@ const TheHeader = (props) => {
                   <InputBase
                     value={search}
                     placeholder="Szukaj..."
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
                     classes={{
                       root: classes.inputRoot,
                       input: classes.inputInput,
@@ -187,8 +178,8 @@ const TheHeader = (props) => {
         </AppBar>
       </HideOnScroll>
       <div className={classes.offset} />
-      {articlesFound.length > 0 && (
-        <ResultsContainer articles={articlesFound} onClick={clear} />
+      {search && filteredArticles?.length > 0 && (
+        <ResultsContainer articles={filteredArticles} />
       )}
     </Fragment>
   );

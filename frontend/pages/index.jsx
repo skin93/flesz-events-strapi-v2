@@ -20,7 +20,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const Home = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(6);
+  const [limit] = useState(12);
 
   const [articlesToShow, setArticlesToShow] = useState(data?.articles);
   const [hasMore, setHasMore] = useState(true);
@@ -100,7 +100,7 @@ export async function getServerSideProps() {
   try {
     const data = await fetchWithArgs(ALL_ARTICLES_QUERY, {
       start: 0,
-      limit: 6,
+      limit: 12,
     });
 
     if (!data) {

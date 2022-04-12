@@ -19,7 +19,7 @@ import { NextSeo } from "next-seo";
 const CategoryPage = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(6);
+  const [limit] = useState(12);
 
   const [articlesToShow, setArticlesToShow] = useState(
     data?.categories[0].articles
@@ -125,7 +125,7 @@ export async function getServerSideProps({ params }) {
     const data = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
       slug: params.slug,
       start: 0,
-      limit: 6,
+      limit: 12,
     });
 
     if (!data) {

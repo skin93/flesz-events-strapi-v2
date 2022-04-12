@@ -21,7 +21,7 @@ import { getMediaUrl } from "@/lib/getMediaUrl";
 const TagPage = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(6);
+  const [limit] = useState(12);
 
   const [articlesToShow, setArticlesToShow] = useState(data?.tags[0].articles);
   const [hasMore, setHasMore] = useState(true);
@@ -144,7 +144,7 @@ export async function getServerSideProps({ params }) {
     const data = await fetchWithArgs(SINGLE_TAG_QUERY, {
       slug: params.slug,
       start: 0,
-      limit: 6,
+      limit: 12,
     });
 
     if (!data) {

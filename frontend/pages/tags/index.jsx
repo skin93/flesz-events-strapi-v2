@@ -97,9 +97,9 @@ const TagsPage = ({ data }) => {
             }}
           />
         </form>
-        {search !== "" && tagsFound.length > 0 ? (
+        {search && tagsFound.length > 0 ? (
           <TagsContainer aria-label="tags-filtered" tags={tagsFound} />
-        ) : search !== "" && tagsFound.length === 0 ? null : (
+        ) : search && tagsFound.length === 0 ? null : (
           <TagsContainer aria-label="all-tags" tags={tagsToShow} />
         )}
         <LoadMoreButton
