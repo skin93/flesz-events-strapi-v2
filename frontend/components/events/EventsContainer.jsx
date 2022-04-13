@@ -18,7 +18,7 @@ const EventsContainer = ({ events }) => {
   return (
     <Grid container direction="column" className={classes.container}>
       {events.map((event) => (
-        <Fade key={event.name} in timeout={200}>
+        <Fade key={event.id} in timeout={200}>
           <Grid item xs={12}>
             <Link href={`/articles/${event.article.slug}`} passHref>
               <a>
