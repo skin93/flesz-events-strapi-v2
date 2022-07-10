@@ -42,6 +42,16 @@ const ArticlePage = ({ data }) => {
     });
   }, []);
 
+  useEffect(() => {
+    const figures = document.querySelectorAll(".image");
+    figures?.forEach((figure) => {
+      const image = figure.querySelector("img");
+      const imageSrc = image.getAttribute("src");
+      const newImageSrc = `${process.env.NEXT_PUBLIC_STRAPI}${imageSrc}`;
+      image.setAttribute("src", newImageSrc);
+    });
+  }, []);
+
   const classes = useStyles();
 
   const article = data?.articles[0];
