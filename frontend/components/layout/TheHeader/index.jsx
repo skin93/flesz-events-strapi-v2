@@ -23,6 +23,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Slide from "@material-ui/core/Slide";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 import LinkButton from "@/components/UI/LinkButton";
 
 const SiteDrawer = dynamic(() => import("@/components/layout/SiteDrawer"));
@@ -53,6 +54,7 @@ const navLinks = [
 const items = [
   { title: "tagi", path: "/tags" },
   { title: "eventy", path: "/events" },
+  { title: "kontakt", path: "/contact" },
   { title: "festiwalowa mapa", path: "/festival-map" },
 ];
 
@@ -149,6 +151,14 @@ const TheHeader = (props) => {
                   <Link href="https://facebook.com/flesz.events" passHref>
                     <Button className={classes.icon}>
                       <FacebookIcon />
+                    </Button>
+                  </Link>
+                  <Link
+                    href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg"
+                    passHref
+                  >
+                    <Button className={classes.icon}>
+                      <YouTubeIcon />
                     </Button>
                   </Link>
                 </nav>

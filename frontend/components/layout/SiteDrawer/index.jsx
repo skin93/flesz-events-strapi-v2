@@ -10,6 +10,7 @@ import Menu from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 
 import FacebookIcon from "@material-ui/icons/Facebook";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -52,6 +53,14 @@ const SiteDrawer = ({ navLinks, items }) => {
         <Link href="https://facebook.com/flesz.events" passHref>
           <Button className={classes.icon}>
             <FacebookIcon />
+          </Button>
+        </Link>
+        <Link
+          href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg"
+          passHref
+        >
+          <Button className={classes.icon}>
+            <YouTubeIcon />
           </Button>
         </Link>
       </nav>

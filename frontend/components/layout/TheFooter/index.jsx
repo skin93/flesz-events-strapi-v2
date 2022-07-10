@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import EmailIcon from "@material-ui/icons/Email";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 import LinkButton from "@/components/UI/LinkButton";
 
@@ -22,6 +24,7 @@ const TheFooter = () => {
   const items = [
     { title: "tagi", path: "/tags" },
     { title: "eventy", path: "/events" },
+    { title: "kontakt", path: "/contact" },
     { title: "festiwalowa mapa", path: "/festival-map" },
   ];
 
@@ -43,6 +46,14 @@ const TheFooter = () => {
           <Link href="https://facebook.com/flesz.events" passHref>
             <Button className={classes.icon}>
               <FacebookIcon />
+            </Button>
+          </Link>
+          <Link
+            href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg"
+            passHref
+          >
+            <Button className={classes.icon}>
+              <YouTubeIcon />
             </Button>
           </Link>
         </div>
@@ -82,6 +93,8 @@ const useStyles = makeStyles((theme) => ({
   },
   socials: {
     display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   icon: {
     "& > .MuiButton-label": {
