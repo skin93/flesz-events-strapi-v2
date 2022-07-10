@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
 
     "& > span": {
-      color: theme.palette.primary.main,
+      color: theme.palette.light.main,
+      fontWeight: "bold",
     },
   },
 }));
