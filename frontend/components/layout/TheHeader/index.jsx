@@ -51,6 +51,7 @@ const navLinks = [
 ];
 
 const items = [
+  { title: "tagi", path: "/tags" },
   { title: "eventy", path: "/events" },
   { title: "festiwalowa mapa", path: "/festival-map" },
 ];

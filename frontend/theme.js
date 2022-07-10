@@ -56,7 +56,7 @@ const theme = createTheme({
     },
     MuiTypography: {
       h1: {
-        fontSize: "clamp(2rem, 3vw, 4rem)",
+        fontSize: "clamp(2rem, 4vw, 4rem)",
       },
       h4: {
         fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
@@ -89,6 +89,9 @@ const theme = createTheme({
           color: palette.primary.main,
           transform: "scale(1.1)",
         },
+      },
+      text: {
+        padding: "none",
       },
     },
     MuiCssBaseline: {
