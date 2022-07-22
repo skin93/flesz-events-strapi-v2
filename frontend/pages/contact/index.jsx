@@ -27,14 +27,14 @@ const ContactPage = () => {
         className={classes.container}
         aria-label="contact-container"
       >
-        <Typography component="h1" className={classes.heading}>
+        <Typography variant="h1" component="h1" className={classes.heading}>
           KONTAKT
         </Typography>
-        <Typography className={classes.paragraph}>
+        <p className={classes.paragraph}>
           Jeżeli w Twojej okolicy odbywa się ciekawy festiwal, chcesz pochwalić
           się fajnym zespołem albo po prostu potrzebujesz nawiązać z nami
           kontakt, wyślij wiadomość na <span>kontakt@fleszevents.pl</span>
-        </Typography>
+        </p>
       </Container>
     </Fragment>
   );
@@ -50,12 +50,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "2rem 0 3rem 0",
     fontWeight: 600,
-    fontSize: "calc(2rem + .8vw)",
     textTransform: "uppercase",
   },
   paragraph: {
-    fontSize: "1.5rem",
-
     "& > span": {
       color: theme.palette.light.main,
       fontWeight: "bold",

@@ -66,7 +66,7 @@ const TagsPage = ({ data }) => {
         className={classes.container}
         aria-label="tags-page"
       >
-        <Typography component="h1" className={classes.heading}>
+        <Typography variant="h1" component="h1" className={classes.heading}>
           TAGI
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
@@ -128,7 +128,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "2rem 0 3rem 0",
     fontWeight: 600,
-    fontSize: "calc(2rem + .8vw)",
     textTransform: "uppercase",
   },
   form: {

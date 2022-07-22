@@ -49,11 +49,11 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {loading ? (
-          <PageTransition timeout={500} classNames="page-transition">
+          <PageTransition timeout={200} classNames="page-transition">
             <Loader key={"loader"} />
           </PageTransition>
         ) : (
-          <PageTransition timeout={500} classNames="page-transition">
+          <PageTransition timeout={200} classNames="page-transition">
             <div
               key={router.asPath}
               style={{
@@ -65,7 +65,12 @@ export default function MyApp(props) {
               }}
             >
               <TheHeader />
-              <main style={{ margin: "3rem 0" }} component="main">
+              <main
+                style={{
+                  margin: 0,
+                }}
+                component="main"
+              >
                 <Component key={router.asPath} {...pageProps} />
               </main>
               {router.asPath !== "/festival-map" && <TheFooter />}
@@ -79,14 +84,14 @@ export default function MyApp(props) {
         }
         .page-transition-enter-active {
           opacity: 1;
-          transition: opacity 300ms;
+          transition: opacity 200ms;
         }
         .page-transition-exit {
           opacity: 1;
         }
         .page-transition-exit-active {
           opacity: 0;
-          transition: opacity 300ms;
+          transition: opacity 200ms;
         }
       `}</style>
     </Fragment>

@@ -146,7 +146,6 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    marginBottom: "3rem",
     fontWeight: 600,
     textTransform: "uppercase",
     " & > span": {
@@ -157,11 +156,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     textTransform: "uppercase",
   },
+  container: {
+    paddingInline: 0,
+    position: "relative",
+    height: "100vh",
+  },
   noArticles: {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+    textAlign: "center",
   },
   loadMoreButton: {
     display: "block",

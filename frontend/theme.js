@@ -46,7 +46,7 @@ const theme = createTheme({
     },
     MuiDialogTitle: {
       root: {
-        fontSize: "3rem",
+        fontSize: "clamp(2.27rem, calc(2.01rem + 1.29vw), 2.93rem)",
       },
     },
     MuiDialogActions: {
@@ -56,19 +56,31 @@ const theme = createTheme({
     },
     MuiTypography: {
       h1: {
-        fontSize: "clamp(2rem, 4vw, 4rem)",
+        fontSize: "clamp(3.27rem, calc(2.75rem + 2.56vw), 4.58rem)",
+      },
+      h2: {
+        fontSize: " clamp(2.72rem, calc(2.36rem + 1.83vw), 3.66rem)",
+      },
+      h3: {
+        fontSize: "clamp(2.27rem, calc(2.01rem + 1.29vw), 2.93rem)",
       },
       h4: {
-        fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
+        fontSize: "clamp(1.89rem, calc(1.71rem + 0.89vw), 2.34rem)",
+      },
+      h5: {
+        fontSize: "clamp(1.58rem, calc(1.46rem + 0.59vw), 1.88rem)",
+      },
+      h6: {
+        fontsize: "clamp(1.31rem, calc(1.24rem + 0.37vw), 1.50rem)",
       },
       subtitle1: {
-        fontSize: "clamp(1rem, 2vw, 1.2rem)",
+        fontSize: "clamp(1.09rem, calc(1.05rem + 0.21vw), 1.20rem)",
       },
       subtitle2: {
-        fontSize: "clamp(.5rem, 3vw, .8rem)",
+        fontSize: "clamp(0.91rem, calc(0.89rem + 0.10vw), 0.96rem)",
       },
       caption: {
-        fontSize: "clamp(.6rem, 2vw, .8rem)",
+        fontSize: "clamp(0.91rem, calc(0.89rem + 0.10vw), 0.96rem)",
       },
     },
     MuiListItem: {
@@ -108,8 +120,7 @@ const theme = createTheme({
           },
           "& > figcaption": {
             fontWeight: 700,
-            fontSize: ".75rem",
-            fontSize: "clamp(.6rem, 2vw, .8rem)",
+            fontSize: "clamp(0.91rem, calc(0.89rem + 0.10vw), 0.96rem)",
           },
         },
         ".raw-html-embed": {
@@ -144,30 +155,39 @@ const theme = createTheme({
         },
 
         h1: {
-          fontSize: "clamp(2rem, 3vw, 3rem)",
+          fontSize: "clamp(3.27rem, calc(2.75rem + 2.56vw), 4.58rem)",
         },
         h2: {
-          fontSize: "clamp(1.7rem, 3vw, 2.5rem)",
+          fontSize: " clamp(2.72rem, calc(2.36rem + 1.83vw), 3.66rem)",
         },
         h3: {
-          fontSize: "clamp(1.4rem, 3vw, 2rem)",
+          fontSize: "clamp(2.27rem, calc(2.01rem + 1.29vw), 2.93rem)",
         },
         h4: {
-          fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
+          fontSize: "clamp(1.89rem, calc(1.71rem + 0.89vw), 2.34rem)",
+        },
+        h5: {
+          fontSize: "clamp(1.58rem, calc(1.46rem + 0.59vw), 1.88rem)",
+        },
+        h6: {
+          fontsize: "clamp(1.31rem, calc(1.24rem + 0.37vw), 1.50rem)",
         },
         p: {
-          fontSize: "clamp(1rem, 2vw, 1.2rem)",
+          fontSize: "clamp(1.09rem, calc(1.05rem + 0.21vw), 1.20rem)",
           color: grey[500],
           fontWeight: 400,
         },
+        span: {
+          fontSize: "clamp(0.91rem, calc(0.89rem + 0.10vw), 0.96rem)",
+        },
         ul: {
-          fontSize: "clamp(1rem, 2vw, 1.2rem)",
+          fontSize: "clamp(1.09rem, calc(1.05rem + 0.21vw), 1.20rem)",
           "& > li": {
             listStyle: "square",
           },
         },
         ol: {
-          fontSize: "clamp(1rem, 2vw, 1.2rem)",
+          fontSize: "clamp(1.09rem, calc(1.05rem + 0.21vw), 1.20rem)",
         },
         li: {
           "&::marker": {

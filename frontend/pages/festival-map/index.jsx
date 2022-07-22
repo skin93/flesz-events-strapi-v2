@@ -33,7 +33,7 @@ const FestivalMapPage = (props) => {
           ],
         }}
       />
-      <section aria-label="festival-map" style={{ margin: "-3rem 0" }}>
+      <section aria-label="festival-map" style={{ margin: "0" }}>
         <MapWithNoSSR festivals={props.data.festivals} />
       </section>
     </Fragment>

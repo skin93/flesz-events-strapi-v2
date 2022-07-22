@@ -73,7 +73,7 @@ const Home = ({ data }) => {
         >
           <Grid className={classes.articles} container spacing={4}>
             {articlesToShow.map((article) => (
-              <Fade key={article.id} in timeout={500}>
+              <Fade key={article.id} in timeout={200}>
                 <Grid item xs={12} md={6}>
                   <Link
                     scroll={false}
