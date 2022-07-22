@@ -16,7 +16,7 @@ const RelatedArticles = ({ articles }) => {
 
   return (
     <section className={classes.root} aria-label="related-articles">
-      <Typography variant="h4" className={classes.heading}>
+      <Typography variant="h5" className={classes.heading}>
         Zobacz także:
       </Typography>
       <Grid
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   heading: {
-    marginTop: "3rem ",
+    marginTop: "3rem",
     fontWeight: 600,
   },
   container: {

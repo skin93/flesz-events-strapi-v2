@@ -162,7 +162,7 @@ export async function getServerSideProps({ params }) {
 const useStyles = makeStyles((theme) => ({
   heading: {
     textAlign: "center",
-    marginBottom: "3rem",
+    margin: "3rem 0",
     fontWeight: 600,
     textTransform: "uppercase",
     " & > span": {

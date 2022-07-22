@@ -48,7 +48,7 @@ const EventsPage = ({ data }) => {
         className={classes.container}
         aria-label="events-container"
       >
-        <Typography component="h1" className={classes.heading}>
+        <Typography variant="h1" component="h1" className={classes.heading}>
           NAJBLIŻSZE EVENTY
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
@@ -102,9 +102,8 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    margin: "2rem 0 3rem 0",
+    margin: "3rem 0",
     fontWeight: 600,
-    fontSize: "calc(2rem + .8vw)",
     textTransform: "uppercase",
   },
   form: {

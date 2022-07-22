@@ -121,14 +121,14 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textAlign: "center",
-    marginBottom: "3rem",
+    margin: "3rem 0",
     fontWeight: 600,
     textTransform: "uppercase",
   },
   block: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "3rem",
+    margin: "3rem 0",
   },
   endMessage: {
     margin: 0,

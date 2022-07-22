@@ -145,6 +145,7 @@ const useStyles = makeStyles((theme) => ({
     paddingInline: 0,
   },
   heading: {
+    margin: "3rem 0",
     textAlign: "center",
     fontWeight: 600,
     textTransform: "uppercase",
