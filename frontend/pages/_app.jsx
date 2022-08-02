@@ -65,12 +65,7 @@ export default function MyApp(props) {
               }}
             >
               <TheHeader />
-              <main
-                style={{
-                  margin: 0,
-                }}
-                component="main"
-              >
+              <main>
                 <Component key={router.asPath} {...pageProps} />
               </main>
               {router.asPath !== "/festival-map" && <TheFooter />}

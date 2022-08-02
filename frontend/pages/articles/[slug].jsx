@@ -79,12 +79,7 @@ const ArticlePage = ({ data }) => {
           ],
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        aria-label="article-page"
-        className={classes.container}
-      >
+      <Container component="section" maxWidth="lg" aria-label="article-page">
         <div className={classes.chips}>
           <Link href={`/categories/${article.category.slug}`}>
             <a>

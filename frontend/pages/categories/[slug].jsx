@@ -64,12 +64,7 @@ const CategoryPage = ({ data }) => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`,
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        aria-label="category-page"
-        className={classes.container}
-      >
+      <Container component="section" maxWidth="lg" aria-label="category-page">
         {articlesToShow.length > 0 ? (
           <Fragment>
             <Typography variant="h1" className={classes.heading}>
@@ -107,7 +102,7 @@ const CategoryPage = ({ data }) => {
             </InfiniteScroll>
           </Fragment>
         ) : (
-          <div className={classes.noArticles}>
+          <div>
             <Typography variant="h1" className={classes.heading}>
               BRAK WPISÓW...
             </Typography>
@@ -163,11 +158,10 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   noArticles: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   loadMoreButton: {
     display: "block",
@@ -178,7 +172,7 @@ const useStyles = makeStyles((theme) => ({
   block: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "3rem",
+    margin: "3rem 0",
   },
   endMessage: {
     margin: 0,

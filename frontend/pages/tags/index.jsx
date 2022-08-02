@@ -60,12 +60,7 @@ const TagsPage = ({ data }) => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`,
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        className={classes.container}
-        aria-label="tags-page"
-      >
+      <Container component="section" maxWidth="lg" aria-label="tags-page">
         <Typography variant="h1" component="h1" className={classes.heading}>
           TAGI
         </Typography>

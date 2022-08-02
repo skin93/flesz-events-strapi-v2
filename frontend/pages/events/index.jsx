@@ -45,7 +45,6 @@ const EventsPage = ({ data }) => {
       <Container
         component="section"
         maxWidth="lg"
-        className={classes.container}
         aria-label="events-container"
       >
         <Typography variant="h1" component="h1" className={classes.heading}>
@@ -83,6 +82,8 @@ export async function getServerSideProps() {
     const data = await fetchWithArgs(ALL_EVENTS_BY_DATE_QUERY, {
       date,
     });
+
+    console.log(data);
 
     if (!data) {
       return { notFound: true };

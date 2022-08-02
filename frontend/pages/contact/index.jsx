@@ -24,7 +24,6 @@ const ContactPage = () => {
       <Container
         component="section"
         maxWidth="lg"
-        className={classes.container}
         aria-label="contact-container"
       >
         <Typography variant="h1" component="h1" className={classes.heading}>

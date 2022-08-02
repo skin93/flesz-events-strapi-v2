@@ -45,12 +45,7 @@ const Home = ({ data }) => {
   return (
     <Fragment>
       <NextSeo nofollow={true} />
-      <Container
-        component="section"
-        maxWidth="lg"
-        className={classes.container}
-        aria-label="home-page"
-      >
+      <Container component="section" maxWidth="lg" aria-label="home-page">
         <Typography variant="h1" className={classes.heading}>
           OSTATNIE WPISY
         </Typography>
