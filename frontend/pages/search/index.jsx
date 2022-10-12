@@ -33,7 +33,11 @@ const SearchPage = ({ data, q }) => {
   }, [articlesToShow]);
 
   useEffect(() => {
-    setHasMore(data?.articles.length === articlesToShow.length ? true : false);
+    setHasMore(
+      data?.articlesConnection.aggregate.count > articlesToShow.length
+        ? true
+        : false
+    );
   }, [articlesToShow]);
 
   return (
