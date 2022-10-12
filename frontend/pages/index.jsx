@@ -45,46 +45,49 @@ const Home = ({ data }) => {
   return (
     <Fragment>
       <NextSeo nofollow={true} />
-      <Container component="section" maxWidth="lg" aria-label="home-page">
-        <Typography variant="h1" className={classes.heading}>
-          OSTATNIE WPISY
-        </Typography>
+      <Fade in timeout={200}>
+        <Container component="section" maxWidth="lg" aria-label="home-page">
+          <Typography variant="h1" className={classes.heading}>
+            OSTATNIE WPISY
+          </Typography>
 
-        <InfiniteScroll
-          style={{ overflow: "hidden" }}
-          dataLength={articlesToShow.length}
-          next={getMoreArticles}
-          hasMore={hasMore}
-          loader={
-            <div className={classes.block}>
-              <CircularProgress />
-            </div>
-          }
-          endMessage={
-            <div className={classes.block}>
-              <p className={classes.endMessage}>Nic więcej nie ma</p>
-            </div>
-          }
-        >
-          <Grid className={classes.articles} container spacing={4}>
-            {articlesToShow.map((article) => (
-              <Fade key={article.id} in timeout={200}>
-                <Grid item xs={12} md={6}>
-                  <Link
-                    scroll={false}
-                    href={`/articles/${article.slug}`}
-                    passHref
-                  >
-                    <a>
-                      <BaseCard article={article} />
-                    </a>
-                  </Link>
-                </Grid>
-              </Fade>
-            ))}
-          </Grid>
-        </InfiniteScroll>
-      </Container>
+          <InfiniteScroll
+            scrollThreshold="500px"
+            style={{ overflow: "hidden" }}
+            dataLength={articlesToShow.length}
+            next={getMoreArticles}
+            hasMore={hasMore}
+            loader={
+              <div className={classes.block}>
+                <CircularProgress />
+              </div>
+            }
+            endMessage={
+              <div className={classes.block}>
+                <p className={classes.endMessage}>Nic więcej nie ma</p>
+              </div>
+            }
+          >
+            <Grid className={classes.articles} container spacing={4}>
+              {articlesToShow.map((article) => (
+                <Fade key={article.id} in timeout={200}>
+                  <Grid item xs={12} md={6}>
+                    <Link
+                      scroll={false}
+                      href={`/articles/${article.slug}`}
+                      passHref
+                    >
+                      <a>
+                        <BaseCard article={article} />
+                      </a>
+                    </Link>
+                  </Grid>
+                </Fade>
+              ))}
+            </Grid>
+          </InfiniteScroll>
+        </Container>
+      </Fade>
     </Fragment>
   );
 };

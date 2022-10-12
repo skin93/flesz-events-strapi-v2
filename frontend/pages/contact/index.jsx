@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { NextSeo } from "next-seo";
+import { Fade } from "@material-ui/core";
 
 const ContactPage = () => {
   const classes = useStyles();
@@ -21,20 +22,23 @@ const ContactPage = () => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/contact`,
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        aria-label="contact-container"
-      >
-        <Typography variant="h1" component="h1" className={classes.heading}>
-          KONTAKT
-        </Typography>
-        <p className={classes.paragraph}>
-          Jeżeli w Twojej okolicy odbywa się ciekawy festiwal, chcesz pochwalić
-          się fajnym zespołem albo po prostu potrzebujesz nawiązać z nami
-          kontakt, wyślij wiadomość na <span>kontakt@fleszevents.pl</span>
-        </p>
-      </Container>
+      <Fade in timeout={200}>
+        <Container
+          component="section"
+          maxWidth="lg"
+          aria-label="contact-container"
+        >
+          <Typography variant="h1" component="h1" className={classes.heading}>
+            KONTAKT
+          </Typography>
+          <p className={classes.paragraph}>
+            Jeżeli w Twojej okolicy odbywa się ciekawy festiwal, chcesz
+            pochwalić się fajnym zespołem albo po prostu potrzebujesz nawiązać z
+            nami kontakt, wyślij wiadomość na{" "}
+            <span>kontakt@fleszevents.pl</span>
+          </p>
+        </Container>
+      </Fade>
     </Fragment>
   );
 };

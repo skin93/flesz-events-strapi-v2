@@ -48,47 +48,12 @@ export default function MyApp(props) {
       <DefaultSeo {...SEO} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {loading ? (
-          <PageTransition timeout={200} classNames="page-transition">
-            <Loader key={"loader"} />
-          </PageTransition>
-        ) : (
-          <PageTransition timeout={200} classNames="page-transition">
-            <div
-              key={router.asPath}
-              style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
-                width: "100%",
-              }}
-            >
-              <TheHeader />
-              <main>
-                <Component key={router.asPath} {...pageProps} />
-              </main>
-              {router.asPath !== "/festival-map" && <TheFooter />}
-            </div>
-          </PageTransition>
-        )}
+        <TheHeader />
+        <main>
+          <Component key={router.asPath} {...pageProps} />
+        </main>
+        {router.asPath !== "/festival-map" && <TheFooter />}
       </ThemeProvider>
-      <style jsx global>{`
-        .page-transition-enter {
-          opacity: 0;
-        }
-        .page-transition-enter-active {
-          opacity: 1;
-          transition: opacity 200ms;
-        }
-        .page-transition-exit {
-          opacity: 1;
-        }
-        .page-transition-exit-active {
-          opacity: 0;
-          transition: opacity 200ms;
-        }
-      `}</style>
     </Fragment>
   );
 }

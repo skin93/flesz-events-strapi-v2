@@ -13,6 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import EventsContainer from "@/components/events/EventsContainer";
 import { NextSeo } from "next-seo";
+import { Fade } from "@material-ui/core";
 
 const EventsPage = ({ data }) => {
   const classes = useStyles();
@@ -42,33 +43,38 @@ const EventsPage = ({ data }) => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/events`,
         }}
       />
-      <Container
-        component="section"
-        maxWidth="lg"
-        aria-label="events-container"
-      >
-        <Typography variant="h1" component="h1" className={classes.heading}>
-          NAJBLIŻSZE EVENTY
-        </Typography>
-        <form className={classes.form} noValidate autoComplete="off">
-          <TextField
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className={classes.textField}
-            id="outlined-basic"
-            label="Podaj nazwę zespołu / festiwalu / miasta / klubu"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
+      <Fade in timeout={200}>
+        <Container
+          component="section"
+          maxWidth="lg"
+          aria-label="events-container"
+        >
+          <Typography variant="h1" component="h1" className={classes.heading}>
+            NAJBLIŻSZE EVENTY
+          </Typography>
+          <form className={classes.form} noValidate autoComplete="off">
+            <TextField
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className={classes.textField}
+              id="outlined-basic"
+              label="Podaj nazwę zespołu / festiwalu / miasta / klubu"
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </form>
+          <EventsContainer
+            aria-label="filtered-events"
+            events={filteredEvents}
           />
-        </form>
-        <EventsContainer aria-label="filtered-events" events={filteredEvents} />
-      </Container>
+        </Container>
+      </Fade>
     </Fragment>
   );
 };

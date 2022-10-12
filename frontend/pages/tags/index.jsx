@@ -13,6 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import TagsContainer from "@/components/tags/TagsContainer";
 import LoadMoreButton from "@/components/UI/LoadMoreButton";
 import { NextSeo } from "next-seo";
+import { Fade } from "@material-ui/core";
 
 const TagsPage = ({ data }) => {
   const classes = useStyles();
@@ -60,39 +61,41 @@ const TagsPage = ({ data }) => {
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`,
         }}
       />
-      <Container component="section" maxWidth="lg" aria-label="tags-page">
-        <Typography variant="h1" component="h1" className={classes.heading}>
-          TAGI
-        </Typography>
-        <form className={classes.form} noValidate autoComplete="off">
-          <TextField
-            value={search}
+      <Fade in timeout={200}>
+        <Container component="section" maxWidth="lg" aria-label="tags-page">
+          <Typography variant="h1" component="h1" className={classes.heading}>
+            TAGI
+          </Typography>
+          <form className={classes.form} noValidate autoComplete="off">
+            <TextField
+              value={search}
+              onChange={handleChange}
+              className={classes.textField}
+              id="outlined-basic"
+              label="Szukaj tagu"
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </form>
+          {search && tagsFound.length > 0 ? (
+            <TagsContainer aria-label="tags-filtered" tags={tagsFound} />
+          ) : search && tagsFound.length === 0 ? null : (
+            <TagsContainer aria-label="all-tags" tags={tagsToShow} />
+          )}
+          <LoadMoreButton
             onChange={handleChange}
-            className={classes.textField}
-            id="outlined-basic"
-            label="Szukaj tagu"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
+            next={next}
+            count={data.tagsConnection.aggregate.count}
+            onClick={handleShowMoreTags}
           />
-        </form>
-        {search && tagsFound.length > 0 ? (
-          <TagsContainer aria-label="tags-filtered" tags={tagsFound} />
-        ) : search && tagsFound.length === 0 ? null : (
-          <TagsContainer aria-label="all-tags" tags={tagsToShow} />
-        )}
-        <LoadMoreButton
-          onChange={handleChange}
-          next={next}
-          count={data.tagsConnection.aggregate.count}
-          onClick={handleShowMoreTags}
-        />
-      </Container>
+        </Container>
+      </Fade>
     </Fragment>
   );
 };

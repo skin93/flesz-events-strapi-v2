@@ -81,53 +81,54 @@ const TagPage = ({ data }) => {
               ],
         }}
       />
-
-      <Container component="section" maxWidth="lg" aria-label="tag-page">
-        {articlesToShow.length > 0 ? (
-          <Fragment>
-            <Typography variant="h1" className={classes.heading}>
-              <span>#</span>
-              {tag.name}
-            </Typography>
-            <InfiniteScroll
-              style={{ overflow: "hidden" }}
-              dataLength={articlesToShow.length}
-              next={getMoreArticles}
-              hasMore={hasMore}
-              loader={
-                <div className={classes.block}>
-                  <CircularProgress />
-                </div>
-              }
-              endMessage={
-                <div className={classes.block}>
-                  <p className={classes.endMessage}>Nic więcej nie ma</p>
-                </div>
-              }
-            >
-              <Grid className={classes.articles} container spacing={4}>
-                {articlesToShow.map((article) => (
-                  <Fade key={article.id} in timeout={200}>
-                    <Grid item xs={12} md={6}>
-                      <Link href={`/articles/${article.slug}`} passHref>
-                        <a>
-                          <BaseCard article={article} />
-                        </a>
-                      </Link>
-                    </Grid>
-                  </Fade>
-                ))}
-              </Grid>
-            </InfiniteScroll>
-          </Fragment>
-        ) : (
-          <div>
-            <Typography variant="h1" className={classes.heading}>
-              BRAK WPISÓW...
-            </Typography>
-          </div>
-        )}
-      </Container>
+      <Fade in timeout={200}>
+        <Container component="section" maxWidth="lg" aria-label="tag-page">
+          {articlesToShow.length > 0 ? (
+            <Fragment>
+              <Typography variant="h1" className={classes.heading}>
+                <span>#</span>
+                {tag.name}
+              </Typography>
+              <InfiniteScroll
+                style={{ overflow: "hidden" }}
+                dataLength={articlesToShow.length}
+                next={getMoreArticles}
+                hasMore={hasMore}
+                loader={
+                  <div className={classes.block}>
+                    <CircularProgress />
+                  </div>
+                }
+                endMessage={
+                  <div className={classes.block}>
+                    <p className={classes.endMessage}>Nic więcej nie ma</p>
+                  </div>
+                }
+              >
+                <Grid className={classes.articles} container spacing={4}>
+                  {articlesToShow.map((article) => (
+                    <Fade key={article.id} in timeout={200}>
+                      <Grid item xs={12} md={6}>
+                        <Link href={`/articles/${article.slug}`} passHref>
+                          <a>
+                            <BaseCard article={article} />
+                          </a>
+                        </Link>
+                      </Grid>
+                    </Fade>
+                  ))}
+                </Grid>
+              </InfiniteScroll>
+            </Fragment>
+          ) : (
+            <div>
+              <Typography variant="h1" className={classes.heading}>
+                BRAK WPISÓW...
+              </Typography>
+            </div>
+          )}
+        </Container>
+      </Fade>
     </Fragment>
   );
 };

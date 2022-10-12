@@ -9,6 +9,7 @@ import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { fetcher } from "@/lib/fetcher";
 
 import { NextSeo } from "next-seo";
+import { Fade } from "@material-ui/core";
 
 const FestivalMapPage = (props) => {
   return (
@@ -33,9 +34,14 @@ const FestivalMapPage = (props) => {
           ],
         }}
       />
-      <section aria-label="festival-map" style={{ margin: "0" }}>
-        <MapWithNoSSR festivals={props.data.festivals} />
-      </section>
+      <Fade in timeout={200}>
+        <section
+          aria-label="festival-map"
+          style={{ margin: "-15px 0 0 0", overflow: "hidden" }}
+        >
+          <MapWithNoSSR festivals={props.data.festivals} />
+        </section>
+      </Fade>
     </Fragment>
   );
 };
