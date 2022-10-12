@@ -13,6 +13,8 @@ export const SINGLE_ARTICLE_QUERY = gql`
         url
         alternativeText
         caption
+        width
+        height
       }
       category {
         name

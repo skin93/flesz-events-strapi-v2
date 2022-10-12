@@ -18,6 +18,7 @@ import RelatedArticles from "@/components/layout/RelatedArticles";
 
 import { getMediaUrl } from "@/lib/getMediaUrl";
 import Disqus from "@/components/Disqus";
+import { Fade } from "@material-ui/core";
 
 const ArticlePage = ({ data }) => {
   useEffect(() => {
@@ -79,116 +80,121 @@ const ArticlePage = ({ data }) => {
           ],
         }}
       />
-      <Container component="section" maxWidth="lg" aria-label="article-page">
-        <div className={classes.chips}>
-          <Link href={`/categories/${article.category.slug}`}>
-            <a>
-              <Chip
-                variant="outlined"
-                label={article.category.name}
-                className={clsx(classes.category, classes.chip)}
-              />
-            </a>
-          </Link>
-          {article.tags.map((tag) => (
-            <Link key={tag.slug} href={`/tags/${tag.slug}`}>
+      <Fade in timeout={200}>
+        <Container component="section" maxWidth="lg" aria-label="article-page">
+          <div className={classes.chips}>
+            <Link href={`/categories/${article.category.slug}`}>
               <a>
                 <Chip
-                  key={tag.name}
-                  label={tag.name}
-                  className={clsx(classes.tag, classes.chip)}
                   variant="outlined"
+                  label={article.category.name}
+                  className={clsx(classes.category, classes.chip)}
                 />
               </a>
             </Link>
-          ))}
-          {article.published_at === null ? (
-            <Chip
-              label={article.createdAt.split("T")[0]}
-              className={clsx(classes.published_at, classes.chip)}
-              variant="outlined"
-            />
-          ) : (
-            <Chip
-              label={article.published_at.split("T")[0]}
-              className={clsx(classes.published_at, classes.chip)}
-              variant="outlined"
-            />
-          )}
-
-          {article.writers.map((writer) => (
-            <Chip
-              label={writer.name}
-              key={writer.name}
-              className={clsx(classes.writer, classes.chip)}
-              variant="outlined"
-            />
-          ))}
-        </div>
-        <Typography
-          variant="h1"
-          aria-label="article-title"
-          className={classes.title}
-        >
-          {article.title}
-        </Typography>
-        <Divider className={classes.divider} />
-        <Grid container justifyContent="space-between">
-          <Grid item xs={12} lg={7} component="article" className="left_column">
-            <div className={classes.imageWrapper}>
-              <Image
-                src={getMediaUrl(article.image_cover)}
-                quality={100}
-                width={16}
-                height={9}
-                priority={true}
-                layout="responsive"
-                objectFit="cover"
-                blurDataURL={getMediaUrl(article.image_cover)}
-                alt={article.title}
-                aria-label="article-cover"
+            {article.tags.map((tag) => (
+              <Link key={tag.slug} href={`/tags/${tag.slug}`}>
+                <a>
+                  <Chip
+                    key={tag.name}
+                    label={tag.name}
+                    className={clsx(classes.tag, classes.chip)}
+                    variant="outlined"
+                  />
+                </a>
+              </Link>
+            ))}
+            {article.published_at === null ? (
+              <Chip
+                label={article.createdAt.split("T")[0]}
+                className={clsx(classes.published_at, classes.chip)}
+                variant="outlined"
               />
-              <Typography
-                variant="caption"
-                className={classes.caption}
-                aria-label="article-image-caption"
-              >
-                {article.image_cover.caption}
-              </Typography>
-            </div>
-
-            <Typography
-              variant="subtitle1"
-              className={classes.excerpt}
-              aria-label="article-excerpt"
-            >
-              {article.excerpt}
-            </Typography>
-            <Divider className={classes.divider} />
-            <div
-              dangerouslySetInnerHTML={{
-                __html: article.content,
-              }}
-              aria-label="article-content"
-            />
-            <Divider className={classes.divider} />
-            <Disqus article={article} />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            lg={4}
-            className={classes.rightColumn}
-            container
-            justifyContent="center"
-            component="aside"
-          >
-            {article.related_articles && (
-              <RelatedArticles articles={article.related_articles.articles} />
+            ) : (
+              <Chip
+                label={article.published_at.split("T")[0]}
+                className={clsx(classes.published_at, classes.chip)}
+                variant="outlined"
+              />
             )}
+
+            {article.writers.map((writer) => (
+              <Chip
+                label={writer.name}
+                key={writer.name}
+                className={clsx(classes.writer, classes.chip)}
+                variant="outlined"
+              />
+            ))}
+          </div>
+          <Typography
+            variant="h1"
+            aria-label="article-title"
+            className={classes.title}
+          >
+            {article.title}
+          </Typography>
+          <Divider className={classes.divider} />
+          <Grid container justifyContent="space-between">
+            <Grid
+              item
+              xs={12}
+              lg={7}
+              component="article"
+              className="left_column"
+            >
+              <div className={classes.imageWrapper}>
+                <Image
+                  src={getMediaUrl(article.image_cover)}
+                  quality={100}
+                  width={article.image_cover.width}
+                  height={article.image_cover.height}
+                  blurDataURL={getMediaUrl(article.image_cover)}
+                  alt={article.title}
+                  aria-label="article-cover"
+                />
+                <Typography
+                  variant="caption"
+                  className={classes.caption}
+                  aria-label="article-image-caption"
+                >
+                  {article.image_cover.caption}
+                </Typography>
+              </div>
+
+              <Typography
+                variant="subtitle1"
+                className={classes.excerpt}
+                aria-label="article-excerpt"
+              >
+                {article.excerpt}
+              </Typography>
+              <Divider className={classes.divider} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: article.content,
+                }}
+                aria-label="article-content"
+              />
+              <Divider className={classes.divider} />
+              <Disqus article={article} />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              lg={4}
+              className={classes.rightColumn}
+              container
+              justifyContent="center"
+              component="aside"
+            >
+              {article.related_articles && (
+                <RelatedArticles articles={article.related_articles.articles} />
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </Fade>
     </Fragment>
   );
 };
