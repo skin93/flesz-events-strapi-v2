@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import Fade from "@material-ui/icons/Fade";
+import Fade from "@material-ui/core/Fade";
 
 import EventsContainer from "@/components/events/EventsContainer";
 import { NextSeo } from "next-seo";
