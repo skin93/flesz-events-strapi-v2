@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import EmailIcon from "@material-ui/icons/Email";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 
 import LinkButton from "@/components/UI/LinkButton";
@@ -67,7 +66,6 @@ export default TheFooter;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "auto",
     backgroundColor: theme.palette.background.default,
   },
   container: {
@@ -104,5 +102,7 @@ const useStyles = makeStyles((theme) => ({
   },
   credit: {
     textAlign: "center",
+    margin: 0,
+    paddingBottom: "2rem",
   },
 }));
