@@ -19,15 +19,13 @@ import Container from "@material-ui/core/Container";
 const SearchPage = ({ data, q }) => {
   const classes = useStyles();
 
-  const [limit] = useState(12);
-
   const [articlesToShow, setArticlesToShow] = useState(data?.articles);
   const [hasMore, setHasMore] = useState(true);
 
   const getMoreArticles = useCallback(async () => {
     const res = await fetchWithArgs(SEARCH_ARTICLES_QUERY, {
       start: articlesToShow.length,
-      limit,
+      limit: 6,
       q,
     });
 
@@ -35,12 +33,8 @@ const SearchPage = ({ data, q }) => {
   }, [articlesToShow]);
 
   useEffect(() => {
-    setHasMore(
-      data?.articlesConnection.aggregate.count > articlesToShow.length
-        ? true
-        : false
-    );
-  }, [articlesToShow, data?.articlesConnection.aggregate.count]);
+    setHasMore(data?.articles.length === articlesToShow.length ? true : false);
+  }, [articlesToShow]);
 
   return (
     <Fragment>
@@ -52,7 +46,7 @@ const SearchPage = ({ data, q }) => {
           </Typography>
 
           <InfiniteScroll
-            scrollThreshold="500px"
+            scrollThreshold="50%"
             style={{ overflow: "hidden" }}
             dataLength={articlesToShow.length}
             next={getMoreArticles}
@@ -94,7 +88,7 @@ export async function getServerSideProps(context) {
   try {
     const data = await fetchWithArgs(SEARCH_ARTICLES_QUERY, {
       start: 0,
-      limit: 12,
+      limit: 6,
       q,
     });
 
