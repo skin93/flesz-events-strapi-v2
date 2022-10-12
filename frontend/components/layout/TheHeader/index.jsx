@@ -62,7 +62,11 @@ const TheHeader = (props) => {
   const classes = useStyles();
   const router = useRouter();
   const inputRef = useRef();
-  const [search, setSearch] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/search?q=${inputRef.current.value}`);
+  };
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -73,32 +77,6 @@ const TheHeader = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const q = ARTICLES_TITLE_QUERY;
-
-  const { data, error } = useSWR(q, fetcher);
-
-  if (error) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>Coś poszło nie tak...</p>
-      </div>
-    );
-  }
-
-  const filteredArticles = useMemo(
-    () =>
-      data?.articles.filter(({ title }) =>
-        title.toLowerCase().includes(search.toLowerCase())
-      ),
-    [search]
-  );
 
   return (
     <Fragment>
@@ -164,23 +142,20 @@ const TheHeader = (props) => {
                 </nav>
               </Hidden>
               <Hidden smDown>
-                <div className={classes.search}>
+                <form onSubmit={handleSubmit} className={classes.searchForm}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
                   </div>
                   <InputBase
-                    value={search}
+                    inputRef={inputRef}
                     placeholder="Szukaj..."
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                    }}
                     classes={{
                       root: classes.inputRoot,
                       input: classes.inputInput,
                     }}
                     inputProps={{ "aria-label": "search" }}
                   />
-                </div>
+                </form>
               </Hidden>
               <Hidden mdUp>
                 <SiteDrawer navLinks={navLinks} items={items} />
@@ -190,9 +165,6 @@ const TheHeader = (props) => {
         </AppBar>
       </HideOnScroll>
       <div className={classes.offset} />
-      {search && filteredArticles?.length > 0 && (
-        <ResultsContainer articles={filteredArticles} />
-      )}
     </Fragment>
   );
 };
@@ -240,7 +212,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  search: {
+  searchForm: {
     flex: 1,
     position: "relative",
     borderRadius: theme.shape.borderRadius,
