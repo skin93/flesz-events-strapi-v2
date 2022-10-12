@@ -10,10 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
+import Fade from "@material-ui/icons/Fade";
 
 import EventsContainer from "@/components/events/EventsContainer";
 import { NextSeo } from "next-seo";
-import { Fade } from "@material-ui/core";
 
 const EventsPage = ({ data }) => {
   const classes = useStyles();
@@ -88,8 +88,6 @@ export async function getServerSideProps() {
     const data = await fetchWithArgs(ALL_EVENTS_BY_DATE_QUERY, {
       date,
     });
-
-    console.log(data);
 
     if (!data) {
       return { notFound: true };

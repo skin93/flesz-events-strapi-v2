@@ -3,8 +3,8 @@ import { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Fade from "@material-ui/core/Fade";
 import { NextSeo } from "next-seo";
-import { Fade } from "@material-ui/core";
 
 const ContactPage = () => {
   const classes = useStyles();

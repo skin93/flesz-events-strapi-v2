@@ -19,8 +19,6 @@ import { NextSeo } from "next-seo";
 const CategoryPage = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(12);
-
   const [articlesToShow, setArticlesToShow] = useState(
     data?.categories[0].articles
   );
@@ -29,7 +27,7 @@ const CategoryPage = ({ data }) => {
   const getMoreArticles = useCallback(async () => {
     const res = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
       start: articlesToShow.length,
-      limit,
+      limit: 6,
       slug: data?.categories[0].slug,
     });
 
@@ -45,7 +43,7 @@ const CategoryPage = ({ data }) => {
         ? true
         : false
     );
-  }, [articlesToShow, data?.articlesCountBasedOnTagOrCategory]);
+  }, [articlesToShow]);
 
   const category = data?.categories[0];
 
@@ -122,7 +120,7 @@ export async function getServerSideProps({ params }) {
     const data = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
       slug: params.slug,
       start: 0,
-      limit: 12,
+      limit: 6,
     });
 
     if (!data) {

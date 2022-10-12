@@ -45,7 +45,7 @@ const TagPage = ({ data }) => {
         ? true
         : false
     );
-  }, [articlesToShow, data?.articlesCountBasedOnTagOrCategory]);
+  }, [articlesToShow]);
 
   const tag = data?.tags[0];
 

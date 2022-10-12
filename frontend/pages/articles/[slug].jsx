@@ -13,12 +13,12 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
+import Fade from "@material-ui/core/Fade";
 
 import RelatedArticles from "@/components/layout/RelatedArticles";
 
 import { getMediaUrl } from "@/lib/getMediaUrl";
 import Disqus from "@/components/Disqus";
-import { Fade } from "@material-ui/core";
 
 const ArticlePage = ({ data }) => {
   useEffect(() => {

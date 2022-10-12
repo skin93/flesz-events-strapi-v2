@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,7 +17,6 @@ import LinkButton from "@/components/UI/LinkButton";
 
 const SiteDrawer = ({ navLinks, items }) => {
   const classes = useStyles();
-  const router = useRouter();
 
   const [state, setState] = useState({ right: false });
 

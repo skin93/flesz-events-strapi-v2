@@ -9,7 +9,7 @@ import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { fetcher } from "@/lib/fetcher";
 
 import { NextSeo } from "next-seo";
-import { Fade } from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
 
 const FestivalMapPage = (props) => {
   return (

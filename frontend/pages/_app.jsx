@@ -1,6 +1,5 @@
 import { useEffect, useState, Fragment } from "react";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import PropTypes from "prop-types";
@@ -13,9 +12,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import TheHeader from "@/components/layout/TheHeader";
 import TheFooter from "@/components/layout/TheFooter";
-import { PageTransition } from "next-page-transitions";
-
-const Loader = dynamic(() => import("@/components/UI/Loader"));
 
 export default function MyApp(props) {
   const router = useRouter();

@@ -20,15 +20,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const Home = ({ data }) => {
   const classes = useStyles();
 
-  const [limit] = useState(12);
-
   const [articlesToShow, setArticlesToShow] = useState(data?.articles);
   const [hasMore, setHasMore] = useState(true);
 
   const getMoreArticles = useCallback(async () => {
     const res = await fetchWithArgs(ALL_ARTICLES_QUERY, {
       start: articlesToShow.length,
-      limit,
+      limit: 6,
     });
 
     setArticlesToShow((articlesToShow) => [...articlesToShow, ...res.articles]);
@@ -40,7 +38,7 @@ const Home = ({ data }) => {
         ? true
         : false
     );
-  }, [articlesToShow, data?.articlesConnection.aggregate.count]);
+  }, [articlesToShow]);
 
   return (
     <Fragment>
@@ -52,7 +50,6 @@ const Home = ({ data }) => {
           </Typography>
 
           <InfiniteScroll
-            scrollThreshold="500px"
             style={{ overflow: "hidden" }}
             dataLength={articlesToShow.length}
             next={getMoreArticles}
@@ -98,7 +95,7 @@ export async function getServerSideProps() {
   try {
     const data = await fetchWithArgs(ALL_ARTICLES_QUERY, {
       start: 0,
-      limit: 12,
+      limit: 6,
     });
 
     if (!data) {

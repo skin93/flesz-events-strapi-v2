@@ -1,12 +1,8 @@
-import { Fragment, useMemo, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-
-import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
-import { ARTICLES_TITLE_QUERY } from "@/lib/queries/articles/articlesTitleQuery";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { alpha } from "@material-ui/core/styles";
@@ -28,10 +24,6 @@ import LinkButton from "@/components/UI/LinkButton";
 
 const SiteDrawer = dynamic(() => import("@/components/layout/SiteDrawer"));
 
-const ResultsContainer = dynamic(() =>
-  import("@/components/UI/ResultsContainer")
-);
-
 const HideOnScroll = (props) => {
   const { children } = props;
   const trigger = useScrollTrigger();
@@ -52,7 +44,6 @@ const navLinks = [
 ];
 
 const items = [
-  { title: "tagi", path: "/tags" },
   { title: "eventy", path: "/events" },
   { title: "kontakt", path: "/contact" },
   { title: "festiwalowa mapa", path: "/festival-map" },
