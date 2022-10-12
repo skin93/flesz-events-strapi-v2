@@ -90,6 +90,7 @@ const TagPage = ({ data }) => {
                 {tag.name}
               </Typography>
               <InfiniteScroll
+                scrollThreshold="50%"
                 style={{ overflow: "hidden" }}
                 dataLength={articlesToShow.length}
                 next={getMoreArticles}

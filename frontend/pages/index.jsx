@@ -50,6 +50,7 @@ const Home = ({ data }) => {
           </Typography>
 
           <InfiniteScroll
+            scrollThreshold="50%"
             style={{ overflow: "hidden" }}
             dataLength={articlesToShow.length}
             next={getMoreArticles}
