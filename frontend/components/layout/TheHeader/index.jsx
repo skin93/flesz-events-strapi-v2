@@ -66,6 +66,7 @@ const TheHeader = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     router.push(`/search?q=${inputRef.current.value}`);
+    inputRef.current.value = "";
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
