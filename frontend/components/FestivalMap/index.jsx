@@ -72,7 +72,7 @@ const FestivalMap = ({ festivals }) => {
     points,
     zoom: viewport.zoom,
     bounds,
-    options: { radius: 75, maxZoom: 20 },
+    options: { radius: 50, maxZoom: 20 },
   });
 
   return (
@@ -101,8 +101,8 @@ const FestivalMap = ({ festivals }) => {
               >
                 <div
                   style={{
-                    width: `${25 + (pointCount / points.length) * 50}px`,
-                    height: `${25 + (pointCount / points.length) * 50}px`,
+                    width: `${15 + (pointCount / points.length) * 30}px`,
+                    height: `${15 + (pointCount / points.length) * 30}px`,
                   }}
                   onClick={() => {
                     const expansionZoom = Math.min(
@@ -132,8 +132,8 @@ const FestivalMap = ({ festivals }) => {
               key={cluster.properties.festId}
               latitude={latitude}
               longitude={longitude}
-              offsetLeft={-40}
-              offsetTop={-20}
+              offsetLeft={-20}
+              offsetTop={-10}
             >
               <button
                 className="marker-btn"
@@ -143,8 +143,8 @@ const FestivalMap = ({ festivals }) => {
                 }}
               >
                 <Image
-                  width={40}
-                  height={40}
+                  width={20}
+                  height={20}
                   alt={`${cluster.properties.festName}`}
                   src="/icons8-metal-music-96.png"
                 />
@@ -268,7 +268,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     fontWeight: 600,
-    fontSize: "1.3em",
+    fontSize: "1.2em",
   },
   event: {
     padding: "16px 24px",

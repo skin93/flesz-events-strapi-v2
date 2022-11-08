@@ -15,14 +15,13 @@ const FestivalMapPage = (props) => {
   return (
     <Fragment>
       <NextSeo
-        title="Festiwalowa Mapa Polski"
-        description="Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!"
+        title="Festiwalowa Mapa"
+        description="Najciekawsze festiwale w Polsce oraz w Europie"
         nofollow={true}
         canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`}
         openGraph={{
           title: `Festiwalowa Mapa Polski| ${process.env.NEXT_PUBLIC_APP_NAME}`,
-          descirption:
-            "Sprawdź, czy w Twojej okolicy nie odbywa się jakiś fajny festiwal!",
+          descirption: "Najciekawsze festiwale w Polsce oraz w Europie",
           url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`,
           images: [
             {
