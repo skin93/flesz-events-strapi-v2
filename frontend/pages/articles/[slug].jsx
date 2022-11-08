@@ -147,8 +147,9 @@ const ArticlePage = ({ data }) => {
                 <Image
                   src={getMediaUrl(article.image_cover)}
                   quality={100}
-                  width={article.image_cover.width}
-                  height={article.image_cover.height}
+                  layout="fill"
+                  objectFit={"cover"}
+                  objectPosition={"center"}
                   blurDataURL={getMediaUrl(article.image_cover)}
                   alt={article.title}
                   aria-label="article-cover"
@@ -232,6 +233,7 @@ const useStyles = makeStyles((theme) => ({
   imageWrapper: {
     position: "relative",
     boxShadow: "rgba(0, 0, 0, 0.7) 0px 5px 15px",
+    aspectRatio: 16 / 9,
   },
   caption: {
     display: "inline-block",
@@ -240,6 +242,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     background: theme.palette.black.main,
     fontWeight: 600,
+    padding: "5px 10px",
   },
   title: {
     fontWeight: 600,
