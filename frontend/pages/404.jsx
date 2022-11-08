@@ -7,10 +7,11 @@ export default function Custom404() {
       <Fade in timeout={200}>
         <div
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            height: "100vh",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <h1>404 - Nie odnaleziono strony :(</h1>
