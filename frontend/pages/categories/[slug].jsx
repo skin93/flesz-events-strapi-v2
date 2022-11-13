@@ -132,7 +132,7 @@ export async function getServerSideProps({ params }) {
       props: { data },
     };
   } catch (error) {
-    return { notFound: true };
+    throw new Error("Internal Server Error");
   }
 }
 

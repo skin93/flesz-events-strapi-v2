@@ -104,7 +104,7 @@ export async function getServerSideProps(context) {
       props: { data, q },
     };
   } catch (error) {
-    return { notFound: true };
+    throw new Error("Internal Server Error");
   }
 }
 
