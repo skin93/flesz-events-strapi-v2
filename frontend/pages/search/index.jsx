@@ -42,7 +42,7 @@ const SearchPage = ({ data, q }) => {
 
   return (
     <Fragment>
-      <NextSeo nofollow={true} />
+      <NextSeo nofollow={true} noindex={true} />
       <Fade in timeout={200}>
         <Container component="section" maxWidth="lg" aria-label="home-page">
           <Typography variant="h1" className={classes.heading}>
