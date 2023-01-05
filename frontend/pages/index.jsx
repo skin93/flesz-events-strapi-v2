@@ -70,11 +70,7 @@ const Home = ({ data }) => {
               {articlesToShow.map((article) => (
                 <Fade key={article.id} in timeout={200}>
                   <Grid item xs={12} md={6}>
-                    <Link
-                      scroll={false}
-                      href={`/articles/${article.slug}`}
-                      passHref
-                    >
+                    <Link href={`/articles/${article.slug}`} passHref>
                       <a>
                         <BaseCard article={article} />
                       </a>
