@@ -41,6 +41,7 @@ const navLinks = [
   { title: "koncerty", path: "/categories/koncerty" },
   { title: "patronat", path: "/categories/patronat" },
   { title: "relacje", path: "/categories/relacje" },
+  { title: "wywiady", path: "/categories/wywiady" },
 ];
 
 const items = [
