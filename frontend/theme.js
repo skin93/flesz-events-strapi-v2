@@ -113,10 +113,7 @@ const theme = createTheme({
           textAlign: "center",
           margin: "30px 0",
           "& > img": {
-            width: "100%",
-            height: "100%",
-            maxHeight: "600px",
-            objectFit: "contain",
+            maxWidth: "100%",
           },
           "& > figcaption": {
             fontWeight: 700,
@@ -212,8 +209,7 @@ const theme = createTheme({
           lineHeight: "2rem",
           letterSpacing: "2px",
           padding: "30px 0",
-          width: "100%",
-          maxWidth: "500px",
+          maxWidth: "100%",
           zIndex: 1,
           margin: "1rem auto",
           lineHeight: "2rem",
