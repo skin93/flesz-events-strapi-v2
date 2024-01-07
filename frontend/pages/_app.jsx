@@ -4,8 +4,6 @@ import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
 import PropTypes from "prop-types";
 
-import TagManager from "react-gtm-module";
-
 import theme from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -33,10 +31,6 @@ export default function MyApp(props) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-  }, []);
-
-  useEffect(() => {
-    TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM });
   }, []);
 
   return (
