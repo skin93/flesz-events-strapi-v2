@@ -146,10 +146,10 @@ const ArticlePage = ({ data }) => {
               <div className={classes.imageWrapper}>
                 <Image
                   src={getMediaUrl(article.image_cover)}
-                  quality={100}
+                  quality={50}
                   layout="fill"
-                  objectFit={"cover"}
-                  objectPosition={"center"}
+                  priority
+                  placeholder="blur"
                   blurDataURL={getMediaUrl(article.image_cover)}
                   alt={article.title}
                   aria-label="article-cover"
