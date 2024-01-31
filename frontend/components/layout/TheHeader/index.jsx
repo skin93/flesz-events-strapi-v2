@@ -21,6 +21,7 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import LinkButton from "@/components/UI/LinkButton";
+import Logo from "@/components/UI/Logo";
 
 const SiteDrawer = dynamic(() => import("@/components/layout/SiteDrawer"));
 
@@ -74,26 +75,10 @@ const TheHeader = (props) => {
   return (
     <Fragment>
       <HideOnScroll {...props}>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar
-            variant="dense"
-            id="back-to-top-anchor"
-            style={{ paddingInline: 0 }}
-          >
+        <AppBar className={classes.appBar}>
+          <Toolbar id="back-to-top-anchor" style={{ paddingInline: 0 }}>
             <Container maxWidth="lg" className={classes.container}>
-              <div
-                className={classes.navbarBrand}
-                color="inherit"
-                aria-label="home"
-              >
-                <Link href="/">
-                  <img
-                    src="/biale-logo-pelny-napis-akcent.png"
-                    className={classes.logo}
-                    alt="logo"
-                  />
-                </Link>
-              </div>
+              <Logo />
               <Hidden smDown>
                 <nav aria-label="main-navigation" className={classes.navbar}>
                   <Button
@@ -167,6 +152,7 @@ export default TheHeader;
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: theme.palette.black.main,
+    // padding: "0.5rem",
   },
   offset: theme.mixins.toolbar,
   menuButton: {
@@ -181,18 +167,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     paddingInline: "1rem",
-  },
-  navbarBrand: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    position: "relative",
-    width: "150px",
-  },
-  logo: {
-    width: "100%",
-    height: "100%",
-    cursor: "pointer",
   },
   navbar: {
     display: "flex",
