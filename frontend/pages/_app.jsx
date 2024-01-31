@@ -38,7 +38,7 @@ export default function MyApp(props) {
       <DefaultSeo {...SEO} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <TheHeader />
+        {router.asPath !== "/festival-map" && <TheHeader />}
         <main>
           <Component key={router.asPath} {...pageProps} />
         </main>
