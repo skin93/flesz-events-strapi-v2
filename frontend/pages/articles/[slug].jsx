@@ -81,7 +81,12 @@ const ArticlePage = ({ data }) => {
         }}
       />
       <Fade in timeout={200}>
-        <Container component="section" maxWidth="lg" aria-label="article-page">
+        <Container
+          component="section"
+          maxWidth="lg"
+          style={{ marginTop: "3rem" }}
+          aria-label="article-page"
+        >
           <div className={classes.chips}>
             <Link href={`/categories/${article.category.slug}`}>
               <a>
@@ -224,9 +229,6 @@ export async function getServerSideProps(context) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingInline: "1rem",
-  },
   chip: {
     marginBottom: "1rem",
   },
