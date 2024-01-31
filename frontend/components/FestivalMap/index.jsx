@@ -41,7 +41,7 @@ const FestivalMap = ({ festivals }) => {
     latitude: 51.974077,
     longitude: 19.451946,
     width: "100vw",
-    height: "93vh",
+    height: "100vh",
     zoom: 5,
   });
 

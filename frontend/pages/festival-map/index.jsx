@@ -34,10 +34,7 @@ const FestivalMapPage = (props) => {
         }}
       />
       <Fade in timeout={200}>
-        <section
-          aria-label="festival-map"
-          style={{ margin: "-15px 0 0 0", overflow: "hidden" }}
-        >
+        <section aria-label="festival-map">
           <MapWithNoSSR festivals={props.data.festivals} />
         </section>
       </Fade>
