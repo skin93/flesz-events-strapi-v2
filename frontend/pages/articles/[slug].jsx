@@ -84,7 +84,7 @@ const ArticlePage = ({ data }) => {
         <Container
           component="section"
           maxWidth="lg"
-          style={{ marginTop: "3rem" }}
+          style={{ marginTop: "16px" }}
           aria-label="article-page"
         >
           <div className={classes.chips}>
