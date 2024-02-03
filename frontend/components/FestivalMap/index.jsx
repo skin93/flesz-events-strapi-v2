@@ -159,12 +159,6 @@ const FestivalMap = ({ festivals }) => {
             onClose={() => setIsOpen(false)}
             TransitionComponent={Transition}
           >
-            <button
-              onClick={() => setIsOpen(false)}
-              className={classes.closeButton}
-            >
-              X
-            </button>
             <Image
               quality={100}
               alt={selected.properties.festName}
