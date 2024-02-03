@@ -119,22 +119,21 @@ const TheHeader = (props) => {
                   </Link>
                 </nav>
               </Hidden>
-              <Hidden smDown>
-                <form onSubmit={handleSubmit} className={classes.searchForm}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    inputRef={inputRef}
-                    placeholder="Szukaj..."
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </form>
-              </Hidden>
+              <form onSubmit={handleSubmit} className={classes.searchForm}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  inputRef={inputRef}
+                  placeholder="Szukaj..."
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </form>
+
               <Hidden mdUp>
                 <SiteDrawer navLinks={navLinks} items={items} />
               </Hidden>
@@ -180,18 +179,21 @@ const useStyles = makeStyles((theme) => ({
   },
 
   searchForm: {
-    flex: 1,
+    flex: 0.75,
+    marginRight: theme.spacing(1),
+    marginLeft: "auto",
+    [theme.breakpoints.up("sm")]: {
+      flex: 0.5,
+    },
+    [theme.breakpoints.up("md")]: {
+      flex: 1,
+    },
+
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
     },
   },
   searchIcon: {
