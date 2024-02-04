@@ -140,7 +140,11 @@ const ArticlePage = ({ data }) => {
             {article.title}
           </Typography>
           <Divider className={classes.divider} />
-          <Grid container justifyContent="space-between">
+          <Grid
+            className={classes.container}
+            container
+            justifyContent="space-between"
+          >
             <Grid
               item
               xs={12}
@@ -285,6 +289,18 @@ const useStyles = makeStyles((theme) => ({
     height: "3px",
     "&:first-of-type": {
       marginTop: "0",
+    },
+  },
+  container: {
+    [theme.breakpoints.up("lg")]: {
+      alignItems: "flex-start",
+    },
+  },
+  rightColumn: {
+    [theme.breakpoints.up("lg")]: {
+      position: "sticky",
+      top: 0,
+      height: "100dvh",
     },
   },
 }));
