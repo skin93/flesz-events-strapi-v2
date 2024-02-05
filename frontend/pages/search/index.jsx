@@ -41,7 +41,7 @@ const SearchPage = ({ data, q }) => {
   }, [articlesToShow]);
 
   return (
-    <Fragment>
+    <main>
       <NextSeo nofollow={true} noindex={true} />
       <Fade in timeout={200}>
         <Container component="section" maxWidth="lg" aria-label="home-page">
@@ -81,7 +81,7 @@ const SearchPage = ({ data, q }) => {
           </InfiniteScroll>
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

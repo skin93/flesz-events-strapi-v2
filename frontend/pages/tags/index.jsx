@@ -49,7 +49,7 @@ const TagsPage = ({ data }) => {
   };
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title="Tagi"
         description="Zbiór wszystkich tagów"
@@ -96,7 +96,7 @@ const TagsPage = ({ data }) => {
           />
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

@@ -48,7 +48,7 @@ const CategoryPage = ({ data }) => {
   const category = data?.categories[0];
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title={category.metadata.meta_title}
         description={category.metadata.meta_description}
@@ -110,7 +110,7 @@ const CategoryPage = ({ data }) => {
           )}
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

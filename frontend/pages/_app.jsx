@@ -39,9 +39,7 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <TheHeader />
-        <main>
-          <Component key={router.asPath} {...pageProps} />
-        </main>
+        <Component key={router.asPath} {...pageProps} />
         {router.asPath !== "/festival-map" && <TheFooter />}
       </ThemeProvider>
     </Fragment>

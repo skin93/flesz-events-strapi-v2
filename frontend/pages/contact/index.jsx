@@ -10,7 +10,7 @@ const ContactPage = () => {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title="Kontakt"
         description="W jaki sposób możes nawiązać z nami kontakt?"
@@ -39,7 +39,7 @@ const ContactPage = () => {
           </p>
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

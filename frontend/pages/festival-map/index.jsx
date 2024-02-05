@@ -13,7 +13,7 @@ import Fade from "@material-ui/core/Fade";
 
 const FestivalMapPage = (props) => {
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title="Festiwalowa Mapa"
         description="Najciekawsze festiwale w Polsce oraz w Europie"
@@ -38,7 +38,7 @@ const FestivalMapPage = (props) => {
           <MapWithNoSSR festivals={props.data.festivals} />
         </section>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

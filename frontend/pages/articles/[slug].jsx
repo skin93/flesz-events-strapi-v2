@@ -58,7 +58,7 @@ const ArticlePage = ({ data }) => {
   const article = data?.articles[0];
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title={article.metadata.meta_title}
         description={article.metadata.meta_description}
@@ -205,7 +205,7 @@ const ArticlePage = ({ data }) => {
           </Grid>
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

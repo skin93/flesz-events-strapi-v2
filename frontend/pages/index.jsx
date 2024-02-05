@@ -41,7 +41,7 @@ const Home = ({ data }) => {
   }, [articlesToShow]);
 
   return (
-    <Fragment>
+    <main>
       <NextSeo nofollow={true} />
       <Fade in timeout={200}>
         <Container component="section" maxWidth="lg" aria-label="home-page">
@@ -82,7 +82,7 @@ const Home = ({ data }) => {
           </InfiniteScroll>
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

@@ -3,7 +3,7 @@ import { Fragment } from "react";
 
 export default function Custom404() {
   return (
-    <Fragment>
+    <main>
       <Fade in timeout={200}>
         <div
           style={{
@@ -17,6 +17,6 @@ export default function Custom404() {
           <h1>404 - Nie odnaleziono strony :(</h1>
         </div>
       </Fade>
-    </Fragment>
+    </main>
   );
 }

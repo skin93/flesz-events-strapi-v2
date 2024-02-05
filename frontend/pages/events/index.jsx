@@ -31,7 +31,7 @@ const EventsPage = ({ data }) => {
   );
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title="Eventy"
         description="Lista nadchodzących wydarzeń"
@@ -75,7 +75,7 @@ const EventsPage = ({ data }) => {
           />
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

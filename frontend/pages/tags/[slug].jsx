@@ -50,7 +50,7 @@ const TagPage = ({ data }) => {
   const tag = data?.tags[0];
 
   return (
-    <Fragment>
+    <main>
       <NextSeo
         title={tag.metadata.meta_title}
         description={tag.metadata.meta_description}
@@ -130,7 +130,7 @@ const TagPage = ({ data }) => {
           )}
         </Container>
       </Fade>
-    </Fragment>
+    </main>
   );
 };
 

@@ -3,7 +3,7 @@ import { Fragment } from "react";
 
 export default function Custom500() {
   return (
-    <Fragment>
+    <main>
       <Fade in timeout={200}>
         <div
           style={{
@@ -17,6 +17,6 @@ export default function Custom500() {
           <h1>500 - Błąd serwera :(</h1>
         </div>
       </Fade>
-    </Fragment>
+    </main>
   );
 }
