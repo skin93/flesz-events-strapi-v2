@@ -12,7 +12,7 @@ export default {
     site_name: process.env.NEXT_PUBLIC_APP_NAME,
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.png`,
+        url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.jpeg`,
         width: 1200,
         height: 628,
         alt: "Flesz.Events logo",
