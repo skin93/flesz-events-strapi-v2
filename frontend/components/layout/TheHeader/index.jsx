@@ -38,6 +38,7 @@ const HideOnScroll = (props) => {
 
 const navLinks = [
   { title: "newsy", path: "/categories/newsy" },
+  { title: "single", path: "/categories/single" },
   { title: "festiwale", path: "/categories/festiwale" },
   { title: "koncerty", path: "/categories/koncerty" },
   { title: "patronat", path: "/categories/patronat" },
