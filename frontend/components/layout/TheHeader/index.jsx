@@ -46,10 +46,7 @@ const navLinks = [
   { title: "wywiady", path: "/categories/wywiady" },
 ];
 
-const items = [
-  { title: "eventy", path: "/events" },
-  { title: "kontakt", path: "/contact" },
-];
+const items = [{ title: "kontakt", path: "/contact" }];
 
 const TheHeader = (props) => {
   const classes = useStyles();

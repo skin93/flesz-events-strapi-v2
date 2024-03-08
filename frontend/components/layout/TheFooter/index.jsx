@@ -23,7 +23,6 @@ const TheFooter = () => {
 
   const items = [
     { title: "tagi", path: "/tags" },
-    { title: "eventy", path: "/events" },
     { title: "kontakt", path: "/contact" },
   ];
 
