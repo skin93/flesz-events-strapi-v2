@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
@@ -18,7 +18,6 @@ import Fade from "@material-ui/core/Fade";
 import RelatedArticles from "@/components/layout/RelatedArticles";
 
 import { getMediaUrl } from "@/lib/getMediaUrl";
-import Disqus from "@/components/Disqus";
 
 const ArticlePage = ({ data }) => {
   useEffect(() => {
@@ -187,7 +186,6 @@ const ArticlePage = ({ data }) => {
                 aria-label="article-content"
               />
               <Divider className={classes.divider} />
-              <Disqus article={article} />
             </Grid>
             <Grid
               item
