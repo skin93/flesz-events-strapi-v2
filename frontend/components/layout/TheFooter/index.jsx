@@ -25,7 +25,6 @@ const TheFooter = () => {
     { title: "tagi", path: "/tags" },
     { title: "eventy", path: "/events" },
     { title: "kontakt", path: "/contact" },
-    { title: "festiwalowa mapa", path: "/festival-map" },
   ];
 
   return (

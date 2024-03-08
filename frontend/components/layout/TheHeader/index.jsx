@@ -49,7 +49,6 @@ const navLinks = [
 const items = [
   { title: "eventy", path: "/events" },
   { title: "kontakt", path: "/contact" },
-  { title: "festiwalowa mapa", path: "/festival-map" },
 ];
 
 const TheHeader = (props) => {
