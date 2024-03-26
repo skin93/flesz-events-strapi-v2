@@ -170,14 +170,6 @@ const ArticlePage = ({ data }) => {
                   {article.image_cover.caption}
                 </Typography>
               </div>
-
-              <Typography
-                variant="subtitle1"
-                className={classes.excerpt}
-                aria-label="article-excerpt"
-              >
-                {article.excerpt}
-              </Typography>
               <Divider className={classes.divider} />
               <div
                 dangerouslySetInnerHTML={{
@@ -251,11 +243,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 600,
     margin: "0 0 1rem 0",
-  },
-  excerpt: {
-    fontWeight: 600,
-
-    margin: "1rem 0",
   },
   category: {
     color: theme.palette.primary.main,
