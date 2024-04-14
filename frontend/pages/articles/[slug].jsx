@@ -156,6 +156,7 @@ const ArticlePage = ({ data }) => {
                   src={getMediaUrl(article.image_cover)}
                   quality={50}
                   layout="fill"
+                  objectFit="cover"
                   priority
                   placeholder="blur"
                   blurDataURL={getMediaUrl(article.image_cover)}
