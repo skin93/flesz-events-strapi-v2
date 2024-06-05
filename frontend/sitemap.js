@@ -4,12 +4,16 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ["/server-sitemap.xml", "/search"], // <= exclude here
+  exclude: ["/server-sitemap.xml", "/search", "/tags/", "/categories/"], // <= exclude here
   robotsTxtOptions: {
     policies: [
       {
         userAgent: "*",
         allow: "/",
+      },
+      {
+        userAgent: "*",
+        disallow: ["/categories/", "/tags/"],
       },
     ],
     additionalSitemaps: [

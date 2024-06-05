@@ -52,8 +52,8 @@ const CategoryPage = ({ data }) => {
       <NextSeo
         title={category.metadata.meta_title}
         description={category.metadata.meta_description}
-        nofollow={!category.metadata.follow}
-        noindex={!category.metadata.index}
+        nofollow={true}
+        noindex={true}
         canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${category.slug}`}
         openGraph={{
           title: `${category.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,

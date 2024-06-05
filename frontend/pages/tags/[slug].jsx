@@ -54,8 +54,8 @@ const TagPage = ({ data }) => {
       <NextSeo
         title={tag.metadata.meta_title}
         description={tag.metadata.meta_description}
-        nofollow={!tag.metadata.follow}
-        noindex={!tag.metadata.index}
+        nofollow={true}
+        noindex={true}
         canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${tag.slug}`}
         openGraph={{
           title: `${tag.metadata.og_title} | ${process.env.NEXT_PUBLIC_APP_NAME}`,

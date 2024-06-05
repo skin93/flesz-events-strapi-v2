@@ -53,7 +53,8 @@ const TagsPage = ({ data }) => {
       <NextSeo
         title="Tagi"
         description="Zbiór wszystkich tagów"
-        nofollow={false}
+        nofollow={true}
+        noindex={true}
         canonical={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags`}
         openGraph={{
           title: `Tagi | ${process.env.NEXT_PUBLIC_APP_NAME}`,
