@@ -17,6 +17,7 @@ const TheFooter = () => {
     { title: "festiwale", path: "/categories/festiwale" },
     { title: "koncerty", path: "/categories/koncerty" },
     { title: "patronat", path: "/categories/patronat" },
+    { title: "polecamy", path: "/categories/polecamy" },
     { title: "relacje", path: "/categories/relacje" },
     { title: "wywiady", path: "/categories/wywiady" },
   ];
