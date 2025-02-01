@@ -52,7 +52,7 @@ export default function Map({ markers }) {
               >
                 <Popup>
                   <DialogTrigger asChild>
-                    <div>
+                    <div className="text-center">
                       <p className="font-bold !my-0">{marker.popup}</p>
                       <Button variant={"ghost"}>Szczegóły</Button>
                     </div>
@@ -76,12 +76,12 @@ export default function Map({ markers }) {
                   </Link>
                 </DialogTitle>
                 <div className="flex flex-row justify-center gap-1">
-                  {marker.date && marker.endDate ? (
+                  {marker.fromDate && marker.endDate ? (
                     <p>
-                      {formatDateToLocal(marker.date.toString())} -{" "}
+                      {formatDateToLocal(marker.fromDate.toString())} -{" "}
                       {formatDateToLocal(marker.endDate.toString())}
                     </p>
-                  ) : marker.date && !marker.endDate ? (
+                  ) : marker.date && !marker.fromDate && !marker.endDate ? (
                     <p>{formatDateToLocal(marker.date.toString())}</p>
                   ) : (
                     <p>Brak daty</p>
