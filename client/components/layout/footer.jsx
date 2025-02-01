@@ -3,18 +3,18 @@ import { ButtonLink } from "../ui/custom/button-link";
 
 export default function Footer() {
   const navLinks = [
-    { title: "newsy", path: "/kategorie/newsy" },
-    { title: "festiwale", path: "/kategorie/festiwale" },
-    { title: "koncerty", path: "/kategorie/koncerty" },
-    { title: "patronat", path: "/kategorie/patronat" },
-    { title: "relacje", path: "/kategorie/relacje" },
-    { title: "wywiady", path: "/kategorie/wywiady" },
-    { title: "galerie", path: "/galerie" },
+    { title: "newsy", path: "/categories/newsy" },
+    { title: "single", path: "/categories/single" },
+    { title: "festiwale", path: "/categories/festiwale" },
+    { title: "koncerty", path: "/categories/koncerty" },
+    { title: "patronat", path: "/categories/patronat" },
+    { title: "relacje", path: "/categories/relacje" },
+    { title: "wywiady", path: "/categories/wywiady" },
   ];
 
   const items = [
-    { title: "tagi", path: "/tagi" },
-    { title: "kontakt", path: "/kontakt" },
+    { title: "tagi", path: "/tags" },
+    { title: "kontakt", path: "/contact" },
   ];
 
   return (

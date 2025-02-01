@@ -18,19 +18,19 @@ import { ButtonLink } from "../ui/custom/button-link";
 import SearchDialog from "../ui/custom/search-dialog";
 
 const navLinks1 = [
-  { title: "newsy", path: "/kategorie/newsy" },
-  { title: "single", path: "/kategorie/single" },
-  { title: "festiwale", path: "/kategorie/festiwale" },
-  { title: "koncerty", path: "/kategorie/koncerty" },
-  { title: "patronat", path: "/kategorie/patronat" },
-  { title: "relacje", path: "/kategorie/relacje" },
-  { title: "wywiady", path: "/kategorie/wywiady" },
+  { title: "newsy", path: "/categories/newsy" },
+  { title: "single", path: "/categories/single" },
+  { title: "festiwale", path: "/categories/festiwale" },
+  { title: "koncerty", path: "/categories/koncerty" },
+  { title: "patronat", path: "/categories/patronat" },
+  { title: "relacje", path: "/categories/relacje" },
+  { title: "wywiady", path: "/categories/wywiady" },
 ];
 
 const navLinks2 = [
-  { title: "mapa", path: "/festiwalowa-mapa" },
-  { title: "galerie", path: "/galerie" },
-  { title: "kontakt", path: "/kontakt" },
+  { title: "mapa", path: "/festival-map" },
+  { title: "galerie", path: "/galleries" },
+  { title: "kontakt", path: "/contact" },
 ];
 
 export default function Header() {
