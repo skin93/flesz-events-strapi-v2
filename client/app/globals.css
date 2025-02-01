@@ -2,63 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 13%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 13%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 0 0% 13%;
+    --radius: 1rem;
   }
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 13%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 0 0% 13%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 0 0% 13%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 283 99% 35%;
+    --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 283 99% 35%;
+    --input: 12 6.5% 15.1%;
+    --ring: 283 99% 35%;
   }
 }
 
@@ -67,6 +54,88 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground relative overflow-x-hidden;
+    ::selection {
+      @apply bg-[#8001b2] text-[#fff];
+    }
+
+    ::marker {
+      @apply text-[#9254ab];
+    }
+  }
+
+  h1 {
+    @apply text-xl md:text-2xl lg:text-5xl font-bold mb-4;
+  }
+
+  h2 {
+    @apply text-lg md:text-xl lg:text-4xl font-bold mb-4;
+  }
+
+  strong {
+    @apply font-[900] dark:text-[#ffffffea] text-foreground;
+  }
+
+  .min-h-custom {
+    @apply min-h-[calc(100vh-56px)];
+  }
+
+  main {
+    @apply container;
+  }
+
+  article {
+    p {
+      @apply dark:text-[#d2cfd3d3] font-[400] text-xs md:text-sm lg:text-lg my-4;
+    }
+
+    a {
+      @apply cursor-pointer dark:hover:text-[#0084ff] text-[#0084ff] hover:text-[#80bffa] dark:text-[#80bffa];
+    }
+
+    ul,
+    ol {
+      @apply pl-8 my-4 font-normal dark:text-[#d2cfd3d3];
+    }
+
+    ul {
+      > li {
+        @apply list-square;
+      }
+    }
+
+    ol {
+      > li {
+        @apply list-decimal;
+      }
+    }
+
+    li {
+      > s {
+        @apply text-[#545454];
+      }
+    }
+  }
+
+  blockquote {
+    @apply relative font-[800] italic tracking-[2px] py-[30px] px-0 max-w-[100%] z-[1] my-4 mx-auto border-t-[3px] border-t-accent border-b-[3px] border-b-accent bg-transparent;
+
+    p {
+      @apply text-foreground;
+    }
+  }
+
+  .embeded-iframe {
+    > .raw-html-embed {
+      @apply relative overflow-hidden w-full pt-[56.25%] my-4 rounded-sm;
+
+      > iframe {
+        @apply absolute inset-0 w-full h-full;
+
+        > .fb {
+          @apply h-full relative;
+        }
+      }
+    }
   }
 }
