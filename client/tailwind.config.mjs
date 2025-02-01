@@ -11,6 +11,9 @@ export default {
       square: "square",
       decimal: "decimal",
     },
+    container: {
+      center: true,
+    },
     extend: {
       colors: {
         background: "hsl(var(--background))",
