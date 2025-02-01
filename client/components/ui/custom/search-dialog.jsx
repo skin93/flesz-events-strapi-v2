@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 export default function SearchDialog() {
   const router = useRouter();
@@ -27,16 +28,12 @@ export default function SearchDialog() {
     }),
   });
 
-  const form =
-    useForm <
-    z.infer <
-    typeof FormSchema >>
-      {
-        resolver: zodResolver(FormSchema),
-        defaultValues: {
-          term: "",
-        },
-      };
+  const form = useForm({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      term: "",
+    },
+  });
 
   function onSubmit(data) {
     router.push(`/szukaj?q=${data.term}&strona=1`);
@@ -44,13 +41,14 @@ export default function SearchDialog() {
     setOpen(false);
   }
 
-  const [open, setOpen] = useState < boolean > false;
+  const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Szukaj frazy</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px]">
+        <DialogTitle className="my-0">Szukaj frazy</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="shrink">
             <FormField
@@ -61,7 +59,6 @@ export default function SearchDialog() {
                   <FormControl>
                     <Input
                       className="h-[100px] w- xl:h-[200px] text-4xl xl:text-6xl border-0 focus-visible:ring-0 focus-visible:ring-transparent"
-                      placeholder="Szukaj frazy..."
                       {...field}
                     />
                   </FormControl>
