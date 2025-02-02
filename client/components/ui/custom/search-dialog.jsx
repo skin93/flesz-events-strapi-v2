@@ -36,7 +36,7 @@ export default function SearchDialog() {
   });
 
   function onSubmit(data) {
-    router.push(`/szukaj?q=${data.term}&strona=1`);
+    router.push(`/search?q=${data.term}`);
     form.reset();
     setOpen(false);
   }
