@@ -55,7 +55,7 @@ export default async function HomePage() {
                 className="basis md:basis-1/2 xl:basis-1/3"
               >
                 <div key={promo.id}>
-                  <Link href={`articles/${promo.slug}`}>
+                  <Link href={`/articles/${promo.slug}`}>
                     <BaseCard article={promo} />
                   </Link>
                 </div>
@@ -76,7 +76,7 @@ export default async function HomePage() {
           <Suspense fallback={<Loading />}>
             {news.map((article) => (
               <div key={article.id}>
-                <Link href={`articles/${article.slug}`}>
+                <Link href={`/articles/${article.slug}`}>
                   <BaseCard article={article} />
                 </Link>
               </div>
@@ -98,7 +98,7 @@ export default async function HomePage() {
           <Suspense fallback={<Loading />}>
             {singles.map((article) => (
               <div key={article.id}>
-                <Link href={`articles/${article.slug}`}>
+                <Link href={`/articles/${article.slug}`}>
                   <BaseCard article={article} />
                 </Link>
               </div>
@@ -122,7 +122,7 @@ export default async function HomePage() {
           <Suspense fallback={<Loading />}>
             {concerts.map((article) => (
               <div key={article.id}>
-                <Link href={`articles/${article.slug}`}>
+                <Link href={`/articles/${article.slug}`}>
                   <BaseCard article={article} />
                 </Link>
               </div>
@@ -146,7 +146,7 @@ export default async function HomePage() {
           <Suspense fallback={<Loading />}>
             {festivals.map((article) => (
               <div key={article.id}>
-                <Link href={`articles/${article.slug}`}>
+                <Link href={`/articles/${article.slug}`}>
                   <BaseCard article={article} />
                 </Link>
               </div>

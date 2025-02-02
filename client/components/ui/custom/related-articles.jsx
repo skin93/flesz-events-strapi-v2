@@ -11,7 +11,7 @@ export default function RelatedArticles({ articles }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-center gap-4 mx-auto">
         {articles.map((article) => (
           <div key={article.id}>
-            <Link href={`/${article.slug}`}>
+            <Link href={`/articles/${article.slug}`}>
               <BaseCard article={article} />
             </Link>
           </div>
