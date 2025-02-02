@@ -13,22 +13,33 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { fetchWithArgs } from "@/lib/fetcher";
-import { LATEST_ARTICLES_BY_CATEGORY_QUERY } from "@/lib/queries/articles/latestArticlesByCategoryQuery";
 import { PROMO_ARTICLES_QUERY } from "@/lib/queries/articles/promoArticlesQuery";
+import { LATEST_NEWS_QUERY } from "@/lib/queries/articles/latestNewsQuery";
+import { LATEST_FESTIVALS_QUERY } from "@/lib/queries/articles/latestFestivalsQuery";
+import { LATEST_CONCERTS_QUERY } from "@/lib/queries/articles/latesConcertsQuery";
+import { LATEST_SINGLES_QUERY } from "@/lib/queries/articles/latestSinglesQuery";
 
 export default async function HomePage() {
   const { promo } = await fetchWithArgs(PROMO_ARTICLES_QUERY, {
     start: 0,
     limit: 6,
   });
-
-  const { news, concerts, festivals, singles } = await fetchWithArgs(
-    LATEST_ARTICLES_BY_CATEGORY_QUERY,
-    {
-      start: 0,
-      limit: 6,
-    }
-  );
+  const { news } = await fetchWithArgs(LATEST_NEWS_QUERY, {
+    start: 0,
+    limit: 6,
+  });
+  const { festivals } = await fetchWithArgs(LATEST_FESTIVALS_QUERY, {
+    start: 0,
+    limit: 6,
+  });
+  const { concerts } = await fetchWithArgs(LATEST_CONCERTS_QUERY, {
+    start: 0,
+    limit: 6,
+  });
+  const { singles } = await fetchWithArgs(LATEST_SINGLES_QUERY, {
+    start: 0,
+    limit: 6,
+  });
 
   if (!promo || !news || !concerts || !festivals || !singles) {
     notFound();
