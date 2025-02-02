@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 export const LATEST_ARTICLES_BY_CATEGORY_QUERY = gql`
-  query allArticlesQueryByCategory($start: Int!, $limit: Int!) {
+  query latestArticlesByCategoryQuery($start: Int!, $limit: Int!) {
     news: articles(
       publicationState: LIVE
       start: $start

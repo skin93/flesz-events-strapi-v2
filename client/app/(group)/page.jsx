@@ -14,10 +14,16 @@ import {
 } from "@/components/ui/carousel";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { LATEST_ARTICLES_BY_CATEGORY_QUERY } from "@/lib/queries/articles/latestArticlesByCategoryQuery";
+import { PROMO_ARTICLES_QUERY } from "@/lib/queries/articles/promoArticlesQuery";
 
 export default async function HomePage() {
   //   const { news, festivals, concerts, singles } = await getLatestArticles(0, 6);
   //   const { promoArticles } = await getPromoArticles();
+
+  const { promo } = await fetchWithArgs(PROMO_ARTICLES_QUERY, {
+    start: 0,
+    limit: 6,
+  });
 
   const { news, concerts, festivals, singles } = await fetchWithArgs(
     LATEST_ARTICLES_BY_CATEGORY_QUERY,
@@ -27,13 +33,13 @@ export default async function HomePage() {
     }
   );
 
-  if (!news || !concerts || !festivals || !singles) {
+  if (!promo || !news || !concerts || !festivals || !singles) {
     notFound();
   }
 
   return (
     <main>
-      {/* <section
+      <section
         aria-label="Promo events"
         className="flex flex-col justify-center items-center my-8"
       >
@@ -46,13 +52,13 @@ export default async function HomePage() {
           className="w-full"
         >
           <CarouselContent>
-            {promoArticles.map((promo) => (
+            {promo.map((promo) => (
               <CarouselItem
                 key={promo.id}
                 className="basis md:basis-1/2 xl:basis-1/3"
               >
                 <div key={promo.id}>
-                  <Link href={`/${promo.attributes.slug}`}>
+                  <Link href={`articles/${promo.slug}`}>
                     <BaseCard article={promo} />
                   </Link>
                 </div>
@@ -63,7 +69,7 @@ export default async function HomePage() {
           <CarouselNext />
         </Carousel>
       </section>
-      <Separator /> */}
+      <Separator />
       <section
         aria-label="Latest news"
         className="flex flex-col justify-center items-center"
