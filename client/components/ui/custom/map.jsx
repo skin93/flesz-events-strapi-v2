@@ -70,7 +70,7 @@ export default function Map({ markers }) {
                   <Link
                     target="_blank"
                     className="hover:underline"
-                    href={`tagi/${marker.slug}`}
+                    href={`/tags/${marker.slug}`}
                   >
                     {marker.alt}
                   </Link>
