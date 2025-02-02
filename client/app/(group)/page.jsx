@@ -17,9 +17,6 @@ import { LATEST_ARTICLES_BY_CATEGORY_QUERY } from "@/lib/queries/articles/latest
 import { PROMO_ARTICLES_QUERY } from "@/lib/queries/articles/promoArticlesQuery";
 
 export default async function HomePage() {
-  //   const { news, festivals, concerts, singles } = await getLatestArticles(0, 6);
-  //   const { promoArticles } = await getPromoArticles();
-
   const { promo } = await fetchWithArgs(PROMO_ARTICLES_QUERY, {
     start: 0,
     limit: 6,
