@@ -7,7 +7,7 @@ import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
 
 export default async function TagPage({ params }) {
-  const slug = await params.slug;
+  const { slug } = await params;
   const { tags } = await fetchWithArgs(SINGLE_TAG_QUERY, {
     slug,
   });

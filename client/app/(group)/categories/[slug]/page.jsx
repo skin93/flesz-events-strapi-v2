@@ -44,7 +44,7 @@ import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQu
 // }
 
 export default async function CategoryPage({ params }) {
-  const slug = await params.slug;
+  const { slug } = await params;
   const { categories } = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
     slug,
   });

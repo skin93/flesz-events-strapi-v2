@@ -1,10 +1,9 @@
 import BaseCard from "@/components/ui/custom/base-card";
+import { connection } from "next/server";
 import Link from "next/link";
-import { Suspense } from "react";
 import { Separator } from "@/components/ui/separator";
 import { ReadMoreLink } from "@/components/ui/custom/button-link";
 import { notFound } from "next/navigation";
-import Loading from "./loading";
 import {
   Carousel,
   CarouselContent,
@@ -13,33 +12,17 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { fetchWithArgs } from "@/lib/fetcher";
-import { PROMO_ARTICLES_QUERY } from "@/lib/queries/articles/promoArticlesQuery";
-import { LATEST_NEWS_QUERY } from "@/lib/queries/articles/latestNewsQuery";
-import { LATEST_FESTIVALS_QUERY } from "@/lib/queries/articles/latestFestivalsQuery";
-import { LATEST_CONCERTS_QUERY } from "@/lib/queries/articles/latesConcertsQuery";
-import { LATEST_SINGLES_QUERY } from "@/lib/queries/articles/latestSinglesQuery";
+import { LATEST_ARTICLES_QUERY } from "@/lib/queries/articles/latestArticlesQuery";
 
 export default async function HomePage() {
-  const { promo } = await fetchWithArgs(PROMO_ARTICLES_QUERY, {
-    start: 0,
-    limit: 6,
-  });
-  const { news } = await fetchWithArgs(LATEST_NEWS_QUERY, {
-    start: 0,
-    limit: 6,
-  });
-  const { festivals } = await fetchWithArgs(LATEST_FESTIVALS_QUERY, {
-    start: 0,
-    limit: 6,
-  });
-  const { concerts } = await fetchWithArgs(LATEST_CONCERTS_QUERY, {
-    start: 0,
-    limit: 6,
-  });
-  const { singles } = await fetchWithArgs(LATEST_SINGLES_QUERY, {
-    start: 0,
-    limit: 6,
-  });
+  await connection();
+  const { promo, news, concerts, festivals, singles } = await fetchWithArgs(
+    LATEST_ARTICLES_QUERY,
+    {
+      start: 0,
+      limit: 6,
+    }
+  );
 
   if (!promo || !news || !concerts || !festivals || !singles) {
     notFound();
@@ -84,15 +67,13 @@ export default async function HomePage() {
       >
         <h1 className="m-8 text-center text-4xl font-bold">OSTATNIE NEWSY</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {news.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {news.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <ReadMoreLink
           href="/categories/newsy"
@@ -106,15 +87,13 @@ export default async function HomePage() {
       >
         <h1 className="m-8 text-center text-4xl font-bold">NAJNOWSZE SINGLE</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {singles.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {singles.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <ReadMoreLink
           href="/categories/single"
@@ -130,15 +109,13 @@ export default async function HomePage() {
           OGŁOSZONE KONCERTY
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {concerts.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {concerts.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <ReadMoreLink
           href="/categories/koncerty"
@@ -154,15 +131,13 @@ export default async function HomePage() {
           OGŁOSZONE FESTIWALE
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {festivals.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {festivals.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <ReadMoreLink
           href="/categories/festiwale"

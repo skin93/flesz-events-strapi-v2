@@ -14,7 +14,7 @@ import React from "react";
 
 export async function generateMetadata({ params }) {
   // read route params
-  const slug = await params.slug;
+  const { slug } = await params;
 
   // fetch data
   const { seo } = await fetchWithArgs(SINGLE_ARTICLE_META_QUERY, {
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function SlugPage({ params }) {
-  const slug = params.slug.toString();
+  const { slug } = await params;
   const { articles } = await fetchWithArgs(SINGLE_ARTICLE_QUERY, {
     slug,
   });
@@ -66,7 +66,7 @@ export default async function SlugPage({ params }) {
   return (
     <main>
       <section className="my-8" aria-label="slug-page">
-        <div aria-label="badges" className="mb-4">
+        <div className="mb-4">
           <Link href={`/categories/${articles[0].category?.slug}`}>
             <Badge
               className="dark:bg-accent hover:dark:bg-foreground hover:dark:text-background dark:text-foreground mr-2 p-2 rounded-none uppercase"
@@ -97,7 +97,7 @@ export default async function SlugPage({ params }) {
         <h1 aria-label="article-title">{articles[0].title}</h1>
         <Separator className="mb-4 h-[3px]" />
         {/* <div className="grid grid-cols-1 xl:grid-cols-[60%_30%] gap-4 justify-between"> */}
-        <article aria-label="left-olumn">
+        <article aria-label="left-column">
           <AspectRatio
             ratio={16 / 9}
             className="realtive"

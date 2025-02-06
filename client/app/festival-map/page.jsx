@@ -2,6 +2,7 @@ import { getMediaUrl } from "@/lib/getMediaUrl";
 import LazyMap from "@/components/ui/custom/lazy-map";
 import { fetcher } from "@/lib/fetcher";
 import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
+import { connection } from "next/server";
 
 export const metadata = {
   title: "Festiwalowa Mapa",
@@ -37,6 +38,7 @@ export const metadata = {
 };
 
 export default async function FestivalMap() {
+  await connection();
   const { festivals } = await fetcher(ALL_FESTIVALS_QUERY);
   const markers = festivals.map((fest) => ({
     position: [fest.location?.latitude, fest.location?.longitude],
