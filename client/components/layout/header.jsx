@@ -66,7 +66,7 @@ export default function Header() {
               WPISY
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent>
+            <DropdownMenuContent className="z-1000">
               {navLinks1.map(({ title, path }) => (
                 <DropdownMenuItem className="h-10" key={title}>
                   <ButtonLink className="uppercase" href={path}>
