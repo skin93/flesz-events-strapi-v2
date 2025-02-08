@@ -46,6 +46,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+  --breakpoint-2xl: initial;
 }
 
 @utility container {
@@ -71,44 +72,44 @@
   }
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
+    --secondary-foreground: 0 0% 98%;
     --muted: 60 4.8% 95.9%;
     --muted-foreground: 25 5.3% 44.7%;
     --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive-foreground: 0 0% 98%;
     --border: 20 5.9% 90%;
     --input: 20 5.9% 90%;
-    --ring: 0 0% 13%;
+    --ring: 0 0% 9%;
     --radius: 1rem;
   }
 
   .dark {
-    --background: 0 0% 13%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 0 0% 13%;
-    --card-foreground: 60 9.1% 97.8%;
-    --popover: 0 0% 13%;
-    --popover-foreground: 60 9.1% 97.8%;
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
+    --secondary-foreground: 0 0% 98%;
     --muted: 12 6.5% 15.1%;
     --muted-foreground: 0 0% 62%;
     --accent: 283 99% 35%;
-    --accent-foreground: 60 9.1% 97.8%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive-foreground: 0 0% 98%;
     --border: 283 99% 35%;
     --input: 12 6.5% 15.1%;
     --ring: 283 99% 35%;
@@ -122,6 +123,12 @@
     ::marker {
       @apply text-purple-500;
     }
+  }
+
+  main,
+  header,
+  footer {
+    @apply container;
   }
 
   h1 {
@@ -140,13 +147,9 @@
     @apply min-h-[calc(100vh-56px)];
   }
 
-  main {
-    @apply container;
-  }
-
   article {
     p {
-      @apply dark:text-white font-[400] text-xs md:text-sm lg:text-lg my-4;
+      @apply dark:text-neutral-400 font-normal text-xs md:text-sm lg:text-lg my-4;
     }
 
     a {
@@ -155,7 +158,7 @@
 
     ul,
     ol {
-      @apply pl-8 my-4 font-normal dark:text-white;
+      @apply pl-8 my-4 font-medium text-neutral-900 dark:text-neutral-200;
     }
 
     ul {

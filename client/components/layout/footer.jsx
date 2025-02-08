@@ -19,7 +19,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full my-8">
-      <div className="container flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col items-start">
           {navLinks.map(({ title, path }) => (
             <ButtonLink className="ml-[-1rem]" key={title} href={path}>

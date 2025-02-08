@@ -75,10 +75,7 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-        <ReadMoreLink
-          href="/categories/newsy"
-          className="m-8 border-accent font-bold"
-        />
+        <ReadMoreLink href="/categories/newsy" />
       </section>
       <Separator />
       <section
@@ -95,10 +92,7 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-        <ReadMoreLink
-          href="/categories/single"
-          className="m-8 border-accent font-bold"
-        />{" "}
+        <ReadMoreLink href="/categories/single" />{" "}
       </section>
       <Separator />
       <section
@@ -117,10 +111,7 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-        <ReadMoreLink
-          href="/categories/koncerty"
-          className="m-8 border-accent font-bold"
-        />
+        <ReadMoreLink href="/categories/koncerty" />
       </section>
       <Separator />
       <section
@@ -139,10 +130,7 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-        <ReadMoreLink
-          href="/categories/festiwale"
-          className="m-8 border-accent font-bold"
-        />
+        <ReadMoreLink href="/categories/festiwale" />
       </section>
     </main>
   );

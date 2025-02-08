@@ -7,11 +7,12 @@ import { ARTICLES_BY_TERM_QUERY } from "@/lib/queries/articles/articlesByTermQue
 import Loading from "./loading";
 
 export default async function SearchPage({ searchParams }) {
-  const query = (await searchParams?.q) || "";
+  const query = await searchParams;
+  const term = query?.q || "";
   const { termInTitle, termInContent } = await fetchWithArgs(
     ARTICLES_BY_TERM_QUERY,
     {
-      term: query,
+      term,
     }
   );
 
@@ -30,7 +31,7 @@ export default async function SearchPage({ searchParams }) {
         className="flex flex-col justify-center items-center"
       >
         <h1 className="my-8 text-center text-4xl font-bold uppercase">
-          Wyniki dla frazy <q>{query}</q>
+          Wyniki dla frazy <q>{term}</q>
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Suspense fallback={<Loading />}>

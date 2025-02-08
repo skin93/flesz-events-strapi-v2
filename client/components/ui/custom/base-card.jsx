@@ -5,7 +5,7 @@ import { getMediaUrl } from "@/lib/getMediaUrl";
 
 export default function BaseCard({ article }) {
   return (
-    <Card className="group aspect-video w-full border-none shadow-xs shadow-accent relative rounded-lg">
+    <Card className="group aspect-video w-full border-none relative">
       <Image
         priority
         width={article.image_cover?.width}

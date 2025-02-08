@@ -21,7 +21,7 @@ export default function Map({ markers }) {
     return L.divIcon({
       html: `<p>${cluster.getChildCount()}</p>`,
       className:
-        "flex! justify-center! items-center! bg-[#8001b2] rounded-[50%] text-[#fff] font-bold w-full h-full",
+        "flex! justify-center! items-center! bg-purple-900 rounded-[50%] text-[#fff] font-bold w-full h-full",
       iconSize: L.point(30, 30, true),
     });
   };
@@ -54,7 +54,9 @@ export default function Map({ markers }) {
                   <DialogTrigger asChild>
                     <div className="text-center">
                       <p className="font-bold my-0!">{marker.popup}</p>
-                      <Button variant={"ghost"}>Szczegóły</Button>
+                      <Button className="cursor-pointer" variant={"ghost"}>
+                        Szczegóły
+                      </Button>
                     </div>
                   </DialogTrigger>
                 </Popup>
@@ -88,7 +90,7 @@ export default function Map({ markers }) {
                   )}
                 </div>
                 {marker.tickets && (
-                  <Button variant={"default"} className="w-fit mx-auto">
+                  <Button variant={"ghost"} className="w-fit mx-auto">
                     <Link
                       target="_blank"
                       className="font-bold"
@@ -105,16 +107,16 @@ export default function Map({ markers }) {
         </MarkerClusterGroup>
       </MapContainer>
 
-      <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-[#333] bg-[rgba(255,255,255,0.8)] font-normal px-[5px] text-[12px] w-fit">
+      <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-neutral-700 bg-neutral-100 font-normal px-[5px] text-[12px] w-fit">
         <a
-          className="text-[#0078A8]"
+          className="text-blue-500"
           target="_blank"
           href="https://icons8.com/icon/hWDCzzX8jyhy/stage"
         >
           Stage
         </a>{" "}
         icon by{" "}
-        <a className="text-[#0078A8]" target="_blank" href="https://icons8.com">
+        <a className="text-blue-500" target="_blank" href="https://icons8.com">
           Icons8
         </a>
       </div>
