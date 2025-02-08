@@ -3,6 +3,39 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
+import { SINGLE_TAG_META_QUERY } from "@/lib/queries/tags/singleTagMetaQuery";
+
+export async function generateMetadata({ params }) {
+  // read route params
+  const { slug } = await params;
+
+  // fetch data
+  const { seo } = await fetchWithArgs(SINGLE_TAG_META_QUERY, {
+    slug,
+  });
+
+  return {
+    title: seo[0].metadata.meta_title,
+    description: seo[0].metadata.meta_description,
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true,
+      },
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${slug}`,
+    },
+    openGraph: {
+      type: "website",
+      url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${slug}`,
+      title: seo[0].metadata.meta_title,
+      description: seo[0].metadata.meta_description,
+    },
+  };
+}
 
 export default async function TagPage({ params }) {
   const { slug } = await params;

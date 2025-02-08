@@ -6,9 +6,29 @@ import { fetchWithArgs } from "@/lib/fetcher";
 import { ARTICLES_BY_TERM_QUERY } from "@/lib/queries/articles/articlesByTermQuery";
 import Loading from "./loading";
 
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const { q } = params;
+  return {
+    title: "Szukaj",
+    description: `Wyniki wyszukiwań na podstawie frazy ${q}`,
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true,
+      },
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/search?q=${q}`,
+    },
+  };
+}
+
 export default async function SearchPage({ searchParams }) {
-  const query = await searchParams;
-  const term = query?.q || "";
+  const params = await searchParams;
+  const term = params?.q || "";
   const { termInTitle, termInContent } = await fetchWithArgs(
     ARTICLES_BY_TERM_QUERY,
     {
