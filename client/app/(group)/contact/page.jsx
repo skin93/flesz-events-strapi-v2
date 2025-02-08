@@ -40,7 +40,7 @@ export default function ContactPage() {
         <h1 className="my-8 text-center text-4xl font-bold uppercase">
           KONTAKT
         </h1>
-        <p className="text-xs md:text-sm lg:text-lg my-0">
+        <p className="my-0">
           Organizujesz festiwal albo w Twojej okolicy odbywa się ciekawe
           wydarzenie? Masz zespół, wydajecie album/singiel albo gracie niedługo
           koncert i szukacie patronatu? A może po prostu potrzebujesz nawiązać
