@@ -47,7 +47,7 @@ export default function SearchDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">Szukaj frazy</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[800px]">
+      <DialogContent className="max-w-[1000px] border-none overflow-y-hidden">
         <DialogTitle className="my-0">Szukaj frazy</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="shrink">
