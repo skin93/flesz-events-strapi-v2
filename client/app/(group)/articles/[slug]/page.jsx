@@ -95,7 +95,7 @@ export default async function SlugPage({ params }) {
           )}
         </div>
         <h1 aria-label="article-title">{articles[0].title}</h1>
-        <Separator className="mb-4 h-[3px]" />
+        <Separator className="mb-4" />
         {/* <div className="grid grid-cols-1 xl:grid-cols-[60%_30%] gap-4 justify-between"> */}
         <article aria-label="left-column">
           <AspectRatio
@@ -121,7 +121,7 @@ export default async function SlugPage({ params }) {
               </p>
             </div>
           </AspectRatio>
-          <Separator className="my-4 h-[3px]" />
+          <Separator className="my-4" />
           <div
             dangerouslySetInnerHTML={{
               __html: articles[0].content,
@@ -129,7 +129,7 @@ export default async function SlugPage({ params }) {
             aria-label="article-content"
             className="embeded-iframe"
           />
-          <Separator className="h-[3px]" />
+          <Separator />
         </article>
         <aside
           className="container justify-center p-0"
