@@ -1,8 +1,6 @@
 import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
-import Loading from "./loading";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
 
@@ -12,7 +10,7 @@ export default async function TagPage({ params }) {
     slug,
   });
 
-  if (!tags[0]) {
+  if (!tags[0] || tags[0].length === 0) {
     notFound();
   }
 
@@ -28,15 +26,13 @@ export default async function TagPage({ params }) {
           {tags[0].name}
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {articles.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {articles.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <div className="m-8" />
       </section>
