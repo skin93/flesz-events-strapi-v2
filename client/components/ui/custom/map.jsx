@@ -21,7 +21,7 @@ export default function Map({ markers }) {
     return L.divIcon({
       html: `<p>${cluster.getChildCount()}</p>`,
       className:
-        "!flex !justify-center !items-center bg-[#8001b2] rounded-[50%] text-[#fff] font-bold w-full h-full",
+        "flex! justify-center! items-center! bg-[#8001b2] rounded-[50%] text-[#fff] font-bold w-full h-full",
       iconSize: L.point(30, 30, true),
     });
   };
@@ -53,7 +53,7 @@ export default function Map({ markers }) {
                 <Popup>
                   <DialogTrigger asChild>
                     <div className="text-center">
-                      <p className="font-bold !my-0">{marker.popup}</p>
+                      <p className="font-bold my-0!">{marker.popup}</p>
                       <Button variant={"ghost"}>Szczegóły</Button>
                     </div>
                   </DialogTrigger>
@@ -105,7 +105,7 @@ export default function Map({ markers }) {
         </MarkerClusterGroup>
       </MapContainer>
 
-      <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-[500] text-[#333] bg-[rgba(255,255,255,0.8)] font-normal px-[5px] text-[12px] w-fit">
+      <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-[#333] bg-[rgba(255,255,255,0.8)] font-normal px-[5px] text-[12px] w-fit">
         <a
           className="text-[#0078A8]"
           target="_blank"

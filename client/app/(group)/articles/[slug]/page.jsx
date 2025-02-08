@@ -69,7 +69,7 @@ export default async function SlugPage({ params }) {
         <div className="mb-4">
           <Link href={`/categories/${articles[0].category?.slug}`}>
             <Badge
-              className="dark:bg-accent hover:dark:bg-foreground hover:dark:text-background dark:text-foreground mr-2 p-2 rounded-none uppercase"
+              className="dark:bg-accent dark:hover:bg-foreground dark:hover:text-background dark:text-foreground mr-2 p-2 rounded-none uppercase"
               variant="default"
             >
               {articles[0].category?.name}
@@ -115,7 +115,7 @@ export default async function SlugPage({ params }) {
             <div className="absolute bottom-0 left-0 w-auto h-auto bg-[rgba(0,0,0,0.7)] rounded-bl-sm">
               <p
                 aria-label="article-image-caption"
-                className="font-bold !text-[#fff] my-0 px-4"
+                className="font-bold text-[#fff]! my-0 px-4"
               >
                 {articles[0].image_cover.caption}
               </p>
