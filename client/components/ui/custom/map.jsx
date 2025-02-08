@@ -19,7 +19,7 @@ export default function Map({ markers }) {
 
   const createClusterCustomIcon = function (cluster) {
     return L.divIcon({
-      html: `<p>${cluster.getChildCount()}</p>`,
+      html: `<p class="text-neutral-100">${cluster.getChildCount()}</p>`,
       className:
         "flex! justify-center! items-center! bg-purple-900 rounded-[50%] text-[#fff] font-bold w-full h-full",
       iconSize: L.point(30, 30, true),
@@ -53,7 +53,7 @@ export default function Map({ markers }) {
                 <Popup>
                   <DialogTrigger asChild>
                     <div className="text-center">
-                      <p className="font-bold my-0!">{marker.popup}</p>
+                      <h4 className="font-bold my-0!">{marker.popup}</h4>
                       <Button className="cursor-pointer" variant={"ghost"}>
                         Szczegóły
                       </Button>
@@ -61,12 +61,13 @@ export default function Map({ markers }) {
                   </DialogTrigger>
                 </Popup>
               </Marker>
-              <DialogContent className="flex flex-col justify-between items-center max-w-[60em] max-h-full overflow-y-hidden">
+              <DialogContent className="border-none flex flex-col justify-between items-center max-w-[60em] max-h-full overflow-y-hidden">
                 <Image
                   src={marker.imageSrc}
                   alt={marker.imageAlt}
                   width={marker.imageWidth}
                   height={marker.imageHeight}
+                  className="rounded-sm"
                 />
                 <DialogTitle className="my-0">
                   <Link
