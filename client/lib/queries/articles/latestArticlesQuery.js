@@ -1,114 +1,72 @@
 import { gql } from "graphql-request";
 export const LATEST_ARTICLES_QUERY = gql`
   query latestArticlesQuery($start: Int!, $limit: Int!) {
-    promo: articles(
-      publicationState: LIVE
-      start: $start
-      limit: $limit
-      sort: "published_at:DESC"
-      where: { category: { slug: "polecamy" } }
-    ) {
-      id
-      title
-      slug
-      createdAt
-      image_cover {
-        alternativeText
-        url
-        width
-        height
-      }
-      category {
-        name
+    news: categories(where: { slug: "newsy" }, publicationState: LIVE) {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
+        id
+        title
         slug
+        image_cover {
+          alternativeText
+          url
+          width
+          height
+        }
       }
     }
-    concerts: articles(
-      publicationState: LIVE
-      start: $start
-      limit: $limit
-      sort: "published_at:DESC"
-      where: { category: { slug: "koncerty" } }
-    ) {
-      id
-      title
-      slug
-      createdAt
-      image_cover {
-        alternativeText
-        url
-        width
-        height
-      }
-      category {
-        name
+    concerts: categories(where: { slug: "koncerty" }, publicationState: LIVE) {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
+        id
+        title
         slug
+        image_cover {
+          alternativeText
+          url
+          width
+          height
+        }
       }
     }
-    news: articles(
+    festivals: categories(
+      where: { slug: "festiwale" }
       publicationState: LIVE
-      start: $start
-      limit: $limit
-      sort: "published_at:DESC"
-      where: { category: { slug: "newsy" } }
     ) {
-      id
-      title
-      slug
-      createdAt
-      image_cover {
-        alternativeText
-        url
-        width
-        height
-      }
-      category {
-        name
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
+        id
+        title
         slug
+        image_cover {
+          alternativeText
+          url
+          width
+          height
+        }
       }
     }
-    festivals: articles(
-      publicationState: LIVE
-      start: $start
-      limit: $limit
-      sort: "published_at:DESC"
-      where: { category: { slug: "festiwale" } }
-    ) {
-      id
-      title
-      slug
-      createdAt
-      image_cover {
-        alternativeText
-        url
-        width
-        height
-      }
-      category {
-        name
+    singles: categories(where: { slug: "single" }, publicationState: LIVE) {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
+        id
+        title
         slug
+        image_cover {
+          alternativeText
+          url
+          width
+          height
+        }
       }
     }
-    singles: articles(
-      publicationState: LIVE
-      start: $start
-      limit: $limit
-      sort: "published_at:DESC"
-      where: { category: { slug: "single" } }
-    ) {
-      id
-      title
-      slug
-      createdAt
-      image_cover {
-        alternativeText
-        url
-        width
-        height
-      }
-      category {
-        name
+    promo: categories(where: { slug: "polecamy" }, publicationState: LIVE) {
+      articles(sort: "published_at:DESC", start: $start, limit: $limit) {
+        id
+        title
         slug
+        image_cover {
+          alternativeText
+          url
+          width
+          height
+        }
       }
     }
   }
