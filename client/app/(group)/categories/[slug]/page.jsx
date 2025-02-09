@@ -1,8 +1,7 @@
 import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
-import Loading from "./loading";
+import React from "react";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_CATEGORY_META_QUERY } from "@/lib/queries/categories/singleCategoryMetaQuery";
 import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
@@ -61,15 +60,13 @@ export default async function CategoryPage({ params }) {
           {categories[0].name}
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {articles.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {articles.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <div className="m-8" />
       </section>

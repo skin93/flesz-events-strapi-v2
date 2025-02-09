@@ -1,10 +1,9 @@
 import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
+import React from "react";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { ARTICLES_BY_TERM_QUERY } from "@/lib/queries/articles/articlesByTermQuery";
-import Loading from "./loading";
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -54,15 +53,13 @@ export default async function SearchPage({ searchParams }) {
           Wyniki dla frazy <q>{term}</q>
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <Suspense fallback={<Loading />}>
-            {articles.map((article) => (
-              <div key={article.id}>
-                <Link href={`/articles/${article.slug}`}>
-                  <BaseCard article={article} />
-                </Link>
-              </div>
-            ))}
-          </Suspense>
+          {articles.map((article) => (
+            <div key={article.id}>
+              <Link href={`/articles/${article.slug}`}>
+                <BaseCard article={article} />
+              </Link>
+            </div>
+          ))}
         </div>
         <div className="my-4" />
       </section>
