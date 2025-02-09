@@ -7,7 +7,14 @@ import { Facebook, Youtube, Menu } from "lucide-react";
 
 import Image from "next/image";
 
-import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -93,11 +100,15 @@ export default function Header() {
           <SearchDialog />
         </div>
         <div className="xl:hidden">
-          <Drawer direction="right">
+          <Drawer direction="bottom">
             <DrawerTrigger>
               <Menu />
             </DrawerTrigger>
             <DrawerContent>
+              <DrawerHeader className="hidden">
+                <DrawerTitle>Menu</DrawerTitle>
+                <DrawerDescription>Menu with nav links</DrawerDescription>
+              </DrawerHeader>
               {navLinks1.map(({ title, path }) => (
                 <ButtonLink key={title} href={path}>
                   {title}
