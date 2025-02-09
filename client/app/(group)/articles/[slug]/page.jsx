@@ -66,7 +66,7 @@ export default async function SlugPage({ params }) {
   return (
     <main>
       <section className="my-8" aria-label="slug-page">
-        <div key={slug} className="mb-4">
+        <div className="mb-4">
           <Link href={`/categories/${articles[0].category?.slug}`}>
             <Badge
               className="bg-foreground hover:bg-foreground/70 dark:bg-accent dark:hover:bg-accent/70 dark:text-foreground mr-2 p-2 rounded-none uppercase"
