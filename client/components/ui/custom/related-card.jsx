@@ -14,6 +14,7 @@ export default function RelatedCard({ article }) {
           src={getMediaUrl(article.cover)}
           title={article.title}
           alt={article.cover?.alternativeText}
+          style={{ objectFit: "cover" }}
           className="rounded-sm aspect-video"
           fill
         />

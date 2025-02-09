@@ -108,7 +108,8 @@ export default async function SlugPage({ params }) {
               priority
               alt={articles[0].title}
               aria-label="article-cover"
-              className="rounded-sm"
+              style={{ objectFit: "cover" }}
+              className="rounded-sm aspect-video"
               sizes="(min-width: 1560px) 802px, (min-width: 1280px) calc(27.69vw + 376px), calc(100vw - 64px)"
               fill
             />
