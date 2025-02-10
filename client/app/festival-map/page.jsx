@@ -4,6 +4,8 @@ import { fetcher } from "@/lib/fetcher";
 import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { connection } from "next/server";
 
+export const revalidate = 60;
+
 export const metadata = {
   title: "Festiwalowa Mapa",
   description: "Sprawdź, czy w Twojej okolicy nie odbywa się fajny festiwal!",
@@ -38,7 +40,6 @@ export const metadata = {
 };
 
 export default async function FestivalMap() {
-  await connection();
   const { festivals } = await fetcher(ALL_FESTIVALS_QUERY);
   const markers = festivals.map((fest) => ({
     position: [fest.location?.latitude, fest.location?.longitude],

@@ -5,6 +5,8 @@ import { connection } from "next/server";
 import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
 import { fetcher } from "@/lib/fetcher";
 
+export const revalidate = 60;
+
 export async function generateMetadata() {
   return {
     title: "Tagi",
@@ -40,7 +42,6 @@ export async function generateMetadata() {
 }
 
 export default async function TagsPage() {
-  await connection();
   const { tags } = await fetcher(ALL_TAGS_QUERY);
 
   if (!tags || tags.length === 0) {
