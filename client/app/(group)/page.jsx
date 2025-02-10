@@ -9,8 +9,9 @@ import Concerts from "@/components/homepage/concerts";
 import Festivals from "@/components/homepage/festivals";
 import Promo from "@/components/homepage/promo";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
-  await connection();
   const { concerts, festivals, promo, singles, news } = await fetchWithArgs(
     LATEST_ARTICLES_QUERY,
     {
