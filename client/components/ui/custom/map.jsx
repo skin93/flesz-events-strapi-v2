@@ -32,7 +32,8 @@ export default function Map({ markers }) {
         preferCanvas={true}
         center={[51.974077, 19.451946]}
         maxZoom={20}
-        zoom={6}
+        zoom={7}
+        minZoom={7}
         scrollWheelZoom={true}
         className="w-[100svw] h-[calc(100svh-56px)]"
       >
