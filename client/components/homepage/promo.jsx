@@ -1,3 +1,4 @@
+"use client";
 import {
   Carousel,
   CarouselContent,
@@ -5,10 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import BaseCard from "../ui/custom/base-card";
+import { useRef } from "react";
 
 export default function Promo({ promo }) {
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
   return (
     <section
       aria-label="Promo events"
@@ -16,9 +20,11 @@ export default function Promo({ promo }) {
     >
       <h1 className="mb-8 text-center font-bold">POLECAMY</h1>
       <Carousel
+        plugins={[plugin.current]}
         opts={{
-          align: "center",
+          align: "start",
           loop: true,
+          plugin,
         }}
         className="w-full"
       >
