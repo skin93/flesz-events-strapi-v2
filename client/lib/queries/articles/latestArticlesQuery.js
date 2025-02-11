@@ -2,6 +2,7 @@ import { gql } from "graphql-request";
 export const LATEST_ARTICLES_QUERY = gql`
   query latestArticlesQuery($start: Int!, $limit: Int!) {
     news: categories(where: { slug: "newsy" }, publicationState: LIVE) {
+      slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
         title
@@ -15,6 +16,7 @@ export const LATEST_ARTICLES_QUERY = gql`
       }
     }
     concerts: categories(where: { slug: "koncerty" }, publicationState: LIVE) {
+      slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
         title
@@ -31,6 +33,7 @@ export const LATEST_ARTICLES_QUERY = gql`
       where: { slug: "festiwale" }
       publicationState: LIVE
     ) {
+      slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
         title
@@ -44,6 +47,7 @@ export const LATEST_ARTICLES_QUERY = gql`
       }
     }
     singles: categories(where: { slug: "single" }, publicationState: LIVE) {
+      slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
         title
@@ -57,6 +61,7 @@ export const LATEST_ARTICLES_QUERY = gql`
       }
     }
     promo: categories(where: { slug: "polecamy" }, publicationState: LIVE) {
+      slug
       articles(sort: "createdAt:DESC") {
         id
         title

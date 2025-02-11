@@ -1,13 +1,9 @@
-import { connection } from "next/server";
 import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { LATEST_ARTICLES_QUERY } from "@/lib/queries/articles/latestArticlesQuery";
-import News from "@/components/homepage/news";
-import Singles from "@/components/homepage/singles";
-import Concerts from "@/components/homepage/concerts";
-import Festivals from "@/components/homepage/festivals";
 import Promo from "@/components/homepage/promo";
+import CategoryBlock from "@/components/homepage/categoryBlock";
 
 export const revalidate = 60;
 
@@ -28,13 +24,29 @@ export default async function HomePage() {
     <main>
       <Promo promo={promo[0].articles} />
       <Separator />
-      <News news={news[0].articles} />
+      <CategoryBlock
+        articles={news[0].articles}
+        name="news"
+        slug={news[0].slug}
+      />
       <Separator />
-      <Singles singles={singles[0].articles} />
+      <CategoryBlock
+        articles={singles[0].articles}
+        name="singles"
+        slug={singles[0].slug}
+      />
       <Separator />
-      <Concerts concerts={concerts[0].articles} />
+      <CategoryBlock
+        articles={concerts[0].articles}
+        name="concerts"
+        slug={concerts[0].slug}
+      />
       <Separator />
-      <Festivals festivals={festivals[0].articles} />
+      <CategoryBlock
+        articles={festivals[0].articles}
+        name="festivals"
+        slug={festivals[0].slug}
+      />
     </main>
   );
 }

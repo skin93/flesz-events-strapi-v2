@@ -2,15 +2,17 @@ import Link from "next/link";
 import BaseCard from "../ui/custom/base-card";
 import { ReadMoreLink } from "../ui/custom/button-link";
 
-export default function Concerts({ concerts }) {
+export default function CategoryBlock({ articles, name, slug }) {
   return (
     <section
-      aria-label="Latest concerts"
+      aria-label={`Latest ${name}`}
       className="flex flex-col justify-center items-center"
     >
-      <h1 className="my-8 text-center font-bold">OSTATNIE KONCERTY</h1>
+      <h1 className="my-8 text-center font-bold">
+        OSTATNIE {slug.toUpperCase()}
+      </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {concerts?.map((article) => (
+        {articles?.map((article) => (
           <div key={article.id}>
             <Link href={`/articles/${article.slug}`}>
               <BaseCard article={article} />
@@ -18,7 +20,7 @@ export default function Concerts({ concerts }) {
           </div>
         ))}
       </div>
-      <ReadMoreLink href="/categories/koncerty" />
+      <ReadMoreLink href={`/categories/${slug}`} />
     </section>
   );
 }
