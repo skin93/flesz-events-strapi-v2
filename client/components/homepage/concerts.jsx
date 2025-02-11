@@ -8,7 +8,7 @@ export default function Concerts({ concerts }) {
       aria-label="Latest concerts"
       className="flex flex-col justify-center items-center"
     >
-      <h1 className="my-8 text-center text-4xl font-bold">OSTATNIE Koncerty</h1>
+      <h1 className="my-8 text-center font-bold">OSTATNIE KONCERTY</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {concerts?.map((article) => (
           <div key={article.id}>
@@ -18,7 +18,7 @@ export default function Concerts({ concerts }) {
           </div>
         ))}
       </div>
-      <ReadMoreLink href="/categories/concerts" />
+      <ReadMoreLink href="/categories/koncerty" />
     </section>
   );
 }

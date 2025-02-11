@@ -51,7 +51,7 @@ export default async function TagsPage() {
   return (
     <main>
       <section aria-label="Tags">
-        <h1 className="my-8 text-center text-4xl font-bold uppercase">TAGI</h1>
+        <h1 className="my-8 text-center font-bold uppercase">TAGI</h1>
         <div>
           {tags.map((tag) => (
             <ButtonLink

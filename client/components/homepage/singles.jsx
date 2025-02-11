@@ -8,7 +8,7 @@ export default function Singles({ singles }) {
       aria-label="Latest singles"
       className="flex flex-col justify-center items-center"
     >
-      <h1 className="my-8 text-center text-4xl font-bold">OSTATNIE SINGLE</h1>
+      <h1 className="my-8 text-center font-bold">OSTATNIE SINGLE</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {singles?.map((article) => (
           <div key={article.id}>
@@ -18,7 +18,7 @@ export default function Singles({ singles }) {
           </div>
         ))}
       </div>
-      <ReadMoreLink href="/categories/singles" />
+      <ReadMoreLink href="/categories/single" />
     </section>
   );
 }

@@ -56,7 +56,7 @@ export default async function CategoryPage({ params }) {
         aria-label={`${categories[0].name} content`}
         className="flex flex-col justify-center items-center"
       >
-        <h1 className="my-8 text-center text-4xl font-bold uppercase">
+        <h1 className="my-8 text-center font-bold uppercase">
           {categories[0].name}
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">

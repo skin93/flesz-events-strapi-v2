@@ -37,9 +37,7 @@ export default function ContactPage() {
   return (
     <main>
       <section className="flex flex-col items-center justify-center ">
-        <h1 className="my-8 text-center text-4xl font-bold uppercase">
-          KONTAKT
-        </h1>
+        <h1 className="my-8 text-center font-bold uppercase">KONTAKT</h1>
         <p className="my-0">
           Organizujesz festiwal albo w Twojej okolicy odbywa się ciekawe
           wydarzenie? Masz zespół, wydajecie album/singiel albo gracie niedługo

@@ -128,7 +128,7 @@
   main,
   header,
   footer {
-    @apply container;
+    @apply container px-4;
   }
 
   h1 {
@@ -158,7 +158,7 @@
 
     ul,
     ol {
-      @apply pl-8 my-4 font-medium text-neutral-900 dark:text-neutral-200;
+      @apply pl-8 my-4 font-medium text-neutral-900 dark:text-neutral-200 text-xs md:text-sm lg:text-lg;
     }
 
     ul {

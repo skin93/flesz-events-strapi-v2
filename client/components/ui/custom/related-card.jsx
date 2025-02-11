@@ -20,7 +20,7 @@ export default function RelatedCard({ article }) {
         />
 
         <CardContent className="py-0 px-4 flex justify-start items-center absolute h-[50px] w-full bottom-0 bg-[rgba(0,0,0,0.7)] z-100 rounded-b-sm">
-          <CardTitle className="text-sm mx-auto font-bold text-background dark:text-foreground">
+          <CardTitle className="mx-auto font-bold text-background dark:text-foreground">
             {article.title}
           </CardTitle>
         </CardContent>

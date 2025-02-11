@@ -14,7 +14,7 @@ export default function Promo({ promo }) {
       aria-label="Promo events"
       className="flex flex-col justify-center items-center my-8"
     >
-      <h1 className="mb-8 text-center text-4xl font-bold">POLECAMY</h1>
+      <h1 className="mb-8 text-center font-bold">POLECAMY</h1>
       <Carousel
         opts={{
           align: "center",
