@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
       description: seo[0].metadata.meta_description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/${seo[0].metadata.share_image.media.url}`,
+          url: `${process.env.NEXT_PUBLIC_STRAPI}/${seo[0].metadata.share_image.media.url}`,
           width: seo[0].metadata.share_image.media.width,
           height: seo[0].metadata.share_image.media.height,
           alt: seo[0].metadata.share_image.media.alternativeText,
