@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: "/festival-map",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   images: {
