@@ -15,21 +15,6 @@ export default function Loading() {
         <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
         <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
         <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
-        <Skeleton className="w-[300px] h-[168.75px] xl:w-[400px] xl:h-[225px]" />
       </section>
     </main>
   );

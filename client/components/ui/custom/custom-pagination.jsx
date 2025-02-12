@@ -11,7 +11,6 @@ import { generatePagination } from "@/lib/utils";
 
 export default function CustomPagination({ currentPage, pageCount }) {
   const allPages = generatePagination(currentPage, pageCount);
-
   return (
     <Pagination>
       <PaginationContent>

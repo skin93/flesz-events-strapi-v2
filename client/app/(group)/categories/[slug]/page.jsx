@@ -5,6 +5,7 @@ import React from "react";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_CATEGORY_META_QUERY } from "@/lib/queries/categories/singleCategoryMetaQuery";
 import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
+import CustomPagination from "@/components/ui/custom/pagination";
 
 export async function generateMetadata({ params }) {
   // read route params
@@ -38,11 +39,22 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function CategoryPage({ params }) {
+export default async function CategoryPage({ params, searchParams }) {
   const { slug } = await params;
-  const { categories } = await fetchWithArgs(SINGLE_CATEGORY_QUERY, {
-    slug,
-  });
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const limit = 12;
+  const start = currentPage * limit - limit;
+  const { categories, articlesCountBasedOnTagOrCategory } = await fetchWithArgs(
+    SINGLE_CATEGORY_QUERY,
+    {
+      slug,
+      start,
+      limit,
+    }
+  );
+
+  const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
   if (!categories[0]) {
     notFound();
@@ -69,6 +81,10 @@ export default async function CategoryPage({ params }) {
           ))}
         </div>
         <div className="m-8" />
+        <CustomPagination
+          currentPage={currentPage}
+          pageCount={Number(pageCount)}
+        />
       </section>
     </main>
   );
