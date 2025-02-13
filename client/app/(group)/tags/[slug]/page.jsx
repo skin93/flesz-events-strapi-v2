@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { fetchWithArgs } from "@/lib/fetcher";
 import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
 import { SINGLE_TAG_META_QUERY } from "@/lib/queries/tags/singleTagMetaQuery";
+import CustomPagination from "@/components/ui/custom/pagination";
 
 export async function generateMetadata({ params }) {
   // read route params
@@ -37,11 +38,22 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function TagPage({ params }) {
+export default async function TagPage({ params, searchParams }) {
   const { slug } = await params;
-  const { tags } = await fetchWithArgs(SINGLE_TAG_QUERY, {
-    slug,
-  });
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const limit = 12;
+  const start = currentPage * limit - limit;
+  const { tags, articlesCountBasedOnTagOrCategory } = await fetchWithArgs(
+    SINGLE_TAG_QUERY,
+    {
+      slug,
+      start,
+      limit,
+    }
+  );
+
+  const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
   if (!tags[0] || tags[0].length === 0) {
     notFound();
@@ -65,7 +77,11 @@ export default async function TagPage({ params }) {
             </div>
           ))}
         </div>
-        <div className="m-8" />
+        <div className="my-8" />
+        <CustomPagination
+          currentPage={currentPage}
+          pageCount={Number(pageCount)}
+        />
       </section>
     </main>
   );
