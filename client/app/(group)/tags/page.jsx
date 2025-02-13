@@ -3,7 +3,8 @@ import React from "react";
 import { ButtonLink } from "@/components/ui/custom/button-link";
 import { connection } from "next/server";
 import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
-import { fetcher } from "@/lib/fetcher";
+import { fetchWithArgs } from "@/lib/fetcher";
+import CustomPagination from "@/components/ui/custom/pagination";
 
 export const revalidate = 60;
 
@@ -41,8 +42,19 @@ export async function generateMetadata() {
   };
 }
 
-export default async function TagsPage() {
-  const { tags } = await fetcher(ALL_TAGS_QUERY);
+export default async function TagsPage({ searchParams }) {
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const limit = 40;
+  const start = currentPage * limit - limit;
+  const { tags, tagsConnection } = await fetchWithArgs(ALL_TAGS_QUERY, {
+    start,
+    limit,
+  });
+
+  const total = tagsConnection.aggregate.totalCount;
+
+  const pageCount = Math.ceil(total / limit);
 
   if (!tags || tags.length === 0) {
     notFound();
@@ -52,7 +64,7 @@ export default async function TagsPage() {
     <main>
       <section aria-label="Tags">
         <h1 className="my-8 text-center font-bold uppercase">TAGI</h1>
-        <div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
           {tags.map((tag) => (
             <ButtonLink
               className="text-wrap dark:text-neutral-400"
@@ -63,11 +75,11 @@ export default async function TagsPage() {
             </ButtonLink>
           ))}
         </div>
-        <div className="my-4" />
-        {/* <CustomPagination
+        <div className="my-8" />
+        <CustomPagination
           currentPage={currentPage}
-          pageCount={Number(pagination?.pageCount)}
-        /> */}
+          pageCount={Number(pageCount)}
+        />
       </section>
     </main>
   );

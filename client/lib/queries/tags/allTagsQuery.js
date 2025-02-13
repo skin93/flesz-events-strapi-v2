@@ -1,10 +1,15 @@
 import { gql } from "graphql-request";
 export const ALL_TAGS_QUERY = gql`
-  query {
-    tags(sort: "slug:asc") {
+  query allTagsQuery($start: Int!, $limit: Int!) {
+    tags(start: $start, limit: $limit, sort: "slug:asc") {
       id
-      name
       slug
+      name
+    }
+    tagsConnection {
+      aggregate {
+        totalCount
+      }
     }
   }
 `;
