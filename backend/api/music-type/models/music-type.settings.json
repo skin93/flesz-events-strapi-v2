@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "music_types",
+  "info": {
+    "name": "MusicType"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "festivals": {
+      "collection": "festival",
+      "via": "music_types",
+      "dominant": true
+    }
+  }
+}
