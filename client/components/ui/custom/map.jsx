@@ -21,7 +21,7 @@ export default function Map({ markers }) {
     return L.divIcon({
       html: `<p class="text-neutral-100">${cluster.getChildCount()}</p>`,
       className:
-        "flex! justify-center! items-center! bg-purple-900 rounded-[50%] text-[#fff] font-bold w-full h-full",
+        "flex! justify-center! items-center! bg-teal-600 rounded-[50%] text-[#fff] font-bold w-full h-full",
       iconSize: L.point(30, 30, true),
     });
   };
@@ -31,7 +31,7 @@ export default function Map({ markers }) {
       <MapContainer
         preferCanvas={true}
         center={[51.974077, 19.451946]}
-        maxZoom={20}
+        maxZoom={12}
         zoom={7}
         minZoom={7}
         scrollWheelZoom={true}

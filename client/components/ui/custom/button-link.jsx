@@ -15,7 +15,7 @@ export function ReadMoreLink({ href, className }) {
   return (
     <Button
       className={cn(className, "uppercase m-8 font-bold")}
-      variant={"default"}
+      variant={"outline"}
     >
       <Link href={href}>ZOBACZ WIĘCEJ</Link>
     </Button>

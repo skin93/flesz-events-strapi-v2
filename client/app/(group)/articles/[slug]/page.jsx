@@ -69,7 +69,7 @@ export default async function SlugPage({ params }) {
         <div className="mb-4">
           <Link href={`/categories/${articles[0].category?.slug}`}>
             <Badge
-              className="bg-foreground hover:bg-foreground/70 dark:bg-accent dark:hover:bg-accent/70 dark:text-foreground mr-2 p-2 rounded-none uppercase"
+              className="bg-foreground hover:bg-foreground/70 dark:bg-accent dark:hover:bg-accent/90 dark:text-foreground mr-2 p-2 rounded-sm uppercase"
               variant="default"
             >
               {articles[0].category?.name}

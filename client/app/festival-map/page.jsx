@@ -12,10 +12,10 @@ export const metadata = {
   keywords: ["Festiwalowa mapa", "festiwale w okolicy", "interaktywna mapa"],
   robots: {
     index: true,
-    follow: false,
+    follow: true,
     googleBot: {
       index: true,
-      follow: false,
+      follow: true,
     },
   },
   alternates: {

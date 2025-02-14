@@ -106,22 +106,22 @@
     --secondary-foreground: 0 0% 98%;
     --muted: 12 6.5% 15.1%;
     --muted-foreground: 0 0% 62%;
-    --accent: 283 99% 35%;
+    --accent: 174.7, 83.9%, 31.6%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 283 99% 35%;
+    --border: 174.7, 83.9%, 31.6%;
     --input: 12 6.5% 15.1%;
-    --ring: 283 99% 35%;
+    --ring: 174.7, 83.9%, 31.6%;
   }
   body {
     @apply bg-background text-foreground relative overflow-x-hidden;
     ::selection {
-      @apply bg-purple-500 text-white;
+      @apply bg-teal-600 text-white;
     }
 
     ::marker {
-      @apply text-purple-500;
+      @apply text-teal-600;
     }
   }
 
@@ -175,7 +175,7 @@
 
     li {
       > s {
-        @apply text-[#545454];
+        @apply text-muted-foreground;
       }
     }
   }

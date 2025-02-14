@@ -76,9 +76,9 @@ export default function Header() {
             <DropdownMenuContent className="z-1000">
               {navLinks1.map(({ title, path }) => (
                 <DropdownMenuItem className="h-10" key={title}>
-                  <ButtonLink className="uppercase" href={path}>
+                  <Link className="uppercase" href={path}>
                     {title}
-                  </ButtonLink>
+                  </Link>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
