@@ -12,6 +12,8 @@ export default async function HomePage() {
     6
   );
 
+  console.log(promo);
+
   if (!concerts || !festivals || !singles || !news || !promo) {
     notFound();
   }
