@@ -1,23 +1,19 @@
 import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchWithArgs } from "@/lib/fetcher";
-import { SINGLE_TAG_QUERY } from "@/lib/queries/tags/singleTagQuery";
-import { SINGLE_TAG_META_QUERY } from "@/lib/queries/tags/singleTagMetaQuery";
 import CustomPagination from "@/components/ui/custom/pagination";
+import { getArticlesByTag, getTagMeta } from "@/lib/data/tags";
 
 export async function generateMetadata({ params }) {
   // read route params
   const { slug } = await params;
 
   // fetch data
-  const { seo } = await fetchWithArgs(SINGLE_TAG_META_QUERY, {
-    slug,
-  });
+  const { seo } = await getTagMeta(slug);
 
   return {
-    title: seo[0].metadata.meta_title,
-    description: seo[0].metadata.meta_description,
+    title: seo.metadata.meta_title,
+    description: seo.metadata.meta_description,
     robots: {
       index: false,
       follow: true,
@@ -32,8 +28,8 @@ export async function generateMetadata({ params }) {
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${slug}`,
-      title: seo[0].metadata.meta_title,
-      description: seo[0].metadata.meta_description,
+      title: seo.metadata.meta_title,
+      description: seo.metadata.meta_description,
     },
   };
 }
@@ -44,30 +40,22 @@ export default async function TagPage({ params, searchParams }) {
   const currentPage = Number(page) || 1;
   const limit = 12;
   const start = currentPage * limit - limit;
-  const { tags, articlesCountBasedOnTagOrCategory } = await fetchWithArgs(
-    SINGLE_TAG_QUERY,
-    {
-      slug,
-      start,
-      limit,
-    }
-  );
+  const { tag, articles, articlesCountBasedOnTagOrCategory } =
+    await getArticlesByTag(slug, start, limit);
 
   const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
-  if (!tags[0] || tags[0].length === 0) {
+  if (!tag) {
     notFound();
   }
-
-  const articles = tags[0].articles;
 
   return (
     <main>
       <section
-        aria-label={`${tags[0].name} content`}
+        aria-label={`${tag.name} content`}
         className="flex flex-col justify-center items-center"
       >
-        <h1 className="my-8 text-center font-bold uppercase">{tags[0].name}</h1>
+        <h1 className="my-8 text-center font-bold uppercase">{tag.name}</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {articles.map((article) => (
             <div key={article.id}>

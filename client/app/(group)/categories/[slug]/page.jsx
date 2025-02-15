@@ -2,23 +2,19 @@ import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
-import { fetchWithArgs } from "@/lib/fetcher";
-import { SINGLE_CATEGORY_META_QUERY } from "@/lib/queries/categories/singleCategoryMetaQuery";
-import { SINGLE_CATEGORY_QUERY } from "@/lib/queries/categories/singleCategoryQuery";
 import CustomPagination from "@/components/ui/custom/pagination";
+import { getArticlesByCategory, getCategoryMeta } from "@/lib/data/categories";
 
 export async function generateMetadata({ params }) {
   // read route params
   const { slug } = await params;
 
   // fetch data
-  const { seo } = await fetchWithArgs(SINGLE_CATEGORY_META_QUERY, {
-    slug,
-  });
+  const { seo } = await getCategoryMeta(slug);
 
   return {
-    title: seo[0].metadata.meta_title,
-    description: seo[0].metadata.meta_description,
+    title: seo.metadata.meta_title,
+    description: seo.metadata.meta_description,
     robots: {
       index: false,
       follow: true,
@@ -33,8 +29,8 @@ export async function generateMetadata({ params }) {
     openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${slug}`,
-      title: seo[0].metadata.meta_title,
-      description: seo[0].metadata.meta_description,
+      title: seo.metadata.meta_title,
+      description: seo.metadata.meta_description,
     },
   };
 }
@@ -45,31 +41,23 @@ export default async function CategoryPage({ params, searchParams }) {
   const currentPage = Number(page) || 1;
   const limit = 12;
   const start = currentPage * limit - limit;
-  const { categories, articlesCountBasedOnTagOrCategory } = await fetchWithArgs(
-    SINGLE_CATEGORY_QUERY,
-    {
-      slug,
-      start,
-      limit,
-    }
-  );
+  const { category, articles, articlesCountBasedOnTagOrCategory } =
+    await getArticlesByCategory(slug, start, limit);
 
   const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
-  if (!categories[0]) {
+  if (!category) {
     notFound();
   }
-
-  const articles = categories[0].articles;
 
   return (
     <main>
       <section
-        aria-label={`${categories[0].name} content`}
+        aria-label={`${category.name} content`}
         className="flex flex-col justify-center items-center"
       >
         <h1 className="my-8 text-center font-bold uppercase">
-          {categories[0].name}
+          {category.name}
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {articles.map((article) => (

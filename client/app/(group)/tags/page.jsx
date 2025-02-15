@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import React from "react";
 import { ButtonLink } from "@/components/ui/custom/button-link";
-import { connection } from "next/server";
+
 import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
 import { fetchWithArgs } from "@/lib/fetcher";
 import CustomPagination from "@/components/ui/custom/pagination";
+import { getAllTags } from "@/lib/data/tags";
 
 export const revalidate = 60;
 
@@ -47,14 +48,9 @@ export default async function TagsPage({ searchParams }) {
   const currentPage = Number(page) || 1;
   const limit = 40;
   const start = currentPage * limit - limit;
-  const { tags, tagsConnection } = await fetchWithArgs(ALL_TAGS_QUERY, {
-    start,
-    limit,
-  });
+  const { tags, totalCount } = await getAllTags(start, limit);
 
-  const total = tagsConnection.aggregate.totalCount;
-
-  const pageCount = Math.ceil(total / limit);
+  const pageCount = Math.ceil(totalCount / limit);
 
   if (!tags || tags.length === 0) {
     notFound();

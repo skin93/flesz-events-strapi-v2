@@ -1,19 +1,15 @@
 import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
-import { fetchWithArgs } from "@/lib/fetcher";
-import { LATEST_ARTICLES_QUERY } from "@/lib/queries/articles/latestArticlesQuery";
 import Promo from "@/components/homepage/promo";
 import CategoryBlock from "@/components/homepage/categoryBlock";
+import { getLatestArticles } from "@/lib/data/articles";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const { concerts, festivals, promo, singles, news } = await fetchWithArgs(
-    LATEST_ARTICLES_QUERY,
-    {
-      start: 0,
-      limit: 6,
-    }
+  const { concerts, festivals, promo, singles, news } = await getLatestArticles(
+    0,
+    6
   );
 
   if (!concerts || !festivals || !singles || !news || !promo) {

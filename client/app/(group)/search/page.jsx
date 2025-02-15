@@ -2,8 +2,7 @@ import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
-import { fetchWithArgs } from "@/lib/fetcher";
-import { ARTICLES_BY_TERM_QUERY } from "@/lib/queries/articles/articlesByTermQuery";
+import { getArticlesByTerm } from "@/lib/data/articles";
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -28,12 +27,7 @@ export async function generateMetadata({ searchParams }) {
 export default async function SearchPage({ searchParams }) {
   const params = await searchParams;
   const term = params?.q || "";
-  const { termInTitle, termInContent } = await fetchWithArgs(
-    ARTICLES_BY_TERM_QUERY,
-    {
-      term,
-    }
-  );
+  const { termInTitle, termInContent } = await getArticlesByTerm(term);
 
   if (!termInTitle || !termInContent) {
     notFound();

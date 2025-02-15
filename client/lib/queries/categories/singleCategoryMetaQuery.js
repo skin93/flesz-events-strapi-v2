@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 export const SINGLE_CATEGORY_META_QUERY = gql`
   query singleCategoryMetaQuery($slug: String!) {
-    seo: categories(where: { slug: $slug }) {
+    categories(where: { slug: $slug }) {
       metadata {
         meta_title
         meta_description

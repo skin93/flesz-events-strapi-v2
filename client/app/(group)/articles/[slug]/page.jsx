@@ -2,10 +2,8 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import RelatedArticles from "@/components/ui/custom/related-articles";
 import { Separator } from "@/components/ui/separator";
-import { fetchWithArgs } from "@/lib/fetcher";
+import { getArticleBySlug, getArticleMeta } from "@/lib/data/articles";
 import { getMediaUrl } from "@/lib/getMediaUrl";
-import { SINGLE_ARTICLE_META_QUERY } from "@/lib/queries/articles/singleArticleMetaQuery";
-import { SINGLE_ARTICLE_QUERY } from "@/lib/queries/articles/singleArticleQuery";
 import { formatDateToLocal } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,20 +15,18 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
 
   // fetch data
-  const { seo } = await fetchWithArgs(SINGLE_ARTICLE_META_QUERY, {
-    slug,
-  });
+  const { seo } = await getArticleMeta(slug);
 
   return {
-    title: seo[0].metadata.meta_title,
-    description: seo[0].metadata.meta_description,
-    // keywords: seo[0].keywords,
+    title: seo.metadata.meta_title,
+    description: seo.metadata.meta_description,
+    // keywords: seo.keywords,
     robots: {
-      index: seo[0].metadata.index,
-      follow: seo[0].metadata.follow,
+      index: seo.metadata.index,
+      follow: seo.metadata.follow,
       googleBot: {
-        index: seo[0].metadata.index,
-        follow: seo[0].metadata.follow,
+        index: seo.metadata.index,
+        follow: seo.metadata.follow,
       },
     },
     alternates: {
@@ -39,14 +35,14 @@ export async function generateMetadata({ params }) {
     openGraph: {
       type: "article",
       url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${slug}`,
-      title: seo[0].metadata.meta_title,
-      description: seo[0].metadata.meta_description,
+      title: seo.metadata.meta_title,
+      description: seo.metadata.meta_description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_STRAPI}/${seo[0].metadata.share_image.media.url}`,
-          width: seo[0].metadata.share_image.media.width,
-          height: seo[0].metadata.share_image.media.height,
-          alt: seo[0].metadata.share_image.media.alternativeText,
+          url: `${process.env.NEXT_PUBLIC_STRAPI}/${seo.metadata.share_image.media.url}`,
+          width: seo.metadata.share_image.media.width,
+          height: seo.metadata.share_image.media.height,
+          alt: seo.metadata.share_image.media.alternativeText,
         },
       ],
     },
@@ -55,11 +51,9 @@ export async function generateMetadata({ params }) {
 
 export default async function SlugPage({ params }) {
   const { slug } = await params;
-  const { articles } = await fetchWithArgs(SINGLE_ARTICLE_QUERY, {
-    slug,
-  });
+  const { article } = await getArticleBySlug(slug);
 
-  if (!articles) {
+  if (!article) {
     notFound();
   }
 
@@ -67,15 +61,15 @@ export default async function SlugPage({ params }) {
     <main>
       <section className="my-8" aria-label="slug-page">
         <div className="mb-4">
-          <Link href={`/categories/${articles[0].category?.slug}`}>
+          <Link href={`/categories/${article.category?.slug}`}>
             <Badge
               className="bg-foreground hover:bg-foreground/70 dark:bg-accent dark:hover:bg-accent/90 dark:text-foreground mr-2 p-2 rounded-sm uppercase"
               variant="default"
             >
-              {articles[0].category?.name}
+              {article.category?.name}
             </Badge>
           </Link>
-          {articles[0].writers?.map((writer) => (
+          {article.writers?.map((writer) => (
             <Badge
               key={writer.id}
               className=" mr-2 p-2 uppercase border-none"
@@ -84,17 +78,17 @@ export default async function SlugPage({ params }) {
               {writer.name}
             </Badge>
           ))}
-          {articles[0].published_at === undefined ? (
+          {article.published_at === undefined ? (
             <Badge variant="outline" className=" mr-2 p-2 border-none ">
-              {formatDateToLocal(articles[0].createdAt?.toString())}
+              {formatDateToLocal(article.createdAt?.toString())}
             </Badge>
           ) : (
             <Badge variant="outline" className=" mr-2 p-2 border-none">
-              {formatDateToLocal(articles[0].published_at?.toString())}
+              {formatDateToLocal(article.published_at?.toString())}
             </Badge>
           )}
         </div>
-        <h1 aria-label="article-title">{articles[0].title}</h1>
+        <h1 aria-label="article-title">{article.title}</h1>
         <Separator className="mb-4" />
         {/* <div className="grid grid-cols-1 xl:grid-cols-[60%_30%] gap-4 justify-between"> */}
         <article aria-label="left-column">
@@ -104,9 +98,9 @@ export default async function SlugPage({ params }) {
             aria-label="image-wrapper"
           >
             <Image
-              src={getMediaUrl(articles[0].image_cover)}
+              src={getMediaUrl(article.image_cover)}
               priority
-              alt={articles[0].title}
+              alt={article.title}
               aria-label="article-cover"
               style={{ objectFit: "cover" }}
               className="rounded-sm aspect-video"
@@ -118,14 +112,14 @@ export default async function SlugPage({ params }) {
                 aria-label="article-image-caption"
                 className="font-bold text-[#fff]! my-0 px-4"
               >
-                {articles[0].image_cover.caption}
+                {article.image_cover.caption}
               </p>
             </div>
           </AspectRatio>
           <Separator className="my-4" />
           <div
             dangerouslySetInnerHTML={{
-              __html: articles[0].content,
+              __html: article.content,
             }}
             aria-label="article-content"
             className="embeded-iframe"
@@ -136,8 +130,8 @@ export default async function SlugPage({ params }) {
           className="container justify-center p-0"
           aria-label="right-column"
         >
-          {articles[0].related_articles && (
-            <RelatedArticles articles={articles[0].related_articles.articles} />
+          {article.related_articles && (
+            <RelatedArticles articles={article.related_articles.articles} />
           )}
         </aside>
         {/* </div> */}

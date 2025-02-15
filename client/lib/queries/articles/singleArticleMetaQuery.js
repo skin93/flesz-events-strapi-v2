@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 export const SINGLE_ARTICLE_META_QUERY = gql`
   query singleArticleMetaQuery($slug: String!) {
-    seo: articles(publicationState: LIVE, where: { slug: $slug }) {
+    articles(publicationState: LIVE, where: { slug: $slug }) {
       metadata {
         meta_title
         meta_description
