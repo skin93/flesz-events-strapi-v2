@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
 import React from "react";
 import { ButtonLink } from "@/components/ui/custom/button-link";
-
-import { ALL_TAGS_QUERY } from "@/lib/queries/tags/allTagsQuery";
-import { fetchWithArgs } from "@/lib/fetcher";
 import CustomPagination from "@/components/ui/custom/pagination";
 import { getAllTags } from "@/lib/data/tags";
 
