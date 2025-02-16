@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,6 +58,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <NextTopLoader color="#0d9488" height={5} />
           {children}
           {/* <Footer /> */}
         </ThemeProvider>
