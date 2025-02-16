@@ -18,30 +18,26 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Promo promo={promo[0].articles} />
+      <Promo promo={promo.articles} />
       <Separator />
       <CategoryBlock
-        articles={news[0].articles}
-        name="news"
-        slug={news[0].slug}
-      />
-      <Separator />
-      <CategoryBlock
-        articles={singles[0].articles}
-        name="singles"
-        slug={singles[0].slug}
-      />
-      <Separator />
-      <CategoryBlock
-        articles={concerts[0].articles}
+        articles={concerts.articles}
         name="concerts"
-        slug={concerts[0].slug}
+        slug={concerts.slug}
       />
       <Separator />
       <CategoryBlock
-        articles={festivals[0].articles}
+        articles={festivals.articles}
         name="festivals"
-        slug={festivals[0].slug}
+        slug={festivals.slug}
+      />
+      <Separator />
+      <CategoryBlock articles={news.articles} name="news" slug={news.slug} />
+      <Separator />
+      <CategoryBlock
+        articles={singles.articles}
+        name="singles"
+        slug={singles.slug}
       />
     </main>
   );

@@ -11,11 +11,11 @@ export async function getLatestArticles(start, limit) {
     limit,
   });
   return {
-    news: res.news,
-    concerts: res.concerts,
-    festivals: res.festivals,
-    singles: res.singles,
-    promo: res.promo,
+    news: res.news[0],
+    concerts: res.concerts[0],
+    festivals: res.festivals[0],
+    singles: res.singles[0],
+    promo: res.promo[0],
   };
 }
 
