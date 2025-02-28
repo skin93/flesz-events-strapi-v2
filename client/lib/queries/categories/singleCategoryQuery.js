@@ -4,7 +4,7 @@ export const SINGLE_CATEGORY_QUERY = gql`
     articlesCountBasedOnTagOrCategory(
       where: { category: { slug: $slug }, published_at_null: false }
     )
-    categories(where: { slug: $slug }, publicationState: LIVE) {
+    categories(where: { slug: $slug }) {
       name
       slug
       articles(sort: "published_at:DESC", start: $start, limit: $limit) {

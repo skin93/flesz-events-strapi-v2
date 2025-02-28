@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 export const LATEST_ARTICLES_QUERY = gql`
   query latestArticlesQuery($start: Int!, $limit: Int!) {
-    news: categories(where: { slug: "newsy" }, publicationState: LIVE) {
+    news: categories(where: { slug: "newsy" }) {
       slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
@@ -15,7 +15,7 @@ export const LATEST_ARTICLES_QUERY = gql`
         }
       }
     }
-    concerts: categories(where: { slug: "koncerty" }, publicationState: LIVE) {
+    concerts: categories(where: { slug: "koncerty" }) {
       slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
@@ -29,10 +29,7 @@ export const LATEST_ARTICLES_QUERY = gql`
         }
       }
     }
-    festivals: categories(
-      where: { slug: "festiwale" }
-      publicationState: LIVE
-    ) {
+    festivals: categories(where: { slug: "festiwale" }) {
       slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
@@ -46,7 +43,7 @@ export const LATEST_ARTICLES_QUERY = gql`
         }
       }
     }
-    singles: categories(where: { slug: "single" }, publicationState: LIVE) {
+    singles: categories(where: { slug: "single" }) {
       slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id
@@ -60,7 +57,7 @@ export const LATEST_ARTICLES_QUERY = gql`
         }
       }
     }
-    promo: categories(where: { slug: "polecamy" }, publicationState: LIVE) {
+    promo: categories(where: { slug: "polecamy" }) {
       slug
       articles(sort: "createdAt:DESC") {
         id
