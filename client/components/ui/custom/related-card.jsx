@@ -10,7 +10,7 @@ export default function RelatedCard({ article }) {
     <AspectRatio ratio={16 / 9}>
       <Card className="relative border-l-[5px] border-transparent border-solid w-full h-full translate-x-0 transition-all hover:border-l-[#8001b2] hover:translate-x-[5px]">
         <Image
-          priority
+          loading="lazy"
           src={getMediaUrl(article.cover)}
           title={article.title}
           alt={article.cover?.alternativeText}

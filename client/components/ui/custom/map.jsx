@@ -71,6 +71,7 @@ export default function Map({ markers }) {
                   height={marker.imageHeight}
                   className="rounded-sm aspect-video"
                   style={{ objectFit: "cover" }}
+                  loading="lazy"
                 />
                 <DialogTitle className="my-0">
                   <Link
