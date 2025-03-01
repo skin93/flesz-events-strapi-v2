@@ -3,7 +3,7 @@ import LazyMap from "@/components/ui/custom/lazy-map";
 import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { getAllFestivals } from "@/lib/data/festivals";
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Festiwalowa Mapa",

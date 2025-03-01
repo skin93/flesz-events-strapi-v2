@@ -188,6 +188,18 @@
     }
   }
 
+  figure {
+    @apply block text-center my-8 mx-0;
+  }
+
+  img {
+    @apply max-w-full mx-auto;
+  }
+
+  figcaption {
+    @apply font-bold text-sm mt-8;
+  }
+
   .embeded-iframe {
     > .raw-html-embed {
       @apply relative overflow-hidden w-full pt-[56.25%] my-4 rounded-sm;
