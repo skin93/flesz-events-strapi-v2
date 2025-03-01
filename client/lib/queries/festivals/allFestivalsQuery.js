@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 export const ALL_FESTIVALS_QUERY = gql`
   query {
-    festivals {
+    festivals(publicationState: LIVE) {
       id
       name
       description
