@@ -102,7 +102,7 @@ export default function Header() {
         <div className="xl:hidden">
           <Drawer direction="bottom">
             <DrawerTrigger>
-              <Menu />
+              <Menu aria-label="menu-button" />
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader className="hidden">
