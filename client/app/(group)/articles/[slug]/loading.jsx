@@ -4,7 +4,7 @@ import React from "react";
 export default function Loading() {
   return (
     <main>
-      <section className="my-8 px-8">
+      <section className="my-8">
         <div className="flex flex-row gap-4">
           <Skeleton className="w-[50px] sm:w-[75px] md:w-[100px] xl:w-[165px] h-[33px] rounded-none" />
           <Skeleton className="w-[50px] sm:w-[75px] md:w-[100px] xl:w-[165px] h-[33px] rounded-none" />
