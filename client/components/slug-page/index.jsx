@@ -52,50 +52,50 @@ export default function SlugPageComponent({ article }) {
         </div>
         <h1 aria-label="article-title">{article.title}</h1>
         <Separator className="mb-4" />
-        {/* <div className="grid grid-cols-1 xl:grid-cols-[60%_30%] gap-4 justify-between"> */}
-        <article aria-label="left-column">
-          <AspectRatio
-            ratio={16 / 9}
-            className="realtive"
-            aria-label="image-wrapper"
-          >
-            <Image
-              src={getMediaUrl(article.image_cover)}
-              priority
-              alt={article.title}
-              aria-label="article-cover"
-              style={{ objectFit: "cover" }}
-              className="rounded-sm aspect-video"
-              fill
+        <div className="grid grid-cols-1 xl:grid-cols-[50%_40%] gap-2 justify-between">
+          <article aria-label="left-column">
+            <AspectRatio
+              ratio={16 / 9}
+              className="realtive"
+              aria-label="image-wrapper"
+            >
+              <Image
+                src={getMediaUrl(article.image_cover)}
+                priority
+                alt={article.title}
+                aria-label="article-cover"
+                style={{ objectFit: "cover" }}
+                className="rounded-sm aspect-video"
+                fill
+              />
+              <div className="absolute bottom-0 left-0 w-auto h-auto bg-[rgba(0,0,0,0.7)] rounded-bl-sm">
+                <p
+                  aria-label="article-image-caption"
+                  className="font-bold text-[#fff]! my-0 px-4"
+                >
+                  {article.image_cover.caption}
+                </p>
+              </div>
+            </AspectRatio>
+            <Separator className="my-4" />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: article.content,
+              }}
+              aria-label="article-content"
+              className="embeded-iframe"
             />
-            <div className="absolute bottom-0 left-0 w-auto h-auto bg-[rgba(0,0,0,0.7)] rounded-bl-sm">
-              <p
-                aria-label="article-image-caption"
-                className="font-bold text-[#fff]! my-0 px-4"
-              >
-                {article.image_cover.caption}
-              </p>
-            </div>
-          </AspectRatio>
-          <Separator className="my-4" />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: article.content,
-            }}
-            aria-label="article-content"
-            className="embeded-iframe"
-          />
-          <Separator />
-        </article>
-        <aside
-          className="container justify-center p-0"
-          aria-label="right-column"
-        >
-          {article.related_articles && (
-            <RelatedArticles articles={article.related_articles.articles} />
-          )}
-        </aside>
-        {/* </div> */}
+            <Separator />
+          </article>
+          <aside
+            className="container justify-center p-0"
+            aria-label="right-column"
+          >
+            {article.related_articles && (
+              <RelatedArticles articles={article.related_articles.articles} />
+            )}
+          </aside>
+        </div>
       </section>
     </main>
   );
