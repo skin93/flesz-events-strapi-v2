@@ -1,6 +1,7 @@
 "use client";
 
 import L, { Icon } from "leaflet";
+import { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
@@ -11,7 +12,27 @@ import Link from "next/link";
 import { formatDateToLocal } from "@/lib/utils";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 export default function Map({ markers }) {
+  const cities = new Set(markers.map((marker) => marker.location.city));
+  const [filteredMarkers, setFilteredMarkers] = useState(markers);
+  const handleChange = function (val) {
+    if (val === "Wszystkie") {
+      setFilteredMarkers(markers);
+      return;
+    }
+    setFilteredMarkers(
+      markers.filter((marker) => marker.location.city === val)
+    );
+  };
+
   const customIcon = new Icon({
     iconUrl: "/icons8-stage-64.png",
     iconSize: [30, 30], // size of the icon
@@ -45,7 +66,7 @@ export default function Map({ markers }) {
           chunkedLoading
           iconCreateFunction={createClusterCustomIcon}
         >
-          {markers.map((marker) => (
+          {filteredMarkers.map((marker) => (
             <Dialog key={marker.id}>
               <Marker
                 alt={marker.alt}
@@ -82,14 +103,20 @@ export default function Map({ markers }) {
                     {marker.alt}
                   </Link>
                 </DialogTitle>
-                <div className="flex flex-row justify-center gap-1">
+
+                <div className="flex flex-col items-center justify-center">
+                  <p className="text-foreground m-0">
+                    {marker.location.city} - {marker.location.place}
+                  </p>
                   {marker.fromDate && marker.endDate ? (
-                    <p>
+                    <p className="m-0">
                       {formatDateToLocal(marker.fromDate.toString())} -{" "}
                       {formatDateToLocal(marker.endDate.toString())}
                     </p>
                   ) : marker.date && !marker.fromDate && !marker.endDate ? (
-                    <p>{formatDateToLocal(marker.date.toString())}</p>
+                    <p className="m-0">
+                      {formatDateToLocal(marker.date.toString())}
+                    </p>
                   ) : (
                     <p>Brak daty</p>
                   )}
@@ -111,6 +138,25 @@ export default function Map({ markers }) {
           ))}
         </MarkerClusterGroup>
       </MapContainer>
+
+      <div className="absolute top-8 right-8 z-500">
+        <Select
+          placeholder="Wybierz miasto"
+          onValueChange={(val) => handleChange(val)}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Wybierz miasto" />
+          </SelectTrigger>
+          <SelectContent className="z-500">
+            <SelectItem value="Wszystkie">Wszystkie</SelectItem>
+            {[...cities].sort().map((city) => (
+              <SelectItem key={city} value={city}>
+                {city}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
       <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-neutral-700 bg-neutral-100 font-normal px-[5px] text-[12px] w-fit">
         <a

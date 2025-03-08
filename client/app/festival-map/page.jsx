@@ -55,6 +55,7 @@ export default async function FestivalMap() {
     date: fest?.next_event?.date,
     fromDate: fest?.next_event?.from_date,
     endDate: fest?.next_event?.to_date,
+    location: fest.location,
     // tickets: fest.tickets,
   }));
   return (
