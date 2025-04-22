@@ -4,7 +4,7 @@ import Promo from "@/components/homepage/promo";
 import CategoryBlock from "@/components/homepage/categoryBlock";
 import { getLatestArticles } from "@/lib/data/articles";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function HomePage() {
   const { concerts, festivals, promo, singles, news } = await getLatestArticles(
