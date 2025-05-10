@@ -23,8 +23,10 @@ import { MapLibreTileLayer } from "./map-libre-tile-layer";
 
 export default function Map({ markers }) {
   const cities = new Set(markers.map((marker) => marker.location.city));
+  const names = new Set(markers.map((marker) => marker.alt));
   const [filteredMarkers, setFilteredMarkers] = useState(markers);
-  const handleChange = function (val) {
+
+  const handleCityChange = function (val) {
     if (val === "Wszystkie") {
       setFilteredMarkers(markers);
       return;
@@ -32,6 +34,14 @@ export default function Map({ markers }) {
     setFilteredMarkers(
       markers.filter((marker) => marker.location.city === val)
     );
+  };
+
+  const handleChangeFest = function (val) {
+    if (val === "Wszystkie") {
+      setFilteredMarkers(markers);
+      return;
+    }
+    setFilteredMarkers(markers.filter((marker) => marker.alt === val));
   };
 
   const customIcon = new Icon({
@@ -145,24 +155,34 @@ export default function Map({ markers }) {
           ))}
         </MarkerClusterGroup>
         <div className="absolute top-8 right-8 z-500">
-          <Select
-            placeholder="Wybierz miasto"
-            onValueChange={(val) => handleChange(val)}
-          >
+          <Select onValueChange={(val) => handleCityChange(val)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz miasto" />
             </SelectTrigger>
             <SelectContent className="z-500">
-              <SelectItem value="Wszystkie">Wszystkie</SelectItem>
+              <SelectItem value="Wszystkie">Wszystkie miasta</SelectItem>
               {[...cities].sort().map((city) => (
                 <SelectItem key={city} value={city}>
                   {city}
                 </SelectItem>
               ))}
             </SelectContent>
-            <MapInstance />
+          </Select>
+          <Select onValueChange={(val) => handleChangeFest(val)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Wybierz Fest" />
+            </SelectTrigger>
+            <SelectContent className="z-500">
+              <SelectItem value="Wszystkie">Wszystkie festiwale</SelectItem>
+              {[...names].sort().map((name) => (
+                <SelectItem key={name} value={name}>
+                  {name}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
         </div>
+        <MapInstance />
       </MapContainer>
 
       <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-neutral-700 bg-neutral-100 font-normal px-[5px] text-[12px] w-fit">
