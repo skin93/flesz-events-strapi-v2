@@ -49,6 +49,15 @@ export default function Map({ markers }) {
     }
   };
 
+  const handleReset = function () {
+    setFilteredMarkers(markers);
+    setCityValue("");
+    setFestValue("");
+    if (mapRef.current != null) {
+      mapRef.current.flyTo(center, zoom, { duration: 1 });
+    }
+  };
+
   const customIcon = new Icon({
     iconUrl: "/icons8-stage-64.png",
     iconSize: [30, 30], // size of the icon
@@ -62,14 +71,6 @@ export default function Map({ markers }) {
       iconSize: L.point(30, 30, true),
     });
   };
-
-  function MapInstance() {
-    const map = useMap();
-    if (cityValue === "" && festValue === "") {
-      map.flyTo(center, zoom, { duration: 1 });
-      return null;
-    }
-  }
 
   return (
     <section className="relative">
@@ -195,17 +196,8 @@ export default function Map({ markers }) {
               ))}
             </SelectContent>
           </Select>
-          <Button
-            onClick={() => {
-              setFilteredMarkers(markers);
-              setCityValue("");
-              setFestValue("");
-            }}
-          >
-            Reset
-          </Button>
+          <Button onClick={handleReset}>Reset</Button>
         </div>
-        <MapInstance />
       </MapContainer>
 
       <div className="absolute bottom-8 right-0 sm:bottom-0 sm:left-0 z-500 text-neutral-700 bg-neutral-100 font-normal px-[5px] text-[12px] w-fit">
