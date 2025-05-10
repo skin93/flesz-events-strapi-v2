@@ -1,7 +1,7 @@
 "use client";
 
 import L, { Icon } from "leaflet";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
@@ -22,22 +22,28 @@ import {
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
 
 export default function Map({ markers }) {
+  const center = [51.974077, 19.451946];
+  const zoom = 6;
   const [cityValue, setCityValue] = useState("");
   const [festValue, setFestValue] = useState("");
+  const mapRef = useRef(null);
   const cities = new Set(markers.map((marker) => marker.location.city));
   const names = new Set(markers.map((marker) => marker.alt));
   const [filteredMarkers, setFilteredMarkers] = useState(markers);
 
   const handleCityChange = function (val) {
+    const marker = markers.filter((marker) => marker.location.city === val);
     setCityValue(val);
-    setFilteredMarkers(
-      markers.filter((marker) => marker.location.city === val)
-    );
+    setFilteredMarkers(marker);
   };
 
   const handleFestChange = function (val) {
+    const marker = markers.filter((marker) => marker.alt == val);
     setFestValue(val);
-    setFilteredMarkers(markers.filter((marker) => marker.alt === val));
+    setFilteredMarkers(marker);
+    if (mapRef.current != null) {
+      mapRef.current.flyTo(marker[0].position, 14, { duration: 1 });
+    }
   };
 
   const customIcon = new Icon({
@@ -56,18 +62,21 @@ export default function Map({ markers }) {
 
   function MapInstance() {
     const map = useMap();
-    map.setView([51.974077, 19.451946], 6);
-    return null;
+    if (cityValue === "" && festValue === "") {
+      map.flyTo(center, zoom, { duration: 1 });
+      return null;
+    }
   }
 
   return (
     <section className="relative">
       <MapContainer
+        ref={mapRef}
         preferCanvas={true}
-        center={[51.974077, 19.451946]}
-        maxZoom={10}
-        zoom={6}
-        minZoom={6}
+        center={center}
+        maxZoom={14}
+        zoom={zoom}
+        minZoom={zoom}
         scrollWheelZoom={true}
         className="w-[100svw] h-[calc(100svh-56px)]"
       >
