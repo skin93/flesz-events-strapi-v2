@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { MapLibreTileLayer } from "./map-libre-tile-layer";
 
 export default function Map({ markers }) {
   const cities = new Set(markers.map((marker) => marker.location.city));
@@ -64,9 +65,9 @@ export default function Map({ markers }) {
         scrollWheelZoom={true}
         className="w-[100svw] h-[calc(100svh-56px)]"
       >
-        <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+        <MapLibreTileLayer
+          attribution='&copy; <a href="https://openfreemap.org/" target="_blank">OpenFreeMap</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+          url="https://tiles.openfreemap.org/styles/positron"
         />
         <MarkerClusterGroup
           chunkedLoading
