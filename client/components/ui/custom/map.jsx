@@ -150,7 +150,7 @@ export default function Map({ markers }) {
             </Dialog>
           ))}
         </MarkerClusterGroup>
-        <div className="absolute top-10 right-10 z-500 flex xl:flex-row flex-col gap-4">
+        <div className="absolute top-3 right-3 z-500 flex xl:flex-row flex-col gap-4">
           <Select
             value={cityValue}
             onValueChange={(val) => handleCityChange(val)}
