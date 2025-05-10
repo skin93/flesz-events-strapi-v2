@@ -35,6 +35,9 @@ export default function Map({ markers }) {
     const marker = markers.filter((marker) => marker.location.city === val);
     setCityValue(val);
     setFilteredMarkers(marker);
+    if (mapRef.current != null) {
+      mapRef.current.flyTo(marker[0].position, 14, { duration: 1 });
+    }
   };
 
   const handleFestChange = function (val) {
