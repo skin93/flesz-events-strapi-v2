@@ -22,25 +22,21 @@ import {
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
 
 export default function Map({ markers }) {
+  const [cityValue, setCityValue] = useState("");
+  const [festValue, setFestValue] = useState("");
   const cities = new Set(markers.map((marker) => marker.location.city));
   const names = new Set(markers.map((marker) => marker.alt));
   const [filteredMarkers, setFilteredMarkers] = useState(markers);
 
   const handleCityChange = function (val) {
-    if (val === "Wszystkie") {
-      setFilteredMarkers(markers);
-      return;
-    }
+    setCityValue(val);
     setFilteredMarkers(
       markers.filter((marker) => marker.location.city === val)
     );
   };
 
-  const handleChangeFest = function (val) {
-    if (val === "Wszystkie") {
-      setFilteredMarkers(markers);
-      return;
-    }
+  const handleFestChange = function (val) {
+    setFestValue(val);
     setFilteredMarkers(markers.filter((marker) => marker.alt === val));
   };
 
@@ -90,15 +86,15 @@ export default function Map({ markers }) {
                 position={marker.position}
                 icon={customIcon}
               >
-                <Popup>
-                  <DialogTrigger asChild>
-                    <div className="text-center">
-                      <h4 className="font-bold my-0!">{marker.popup}</h4>
-                      <Button className="cursor-pointer" variant={"ghost"}>
+                <Popup closeButton={false} closeOnEscapeKey>
+                  <div className="text-center flex flex-col gap-4">
+                    <h4 className="font-bold text-[16px]">{marker.popup}</h4>
+                    <DialogTrigger asChild>
+                      <Button className="cursor-pointer" variant={"default"}>
                         Szczegóły
                       </Button>
-                    </div>
-                  </DialogTrigger>
+                    </DialogTrigger>
+                  </div>
                 </Popup>
               </Marker>
               <DialogContent className="border-none flex flex-col justify-between items-center max-w-[60em] max-h-full overflow-y-hidden">
@@ -114,7 +110,7 @@ export default function Map({ markers }) {
                 <DialogTitle className="my-0">
                   <Link
                     target="_blank"
-                    className="hover:underline"
+                    className="hover:underline text-teal-400"
                     href={`/tags/${marker.slug}`}
                   >
                     {marker.alt}
@@ -154,13 +150,16 @@ export default function Map({ markers }) {
             </Dialog>
           ))}
         </MarkerClusterGroup>
-        <div className="absolute top-8 right-8 z-500">
-          <Select onValueChange={(val) => handleCityChange(val)}>
+        <div className="absolute top-10 right-10 z-500 flex xl:flex-row flex-col gap-4">
+          <Select
+            value={cityValue}
+            onValueChange={(val) => handleCityChange(val)}
+            disabled={festValue || null}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz miasto" />
             </SelectTrigger>
             <SelectContent className="z-500">
-              <SelectItem value="Wszystkie">Wszystkie miasta</SelectItem>
               {[...cities].sort().map((city) => (
                 <SelectItem key={city} value={city}>
                   {city}
@@ -168,12 +167,15 @@ export default function Map({ markers }) {
               ))}
             </SelectContent>
           </Select>
-          <Select onValueChange={(val) => handleChangeFest(val)}>
+          <Select
+            value={festValue}
+            onValueChange={(val) => handleFestChange(val)}
+            disabled={cityValue || null}
+          >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Wybierz Fest" />
+              <SelectValue placeholder="Wybierz festiwal" />
             </SelectTrigger>
             <SelectContent className="z-500">
-              <SelectItem value="Wszystkie">Wszystkie festiwale</SelectItem>
               {[...names].sort().map((name) => (
                 <SelectItem key={name} value={name}>
                   {name}
@@ -181,6 +183,15 @@ export default function Map({ markers }) {
               ))}
             </SelectContent>
           </Select>
+          <Button
+            onClick={() => {
+              setFilteredMarkers(markers);
+              setCityValue("");
+              setFestValue("");
+            }}
+          >
+            Reset
+          </Button>
         </div>
         <MapInstance />
       </MapContainer>
