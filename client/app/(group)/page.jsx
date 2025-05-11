@@ -21,15 +21,15 @@ export default async function HomePage() {
       <Promo promo={promo.articles} />
       <Separator />
       <CategoryBlock
-        articles={concerts.articles}
-        name="concerts"
-        slug={concerts.slug}
-      />
-      <Separator />
-      <CategoryBlock
         articles={festivals.articles}
         name="festivals"
         slug={festivals.slug}
+      />
+      <Separator />
+      <CategoryBlock
+        articles={concerts.articles}
+        name="concerts"
+        slug={concerts.slug}
       />
       <Separator />
       <CategoryBlock articles={news.articles} name="news" slug={news.slug} />
