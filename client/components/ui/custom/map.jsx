@@ -189,7 +189,7 @@ export default function Map({ markers, genres }) {
             <SelectContent className="z-500">
               {[...cities].sort().map((city, index) => (
                 <SelectItem key={city} value={city}>
-                  {`${index}. ${city}`}
+                  {`${index + 1}. ${city}`}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -205,7 +205,7 @@ export default function Map({ markers, genres }) {
             <SelectContent className="z-500">
               {[...names].sort().map((name, index) => (
                 <SelectItem key={name} value={name}>
-                  {`${index}. ${name}`}
+                  {`${index + 1}. ${name}`}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -221,7 +221,7 @@ export default function Map({ markers, genres }) {
             <SelectContent className="z-500">
               {[...genres].sort().map((genre, index) => (
                 <SelectItem key={genre} value={genre}>
-                  {`${index}. ${genre}`}
+                  {`${index + 1}. ${genre}`}
                 </SelectItem>
               ))}
             </SelectContent>
