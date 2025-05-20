@@ -21,11 +21,12 @@ import {
 } from "@/components/ui/select";
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
 
-export default function Map({ markers }) {
+export default function Map({ markers, genres }) {
   const center = [51.974077, 19.451946];
   const zoom = 6;
   const [cityValue, setCityValue] = useState("");
   const [festValue, setFestValue] = useState("");
+  const [genreValue, setGenreValue] = useState("");
   const mapRef = useRef(null);
   const cities = new Set(markers.map((marker) => marker.location.city));
   const names = new Set(markers.map((marker) => marker.alt));
@@ -36,7 +37,7 @@ export default function Map({ markers }) {
     setCityValue(val);
     setFilteredMarkers(marker);
     if (mapRef.current != null) {
-      mapRef.current.flyTo(marker[0].position, 14, { duration: 1 });
+      mapRef.current.flyTo(marker[0].position, 10, { duration: 1 });
     }
   };
 
@@ -45,7 +46,19 @@ export default function Map({ markers }) {
     setFestValue(val);
     setFilteredMarkers(marker);
     if (mapRef.current != null) {
-      mapRef.current.flyTo(marker[0].position, 14, { duration: 1 });
+      mapRef.current.flyTo(marker[0].position, 10, { duration: 1 });
+    }
+  };
+
+  const handleGenreChange = function (val) {
+    const markersWithGenre = markers.filter((marker) =>
+      marker.music_types?.some((g) => g.name === val)
+    );
+
+    setGenreValue(val);
+    setFilteredMarkers(markersWithGenre);
+    if (mapRef.current != null) {
+      mapRef.current.setView(center, zoom, { duration: 1 });
     }
   };
 
@@ -53,8 +66,9 @@ export default function Map({ markers }) {
     setFilteredMarkers(markers);
     setCityValue("");
     setFestValue("");
+    setGenreValue("");
     if (mapRef.current != null) {
-      mapRef.current.flyTo(center, zoom, { duration: 1 });
+      mapRef.current.setView(center, zoom, { duration: 1 });
     }
   };
 
@@ -167,15 +181,15 @@ export default function Map({ markers }) {
           <Select
             value={cityValue}
             onValueChange={(val) => handleCityChange(val)}
-            disabled={festValue || null}
+            disabled={festValue !== "" || genreValue !== ""}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz miasto" />
             </SelectTrigger>
             <SelectContent className="z-500">
-              {[...cities].sort().map((city) => (
+              {[...cities].sort().map((city, index) => (
                 <SelectItem key={city} value={city}>
-                  {city}
+                  {`${index}. ${city}`}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -183,15 +197,31 @@ export default function Map({ markers }) {
           <Select
             value={festValue}
             onValueChange={(val) => handleFestChange(val)}
-            disabled={cityValue || null}
+            disabled={cityValue !== "" || genreValue !== ""}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz festiwal" />
             </SelectTrigger>
             <SelectContent className="z-500">
-              {[...names].sort().map((name) => (
+              {[...names].sort().map((name, index) => (
                 <SelectItem key={name} value={name}>
-                  {name}
+                  {`${index}. ${name}`}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
+            value={genreValue}
+            onValueChange={(val) => handleGenreChange(val)}
+            disabled={cityValue !== "" || festValue !== ""}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Wybierz gatunek" />
+            </SelectTrigger>
+            <SelectContent className="z-500">
+              {[...genres].sort().map((genre, index) => (
+                <SelectItem key={genre} value={genre}>
+                  {`${index}. ${genre}`}
                 </SelectItem>
               ))}
             </SelectContent>
