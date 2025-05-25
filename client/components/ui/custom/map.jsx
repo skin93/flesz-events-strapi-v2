@@ -201,7 +201,7 @@ export default function Map({ markers, genres }) {
           <Select
             value={cityValue}
             onValueChange={(val) => handleCityChange(val)}
-            disabled={festValue !== "" || genreValue !== ""}
+            disabled={festValue !== "" || genreValue !== "" || inputVal !== ""}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz miasto" />
@@ -217,7 +217,7 @@ export default function Map({ markers, genres }) {
           <Select
             value={festValue}
             onValueChange={(val) => handleFestChange(val)}
-            disabled={cityValue !== "" || genreValue !== ""}
+            disabled={cityValue !== "" || genreValue !== "" || inputVal !== ""}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz festiwal" />
@@ -233,7 +233,7 @@ export default function Map({ markers, genres }) {
           <Select
             value={genreValue}
             onValueChange={(val) => handleGenreChange(val)}
-            disabled={cityValue !== "" || festValue !== ""}
+            disabled={cityValue !== "" || festValue !== "" || inputVal !== ""}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wybierz gatunek" />
