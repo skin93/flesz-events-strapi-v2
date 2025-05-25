@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
+import { Input } from "../input";
 
 export default function Map({ markers, genres }) {
   const center = [51.974077, 19.451946];
