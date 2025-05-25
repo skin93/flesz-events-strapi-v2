@@ -24,6 +24,7 @@ import { MapLibreTileLayer } from "./map-libre-tile-layer";
 export default function Map({ markers, genres }) {
   const center = [51.974077, 19.451946];
   const zoom = 6;
+  const [inputVal, setInputVal] = useState("");
   const [cityValue, setCityValue] = useState("");
   const [festValue, setFestValue] = useState("");
   const [genreValue, setGenreValue] = useState("");
@@ -32,12 +33,23 @@ export default function Map({ markers, genres }) {
   const names = new Set(markers.map((marker) => marker.alt));
   const [filteredMarkers, setFilteredMarkers] = useState(markers);
 
+  const handleNameChange = function (val) {
+    const marker = markers.filter((marker) =>
+      marker?.alt?.toLowerCase().includes(val.toLowerCase())
+    );
+    setInputVal(val);
+    setFilteredMarkers(marker);
+    if (mapRef.current != null) {
+      mapRef.current.setView(center, zoom, { duration: 1 });
+    }
+  };
+
   const handleCityChange = function (val) {
     const marker = markers.filter((marker) => marker.location.city === val);
     setCityValue(val);
     setFilteredMarkers(marker);
     if (mapRef.current != null) {
-      mapRef.current.flyTo(marker[0].position, 10, { duration: 1 });
+      mapRef.current.setView(marker[0].position, 10, { duration: 1 });
     }
   };
 
@@ -46,7 +58,7 @@ export default function Map({ markers, genres }) {
     setFestValue(val);
     setFilteredMarkers(marker);
     if (mapRef.current != null) {
-      mapRef.current.flyTo(marker[0].position, 10, { duration: 1 });
+      mapRef.current.setView(marker[0].position, 10, { duration: 1 });
     }
   };
 
@@ -67,6 +79,7 @@ export default function Map({ markers, genres }) {
     setCityValue("");
     setFestValue("");
     setGenreValue("");
+    setInputVal("");
     if (mapRef.current != null) {
       mapRef.current.setView(center, zoom, { duration: 1 });
     }
@@ -178,6 +191,12 @@ export default function Map({ markers, genres }) {
           ))}
         </MarkerClusterGroup>
         <div className="absolute top-3 right-3 z-500 flex xl:flex-row flex-col gap-4">
+          <Input
+            value={inputVal}
+            placeholder="Podaj nazwę"
+            onChange={(e) => handleNameChange(e.target.value)}
+            disabled={festValue !== "" || genreValue !== "" || cityValue !== ""}
+          />
           <Select
             value={cityValue}
             onValueChange={(val) => handleCityChange(val)}
