@@ -11,68 +11,71 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatDateToLocal } from "@/lib/utils";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
-import { Input } from "../input";
 
 export default function Map({ markers, genres }) {
   const center = [51.974077, 19.451946];
   const zoom = 6;
-  const [inputVal, setInputVal] = useState("");
   const [cityValue, setCityValue] = useState("");
   const [festValue, setFestValue] = useState("");
   const [genreValue, setGenreValue] = useState("");
+  const [cityPopOpen, setCityPopOpen] = useState(false);
+  const [festPopOpen, setFestPopOpen] = useState(false);
+  const [genrePopOpen, setGenrePopOpen] = useState(false);
+
   const mapRef = useRef(null);
   const cities = new Set(markers.map((marker) => marker.location.city));
   const names = new Set(markers.map((marker) => marker.alt));
   const [filteredMarkers, setFilteredMarkers] = useState(markers);
 
-  const handleNameChange = function (val) {
-    const marker = markers.filter((marker) =>
-      marker?.alt?.toLowerCase().includes(val.toLowerCase())
-    );
-    setInputVal(val);
-    setFilteredMarkers(marker);
-    if (mapRef.current != null) {
-      mapRef.current.setView(center, zoom, { duration: 1 });
-    }
-  };
-
   const handleCityChange = function (val) {
-    const marker = markers.filter((marker) => marker.location.city === val);
+    const filteredMarkers = markers.filter(
+      (marker) => marker.location.city === val
+    );
     setCityValue(val);
-    setFilteredMarkers(marker);
+    setFilteredMarkers(filteredMarkers);
     if (mapRef.current != null) {
-      mapRef.current.setView(marker[0].position, 10, { duration: 1 });
+      mapRef.current.setView(filteredMarkers[0].position, 10, { duration: 1 });
     }
+    setCityPopOpen(false);
   };
 
   const handleFestChange = function (val) {
-    const marker = markers.filter((marker) => marker.alt == val);
+    const filteredMarkers = markers.filter((marker) => marker.alt == val);
     setFestValue(val);
-    setFilteredMarkers(marker);
+    setFilteredMarkers(filteredMarkers);
     if (mapRef.current != null) {
-      mapRef.current.setView(marker[0].position, 10, { duration: 1 });
+      mapRef.current.setView(filteredMarkers[0].position, 10, { duration: 1 });
     }
+    setFestPopOpen(false);
   };
 
   const handleGenreChange = function (val) {
-    const markersWithGenre = markers.filter((marker) =>
+    const filteredMarkers = markers.filter((marker) =>
       marker.music_types?.some((g) => g.name === val)
     );
 
     setGenreValue(val);
-    setFilteredMarkers(markersWithGenre);
+    setFilteredMarkers(filteredMarkers);
     if (mapRef.current != null) {
       mapRef.current.setView(center, zoom, { duration: 1 });
     }
+    setGenrePopOpen(false);
   };
 
   const handleReset = function () {
@@ -80,7 +83,6 @@ export default function Map({ markers, genres }) {
     setCityValue("");
     setFestValue("");
     setGenreValue("");
-    setInputVal("");
     if (mapRef.current != null) {
       mapRef.current.setView(center, zoom, { duration: 1 });
     }
@@ -127,7 +129,7 @@ export default function Map({ markers, genres }) {
                 position={marker.position}
                 icon={customIcon}
               >
-                <Popup closeButton={false} closeOnEscapeKey>
+                <Popup closeButton={false} closeOnEscapeKey offset={[0, 5]}>
                   <div className="text-center flex flex-col gap-4">
                     <h4 className="font-bold text-[16px]">{marker.popup}</h4>
                     <DialogTrigger asChild>
@@ -192,60 +194,141 @@ export default function Map({ markers, genres }) {
           ))}
         </MarkerClusterGroup>
         <div className="absolute top-3 right-3 z-500 flex xl:flex-row flex-col gap-4">
-          <Input
-            value={inputVal}
-            placeholder="Podaj nazwę"
-            onChange={(e) => handleNameChange(e.target.value)}
-            disabled={festValue !== "" || genreValue !== "" || cityValue !== ""}
-          />
-          <Select
-            value={cityValue}
-            onValueChange={(val) => handleCityChange(val)}
-            disabled={festValue !== "" || genreValue !== "" || inputVal !== ""}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Wybierz miasto" />
-            </SelectTrigger>
-            <SelectContent className="z-500">
-              {[...cities].sort().map((city, index) => (
-                <SelectItem key={city} value={city}>
-                  {`${index + 1}. ${city}`}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select
-            value={festValue}
-            onValueChange={(val) => handleFestChange(val)}
-            disabled={cityValue !== "" || genreValue !== "" || inputVal !== ""}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Wybierz festiwal" />
-            </SelectTrigger>
-            <SelectContent className="z-500">
-              {[...names].sort().map((name, index) => (
-                <SelectItem key={name} value={name}>
-                  {`${index + 1}. ${name}`}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select
-            value={genreValue}
-            onValueChange={(val) => handleGenreChange(val)}
-            disabled={cityValue !== "" || festValue !== "" || inputVal !== ""}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Wybierz gatunek" />
-            </SelectTrigger>
-            <SelectContent className="z-500">
-              {[...genres].sort().map((genre, index) => (
-                <SelectItem key={genre} value={genre}>
-                  {`${index + 1}. ${genre}`}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Popover open={cityPopOpen} onOpenChange={setCityPopOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                disabled={festValue !== "" || genreValue !== ""}
+                variant="outline"
+                role="combobox"
+                aria-expanded={cityPopOpen}
+                className="w-[200px] justify-between"
+              >
+                {cityValue
+                  ? [...cities].find((city) => city === cityValue)
+                  : "Wybierz miasto..."}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Wybierz miasto..." className="h-9" />
+                <CommandList>
+                  <CommandEmpty>Brak miasta</CommandEmpty>
+                  <CommandGroup>
+                    {[...cities].sort().map((city) => (
+                      <CommandItem
+                        key={city}
+                        value={city}
+                        onSelect={(currentValue) =>
+                          handleCityChange(currentValue)
+                        }
+                      >
+                        {city}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            cityValue === city ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          <Popover open={festPopOpen} onOpenChange={setFestPopOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                disabled={cityValue !== "" || genreValue !== ""}
+                variant="outline"
+                role="combobox"
+                aria-expanded={festPopOpen}
+                className="w-[200px] justify-between"
+              >
+                {festValue
+                  ? [...names].find((name) => name === festValue)
+                  : "Wybierz festiwal..."}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Wybierz festiwal..."
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>Brak festiwalu</CommandEmpty>
+                  <CommandGroup>
+                    {[...names].sort().map((name) => (
+                      <CommandItem
+                        key={name}
+                        value={name}
+                        onSelect={(currentValue) =>
+                          handleFestChange(currentValue)
+                        }
+                      >
+                        {name}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            festValue === name ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          <Popover open={genrePopOpen} onOpenChange={setGenrePopOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                disabled={festValue !== "" || cityValue !== ""}
+                variant="outline"
+                role="combobox"
+                aria-expanded={genrePopOpen}
+                className="w-[200px] justify-between"
+              >
+                {genreValue
+                  ? [...genres].find((genre) => genre === genreValue)
+                  : "Wybierz gatunek..."}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Wybierz gatunek..."
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>Brak gatunku</CommandEmpty>
+                  <CommandGroup>
+                    {[...genres].sort().map((genre) => (
+                      <CommandItem
+                        key={genre}
+                        value={genre}
+                        onSelect={(currentValue) =>
+                          handleGenreChange(currentValue)
+                        }
+                      >
+                        {genre}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            genreValue === genre ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
           <Button onClick={handleReset}>Reset</Button>
         </div>
       </MapContainer>
