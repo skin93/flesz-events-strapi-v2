@@ -125,7 +125,7 @@ export default function Header() {
               <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
                 <Youtube />
               </ButtonLink>
-              <SearchDialog />
+              {/* <SearchDialog /> */}
             </DrawerContent>
           </Drawer>
         </div>
