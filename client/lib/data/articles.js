@@ -6,45 +6,70 @@ import { ARTICLES_BY_TERM_QUERY } from "../queries/articles/articlesByTermQuery"
 import { ARTICLES_SITEMAP_QUERY } from "../queries/articles/articlesSitemapQuery";
 
 export async function getLatestArticles(start, limit) {
-  const res = await grafbase.request(LATEST_ARTICLES_QUERY, {
-    start,
-    limit,
-  });
-  return {
-    news: res.news[0],
-    concerts: res.concerts[0],
-    festivals: res.festivals[0],
-    premiers: res.premiers[0],
-    promo: res.promo[0],
-  };
+  try {
+    const res = await grafbase.request(LATEST_ARTICLES_QUERY, {
+      start,
+      limit,
+    });
+    return {
+      news: res.news[0],
+      concerts: res.concerts[0],
+      festivals: res.festivals[0],
+      premiers: res.premiers[0],
+      promo: res.promo[0],
+    };
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 export async function getArticleBySlug(slug) {
-  const res = await grafbase.request(SINGLE_ARTICLE_QUERY, {
-    slug,
-  });
-  return { article: res.articles[0] };
+  try {
+    const res = await grafbase.request(SINGLE_ARTICLE_QUERY, {
+      slug,
+    });
+    return { article: res.articles[0] };
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 export async function getArticleMeta(slug) {
-  const res = await grafbase.request(SINGLE_ARTICLE_META_QUERY, {
-    slug,
-  });
-  return { seo: res.articles[0] };
+  try {
+    const res = await grafbase.request(SINGLE_ARTICLE_META_QUERY, {
+      slug,
+    });
+    return { seo: res.articles[0] };
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 export async function getArticlesSitemap() {
-  const res = await grafbase.request(ARTICLES_SITEMAP_QUERY);
-  return { articles: res.articles };
+  try {
+    const res = await grafbase.request(ARTICLES_SITEMAP_QUERY);
+    return { articles: res.articles };
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
-export async function getArticlesByTerm(term, start, limit) {
-  const res = await grafbase.request(ARTICLES_BY_TERM_QUERY, {
-    term,
-  });
+export async function getArticlesByTerm(term) {
+  try {
+    const res = await grafbase.request(ARTICLES_BY_TERM_QUERY, {
+      term,
+    });
 
-  return {
-    termInContent: res.termInContent,
-    termInTitle: res.termInTitle,
-  };
+    return {
+      termInContent: res.termInContent,
+      termInTitle: res.termInTitle,
+    };
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
