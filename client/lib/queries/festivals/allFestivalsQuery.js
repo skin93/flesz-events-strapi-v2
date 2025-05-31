@@ -20,6 +20,7 @@ export const ALL_FESTIVALS_QUERY = gql`
         date
         from_date
         to_date
+        tickets
       }
       image {
         url

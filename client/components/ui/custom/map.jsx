@@ -27,6 +27,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { MapLibreTileLayer } from "./map-libre-tile-layer";
+import isValidUrl from "@/lib/isValidUrl";
 
 export default function Map({ markers, genres }) {
   const center = [51.974077, 19.451946];
@@ -178,17 +179,40 @@ export default function Map({ markers, genres }) {
                     <p>Brak daty</p>
                   )}
                 </div>
-                {marker.tickets && (
-                  <Button variant={"ghost"} className="w-fit mx-auto">
+                {(marker.date || marker.fromDate) &&
+                isValidUrl(marker.tickets) ? (
+                  <Button variant={"default"} className="w-fit mx-auto">
                     <Link
                       target="_blank"
                       className="font-bold"
                       href={`${marker.tickets}`}
+                      rel="nofollow"
                     >
                       Bilety
                     </Link>
                   </Button>
+                ) : (marker.date || marker.fromDate) &&
+                  marker.tickets !== "" ? (
+                  <p className="font-bold text-foreground">{marker.tickets}</p>
+                ) : (
+                  (marker.date || marker.fromDate) && (
+                    <p className="font-bold text-foreground">
+                      Brak informacji o biletach
+                    </p>
+                  )
                 )}
+                {/* {marker.fromDate && isValidUrl(marker.tickets) && (
+                  <Button variant={"default"} className="w-fit mx-auto">
+                    <Link
+                      target="_blank"
+                      className="font-bold"
+                      href={`${marker.tickets}`}
+                      rel="nofollow"
+                    >
+                      Bilety
+                    </Link>
+                  </Button>
+                )} */}
                 <DialogDescription>{marker.description}</DialogDescription>
               </DialogContent>
             </Dialog>

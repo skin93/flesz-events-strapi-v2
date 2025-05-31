@@ -58,11 +58,11 @@ export default async function FestivalMap() {
     date: fest?.next_event?.date,
     fromDate: fest?.next_event?.from_date,
     endDate: fest?.next_event?.to_date,
+    tickets: fest?.next_event?.tickets,
     location: fest.location,
     music_types: fest.music_types,
-
-    // tickets: fest.tickets,
   }));
+  console.log(markers.tickets);
   return (
     <main className="grid place-content-center">
       <LazyMap markers={markers} genres={genres} />
