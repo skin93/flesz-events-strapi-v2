@@ -62,7 +62,6 @@ export default async function FestivalMap() {
     location: fest.location,
     music_types: fest.music_types,
   }));
-  console.log(markers.tickets);
   return (
     <main className="grid place-content-center">
       <LazyMap markers={markers} genres={genres} />
