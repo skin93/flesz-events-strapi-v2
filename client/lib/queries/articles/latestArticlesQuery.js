@@ -43,7 +43,7 @@ export const LATEST_ARTICLES_QUERY = gql`
         }
       }
     }
-    singles: categories(where: { slug: "single" }) {
+    premiers: categories(where: { slug: "premiery" }) {
       slug
       articles(sort: "createdAt:DESC", start: $start, limit: $limit) {
         id

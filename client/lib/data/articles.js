@@ -14,7 +14,7 @@ export async function getLatestArticles(start, limit) {
     news: res.news[0],
     concerts: res.concerts[0],
     festivals: res.festivals[0],
-    singles: res.singles[0],
+    premiers: res.premiers[0],
     promo: res.promo[0],
   };
 }

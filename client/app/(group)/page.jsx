@@ -7,12 +7,10 @@ import { getLatestArticles } from "@/lib/data/articles";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const { concerts, festivals, promo, singles, news } = await getLatestArticles(
-    0,
-    6
-  );
+  const { concerts, festivals, promo, premiers, news } =
+    await getLatestArticles(0, 6);
 
-  if (!concerts || !festivals || !singles || !news || !promo) {
+  if (!concerts || !festivals || !premiers || !news || !promo) {
     notFound();
   }
 
@@ -35,9 +33,9 @@ export default async function HomePage() {
       <CategoryBlock articles={news.articles} name="news" slug={news.slug} />
       <Separator />
       <CategoryBlock
-        articles={singles.articles}
-        name="singles"
-        slug={singles.slug}
+        articles={premiers.articles}
+        name="premiers"
+        slug={premiers.slug}
       />
     </main>
   );
