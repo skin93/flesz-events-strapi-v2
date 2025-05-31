@@ -1,5 +1,5 @@
 import { grafbase } from "../graphql";
-import { SINGLE_CATEGORY_META_QUERY } from "../queries/categories/singleCategoryMetaQuery";
+import { CATEGORY_QUERY } from "../queries/categories/categoryQuery";
 import { SINGLE_CATEGORY_QUERY } from "../queries/categories/singleCategoryQuery";
 
 export async function getArticlesByCategory(slug, start, limit) {
@@ -16,9 +16,9 @@ export async function getArticlesByCategory(slug, start, limit) {
   };
 }
 
-export async function getCategoryMeta(slug) {
-  const res = await grafbase.request(SINGLE_CATEGORY_META_QUERY, {
+export async function getCategory(slug) {
+  const res = await grafbase.request(CATEGORY_QUERY, {
     slug,
   });
-  return { seo: res.categories[0] };
+  return { category: res.categories[0] };
 }

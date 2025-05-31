@@ -3,18 +3,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import CustomPagination from "@/components/ui/custom/pagination";
-import { getArticlesByCategory, getCategoryMeta } from "@/lib/data/categories";
+import { getArticlesByCategory, getCategory } from "@/lib/data/categories";
 
 export async function generateMetadata({ params }) {
   // read route params
   const { slug } = await params;
 
   // fetch data
-  const { seo } = await getCategoryMeta(slug);
+  const { category } = await getCategory(slug);
 
   return {
-    title: seo.metadata.meta_title,
-    description: seo.metadata.meta_description,
+    title: category.name,
+    description: category.description,
     robots: {
       index: false,
       follow: true,
@@ -24,14 +24,9 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${slug}`,
+      canonical: `/categories/${category.slug}`,
     },
-    openGraph: {
-      type: "website",
-      url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/categories/${slug}`,
-      title: seo.metadata.meta_title,
-      description: seo.metadata.meta_description,
-    },
+    openGraph: null,
   };
 }
 
