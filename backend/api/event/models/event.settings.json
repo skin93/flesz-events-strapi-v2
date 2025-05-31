@@ -21,8 +21,8 @@
       "type": "date"
     },
     "tags": {
-      "collection": "tag",
       "via": "events",
+      "collection": "tag",
       "dominant": true
     },
     "article": {

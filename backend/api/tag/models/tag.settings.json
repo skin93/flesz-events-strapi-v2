@@ -17,9 +17,6 @@
       "unique": true,
       "required": true
     },
-    "description": {
-      "type": "text"
-    },
     "slug": {
       "type": "uid",
       "targetField": "name"
@@ -27,11 +24,6 @@
     "articles": {
       "via": "tags",
       "collection": "article"
-    },
-    "metadata": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.metadata"
     },
     "events": {
       "via": "tags",

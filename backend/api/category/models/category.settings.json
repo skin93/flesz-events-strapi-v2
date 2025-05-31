@@ -27,11 +27,6 @@
     "articles": {
       "via": "category",
       "collection": "article"
-    },
-    "metadata": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.metadata"
     }
   }
 }
