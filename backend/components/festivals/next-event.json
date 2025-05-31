@@ -21,6 +21,9 @@
     },
     "date": {
       "type": "date"
+    },
+    "tickets": {
+      "type": "string"
     }
   }
 }
