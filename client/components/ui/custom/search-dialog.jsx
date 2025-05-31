@@ -48,7 +48,7 @@ export default function SearchDialog() {
         <Button variant="outline">Szukaj frazy</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[1000px] border-none overflow-y-hidden">
-        <DialogTitle className="my-0">Szukaj frazy</DialogTitle>
+        <DialogTitle className="my-0 text-white">Szukaj frazy</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="shrink">
             <FormField
@@ -58,7 +58,7 @@ export default function SearchDialog() {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="h-[100px] w- xl:h-[200px] text-4xl xl:text-6xl border-0 focus-visible:ring-0 focus-visible:ring-transparent"
+                      className="h-[100px] w- xl:h-[200px] bg-transparent text-white text-4xl xl:text-6xl ring-offset-0 border-0 focus-visible:ring-0 focus-visible:ring-transparent"
                       {...field}
                     />
                   </FormControl>

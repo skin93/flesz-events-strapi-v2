@@ -22,7 +22,7 @@ export function ReadMoreLink({ href, className }) {
     <Button
       aria-label="read-more-button"
       className={cn(className, "uppercase m-8 font-bold")}
-      variant={"outline"}
+      variant={"default"}
     >
       <Link href={href}>ZOBACZ WIĘCEJ</Link>
     </Button>

@@ -18,7 +18,7 @@ const DialogOverlay = React.forwardRef(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-900 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "fixed inset-0 z-900 bg-black/90  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className
     )}
     {...props}
@@ -33,14 +33,14 @@ const DialogContent = React.forwardRef(
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
-          "fixed overflow-y-scroll left-[50%] top-[50%] z-900 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+          "fixed left-[50%] top-[50%] z-900 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-transparent p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 rounded-none",
           className
         )}
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="absolute bg-foreground dark:bg-accent hover:bg-foreground/80 dark:hover:bg-accent/80 right-4 top-4 rounded-sm transition-opacity hover:opacity-100  disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-          <X className="h-5 w-5 cursor-pointer text-background dark:text-foreground" />
+        <DialogPrimitive.Close className="absolute bg-teal-600 hover:bg-teal-600/80 right-0 top-0 rounded-sm transition-opacity hover:opacity-100  disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <X className="h-5 w-5 cursor-pointer text-white hover:text-white dark:text-foreground" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>

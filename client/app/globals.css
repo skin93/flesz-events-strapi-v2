@@ -70,7 +70,7 @@
     border-color: var(--color-gray-200, currentColor);
   }
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 95%;
     --foreground: 0 0% 9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 9%;
@@ -125,7 +125,6 @@
   }
 
   main,
-  header,
   footer {
     @apply container px-4;
   }
@@ -143,7 +142,7 @@
   }
 
   .min-h-custom {
-    @apply min-h-[calc(100vh-56px)];
+    @apply min-h-[calc(100svh-56px)];
   }
 
   p {

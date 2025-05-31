@@ -42,8 +42,8 @@ const navLinks2 = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-background shadow-md ">
-      <div className="flex h-14 items-center justify-between">
+    <header className="sticky  top-0 z-50 w-full bg-background">
+      <div className="flex h-14 items-center justify-around xl:justify-center">
         <Link
           href="/"
           className="flex shrink-0 justify-start items-center relative w-[100px] h-full mr-4"
@@ -66,10 +66,10 @@ export default function Header() {
 
         <nav
           aria-label="main-navigation"
-          className="hidden xl:flex justify-start items-center gap-2 flex-1"
+          className="hidden xl:flex justify-start items-center gap-2  w-fit"
         >
           <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer hover:bg-foreground bg-background dark:hover:bg-accent hover:text-accent-foreground py-2 px-4">
+            <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer hover:bg-foreground bg-transparent dark:hover:bg-accent hover:text-accent-foreground py-2 px-4">
               WPISY
             </DropdownMenuTrigger>
 
@@ -89,6 +89,7 @@ export default function Header() {
             </ButtonLink>
           ))}
         </nav>
+
         <div className="hidden xl:flex justify-end items-center gap-2">
           <ButtonLink href="https://facebook.com/flesz.events">
             <Facebook />
@@ -96,9 +97,10 @@ export default function Header() {
           <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
             <Youtube />
           </ButtonLink>
-          <ModeToggle />
+
           <SearchDialog />
         </div>
+        <ModeToggle />
         <div className="xl:hidden">
           <Drawer direction="bottom">
             <DrawerTrigger>

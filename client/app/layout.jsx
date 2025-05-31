@@ -63,7 +63,6 @@ export default function RootLayout({ children }) {
         >
           <NextTopLoader color="#0d9488" height={5} />
           {children}
-          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>

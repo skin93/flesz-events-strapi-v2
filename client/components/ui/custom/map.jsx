@@ -114,7 +114,7 @@ export default function Map({ markers, genres }) {
         zoom={zoom}
         minZoom={zoom}
         scrollWheelZoom={true}
-        className="w-[100svw] h-[calc(100svh-56px)]"
+        className="w-[100svw] min-h-custom"
       >
         <MapLibreTileLayer
           attribution='&copy; <a href="https://openfreemap.org/" target="_blank">OpenFreeMap</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
@@ -135,7 +135,7 @@ export default function Map({ markers, genres }) {
                   <div className="text-center flex flex-col gap-4">
                     <h4 className="font-bold text-[16px]">{marker.popup}</h4>
                     <DialogTrigger asChild>
-                      <Button className="cursor-pointer" variant={"default"}>
+                      <Button className="cursor-pointer bg-teal-600 hover:bg-teal-600/80">
                         Szczegóły
                       </Button>
                     </DialogTrigger>
@@ -155,7 +155,7 @@ export default function Map({ markers, genres }) {
                 <DialogTitle className="my-0">
                   <Link
                     target="_blank"
-                    className="hover:underline text-teal-400"
+                    className="hover:underline text-white"
                     href={`/tags/${marker.slug}`}
                   >
                     {marker.alt}
@@ -163,11 +163,11 @@ export default function Map({ markers, genres }) {
                 </DialogTitle>
 
                 <div className="flex flex-col items-center justify-center">
-                  <p className="text-foreground m-0">
+                  <p className="text-teal-400 m-0">
                     {marker.location.city} - {marker.location.place}
                   </p>
                   {marker.fromDate && marker.endDate ? (
-                    <p className="m-0">
+                    <p className="m-0 text-teal-400">
                       {formatDateToLocal(marker.fromDate.toString())} -{" "}
                       {formatDateToLocal(marker.endDate.toString())}
                     </p>
@@ -181,7 +181,7 @@ export default function Map({ markers, genres }) {
                 </div>
                 {(marker.date || marker.fromDate) &&
                 isValidUrl(marker.tickets) ? (
-                  <Button variant={"default"} className="w-fit mx-auto">
+                  <Button className="bg-teal-600">
                     <Link
                       target="_blank"
                       className="font-bold"
@@ -201,19 +201,9 @@ export default function Map({ markers, genres }) {
                     </p>
                   )
                 )}
-                {/* {marker.fromDate && isValidUrl(marker.tickets) && (
-                  <Button variant={"default"} className="w-fit mx-auto">
-                    <Link
-                      target="_blank"
-                      className="font-bold"
-                      href={`${marker.tickets}`}
-                      rel="nofollow"
-                    >
-                      Bilety
-                    </Link>
-                  </Button>
-                )} */}
-                <DialogDescription>{marker.description}</DialogDescription>
+                <DialogDescription className="text-white">
+                  {marker.description}
+                </DialogDescription>
               </DialogContent>
             </Dialog>
           ))}
@@ -221,18 +211,17 @@ export default function Map({ markers, genres }) {
         <Dialog open={dialog} onOpenChange={setDialog}>
           <DialogTrigger asChild>
             <Button
-              className="cursor-pointer z-900 absolute left-[50%] translate-x-[-50%] top-10  w-[200px]"
-              variant={"default"}
+              className="cursor-pointer z-900 absolute left-[50%] translate-x-[-50%] top-10  w-[200px] bg-teal-600 hover:bg-teal-600/80"
               onClick={() => setDialog(true)}
             >
               Filtruj
             </Button>
           </DialogTrigger>
-          <DialogContent className="border-none flex flex-col items-center justify-start max-w-[60em] h-130 md:h-120">
+          <DialogContent className="container border-none flex flex-col items-center justify-start">
             <DialogHeader>
-              <DialogTitle className="m-0">Filtruj mapę</DialogTitle>
+              <DialogTitle className="m-0 text-white">Filtruj mapę</DialogTitle>
             </DialogHeader>
-            <DialogDescription className="m-0">
+            <DialogDescription className="m-0 text-white">
               Wybierz jeden z poniszych filtrów
             </DialogDescription>
             <div className="flex flex-col justify-around md:flex-row gap-4">
@@ -379,7 +368,12 @@ export default function Map({ markers, genres }) {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <Button onClick={handleReset}>Reset</Button>
+              <Button
+                className="bg-teal-600 hover:bg-teal-600/80"
+                onClick={handleReset}
+              >
+                Reset
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
