@@ -4,7 +4,7 @@ import { ButtonLink } from "../ui/custom/button-link";
 export default function Footer() {
   const navLinks = [
     { title: "newsy", path: "/categories/newsy" },
-    { title: "single", path: "/categories/single" },
+    { title: "premiery", path: "/categories/premiery" },
     { title: "festiwale", path: "/categories/festiwale" },
     { title: "koncerty", path: "/categories/koncerty" },
     { title: "patronat", path: "/categories/patronat" },
@@ -14,7 +14,6 @@ export default function Footer() {
 
   const items = [
     { title: "festiwalowa mapa", path: "/festival-map" },
-    { title: "patronat", path: "/categories/patronat" },
     // { title: "galerie", path: "/galleries" },
     { title: "kontakt", path: "/contact" },
   ];
