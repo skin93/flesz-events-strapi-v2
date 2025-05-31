@@ -16,6 +16,7 @@ export default function Footer() {
     { title: "festiwalowa mapa", path: "/festival-map" },
     // { title: "galerie", path: "/galleries" },
     { title: "kontakt", path: "/contact" },
+    { title: "tagi", path: "/tags" },
   ];
 
   return (

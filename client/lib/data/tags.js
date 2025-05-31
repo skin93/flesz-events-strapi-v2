@@ -1,7 +1,7 @@
 import { grafbase } from "../graphql";
 import { ALL_TAGS_QUERY } from "../queries/tags/allTagsQuery";
-import { SINGLE_TAG_META_QUERY } from "../queries/tags/singleTagMetaQuery";
 import { SINGLE_TAG_QUERY } from "../queries/tags/singleTagQuery";
+import { TAG_QUERY } from "../queries/tags/tagQuery";
 
 export async function getArticlesByTag(slug, start, limit) {
   const res = await grafbase.request(SINGLE_TAG_QUERY, {
@@ -25,9 +25,9 @@ export async function getAllTags(start, limit) {
   };
 }
 
-export async function getTagMeta(slug) {
-  const res = await grafbase.request(SINGLE_TAG_META_QUERY, {
+export async function getTag(slug) {
+  const res = await grafbase.request(TAG_QUERY, {
     slug,
   });
-  return { seo: res.tags[0] };
+  return { tag: res.tags[0] };
 }

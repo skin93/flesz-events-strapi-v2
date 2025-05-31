@@ -2,18 +2,17 @@ import BaseCard from "@/components/ui/custom/base-card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CustomPagination from "@/components/ui/custom/pagination";
-import { getArticlesByTag, getTagMeta } from "@/lib/data/tags";
+import { getArticlesByTag, getTag } from "@/lib/data/tags";
 
 export async function generateMetadata({ params }) {
   // read route params
   const { slug } = await params;
 
   // fetch data
-  const { seo } = await getTagMeta(slug);
+  const { tag } = await getTag(slug);
 
   return {
-    title: seo.metadata.meta_title,
-    description: seo.metadata.meta_description,
+    title: tag.name,
     robots: {
       index: false,
       follow: true,
@@ -23,14 +22,9 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${slug}`,
+      canonical: `/tags/${tag.slug}`,
     },
-    openGraph: {
-      type: "website",
-      url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/tags/${slug}`,
-      title: seo.metadata.meta_title,
-      description: seo.metadata.meta_description,
-    },
+    openGraph: null,
   };
 }
 
