@@ -64,9 +64,12 @@ export default function SlugPageComponent({ article }) {
                 priority
                 alt={article.title}
                 aria-label="article-cover"
+                placeholder="blur"
+                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                 style={{ objectFit: "cover" }}
-                className="rounded-sm aspect-video"
-                fill
+                width={article.image_cover.width}
+                height={article.image_cover.height}
+                className="rounded-sm aspect-video w-full"
               />
               <div className="absolute bottom-0 left-0 w-auto h-auto bg-[rgba(0,0,0,0.7)] rounded-bl-sm">
                 <p
