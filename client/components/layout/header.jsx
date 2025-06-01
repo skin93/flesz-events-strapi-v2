@@ -97,9 +97,8 @@ export default function Header() {
           <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
             <Youtube />
           </ButtonLink>
-
-          <SearchDialog />
         </div>
+        <SearchDialog />
         <ModeToggle />
         <div className="xl:hidden">
           <Drawer direction="bottom">
@@ -127,7 +126,6 @@ export default function Header() {
               <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
                 <Youtube />
               </ButtonLink>
-              {/* <SearchDialog /> */}
             </DrawerContent>
           </Drawer>
         </div>
