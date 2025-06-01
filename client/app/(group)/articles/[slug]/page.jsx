@@ -24,12 +24,12 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${slug}`,
+      canonical: `/articles/${slug}`,
     },
     openGraph: {
       type: "article",
-      url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${slug}`,
-      title: seo.metadata.meta_title,
+      url: `/articles/${slug}`,
+      title: `${seo.metadata.meta_title}`,
       description: seo.metadata.meta_description,
       images: [
         {
