@@ -121,6 +121,7 @@ export default function Map({ markers, genres }) {
           url="https://tiles.openfreemap.org/styles/positron"
         />
         <MarkerClusterGroup
+          maxClusterRadius={50}
           chunkedLoading
           iconCreateFunction={createClusterCustomIcon}
         >
