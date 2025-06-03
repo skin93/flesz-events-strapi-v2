@@ -16,7 +16,7 @@ const nextConfig = {
       {
         source: "/",
         destination: "/festival-map",
-        permanent: true,
+        permanent: false,
       },
     ];
   },
