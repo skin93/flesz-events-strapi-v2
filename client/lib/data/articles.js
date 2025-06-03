@@ -6,32 +6,24 @@ import { ARTICLES_BY_TERM_QUERY } from "../queries/articles/articlesByTermQuery"
 import { ARTICLES_SITEMAP_QUERY } from "../queries/articles/articlesSitemapQuery";
 
 export async function getLatestArticles(start, limit) {
-  try {
-    const res = await grafbase.request(LATEST_ARTICLES_QUERY, {
-      start,
-      limit,
-    });
-    return {
-      news: res.news[0],
-      concerts: res.concerts[0],
-      festivals: res.festivals[0],
-      premiers: res.premiers[0],
-      promo: res.promo[0],
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await grafbase.request(LATEST_ARTICLES_QUERY, {
+    start,
+    limit,
+  });
+  return {
+    news: res.news[0],
+    concerts: res.concerts[0],
+    festivals: res.festivals[0],
+    premiers: res.premiers[0],
+    promo: res.promo[0],
+  };
 }
 
 export async function getArticleBySlug(slug) {
-  try {
-    const res = await grafbase.request(SINGLE_ARTICLE_QUERY, {
-      slug,
-    });
-    return { article: res.articles[0] };
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await grafbase.request(SINGLE_ARTICLE_QUERY, {
+    slug,
+  });
+  return { article: res.articles[0] };
 }
 
 export async function getArticleMeta(slug) {
@@ -46,25 +38,17 @@ export async function getArticleMeta(slug) {
 }
 
 export async function getArticlesSitemap() {
-  try {
-    const res = await grafbase.request(ARTICLES_SITEMAP_QUERY);
-    return { articles: res.articles };
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await grafbase.request(ARTICLES_SITEMAP_QUERY);
+  return { articles: res.articles };
 }
 
 export async function getArticlesByTerm(term) {
-  try {
-    const res = await grafbase.request(ARTICLES_BY_TERM_QUERY, {
-      term,
-    });
+  const res = await grafbase.request(ARTICLES_BY_TERM_QUERY, {
+    term,
+  });
 
-    return {
-      termInContent: res.termInContent,
-      termInTitle: res.termInTitle,
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  return {
+    termInContent: res.termInContent,
+    termInTitle: res.termInTitle,
+  };
 }
