@@ -16,7 +16,6 @@ export async function getArticlesByCategory(slug, start, limit) {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -28,6 +27,5 @@ export async function getCategory(slug) {
     return { category: res.categories[0] };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }

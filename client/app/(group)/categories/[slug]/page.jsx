@@ -41,7 +41,7 @@ export default async function CategoryPage({ params, searchParams }) {
 
   const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
-  if (!category) {
+  if (!category || !articles || articles.length === 0) {
     notFound();
   }
 

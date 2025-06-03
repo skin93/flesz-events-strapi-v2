@@ -20,7 +20,6 @@ export async function getLatestArticles(start, limit) {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -32,7 +31,6 @@ export async function getArticleBySlug(slug) {
     return { article: res.articles[0] };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -44,7 +42,6 @@ export async function getArticleMeta(slug) {
     return { seo: res.articles[0] };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -54,7 +51,6 @@ export async function getArticlesSitemap() {
     return { articles: res.articles };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -70,6 +66,5 @@ export async function getArticlesByTerm(term) {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }

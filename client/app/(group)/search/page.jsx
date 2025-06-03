@@ -29,7 +29,12 @@ export default async function SearchPage({ searchParams }) {
   const term = params?.q || "";
   const { termInTitle, termInContent } = await getArticlesByTerm(term);
 
-  if (!termInTitle || !termInContent) {
+  if (
+    !termInTitle ||
+    !termInContent ||
+    termInTitle.length === 0 ||
+    termInContent.length === 0
+  ) {
     notFound();
   }
 

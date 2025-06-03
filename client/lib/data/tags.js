@@ -18,7 +18,6 @@ export async function getArticlesByTag(slug, start, limit) {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -31,7 +30,6 @@ export async function getAllTags(start, limit) {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
 
@@ -43,6 +41,5 @@ export async function getTag(slug) {
     return { tag: res.tags[0] };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }

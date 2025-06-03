@@ -39,7 +39,7 @@ export default async function TagPage({ params, searchParams }) {
 
   const pageCount = Math.ceil(articlesCountBasedOnTagOrCategory / limit);
 
-  if (!tag) {
+  if (!tag || !articles || articles.length === 0) {
     notFound();
   }
 

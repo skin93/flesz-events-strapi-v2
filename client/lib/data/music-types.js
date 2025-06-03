@@ -9,6 +9,5 @@ export async function getAllMusicTypes() {
     };
   } catch (error) {
     console.error(error);
-    process.exit(1);
   }
 }
