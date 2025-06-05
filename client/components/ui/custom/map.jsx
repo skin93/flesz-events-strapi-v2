@@ -173,7 +173,7 @@ export default function Map({ markers, genres }) {
                       {formatDateToLocal(marker.endDate.toString())}
                     </p>
                   ) : marker.date && !marker.fromDate && !marker.endDate ? (
-                    <p className="m-0 text-white">
+                    <p className="m-0 text-teal-400">
                       {formatDateToLocal(marker.date.toString())}
                     </p>
                   ) : (
