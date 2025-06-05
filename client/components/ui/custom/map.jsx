@@ -194,13 +194,13 @@ export default function Map({ markers, genres }) {
                       </Link>
                     </Button>
                   ) : (marker.date || marker.fromDate) &&
-                    marker.tickets !== "" ? (
-                    <p className="font-bold text-white">{marker.tickets}</p>
+                    (marker.tickets === "" || marker.tickets === null) ? (
+                    <p className="font-bold text-white">
+                      Brak informacji o biletach
+                    </p>
                   ) : (
                     (marker.date || marker.fromDate) && (
-                      <p className="font-bold text-white">
-                        Brak informacji o biletach
-                      </p>
+                      <p className="font-bold text-white">{marker.tickets}</p>
                     )
                   )}
                   <Button variant={"outline"}>
