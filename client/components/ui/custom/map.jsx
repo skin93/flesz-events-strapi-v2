@@ -173,35 +173,47 @@ export default function Map({ markers, genres }) {
                       {formatDateToLocal(marker.endDate.toString())}
                     </p>
                   ) : marker.date && !marker.fromDate && !marker.endDate ? (
-                    <p className="m-0">
+                    <p className="m-0 text-white">
                       {formatDateToLocal(marker.date.toString())}
                     </p>
                   ) : (
-                    <p>Brak daty</p>
+                    <p className="m-0 text-white">Brak daty</p>
                   )}
                 </div>
-                {(marker.date || marker.fromDate) &&
-                isValidUrl(marker.tickets) ? (
-                  <Button className="bg-teal-600">
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  {(marker.date || marker.fromDate) &&
+                  isValidUrl(marker.tickets) ? (
+                    <Button className="bg-teal-600">
+                      <Link
+                        target="_blank"
+                        className="font-bold"
+                        href={`${marker.tickets}`}
+                        rel="noopener noreferrer"
+                      >
+                        Bilety
+                      </Link>
+                    </Button>
+                  ) : (marker.date || marker.fromDate) &&
+                    marker.tickets !== "" ? (
+                    <p className="font-bold text-white">{marker.tickets}</p>
+                  ) : (
+                    (marker.date || marker.fromDate) && (
+                      <p className="font-bold text-white">
+                        Brak informacji o biletach
+                      </p>
+                    )
+                  )}
+                  <Button variant={"outline"}>
                     <Link
-                      target="_blank"
+                      href={`https://www.google.com/maps?q=${marker.position[0]},${marker.position[1]}`}
                       className="font-bold"
-                      href={`${marker.tickets}`}
-                      rel="nofollow"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      Bilety
+                      Nawiguj
                     </Link>
                   </Button>
-                ) : (marker.date || marker.fromDate) &&
-                  marker.tickets !== "" ? (
-                  <p className="font-bold text-foreground">{marker.tickets}</p>
-                ) : (
-                  (marker.date || marker.fromDate) && (
-                    <p className="font-bold text-foreground">
-                      Brak informacji o biletach
-                    </p>
-                  )
-                )}
+                </div>
                 <DialogDescription className="text-white">
                   {marker.description}
                 </DialogDescription>
