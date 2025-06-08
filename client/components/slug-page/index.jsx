@@ -21,8 +21,8 @@ export default function SlugPageComponent({ article }) {
   }, []);
   return (
     <main>
-      <section className="my-8" aria-label="slug-page">
-        <div className="mb-4">
+      <section className="my-6" aria-label="slug-page">
+        <div className="my-6">
           <Link href={`/categories/${article.category?.slug}`}>
             <Badge
               className="bg-foreground hover:bg-foreground/70 dark:bg-accent dark:hover:bg-accent/90 dark:text-foreground mr-2 p-2 rounded-sm uppercase"
@@ -51,7 +51,7 @@ export default function SlugPageComponent({ article }) {
           )}
         </div>
         <h1 aria-label="article-title">{article.title}</h1>
-        <Separator className="mb-4" />
+        <Separator className="my-6" />
         <div className="grid grid-cols-1 xl:grid-cols-[50%_40%] gap-2 justify-between">
           <article aria-label="left-column">
             <AspectRatio
@@ -80,7 +80,7 @@ export default function SlugPageComponent({ article }) {
                 </p>
               </div>
             </AspectRatio>
-            <Separator className="my-4" />
+            <Separator className="my-6" />
             <div
               dangerouslySetInnerHTML={{
                 __html: article.content,
