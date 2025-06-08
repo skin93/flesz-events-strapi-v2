@@ -51,7 +51,7 @@ export default async function CategoryPage({ params, searchParams }) {
         aria-label={`${category.name} content`}
         className="flex flex-col justify-center items-center"
       >
-        <h1 className="my-8 text-center font-bold uppercase">
+        <h1 className="my-6 text-center font-bold uppercase">
           {category.name}
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">

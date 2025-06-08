@@ -134,7 +134,7 @@ export default function Map({ markers, genres }) {
               >
                 <Popup closeButton={false} closeOnEscapeKey offset={[0, 5]}>
                   <div className="text-center flex flex-col gap-4">
-                    <h4 className="font-bold text-[16px]">{marker.popup}</h4>
+                    <h4 className="font-bold">{marker.popup}</h4>
                     <DialogTrigger asChild>
                       <Button className="cursor-pointer bg-teal-600 hover:bg-teal-600/80">
                         Szczegóły
@@ -143,7 +143,7 @@ export default function Map({ markers, genres }) {
                   </div>
                 </Popup>
               </Marker>
-              <DialogContent className="border-none flex flex-col justify-between items-center max-w-[60em] max-h-full overflow-y-hidden">
+              <DialogContent className="border-none flex flex-col justify-between items-center text-center max-w-[60em] max-h-full overflow-y-scroll">
                 <Image
                   src={marker.imageSrc}
                   alt={marker.imageAlt}
@@ -153,7 +153,7 @@ export default function Map({ markers, genres }) {
                   style={{ objectFit: "cover" }}
                   loading="lazy"
                 />
-                <DialogTitle className="my-0">
+                <DialogTitle className="m-0">
                   <Link
                     target="_blank"
                     className="hover:underline text-white"
@@ -177,10 +177,20 @@ export default function Map({ markers, genres }) {
                       {formatDateToLocal(marker.date.toString())}
                     </p>
                   ) : (
-                    <p className="m-0 text-white">Brak daty</p>
+                    <p className="m-0 text-white font-bold">Brak daty</p>
                   )}
                 </div>
-                <div className="flex flex-col md:flex-row items-center gap-4">
+                <div className="flex flex-col  items-center gap-4">
+                  <Button variant={"outline"}>
+                    <Link
+                      href={`https://www.google.com/maps?q=${marker.position[0]},${marker.position[1]}`}
+                      className="font-bold"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Nawiguj
+                    </Link>
+                  </Button>
                   {(marker.date || marker.fromDate) &&
                   isValidUrl(marker.tickets) ? (
                     <Button className="bg-teal-600">
@@ -195,24 +205,16 @@ export default function Map({ markers, genres }) {
                     </Button>
                   ) : (marker.date || marker.fromDate) &&
                     (marker.tickets === "" || marker.tickets === null) ? (
-                    <p className="font-bold text-white">
+                    <p className="font-bold text-white m-0">
                       Brak informacji o biletach
                     </p>
                   ) : (
                     (marker.date || marker.fromDate) && (
-                      <p className="font-bold text-white">{marker.tickets}</p>
+                      <p className="font-bold text-white m-0">
+                        {marker.tickets}
+                      </p>
                     )
                   )}
-                  <Button variant={"outline"}>
-                    <Link
-                      href={`https://www.google.com/maps?q=${marker.position[0]},${marker.position[1]}`}
-                      className="font-bold"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Nawiguj
-                    </Link>
-                  </Button>
                 </div>
                 <DialogDescription className="text-white">
                   {marker.description}

@@ -129,12 +129,27 @@
     @apply container px-4;
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply scroll-m-20 tracking-tight my-6;
+  }
+
   h1 {
-    @apply text-xl md:text-2xl lg:text-5xl font-bold mb-4;
+    @apply text-4xl font-extrabold text-balance;
   }
 
   h2 {
-    @apply text-lg md:text-xl lg:text-4xl font-bold mb-4;
+    @apply text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
   }
 
   strong {
@@ -146,7 +161,7 @@
   }
 
   p {
-    @apply dark:text-neutral-400 font-normal text-xs md:text-sm lg:text-lg my-4;
+    @apply dark:text-neutral-400 leading-7 my-6;
   }
 
   article {
@@ -156,7 +171,7 @@
 
     ul,
     ol {
-      @apply pl-8 my-4 font-medium text-neutral-900 dark:text-neutral-200 text-xs md:text-sm lg:text-lg;
+      @apply ml-6 my-6 font-medium text-neutral-900 dark:text-neutral-200  leading-7;
     }
 
     ul {
@@ -179,7 +194,7 @@
   }
 
   blockquote {
-    @apply relative font-extrabold italic tracking-[2px] py-[30px] px-0 max-w-full z-1 my-4 mx-auto border-t-[3px] border-t-accent border-b-[3px] border-b-accent bg-transparent;
+    @apply relative font-extrabold italic tracking-[2px] py-[30px] px-0 max-w-full z-1 my-6 mx-auto border-t-[3px] border-t-accent border-b-[3px] border-b-accent bg-transparent;
 
     p {
       @apply text-foreground;
@@ -187,7 +202,7 @@
   }
 
   figure {
-    @apply block text-center my-8 mx-0;
+    @apply block text-center my-6 mx-0;
   }
 
   img {
@@ -195,12 +210,12 @@
   }
 
   figcaption {
-    @apply font-bold text-sm mt-8;
+    @apply font-bold text-sm my-8;
   }
 
   .embeded-iframe {
     > .raw-html-embed {
-      @apply relative overflow-hidden w-full pt-[56.25%] my-4 rounded-sm;
+      @apply relative overflow-hidden w-full pt-[56.25%] my-6 rounded-sm;
 
       > iframe {
         @apply absolute inset-0 w-full h-full;

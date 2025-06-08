@@ -20,7 +20,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full my-8">
+    <footer className="w-full my-6">
       <div className="flex flex-row justify-around items-center">
         <div className="flex flex-col items-start">
           {navLinks.map(({ title, path }) => (
