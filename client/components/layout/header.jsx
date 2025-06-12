@@ -43,7 +43,7 @@ const navLinks2 = [
 export default function Header() {
   return (
     <header className="sticky  top-0 z-50 w-full bg-background">
-      <div className="flex h-14 items-center justify-around xl:justify-center">
+      <div className="container flex h-14 items-center">
         <Link
           href="/"
           className="flex shrink-0 justify-start items-center relative w-[100px] h-full mr-4"
@@ -90,44 +90,46 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden xl:flex justify-end items-center gap-2">
-          <ButtonLink href="https://facebook.com/flesz.events">
-            <Facebook />
-          </ButtonLink>
-          <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
-            <Youtube />
-          </ButtonLink>
-        </div>
-        <SearchDialog />
-        <ModeToggle />
-        <div className="xl:hidden">
-          <Drawer direction="bottom">
-            <DrawerTrigger>
-              <Menu aria-label="menu-button" />
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="hidden">
-                <DrawerTitle>Menu</DrawerTitle>
-                <DrawerDescription>Menu with nav links</DrawerDescription>
-              </DrawerHeader>
-              {navLinks1.map(({ title, path }) => (
-                <ButtonLink key={title} href={path}>
-                  {title}
+        <div className="ml-auto flex flex-row items-center">
+          <div className="hidden xl:block ">
+            <ButtonLink href="https://facebook.com/flesz.events">
+              <Facebook />
+            </ButtonLink>
+            <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
+              <Youtube />
+            </ButtonLink>
+          </div>
+          <SearchDialog />
+          <ModeToggle />
+          <div className="xl:hidden">
+            <Drawer direction="bottom">
+              <DrawerTrigger>
+                <Menu aria-label="menu-button" />
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader className="hidden">
+                  <DrawerTitle>Menu</DrawerTitle>
+                  <DrawerDescription>Menu with nav links</DrawerDescription>
+                </DrawerHeader>
+                {navLinks1.map(({ title, path }) => (
+                  <ButtonLink key={title} href={path}>
+                    {title}
+                  </ButtonLink>
+                ))}
+                {navLinks2.map(({ title, path }) => (
+                  <ButtonLink key={title} href={path}>
+                    {title}
+                  </ButtonLink>
+                ))}
+                <ButtonLink href="https://facebook.com/flesz.events">
+                  <Facebook />
                 </ButtonLink>
-              ))}
-              {navLinks2.map(({ title, path }) => (
-                <ButtonLink key={title} href={path}>
-                  {title}
+                <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
+                  <Youtube />
                 </ButtonLink>
-              ))}
-              <ButtonLink href="https://facebook.com/flesz.events">
-                <Facebook />
-              </ButtonLink>
-              <ButtonLink href="https://www.youtube.com/channel/UCtJGqTQUcJRNVi4gBqVqAfg">
-                <Youtube />
-              </ButtonLink>
-            </DrawerContent>
-          </Drawer>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
       </div>
     </header>
