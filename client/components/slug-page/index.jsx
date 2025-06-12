@@ -89,6 +89,16 @@ export default function SlugPageComponent({ article }) {
               className="embeded-iframe"
             />
             <Separator />
+            <h4 className="mb-0"> Tagi:</h4>
+            <div className="inline-table my-6">
+              {article.tags.map((tag) => (
+                <Link key={tag.id} href={`/tags/${tag.slug}`}>
+                  <Badge className="uppercase m-2 ml-0" variant="outline">
+                    {tag.name}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
           </article>
           <aside
             className="container justify-center p-0"
