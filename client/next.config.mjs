@@ -41,11 +41,6 @@ const nextConfig = {
             value: "geolocation=(self), microphone=(), camera=()",
           },
           {
-            key: "Expect-CT",
-            value:
-              "max-age=86400, enforce, report-uri=https://reporting-url.com",
-          },
-          {
             key: "Cross-Origin-Opener-Policy",
             value: "same-origin",
           },
