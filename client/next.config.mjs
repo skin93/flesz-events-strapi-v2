@@ -11,6 +11,56 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: `${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "no-referrer",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "geolocation=(self), microphone=(), camera=()",
+          },
+          {
+            key: "Expect-CT",
+            value:
+              "max-age=86400, enforce, report-uri=https://reporting-url.com",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+          {
+            key: "Server-Timing",
+            value: "app; dur=100",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
