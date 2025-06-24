@@ -47,12 +47,39 @@ export default async function SlugPage({ params }) {
   const { slug } = await params;
   const { article } = await getArticleBySlug(slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    datePublished: article.published_at?.toLocaleString(),
+    inLanguage: "pl",
+    image: `${process.env.NEXT_PUBLIC_STRAPI}${article.image_cover.url}`,
+    url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/articles/${article.slug}`,
+    publisher: {
+      "@type": "Organization",
+      name: "FleszEvents",
+      image: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.jpeg`,
+    },
+    author: [
+      {
+        "@type": "Person",
+        name: article.writers[0].name,
+      },
+    ],
+  };
+
   if (!article) {
     notFound();
   }
 
   return (
     <Fragment>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <SlugPageComponent article={article} />
     </Fragment>
   );

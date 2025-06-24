@@ -3,6 +3,7 @@ import LazyMap from "@/components/ui/custom/lazy-map";
 import { ALL_FESTIVALS_QUERY } from "@/lib/queries/festivals/allFestivalsQuery";
 import { getAllFestivals } from "@/lib/data/festivals";
 import { getAllMusicTypes } from "@/lib/data/music-types";
+import { Fragment } from "react";
 
 export const revalidate = 60;
 
@@ -31,6 +32,21 @@ export default async function FestivalMap() {
   const { festivals } = await getAllFestivals(ALL_FESTIVALS_QUERY);
   const { genres } = await getAllMusicTypes();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Festiwalowa Mapa",
+    description: "Sprawdź, czy w Twojej okolicy nie odbywa się fajny festiwal!",
+    inLanguage: "pl",
+    url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/festival-map`,
+    image: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/FE-mapa-2025-01.jpg`,
+    publisher: {
+      "@type": "Organization",
+      name: "FleszEvents",
+      image: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.jpeg`,
+    },
+  };
+
   const markers = festivals.map((fest) => ({
     position: [fest.location?.latitude, fest.location?.longitude],
     popup: fest.name,
@@ -51,8 +67,16 @@ export default async function FestivalMap() {
     music_types: fest.music_types,
   }));
   return (
-    <main className="grid place-content-center">
-      <LazyMap markers={markers} genres={genres} />
-    </main>
+    <Fragment>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <main className="grid place-content-center">
+        <LazyMap markers={markers} genres={genres} />
+      </main>
+    </Fragment>
   );
 }

@@ -52,10 +52,25 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "FleszEvents",
+    description: "Festiwalowa mapa oraz zapowiedzi koncertów",
+    inLanguage: "pl",
+    url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
+    image: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/logo-publikacja.jpeg`,
+  };
   return (
     <html lang="en">
       <head>
         <meta name="apple-mobile-web-app-title" content="FleszEvents" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
       </head>
       <body className={inter.className}>
         <ThemeProvider
